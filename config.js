@@ -1,10 +1,10 @@
 var respecConfig =
 {
-  //specStatus: "unofficial",
-  specStatus: "unofficial",
-  //specType: "HR",                     // Geonovum: Handreiking
-  //format: "markdown",                 // Geonovum: altijd "markdown"     
-  shortName: "GWSW-2.0", 	            // Wordt gebruikt in de document URL
+  //specStatus: "unofficial", // w3c-UD.css nodig, maar die is er niet
+  specStatus: "design",
+  //specType: "HR",             // Handreiking
+  //format: "markdown",         // Altijd "markdown"     
+  shortName: "GWSW-2.0", 	      // Wordt gebruikt in de document URL
   license: "cc0",
    
   editors: [{
@@ -26,15 +26,15 @@ var respecConfig =
     companyURL: "https://www.riool.net"
   }],
   otherLinks: [{
-    key: "GitHub", href: "https://github.com/StichtingRIONED/GWSW"
+    key: "GitHub", href: "https://github.com/stichtingrioned/GWSW_2.0/"
   }],
   //github: "https://github.com/StichtingRIONED/GWSW"
   //-- Repositorynaam/issues op GitHub ------------------------------------------------
   //issueBase: "https://github.com/StichtingRIONED/GWSW/issues/",
 
-  thisVersion: "https://rioned.github.io/gwsw",
+  thisVersion: "https://stichtingrioned.github.io/GWSW_2.0/",
   latestVersion: "", // gepubliceerde versie
-  edDraftURI: "https://rioned.github.io/gwsw", // werkversie
+  edDraftURI: "https://stichtingrioned.github.io/GWSW_2.0/", // werkversie
 
   maxTocLevel: 3, // Aantal niveau's ToC, default is 0
 };
