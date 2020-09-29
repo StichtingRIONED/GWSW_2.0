@@ -196,7 +196,7 @@ Modelleerprincipes
 
 <span style="font-size: 1.5em">Hou synchroon met "GWSW Ontologie in RDF.docx" (versie 1.n), wordt daar geactualiseerd.</span>
 
-* Best Practices for Publishing Linked Data [[ld-bp]]
+<!--* Best Practices for Publishing Linked Data [[ld-bp]]-->
 
 Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkelijke opzet van het model in Gellish-vorm (opgezet vanaf circa 2004) en zijn nog steeds geldig.
 
