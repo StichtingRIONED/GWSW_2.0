@@ -687,15 +687,15 @@
 		clear: both;
   }
   .example {
-		border-color: #E0CB52;
-		background:#FCFAEE;
-  }  
-  .example-shapes {
-		border-color: #E0CB52;
-		background: #05fdf118;
+		border-color: #8CCBF2;
+    background:	#DEF;
   }  
   .example-dataset {
 		border-color: #E0CB52;
+		background: #fcfaee;;
+  }  
+  .example-shapes {
+		border-color:  #52e052;
     background: rgba(158, 253, 5, 0.274);  
   }
 	.example::before, .example > .marker, .example-shapes::before, .example-shapes > .marker, .example-dataset::before, .example-dataset > .marker {
