@@ -1272,10 +1272,10 @@ Afgeleid wordt dat ex:Leiding_1 van de klasse Drukleiding is
 Gesignaleerd wordt dat de typering van ex:Leiding_2 niet consistent is
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_2             rdf:type                            gwsw:Drukleiding ;
+    ex:Leiding_2             rdf:type              gwsw:Drukleiding ;
                              gwsw:diameterLeiding         
                              [          
-                                rdf:value                        163 ;
+                                rdf:value          163 ;
                              ] .         
 </pre></div>
 
@@ -1283,29 +1283,29 @@ Een reasoner leidt op basis van het model af of de QuantityValye van het type gw
 Vervolgens zal de validator rapporteren dat de typering van ex:Leiding_2 in de vorige dataset niet consistent is
 
 <div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
-    gwsw:DrukleidingShape    rdf:type                          sh:NodeShape ;
-                             sh:targetClass                    gwsw:Drukleiding ;
+    gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
+                             sh:targetClass         gwsw:Drukleiding ;
                              sh:property         
                              [         
-                                sh:path                        (gwsw:diameterLeiding rdf:value) ;
-                                sh:class                       gwsw:DiameterDrukleiding ;
-                                sh:message                     "diameterLeiding: QuantityValue incorrect" ;
-                                sh:severity                    sh:Violation ;
+                                sh:path             (gwsw:diameterLeiding rdf:value) ;
+                                sh:class            gwsw:DiameterDrukleiding ;
+                                sh:message          "diameterLeiding: QuantityValue incorrect" ;
+                                sh:severity         sh:Violation ;
                              ] .         
 </pre></div>
 
 Of, validatie zonder gebruik te maken van de gespecificeerde gwsw:DiameterDrukleiding:
 
 <div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
-    gwsw:DrukleidingShape    rdf:type                          sh:NodeShape ;
-                             sh:targetClass                    gwsw:Drukleiding ;
+    gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
+                             sh:targetClass         gwsw:Drukleiding ;
                              sh:property         
                              [         
-                                sh:path                        (gwsw:diameterLeiding rdf:value) ;
-                                sh:minInclusive                50 ;
-                                sh:maxInclusive                160 ;
-                                sh:message                     "diameterLeiding: value is out of bounds" ;
-                                sh:severity                    sh:Violation ;
+                                sh:path             (gwsw:diameterLeiding rdf:value) ;
+                                sh:minInclusive     50 ;
+                                sh:maxInclusive     160 ;
+                                sh:message          "diameterLeiding: value is out of bounds" ;
+                                sh:severity         sh:Violation ;
                              ] .         
 </pre></div>
 
