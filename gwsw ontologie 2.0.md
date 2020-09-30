@@ -30,7 +30,7 @@ Het GegevensWoordenboek Stedelijk Water (GWSW), een ontwikkeling van de stichtin
 
 In het najaar van 2015 is het GWSW omgezet naar RDF, daarvoor is het GWSW-OroX protocol geïntroduceerd. Die versie van het GWSW is doorontwikkeld tot medio 2020, toen is versie 1.5.1 uitgebracht.
 
-Begin 2020 is gestart met de ontwikkeling van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035 (NTA 8035). <span class="mark">De term GWSW-OroX protocol is met versie 2.0 ook komen te vervallen??</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
+Begin 2020 is gestart met de ontwikkeling van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035 (NTA 8035). <span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van RDF/RDFS/OWL 2/SHACL en het uitwisselformaat Turtle.
 
@@ -377,7 +377,7 @@ De **Definitietekst, Opmerkingtekst** worden als annotaties bij de concepten opg
 
 De **Datum aanmaak/wijziging, Auteur aanmaak** wordt in Gellish op triple-niveau bijgehouden. In linked data vorm zou dit met reïficatie worden opgelost. Praktisch gezien lijkt alleen registratie als concept-annotatie haalbaar.
 
-**Auteur aanmaak** wordt meer algemeen **Editor**. Kan meervoudig voorkomen, zowel voor aanmaak als wijziging.
+**Auteur aanmaak** wordt meer algemeen **Editor**. Kan meervoudig voorkomen, zowel voor aanmaak als voor meerdere wijzigingen.
 
 De **Taalgemeenschap** wordt als extra naam bij de concepten (met property skos:altLabel) vermeld.
 
@@ -462,12 +462,12 @@ De in het GWSW voorkomende attributen:
 <tr class="odd">
 <td>gwsw:hasDateChange</td>
 <td>gwsw:hasDateChange</td>
-<td><em>Subject</em> <span class="blue">heeft als wijzigingsdatum</span> <em>Literal</em></td>
+<td><em>Subject</em> <span class="blue">heeft als wijzigingsdatum</span> <em>Literal (kan meervoudig voorkomen)</em></td>
 </tr>
 <tr class="even">
 <td>gwsw:hasEditor</td>
 <td>gwsw:hasEditor</td>
-<td><em>Subject</em> <span class="blue">heeft als editor</span> <em>Literal</em> (naam persoon die concept voor het laatst heeft gewijzigd)</td>
+<td><em>Subject</em> <span class="blue">heeft als editor</span> <em>Literal</em> (naam persoon die het concept - op de startdatum of wijzigingsdatum - heeft gewijzigd)</td>
 </tr>
 <tr class="odd">
 <td>gwsw:hasFactColl</td>
@@ -615,7 +615,7 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 </tr>
 <tr class="even">
 <td><p><span class="mark">M-PER-HR of gwsw:M-PER-DAY</span></p>
-<p>(instantie van qudt:unit)</p></td>
+<p>(instantie van qudt:unit, of wel bekend in qudt-versie 2.1?)</p></td>
 <td>m/dag</td>
 <td>xsd:decimal</td>
 </tr>
@@ -916,7 +916,7 @@ Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS e
     gwsw:Stuwput    rdf:type                   owl:Class ;                   
                     rdfs:subClassOf            gwsw:Rioolput ;               
                     skos:prefLabel             "Stuwput"@nl ,                
-                                               “Weir”@en .         # meertalig label            
+                    skos:altLabel              “Weir”@en .         # vertaling als synoniem opnemen
     gwsw:BlindePut  rdf:type                   owl:Class ;                   
                     rdfs:subClassOf            gwsw:Rioolput ;               
                     skos:prefLabel             "Blinde put"@nl .             
@@ -937,7 +937,7 @@ Attributen
 
 ### Annotaties
 
-De volgende annoties worden bij een GWSW-concept opgenomen:
+De volgende annotaties worden bij een GWSW-concept opgenomen:
 
 <table class="default">
 <thead>
@@ -1002,12 +1002,12 @@ De volgende annoties worden bij een GWSW-concept opgenomen:
 <tr class="even">
 <td>gwsw:hasDateChange</td>
 <td>Datum waarop het concept is gewijzigd</td>
-<td>Maximaal 1, invullen als de waarde van één van de attributen wijzigt of als het concept andere properties (attributen/relaties) krijgt. Bevat altijd de laatste datum.</td>
+<td>Onbeperkt (min=0), invullen als de waarde van één van de attributen wijzigt of als het concept andere properties (attributen/relaties) krijgt.</td>
 </tr>
 <tr class="odd">
 <td>gwsw:hasEditor</td>
-<td>Naam van de persoon die het concept voor het laatst heeft gewijzigd</td>
-<td>Exact 1</td>
+<td>Naam van de persoon die het concept heeft gemaakt of gewijzigd</td>
+<td>Onbeperkt (min=1)</td>
 </tr>
 <tr class="even">
 <td>gwsw:hasFactColl</td>
@@ -1106,15 +1106,15 @@ Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven 
 Verificatie van de gebruikte eenheid in de dataset wordt uitgedrukt in SHACL:
 
 <div class="example-shapes"><div class="example-title marker">Shapes: Controleer de gebruikte eenheid</div><pre>
-    gwsw:LengteShape  rdf:type             sh:NodeShape ;      
-                      sh:targetObjectsOf   gwsw:diameterLeiding ;        
-                      sh:property                                    
-                      [        
-                        sh:path            bs:unit ;           
-                        sh:hasValue        unit:MiLiM ;        
-                        sh:message         "Use unit Milimeter for value of gwsw:diameterLeiding " ; 
-                        sh:severity        sh:Violation ;      
-                      ] .      
+    gwsw:diameterLeidingShape  rdf:type             sh:NodeShape ;      
+                               sh:targetObjectsOf   gwsw:diameterLeiding ;        
+                               sh:property                                    
+                               [        
+                                 sh:path            bs:unit ;           
+                                 sh:hasValue        unit:MiLiM ;        
+                                 sh:message         "Use unit Milimeter for value of gwsw:diameterLeiding " ; 
+                                 sh:severity        sh:Violation ;      
+                               ] .      
 </pre></div>
 
 **<span class="smallcaps">Metagegevens bij aspecten (aspecten van aspecten)</span>**
@@ -1222,7 +1222,7 @@ Conform de NTA 8035 maakt het GWSW onderscheid in definiërende en specificerend
 
 **Definiërende beperking, Afleiding**
 
-Ter illustratie: de klasse Drukleiding is een subtype van Mechanische Transportleiding. Een drukleiding onderscheidt zich vanwege de kleine diameter, leidingen met grotere diameter worden anders geclassificeerd. De kleine diameter is in dit geval een defiërende beperking waarmee een afleiding (iets met een kleine diameter is een Drukleiding) wordt gemaakt.
+Ter illustratie: de klasse Drukleiding is een subtype van Mechanische Transportleiding. Een drukleiding onderscheidt zich vanwege de kleine diameter, leidingen met grotere diameter worden anders geclassificeerd (als voorbeeld, de werkelijkheid ligt iets anders). De kleine diameter is in dit geval een defiërende beperking waarmee een afleiding (iets met een kleine diameter is een Drukleiding) wordt gemaakt.
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
     gwsw:diameterLeiding     rdf:type                   owl:ObjectProperty ;
@@ -1272,14 +1272,29 @@ Afgeleid wordt dat ex:Leiding_1 van de klasse Drukleiding is
 Gesignaleerd wordt dat de typering van ex:Leiding_2 niet consistent is
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_2             rdf:type                            gwsw:DrukLeiding ;
+    ex:Leiding_2             rdf:type                            gwsw:Drukleiding ;
                              gwsw:diameterLeiding         
                              [          
                                 rdf:value                        163 ;
                              ] .         
 </pre></div>
 
-Validator rapporteert dat de typering van ex:Leiding_2 in de vorige dataset niet consistent is
+Een reasoner leidt op basis van het model af of de QuantityValye van het type gwsw:DiameterDrukleiding is.
+Vervolgens zal de validator rapporteren dat de typering van ex:Leiding_2 in de vorige dataset niet consistent is
+
+<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
+    gwsw:DrukleidingShape    rdf:type                          sh:NodeShape ;
+                             sh:targetClass                    gwsw:Drukleiding ;
+                             sh:property         
+                             [         
+                                sh:path                        (gwsw:diameterLeiding rdf:value) ;
+                                sh:class                       gwsw:DiameterDrukleiding ;
+                                sh:message                     "diameterLeiding: QuantityValue incorrect" ;
+                                sh:severity                    sh:Violation ;
+                             ] .         
+</pre></div>
+
+Of, validatie zonder gebruik te maken van de gespecificeerde gwsw:DiameterDrukleiding:
 
 <div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
     gwsw:DrukleidingShape    rdf:type                          sh:NodeShape ;
@@ -1289,11 +1304,10 @@ Validator rapporteert dat de typering van ex:Leiding_2 in de vorige dataset niet
                                 sh:path                        (gwsw:diameterLeiding rdf:value) ;
                                 sh:minInclusive                50 ;
                                 sh:maxInclusive                160 ;
-                                sh:message                     "diameterLeiding is out of bounds" ;
+                                sh:message                     "diameterLeiding: value is out of bounds" ;
                                 sh:severity                    sh:Violation ;
                              ] .         
 </pre></div>
-
 
 **Specificerende beperking**
 
