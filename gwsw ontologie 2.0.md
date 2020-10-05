@@ -6,6 +6,7 @@ GWSW Ontologie 2.0
 Versie historie
 <div style="font-size: 0.95em">
 
+20201005: Hst Modelleerprincipes bijgewerkt
 20200817: Voorwaarden bij concept-annotaties uitgeschreven, hst 3.2.1  
 20200814: Annotaties vanuit Gellish toegevoegd (editor, fact-collectie)  
 20200514: Figuren met metamodellen en bestandsvormen bijgewerkt  
@@ -198,20 +199,26 @@ Modelleerprincipes
 
 <!--* Best Practices for Publishing Linked Data [[ld-bp]]-->
 
-Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkelijke opzet van het model in Gellish-vorm (opgezet vanaf circa 2004) en zijn nog steeds geldig.
-
 ### Terminologie - Het vakgebied is leidend
 
-1.  Volg de gebruikelijke termen binnen het vakgebied, bedenk geen nieuwe namen die de lading beter dekken of neutraler zijn. Dat geldt ook - waar mogelijk - voor abstracte concepten.
-2.  Geef alle gebruikelijke vakgebied-termen binnen het te modelleren systeem of proces een plek, als apart concept of als synoniem van een concept. De zoekfunctie moet volledig zijn.
+(uitwerking: zie hst 3.1)
+
+1.  Volg de gebruikelijke termen binnen het vakgebied, bedenk geen nieuwe conceptnamen die misschien de lading beter dekken of neutraler zijn. Dat geldt ook - waar mogelijk - voor abstracte concepten.
+2.  Geef alle gebruikelijke vakgebied-termen die gelden voor het te modelleren systeem of proces een plek, als apart concept of als synoniem van een concept. De zoekfunctie moet volledig zijn.
 3.  Laat algemene termen die niet specifiek bij de discipline horen zoveel mogelijk buiten beschouwing. Modelleer bijvoorbeeld het concept "calamiteit" alleen als het als supertype nodig is.
 4.  Verwijs voor algemene termen waar mogelijk naar andere databronnen (rdfs:seeAlso).
 
+### Concepten en annotaties
+
+1.  Elk GWSW-concept is van het generieke type owl:Class.
+2.  Een concept wordt geïdentificeerd door de URI (prefix + naam) conform hst 3.1.1
+3.  Een concept wordt altijd voorzien van de annotaties zoals opgenomen in hst 3.1.2.
+
 ### Specialiseren - Onderscheidende kenmerken
 
-(het opbouwen van de soortenboom)
+(het opbouwen van de soortenboom, uitwerking: zie hst 3.6)
 
-1.  Voor het classificeren van een object uitgaan van zoeken op onderscheidende kenmerken in de (abstracte) soortenboom. Denk aan determineren van planten volgens Linnaeus: na het maken van een aantal keuzes wordt de soort gevonden
+1.  Voor het classificeren van een concept uitgaan van zoeken op onderscheidende kenmerken in de (abstracte) soortenboom. Denk aan determineren van planten volgens Linnaeus: na het maken van een aantal keuzes wordt de soort gevonden
 2.  Streef ernaar om met de onderscheidende kenmerken de uitgeschreven definitie af te dekken
 3.  Gebruik de volgende onderscheidende kenmerken bij fysieke objecten:
     -   Doel (waarvoor)
@@ -219,24 +226,31 @@ Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkeli
     -   Functie (wat doet het)
     -   Uitvoering (hoe)
     -   Structuur (waaruit)
-4.  Gebruik de volgende onderscheidende kenmerken bij activiteiten:
+
+4.  Activiteiten worden altijd gekenmerkt door de relaties
+    -   Invoer / hasInput (het lijdend voorwerp)
+    -   Uitvoer / hasOutput (het gewijzigde voorwerp, een rapport)
+
+5.  Gebruik daarnaast de volgende onderscheidende kenmerken bij activiteiten:
     -   Doel (waarvoor)
     -   Toepassing (waarin)
     -   Resultaat (wat doet het)
     -   Technologie (werkwijze, eisen)
     -   Mechanisme (waarmee)
-5.  Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus niet gebruikt (zijn - nog - onnodig).
+6.  Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus niet gebruikt (zijn - nog - onnodig).
 
-### Specialiseren - Abstracte concepten
+### Specialiseren - Abstracte concepten (en collecties)
 
 1.  Hou ze beperkt, de soortenboom zo veel mogelijk concreet houden. Supertypes zijn vaak alleen verdichtingen, geen soort.
 2.  Concepten zijn herkenbaar als abstract wanneer ze bijvoorbeeld niet in de deel-geheel relaties (bijvoorbeeld als deel van een rioleringsgebied) voorkomen.
-3.  Introduceer geen subtype als het geen onderscheidend kenmerk heeft. Bijvoorbeeld geen extra subtype "standaard hemelwaterstelsel" naast "verbeterd hemelwaterstelsel".
+3.  Abstracte concepten bij voorkeur als groep/collectie (en niet als supertype) definiëren. Bijvoorbeeld groepering naar thema's, denk aan infiltratievoorzieningen.
+4.  Subtypes op hetzelfde niveau dienen in grote lijn hetzelfde samenstellingsniveau te hebben.
 
 ### Specialiseren - Bladerobjecten
 
 1.  Specialiseer de concepten zoveel als mogelijk: definieer de subtypes, de "bladerobjecten".
-2.  Hou er rekening mee dat de individuen zo specifiek mogelijk geclassificeerd dienen te worden. Classificatie met een supertype gebeurt alleen als het subtype niet van toepassing is (denk aan het eerdere voorbeeld "hemelwaterstelsel") of als het onbekend is en wel toegepast kan worden. Bijvoorbeeld bij gebruik van de inspectienorm voor "vrijverval rioolleidingen" (met subtypes gemengd, hemelwater, vuilwater).
+2.  Introduceer geen subtype als het geen onderscheidend kenmerk heeft. Bijvoorbeeld geen extra subtype "standaard hemelwaterstelsel" naast "verbeterd hemelwaterstelsel".
+3.  Hou er rekening mee dat de individuen zo specifiek mogelijk geclassificeerd dienen te worden. Classificatie met een supertype gebeurt alleen als het subtype niet van toepassing is (denk aan het eerdere voorbeeld "hemelwaterstelsel") of als het onbekend is en wel toegepast kan worden. Bijvoorbeeld bij gebruik van de inspectienorm voor "vrijverval rioolleidingen" (met subtypes gemengd, hemelwater, vuilwater).
 
 ### Samenstellen - Definiërende onderdelen en verbindingen
 
@@ -250,9 +264,28 @@ Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkeli
 
 ### Kenmerken - Horen exclusief bij een concept
 
-1.  Voorkom het opnemen van optionele kenmerken bij een concept (kenmerken die niet voor alle subtypes gelden).
-2.  Definieer de kenmerken dus niet op een te hoog niveau.
-3.  Gebruik bijvoorbeeld het multi-parent principe. Als alleen voor kunststof leidingen het kenmerk "kleur" relevant is, introduceer dan het concept "kunststof leiding" met het kenmerk "kleur". Een indivual is dan zowel een "vrijverval rioolleiding" als een "kunststof leiding" zijn en heeft daarmee dat extra kenmerk.
+1.  Kenmerken zijn altijd eigendom van een entiteit/geheel en kunnen niet bestaan zonder de eigenaar.
+2.  Vermeng dus geen kenmerken van entiteiten. Bijvoorbeeld Dekselmateriaal, Beheerdernaam kunnen geen kenmerken van een Put zijn, die horen bij het concept Deksel en Beheerder. Die concepten zijn vervolgens gerelateerd aan de put.
+3.  Voorkom het opnemen van optionele kenmerken bij een supertype (kenmerken die niet voor alle subtypes gelden), definieer de kenmerken dus niet op een te hoog niveau.
+4.  Gebruik bijvoorbeeld het multi-parent principe. Als alleen kunststof leidingen het gebruikte kenmerk "kleur" hebben, introduceer dan het concept "kunststof leiding" met het kenmerk "kleur". Een indivual is dan zowel een "vrijverval rioolleiding" als een "kunststof leiding" zijn en heeft daarmee dat extra kenmerk.
+
+### Kenmerken - Geen typelijsten
+
+1.  Kenmerken die verwijzen naar een typelijst (bijvoorbeeld het kenmerk Soort Deksel van het concept Deksel) mogen niet voorkomen. Een typelijst moet altijd uitgedrukt worden in de taxonomie, bijvoorbeeld subtypes van Deksel.
+
+### Kenmerken - Specialiseren, maak ze intrinsiek
+
+1.  Specialiseer waar nodig de kenmerken, zodat restricties op de kenmerk-waarde zo specifiek mogelijk zijn. Bijvoorbeeld:
+    -   Definieer het generieke kenmerk "materiaal" met het subtype "materiaal put" met bijbehorende domeinwaarden
+    -   Definieer het generieke kenmerk "diameter" met het subtype "diameter leiding" met specifieke restricties op de afmetingen.
+2.  Intrinsieke kenmerken zijn geen noodzaak maar de combinatie met bepaalde restricties maakt ze waardevol en daarnaast wordt het model robuuster: als een individual het kenmerk heeft, dan hoort het van een bepaald type te zijn.
+
+### Contexten onderscheiden
+
+TOP, BAS, hoe in te delen?
+Opsplitsen in model-bestanden?
+Combineren van model-bestanden in editor mogelijk? Onderscheid houden, ook na aanpassingen in de editor.
+Enkelvoudige contexten altijd in apart model-bestand?
 
 Inrichting GWSW ontologie
 =========================
