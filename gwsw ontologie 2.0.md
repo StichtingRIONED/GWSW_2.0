@@ -1194,8 +1194,7 @@ Een onderscheidend kenmerk speelt een belangrijke rol bij de specialisatie. Het 
     gwsw:onderscheidendKenmerk rdf:type                 owl:ObjectProperty ;
                                rdfs:range               gwsw:OnderscheidendKenmerk .
     gwsw:OnderscheidendKenmerk rdf:type                 owl:Class ;         
-                               rdfs:subClassOf          bs:Enumerationtype ;
-                               rdfs:range               gwsw:OnderscheidendKenmerk .
+                               rdfs:subClassOf          bs:Enumerationtype .
 </pre></div>
 <div class="example"><div class="example-title marker">Model: Definieer type uitvoering "Klein" als onderscheidend Kenmerk</div><pre>
     gwsw:uitvoering          rdf:type                   owl:ObjectProperty ;
