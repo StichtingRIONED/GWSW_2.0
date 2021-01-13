@@ -36,5 +36,5 @@ var respecConfig =
   latestVersion: "", // gepubliceerde versie
   edDraftURI: "https://stichtingrioned.github.io/GWSW_2.0/", // werkversie
 
-  maxTocLevel: 3, // Aantal niveau's ToC, default is 0
+  maxTocLevel: 4, // Aantal niveau's ToC, default is 0
 };
