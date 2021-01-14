@@ -1057,10 +1057,12 @@ Een voorbeeld van gebruikte annotaties:
             skos:prefLabel       "Put"@nl ;            
             rdfs:subClassOf      bs:PhysicalObject ;   
             skos:definition      "Verticale waterdichte ….”@nl ; # interne (eigen) definitie  
-            rdfs:isDefinedBy     "[IMGeo:1.0/2007] Gegraven of … "@nl ;
-            rdfs:seeAlso         "http://www.w3.org" ; 
-            rdfs:comment         "Toelichting bij put" ;         
-            skos:notation        "AAA" .               
+            rdfs:seeAlso         "[IMGeo:1.0/2007] Gegraven of … "@nl ,
+				 "https://imgeo.geostandaarden.nl/def/imgeo-object/put" ;
+	    rdfs:comment         "Toelichting bij modellering put" ;
+	    gwsw:hasValidity	 "1f 3f 4f " ; # codering voor samenstellen conformiteitsklasse
+	    skos:scopeNote	 gwsw:_TOP ;
+	    gwsw:hasDateStart	 "2013-07-18"^^xsd:date .
 </pre></div>
 
 Coderingen komen veel voor in het GWSW, bijvoorbeeld als taalonafhankelijke aanduidigen van toestandsaspecten in de EN13508-2. Codes van concepten (voorbeeld "AAA") zijn literals bij de property skos:notation.
