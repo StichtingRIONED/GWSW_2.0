@@ -1,6 +1,6 @@
 /******************************************************************************
  
- * [nv] vanaf https://www.w3.org/StyleSheets/TR/2016/base.css
+ * [nv:] vanaf https://www.w3.org/StyleSheets/TR/2016/base.css
  *
  *                   Style sheet for the W3C specifications                   *
  *
@@ -75,13 +75,13 @@
 		counter-reset: example figure issue;
 
 		/* Layout */
-		max-width: 50em;               /* limit line length to 50em for readability   */
+		max-width: 60em;               /* mv: was 50em - limit line length to 50em for readability */
 		margin: 0 auto;                /* center text within page                     */
 		padding: 1.6em 1.5em 2em 50px; /* assume 16px font size for downlevel clients */
 		padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */
 
 		/* Typography */
-		line-height: 1.5;
+		line-height: 1.1; /* mv: was 1.2 */
 		font-family: sans-serif;
 		widows: 2;
 		orphans: 2;
@@ -329,15 +329,15 @@
 		page-break-after: avoid;
 		page-break-inside: avoid;
 		font: 100% sans-serif;   /* Reset all font styling to clear out UA styles */
-		font-family: inherit;    /* Inherit the font family. */
+		font-family: 'Segoe UI', sans-serif;    /* Inherit the font family. */
 		line-height: 1.2;        /* Keep wrapped headings compact */
 		hyphens: manual;         /* Hyphenated headings look weird */
 	}
 
-	h2, h3, h4, h5, h6 {
+  /* mv: 	
+  h2, h3, h4, h5, h6 {
 		margin-top: 3rem;
 	}
-
 	h1, h2, h3 {
 		color: #005A9C;
 		background: transparent;
@@ -349,6 +349,14 @@
 	h4 { font-weight: bold; }
 	h5 { font-style: italic; }
 	h6 { font-variant: small-caps; }
+  dt { font-weight: bold; }*/
+
+	h1 { margin-top: 3rem; color: #005A9C; font-size: 200%; }
+	h2 { margin-top: 3rem; color: #005A9C; font-size: 180%; }
+	h3 { margin-top: 3rem; margin-bottom: 0; color: #005A9C; font-size: 160%; font-weight: bold; } /* mv: level1 binnen <section> */
+	h4 { margin-top: 2rem; margin-bottom: 0; color: #005A9C; font-size: 140%; font-weight: bold; }
+	h5 { margin-top: 1rem; margin-bottom: 0; color: #005A9C; font-size: 120%; font-style: italic; font-weight: bold; }
+	h6 { margin-top: 1rem; margin-bottom: 0; color: #005A9C; font-style: italic; font-weight: bold; }
 	dt { font-weight: bold; }
 
 /** Subheadings ***************************************************************/
@@ -485,7 +493,7 @@
 
 /** Change Marking ************************************************************/
 
-	del { color: red;  text-decoration: line-through; }
+	del { color: gray;  text-decoration: line-through; } /** mv: Was color red */
 	ins { color: #080; text-decoration: underline;    }
 
 /** Miscellaneous improvements to inline formatting ***************************/
@@ -494,6 +502,18 @@
 		vertical-align: super;
 		font-size: 80%;
 	}
+
+/** mv: diverse tekstmarkeringen */
+  .yellow{background: yellow;}
+  span.red{color: red;}
+  span.box{background: lightyellow}
+  span.mark {
+    background-color: yellow;
+  }
+  span.blue {
+    color: rgb(0, 174, 255);
+    font-weight: bold;
+  }
 
 /******************************************************************************/
 /*                                    Code                                    */
@@ -725,8 +745,10 @@ table.default td {
 }
 table.simp {
   font-size: 0.95em;
-  padding: 0 0.5em 0 0.5em;
   background-color:  rgb(245, 247, 255);
+}
+table.simp th, table.simp td  { /** mv: eenvoudige basistabel */
+  padding: 0.3em 0 0.3em 0.5em;
 }
 /* mv: preformatted text (20200927) */
 
@@ -738,14 +760,6 @@ pre.file {
   background-color:  rgb(221, 247, 255);
 }
 
-/* mv: gemarkeerde tekst */
-span.mark {
-  background-color: yellow;
-}
-span.blue {
-  color: rgb(0, 174, 255);
-  font-weight: bold;
-}
 /* mv: logo */
 img.logo {
   display:block;
