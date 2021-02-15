@@ -81,7 +81,7 @@
 		padding: 1.6em 1.5em 2em calc(26px + 1.5em); /* leave space for status flag     */
 
 		/* Typography */
-		line-height: 1.1; /* mv: was 1.2 */
+		line-height: 1.2; /* mv: was 1.2 */
 		font-family: sans-serif;
 		widows: 2;
 		orphans: 2;
