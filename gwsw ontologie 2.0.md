@@ -195,7 +195,7 @@ Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit documen
 Modelleerprincipes
 ------------------
 
-<span style="font-size: 1.5em">Hou synchroon met "GWSW Ontologie in RDF.docx" (versie 1.n), wordt daar geactualiseerd.</span>
+<span style="font-size: 1.5em">Zie [GWSW Ontologie in RDF](https://stichtingrioned.github.io/GWSW_Ontologie_RDF/#modelleerprincipes), is daar geactualiseerd.</span>
 
 <!--* Best Practices for Publishing Linked Data [[ld-bp]]-->
 
