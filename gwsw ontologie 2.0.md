@@ -43,7 +43,7 @@ Gebruikte begrippen
 -------------------
 
 **Linked data: RDF, RDFS, OWL 2, SHACL**  
-RDF staat voor Resource Description Format, de basisdefinitie van modellen op basis van subject-predicate-object. In de tekst verstaan we onder "linked data" de combinatie van RDF en de daarop gebaseerde schema's RDFS (RDF Schema), OWL 2 (Web Ontology Language) en SHACL (Shapes Constraint Language). Met de term OWL wordt OWL 2 aangeduid.
+RDF staat voor Resource Description Framework, de basisdefinitie van modellen op basis van subject-predicate-object. In de tekst verstaan we onder "linked data" de combinatie van RDF en de daarop gebaseerde schema's RDFS (RDF Schema), OWL 2 (Web Ontology Language) en SHACL (Shapes Constraint Language). Met de term OWL wordt OWL 2 aangeduid.
 
 **CE, OPE, DPE**  
 Deze termen hanteren we in de OWL definities. De afkorting CE wordt gebruikt voor Class Expressions (in Description Logics “complex concepts”). CE’s worden ondermeer gevormd door Classes te binden aan Object Property Expressions (OPE). Data Property Expressions (DPE) beschrijven restricties op de waardetypes.
@@ -88,7 +88,7 @@ Het laatste hoofdstuk bevat voorbeelden waarbij deze uitgangspunten worden toege
 De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 
 <table class="simp">
-<tr><td>RDF </td><td>Het Resource Description Format, de basisdefinitie van modellen op basis van subject-predicate-object.</td></tr>
+<tr><td>RDF </td><td>Het Resource Description Framework, de basisdefinitie van modellen op basis van subject-predicate-object.</td></tr>
 <tr><td>RDFS </td><td>Een schema op RDF voor het structureren van ontologieën, onderscheidt concepten en individuen</td></tr>
 <tr><td>OWL </td><td>Web Ontology Language (versie 2), voegt mogelijkheden toe om klassen, properties en datatypes door middel van restricties te definiëren</td></tr>
 <tr><td>SHACL </td><td>Shapes Constraint Language, een taal waarmee restricties op RDF graphs beschreven worden</td></tr>
