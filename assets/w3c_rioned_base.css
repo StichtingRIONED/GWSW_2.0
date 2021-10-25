@@ -506,13 +506,18 @@
 /** mv: diverse tekstmarkeringen */
   .yellow{background: yellow;}
   span.red{color: red;}
-  span.box{background: lightyellow}
-  span.mark {
-    background-color: yellow;
-  }
+  span.box{background: lightyellow;}
+  span.mark {background-color: yellow;}
   span.blue {
     color: rgb(0, 174, 255);
     font-weight: bold;
+  }
+  div.box{ /* 20210322 */
+    background: lightyellow; 
+    border: none;
+    box-shadow: 3px 3px rgba(75%, 75%, 75%, .25);
+    padding: 1em;
+    margin-top: 1em;
   }
 
 /******************************************************************************/

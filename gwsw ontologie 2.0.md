@@ -6,6 +6,7 @@ GWSW Ontologie 2.0
 Versie historie
 <div style="font-size: 0.95em">
 
+20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]
 20201005: Hst Modelleerprincipes bijgewerkt
 20200817: Voorwaarden bij concept-annotaties uitgeschreven, hst 3.2.1  
 20200814: Annotaties vanuit Gellish toegevoegd (editor, fact-collectie)  
@@ -22,25 +23,19 @@ Versie historie
 20200102: Voorstel integratie van NTA 8035
 </div> 
 
-Inleiding
-=========
+# Inleiding
 
 Het W3C definieert standaarden voor het Semantisch Web met als basis de triple-vorm: de Subject-Predicate-Object constructie. Het basisprotocol dat hieraan ten grondslag ligt is de linked data taal RDF.
-
-Het GegevensWoordenboek Stedelijk Water (GWSW), een ontwikkeling van de stichting RIONED, is oorspronkelijk ontwikkeld in de Gellish taal. Ook Gellish is een semantische modelleringstaal in het zogenaamde ORO (Object-Relatie-Object) formaat.
-
-In het najaar van 2015 is het GWSW omgezet naar RDF, daarvoor is het GWSW-OroX protocol geïntroduceerd. Die versie van het GWSW is doorontwikkeld tot medio 2020, toen is versie 1.5.1 uitgebracht.
 
 Begin 2020 is gestart met de ontwikkeling van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035 (NTA 8035). <span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van RDF/RDFS/OWL 2/SHACL en het uitwisselformaat Turtle.
 
-In de voorbeelden en in de praktijk (bij uitwisseling van GWSW-gegevens) gebruiken we het Turtle-formaat.
+In de voorbeelden en in de praktijk (bij uitwisseling van GWSW-gegevens) gebruiken we het Turtle-formaat. Voor de concepten binnen de GWSW-Ontologie hanteren we in de voorbeelden de prefix “gwsw:”. Voor individuen in een dataset wordt de prefix “ex:” gebruikt.
 
-In dit hoofdstuk vind u de begrippen en uitgangspunten bij de modellering van het GWSW 2.0. In het volgende hoofdstuk wordt de globale inrichting van het model beschreven. In het laatste hoofdstuk vind u de gedetaillleerde uitwerking met voorbeelden.
+In deze inleiding vindt u de gebruikte begrippen en uitgangspunten bij de modellering. In het volgende hoofdstuk worden modelleringsprincipes toegelicht. Het laatste hoofdstuk bevat de gedetailleerde uitwerking van het RDF model, gecombineerd met voorbeelden van het datamodel en datasets.
 
-Gebruikte begrippen
--------------------
+## Gebruikte begrippen
 
 **Linked data: RDF, RDFS, OWL 2, SHACL**  
 RDF staat voor Resource Description Framework, de basisdefinitie van modellen op basis van subject-predicate-object. In de tekst verstaan we onder "linked data" de combinatie van RDF en de daarop gebaseerde schema's RDFS (RDF Schema), OWL 2 (Web Ontology Language) en SHACL (Shapes Constraint Language). Met de term OWL wordt OWL 2 aangeduid.
@@ -66,16 +61,53 @@ Een samenhangende gegevensstructuur bestaande uit concepten, hun attributen en o
 **Model, Dataset**  
 Binnen de GWSW ontologie beschrijft het datamodel (model) de concepten en hun relaties, de dataset bevat de “individuen”, bijvoorbeeld een fysiek stedelijk water systeem. Voor het model wordt ook wel de term TBox gebruikt: “terminological components”. Voor de dataset wordt ook de term ABox gebruikt: “assertion components”.
 
-Uitgangspunten
---------------
+## Inrichting GWSW-OroX protocol
 
-### Modellering
+De ontologie is gebaseerd op de volgende hoofdstructuren:
+-   Soortenboom (de taxonomie of specialisatie-indeling)
+-   Samenstelling (de meronomie of deel-geheel indeling)
+-   Proces (de activiteiten met in- en uitvoer)
+-   Collecties (groeperingen van concepten of individuen)
+
+De belangrijkste "top level" concepten (supertypes) zijn:
+-   Fysiek object
+-   Activiteit
+
+Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de NTA 8035 vormen ze het ontwerpkader, de ruggengraat van het GWSW. De GWSW ontologie onderscheidt zich door diepgang in semantiek en reikwijdte in de toepassing (van systeem tot proces). De soortenboom van het GWSW bevat op dit moment (versie 1.5) circa 1500 klassen.
+
+## Drie bestandsvormen
+
+De ontologie omvat zowel het model (de concepten en relaties, zie data.gwsw.nl) als de daarop gebaseerde datasets (de individuen, zie apps.gwsw.nl). Vanaf GWSW 2.0 wordt naast het <span class="blue">Model</span> en <span class="blue">Dataset</span> een derde datastructuur gebruikt: de <span class="blue">Shapes</span> met daarin SHACL graphs voor data-verificatie (de conformiteitsklasse - CFK). (De Shapes vervangen de filters op vorige GWSW-versies met daarin aangescherpte OWL-restricties).
+
+Het model is zo ingericht dat hiermee vergaande afleiding van de data in de Dataset mogelijk is ("inferencing"). Daarnaast dienen de Shapes om - afhankelijk van het toepassingsproces - kwaliteitseisen te formuleren en via de SHACL processor te verifiëren.  
+
+*De rol van de drie bestandsvormen Model, Dataset en Shapes bij de toepassing van het GWSW:*
+
+<img src="media/image1.png" style="width:100%;height:40%" />
+
+Voorbeelden van de drie bestandsvormen zijn in dit document als volgt gemarkeerd:
+
+<div class="example"><div class="example-title marker">Model:</div><pre>
+    Voorbeeld model
+</pre></div>
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    Voorbeeld dataset
+</pre></div>
+<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
+    Voorbeeld SHACL graphs
+</pre></div>
+
+
+## Uitgangspunten
 
 Een belangrijk principe is de object-georiënteerde modellering: het model hanteert overerving-principes en maakt zo expliciet mogelijk onderscheid in subtypen van de genoemde supertypen. Dat is een heel andere benadering dan bijvoorbeeld het ontwerp van een relationeel model. Daarbij ligt de nadruk ligt op het interpreteren van informatie met een hoofdrol voor de normalisatie-techniek om opslagruimte te beperken en redundantie te voorkomen. RDF is vanwege zijn binaire relaties van zichzelf optimaal genormaliseerd, wijzigingen beperken zich tot toevoegen of verwijderen van triples.
 
+Voor de modellering is uitgegaan van het OWL RL (Rule Language) profiel. Dit profiel gebruikt nagenoeg alle OWL 2 semantiek en is toereikend voor het modelleren van de GWSW-Ontologie.
+
+Voor de definitie van klassen, eigenschappen, datatypen en restricties kunnen verschillende benaderingen gekozen worden. De volgende uitgangspunten zijn gehanteerd:
+
 Uitgangspunten bij de bouw van de GWSW ontologie:
-*  Bij opbouw van het GWSW in linked data vorm wordt het oorspronkelijke Gellish-model zonder informatieverlies getransformeerd naar het linked data model.
-*  Een mooie erfenis vanuit Gellish: Objectypen (klassen) blijven zoveel mogelijk expliciet gedefinieerd. Voor de indeling in soorten, de vaststelling van de taxonomie volgen we het principe dat op basis van de objecteigenschappen het objecttype wordt gedefinieerd ("onderscheidende kenmerken", "data-afleiding"). Om dat uit te drukken gebruiken we (de CE's en OPE's) in OWL. Er is uitgegaan van het OWL RL (Rule Language) profiel. Dit profiel gebruikt nagenoeg alle OWL semantiek en is toereikend voor de GWSW ontologie.
+* Bij de indeling van soorten, de vaststelling van de taxonomie, wordt de onderscheidende definitie zo expliciet mogelijk beschreven.
 *  Validaties en specificaties voor data-verificatie beschrijven we in SHACL.
 *  De SHACL shapes kunnen in meerdere vormen voorkomen en staan naast de GWSW ontologie. De shapes worden gebaseerd op de vereiste datakwaliteit per proces. De zogenaamde conformiteitsklassen.
 *  De ontologie is volledig gebaseerd op de NTA 8035, uitgave voorjaar 2020. Het GWSW gebruikt ook de NTA-methode voor het beschrijven van attributen. Die is geïnspireerd op de Ontology for Property Management (OPM), zie https://w3c-lbd-cg.github.io/opm .
@@ -119,77 +151,6 @@ Voor de concepten en relaties uit de GWSW-Ontologie hanteren we in de voorbeelde
 <tr><td>GWSW-Dataset</td><td>ex:</td><td>&lt;https://w3id.org/def/example#&gt;</td></tr>
 </table>
 
-### URI-strategie, naamgeving, identificatie
-
-<span style="font-size: 1.5em">De URI-strategie wordt herzien, zie https://geonovum.github.io/uri-bp . De inhoud van dit hoofdstuk is daarop nog niet aangepast.</span>
-
-De details van de URI-opbouw zijn beschreven in het document "GWSW URI Strategie". Daarin is op basis van de richtlijnen van het Platform Linked Data Nederland (PLDN) voor het GWSW-model de URI-opbouw beschreven.
-
-**<span class="smallcaps">Identificatie van concepten</span>**
-
-Om te verwijzen naar documentlocaties van GWSW-concepten gebruiken we:
-
-<pre class="simp">https://{domain}/{type}/{version}/{filter}/{reference}</pre>
-
-**{domain}** is het web-domein: voor de GWSW-Ontologie is {locatie}.gwsw.nl. Het subdomein {locatie} voor de ontologie is <span class="blue">data</span>.
-
-**{type}** is het soort resource: voor concepten / definities van een term is dat type <span class="blue">def</span>. In de URI hoeft het type niet te worden opgenomen, het default-type (bij ontbreken) is <span class="blue">def</span>.
-
-**{version}** is de versie: voor deze GWSW ontologie is dat <span class="blue">2.0</span>.
-
-**{filter}** is het geldende filter ("view") op de GWSW ontologie: om alle concepten op te kunnen vragen geldt filter <span class="blue">Totaal</span>.
-
-**{reference}** is de verwijzing naar het specifieke concept:
-
-Het hanteren van begrijpbare namen voor concepten is een gangbare RDF praktijk en ook voor het GWSW heel bruikbaar. We gaan uit van camelCase en CamelCase notatie van de namen voor respectievelijk de properties (starten met lowercase) en de klassen (starten met uppercase).
-
-Een <span class="blue">externe overstortput</span> is een GWSW concept (klasse) en heeft in GWSW versie 2.0 de URI 
-<pre class="simp">https://data.gwsw.nl/2.0/Totaal/ExterneOverstortput</pre>
-
-De <span class="blue">breedte</span> van een <span class="blue">put</span> is een attribuut en heeft de URI 
-<pre class="simp">https://data.gwsw.nl/2.0/Totaal/breedtePut></pre>
-
-Een URI van een GWSW-klasse bestaat dus uit een ontologie-locatie, aangevuld met de conceptnaam (in CamelCase). In de voorbeelden wordt de ontologie-locatie aangeduid met de prefix gwsw: .
-
-**<span class="smallcaps">Voorkeursnaam, synoniem, vertaling</span>**
-
-We volgen de NTA 8035, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NTA 8035 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
-
-<div class="example"><div class="example-title marker">Model: Voorbeeld URI en namen</div><pre>
-    @prefix gwsw:                         &lt;https://data.gwsw.nl/2.0/totaal/&gt; . 
-    gwsw:ExterneOverstortput              skos:prefLabel             "Externe overstortput"@nl ; 
-                                          skos:altLabel              "External weir"@en ; 
-                                          skos:altLabel              "Externe overstort"@nl . 
-    gwsw:breedtePut                       skos:prefLabel             "Breedte put"@nl . 
-</pre></div>
-
-**<span class="smallcaps">Identificatie individuen</span>**
-
-Het verwijzen naar individuen met URI’s is essentieel in het linked-data principe, zeker nu er meer linked-data platforms verschijnen en de GWSW datasets steeds breder worden toegepast.
-
-Een uniforme URI-strategie voor individuen in de "bebouwde omgeving" ontbreekt nog. In zo'n URI kan dan bijvoorbeeld de eigenaar van de gegevens (gemeente, samenwerkingsregio, waterschap, provincie) worden onderscheiden. Op korte termijn zou deze strategie uitgewerkt, vastgesteld en gebruikt moeten worden.
-
-Een voorbeeld van de mogelijkheden met gebruik van de eerder genoemde opbouw:
-<pre class="simp">https://{domain}/{type}/{organisatie}#{reference} </pre>
-
-**{domain}**: Identiek aan het GWSW-model
-
-**{type}**: Het betreft nu een individual, dus is het type een identifier <span class="blue">id</span>.
-
-**{organisatie}**: De organisatie/eigenaar/beheerder van het individu. Voor het organisatienummer (het identificeren van een lokaal pad) wordt conform de URI-strategie van het Digitaal Stelsel Omgevingswet de CBS-systematiek gehanteerd. Dit is de code van de overheidslaag (01 rijk, 02 uitvoeringsorgaan, 03 provincie, 04 waterschap, 05 gemeenschappelijke regeling, 06 gemeente) gevolgd door de viercijferige CBS-code van de overheidsinstelling. Voor "Roosendaal" betekent dit de code "0601674".
-
-**{reference}**: Als URL-fragment, de identificatie van het object (bijvoorbeeld een GUID).
-
-De URI naar een specifieke rioolput in gemeente Roosendaal wordt daarmee:
-<pre class="simp">https://data.gwsw.nl/id/061674#b2ad189a-8c46-49f2-557ba07c49a2</pre>
-
-Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit document de neutrale aanduiding van individuen.
-
-<div class="example-dataset"><div class="example-title marker">Dataset: Voorbeeld identificatie</div><pre>
-    @prefix gwsw: &lt;https://data.gwsw.nl/2.0/totaal/&gt; .
-    @prefix ex: &lt;https://w3id.org/def/example#&gt; .
-    ex:Put_1    rdf:type gwsw:ExterneOverstortput .
-</pre></div>
 
 
 Modelleerprincipes
@@ -287,43 +248,6 @@ Opsplitsen in model-bestanden?
 Combineren van model-bestanden in editor mogelijk? Onderscheid houden, ook na aanpassingen in de editor.
 Enkelvoudige contexten altijd in apart model-bestand?
 
-Inrichting GWSW ontologie
-=========================
-
-De ontologie is gebaseerd op de volgende hoofdstructuren:
--   Soortenboom (de taxonomie of specialisatie-indeling)
--   Samenstelling (de meronomie of deel-geheel indeling)
--   Proces (de activiteiten met in- en uitvoer)
--   Collecties (groeperingen van concepten of individuen)
-
-De belangrijkste "top level" concepten (supertypes) zijn:
--   Fysiek object
--   Activiteit
-
-Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de NTA 8035 vormen ze het ontwerpkader, de ruggengraat van het GWSW. De GWSW ontologie onderscheidt zich door diepgang in semantiek en reikwijdte in de toepassing (van systeem tot proces). De soortenboom van het GWSW bevat op dit moment (versie 1.5) circa 1500 klassen.
-
-Drie bestandsvormen
--------------------
-
-De ontologie omvat zowel het model (de concepten en relaties, zie data.gwsw.nl) als de daarop gebaseerde datasets (de individuen, zie apps.gwsw.nl). Vanaf GWSW 2.0 wordt naast het <span class="blue">Model</span> en <span class="blue">Dataset</span> een derde datastructuur gebruikt: de <span class="blue">Shapes</span> met daarin SHACL graphs voor data-verificatie (de conformiteitsklasse - CFK). (De Shapes vervangen de filters op vorige GWSW-versies met daarin aangescherpte OWL-restricties).
-
-Het model is zo ingericht dat hiermee vergaande afleiding van de data in de Dataset mogelijk is ("inferencing"). Daarnaast dienen de Shapes om - afhankelijk van het toepassingsproces - kwaliteitseisen te formuleren en via de SHACL processor te verifiëren.  
-
-*De rol van de drie bestandsvormen Model, Dataset en Shapes bij de toepassing van het GWSW:*
-
-<img src="media/image1.png" style="width:100%;height:40%" />
-
-Voorbeelden van de drie bestandsvormen zijn in dit document als volgt gemarkeerd:
-
-<div class="example"><div class="example-title marker">Model:</div><pre>
-    Voorbeeld model
-</pre></div>
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    Voorbeeld dataset
-</pre></div>
-<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
-    Voorbeeld SHACL graphs
-</pre></div>
 
 Concepten, specialisatie
 ------------------------
@@ -931,8 +855,7 @@ Voor het uitdrukken van CE/OPE voorziet OWL in een groot aantal (restrictie) pro
 </tbody>
 </table>
 
-Details GWSW ontologie
-======================
+# Details GWSW ontologie
 
 Concepten, specialisatie
 ------------------------
@@ -968,7 +891,7 @@ Het individu ex:Put_2 is dus zowel een stuwput (een put met een stuwconstructie)
 Attributen
 ----------
 
-### Annotaties
+## Annotaties bij concepten
 
 De volgende annotaties worden bij een GWSW-concept opgenomen:
 
@@ -1074,6 +997,78 @@ Meerdere codes kunnen voorkomen voor verschillende contexten. Bijvoorbeeld bij h
     gwsw:StartNodeReference skos:notation  "GAB"^^gwsw:Dt_Notation_RRB .  # reinigen leiding
     gwsw:Dt_Notation_RRB    skos:prefLabel "Codering reinigen put/leiding"@nl ;
                             rdf:type       rdfs:Datatype .            
+</pre></div>
+
+### URI-strategie, naamgeving, identificatie
+
+<span style="font-size: 1.5em">De URI-strategie wordt herzien, zie https://geonovum.github.io/uri-bp . De inhoud van dit hoofdstuk is daarop nog niet aangepast.</span>
+
+De details van de URI-opbouw zijn beschreven in het document "GWSW URI Strategie". Daarin is op basis van de richtlijnen van het Platform Linked Data Nederland (PLDN) voor het GWSW-model de URI-opbouw beschreven.
+
+**<span class="smallcaps">Identificatie van concepten</span>**
+
+Om te verwijzen naar documentlocaties van GWSW-concepten gebruiken we:
+
+<pre class="simp">https://{domain}/{type}/{version}/{filter}/{reference}</pre>
+
+**{domain}** is het web-domein: voor de GWSW-Ontologie is {locatie}.gwsw.nl. Het subdomein {locatie} voor de ontologie is <span class="blue">data</span>.
+
+**{type}** is het soort resource: voor concepten / definities van een term is dat type <span class="blue">def</span>. In de URI hoeft het type niet te worden opgenomen, het default-type (bij ontbreken) is <span class="blue">def</span>.
+
+**{version}** is de versie: voor deze GWSW ontologie is dat <span class="blue">2.0</span>.
+
+**{filter}** is het geldende filter ("view") op de GWSW ontologie: om alle concepten op te kunnen vragen geldt filter <span class="blue">Totaal</span>.
+
+**{reference}** is de verwijzing naar het specifieke concept:
+
+Het hanteren van begrijpbare namen voor concepten is een gangbare RDF praktijk en ook voor het GWSW heel bruikbaar. We gaan uit van camelCase en CamelCase notatie van de namen voor respectievelijk de properties (starten met lowercase) en de klassen (starten met uppercase).
+
+Een <span class="blue">externe overstortput</span> is een GWSW concept (klasse) en heeft in GWSW versie 2.0 de URI 
+<pre class="simp">https://data.gwsw.nl/2.0/Totaal/ExterneOverstortput</pre>
+
+De <span class="blue">breedte</span> van een <span class="blue">put</span> is een attribuut en heeft de URI 
+<pre class="simp">https://data.gwsw.nl/2.0/Totaal/breedtePut></pre>
+
+Een URI van een GWSW-klasse bestaat dus uit een ontologie-locatie, aangevuld met de conceptnaam (in CamelCase). In de voorbeelden wordt de ontologie-locatie aangeduid met de prefix gwsw: .
+
+**<span class="smallcaps">Voorkeursnaam, synoniem, vertaling</span>**
+
+We volgen de NTA 8035, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NTA 8035 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
+
+<div class="example"><div class="example-title marker">Model: Voorbeeld URI en namen</div><pre>
+    @prefix gwsw:                         &lt;https://data.gwsw.nl/2.0/totaal/&gt; . 
+    gwsw:ExterneOverstortput              skos:prefLabel             "Externe overstortput"@nl ; 
+                                          skos:altLabel              "External weir"@en ; 
+                                          skos:altLabel              "Externe overstort"@nl . 
+    gwsw:breedtePut                       skos:prefLabel             "Breedte put"@nl . 
+</pre></div>
+
+**<span class="smallcaps">Identificatie individuen</span>**
+
+Het verwijzen naar individuen met URI’s is essentieel in het linked-data principe, zeker nu er meer linked-data platforms verschijnen en de GWSW datasets steeds breder worden toegepast.
+
+Een uniforme URI-strategie voor individuen in de "bebouwde omgeving" ontbreekt nog. In zo'n URI kan dan bijvoorbeeld de eigenaar van de gegevens (gemeente, samenwerkingsregio, waterschap, provincie) worden onderscheiden. Op korte termijn zou deze strategie uitgewerkt, vastgesteld en gebruikt moeten worden.
+
+Een voorbeeld van de mogelijkheden met gebruik van de eerder genoemde opbouw:
+<pre class="simp">https://{domain}/{type}/{organisatie}#{reference} </pre>
+
+**{domain}**: Identiek aan het GWSW-model
+
+**{type}**: Het betreft nu een individual, dus is het type een identifier <span class="blue">id</span>.
+
+**{organisatie}**: De organisatie/eigenaar/beheerder van het individu. Voor het organisatienummer (het identificeren van een lokaal pad) wordt conform de URI-strategie van het Digitaal Stelsel Omgevingswet de CBS-systematiek gehanteerd. Dit is de code van de overheidslaag (01 rijk, 02 uitvoeringsorgaan, 03 provincie, 04 waterschap, 05 gemeenschappelijke regeling, 06 gemeente) gevolgd door de viercijferige CBS-code van de overheidsinstelling. Voor "Roosendaal" betekent dit de code "0601674".
+
+**{reference}**: Als URL-fragment, de identificatie van het object (bijvoorbeeld een GUID).
+
+De URI naar een specifieke rioolput in gemeente Roosendaal wordt daarmee:
+<pre class="simp">https://data.gwsw.nl/id/061674#b2ad189a-8c46-49f2-557ba07c49a2</pre>
+
+Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit document de neutrale aanduiding van individuen.
+
+<div class="example-dataset"><div class="example-title marker">Dataset: Voorbeeld identificatie</div><pre>
+    @prefix gwsw: &lt;https://data.gwsw.nl/2.0/totaal/&gt; .
+    @prefix ex: &lt;https://w3id.org/def/example#&gt; .
+    ex:Put_1    rdf:type gwsw:ExterneOverstortput .
 </pre></div>
 
 ### Aspecten
