@@ -1,10 +1,12 @@
-GWSW Ontologie 2.0
-==================
+# GWSW Ontologie 2.0
 
-**Een beschrijving van de GWSW Ontologie op basis van de [NTA 8035](https://www.nen.nl/NEN-Shop/Norm/NTA-80352020-nl.htm)**
+<!-- gebruik voor lokaal editen -->
+<script src="./builds/respec-rioned.js"></script>
+
+**Een beschrijving van de GWSW Ontologie op basis van de [NTA 8035:2020](https://www.nen.nl/NEN-Shop/Norm/NTA-80352020-nl.htm) (versie april 2020)**
 
 Versie historie
-<div style="font-size: 0.95em">
+<div style="font-size: 0.90em">
 
 20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]
 20201005: Hst Modelleerprincipes bijgewerkt
@@ -14,11 +16,11 @@ Versie historie
 20200509: URI-strategie toegevoegd, ook voorstel voor individuen  
 20200507: Commentaar van Michel (overleg dd 20200506) verwerkt  
 20200505: Diverse kleine tekstaanpassingen  
-20200430: Volledig bijgewerkt op basis laatste NTA 8035 en SHACL proefnemingen  
+20200430: Volledig bijgewerkt op basis laatste NTA 8035:2020 en SHACL proefnemingen  
 20200415: Proefneming in voorbeelden uitgewerkt  
 20200408: SHACL toepassing voor data-verificatie toegevoegd  
 20200325: Bijgewerkt op basis (teams)overleg met TNO (Michel) (20200324)  
-20200214: Bijgewerkt op basis laatste versie van NTA 8035 (20200211)  
+20200214: Bijgewerkt op basis laatste versie van NTA 8035:2020 (20200211)  
 20200103: Opmerking toegevoegd: is Topologisch element wel een bs:Property?  
 20200102: Voorstel integratie van NTA 8035
 </div> 
@@ -27,7 +29,7 @@ Versie historie
 
 Het W3C definieert standaarden voor het Semantisch Web met als basis de triple-vorm: de Subject-Predicate-Object constructie. Het basisprotocol dat hieraan ten grondslag ligt is de linked data taal RDF.
 
-Begin 2020 is gestart met de ontwikkeling van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035 (NTA 8035). <span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
+Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020 (verder genoemd NTA 8035). <span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van RDF/RDFS/OWL 2/SHACL en het uitwisselformaat Turtle.
 
@@ -77,7 +79,7 @@ Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de N
 
 ## Drie bestandsvormen
 
-De ontologie omvat zowel het model (de concepten en relaties, zie data.gwsw.nl) als de daarop gebaseerde datasets (de individuen, zie apps.gwsw.nl). Vanaf GWSW 2.0 wordt naast het <span class="blue">Model</span> en <span class="blue">Dataset</span> een derde datastructuur gebruikt: de <span class="blue">Shapes</span> met daarin SHACL graphs voor data-verificatie (de conformiteitsklasse - CFK). (De Shapes vervangen de filters op vorige GWSW-versies met daarin aangescherpte OWL-restricties).
+De ontologie omvat zowel het model (de concepten en relaties, zie [data.gwsw.nl](https://data.gwsw.nl)) als de daarop gebaseerde datasets (de individuen, zie [apps.gwsw.nl](https://apps.gwsw.nl)). Vanaf GWSW 2.0 wordt naast het <span class="blue">Model</span> en <span class="blue">Dataset</span> een derde datastructuur gebruikt: de <span class="blue">Shapes</span> met daarin SHACL graphs voor data-verificatie (de conformiteitsklasse - CFK). (De Shapes vervangen de filters op vorige GWSW-versies met daarin aangescherpte OWL-restricties).
 
 Het model is zo ingericht dat hiermee vergaande afleiding van de data in de Dataset mogelijk is ("inferencing"). Daarnaast dienen de Shapes om - afhankelijk van het toepassingsproces - kwaliteitseisen te formuleren en via de SHACL processor te verifiëren.  
 
@@ -151,112 +153,201 @@ Voor de concepten en relaties uit de GWSW-Ontologie hanteren we in de voorbeelde
 <tr><td>GWSW-Dataset</td><td>ex:</td><td>&lt;https://w3id.org/def/example#&gt;</td></tr>
 </table>
 
+# Modelleerprincipes
 
+Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkelijke opzet (gestart in 2006) van het model in Gellish-vorm. Deze principes zijn natuurlijk taalonafhankelijk, ook in de RDF-vorm blijven ze van groot belang. Veel dank gaat naar Andries van Renssen, geestelijk vader van Gellish en Matthé van Koetsveld, intensief betrokken bij de modellering in Gellish van het GWSW en zijn voorlopers.
 
-Modelleerprincipes
-------------------
+## Reikwijdte model
 
-<span style="font-size: 1.5em">Zie [GWSW Ontologie in RDF](https://stichtingrioned.github.io/GWSW_Ontologie_RDF/#modelleerprincipes), is daar geactualiseerd.</span>
+Het GWSW Datamodel volgt de ontwikkelingen in het vakgebied. Het bevat alleen concepten die actief worden toegepast (in uitwisseling en applicaties) of die in ontwerpen voor toepassing (bijvoorbeeld nieuwe uitwisselvormen) zijn opgenomen. Dat geldt ook (en vooral) voor kenmerken van objecten.  
+Terminologie waarbij het uitsluitend gaat om vastleggen van definities wordt met terughoudendheid opgenomen.
 
-<!--* Best Practices for Publishing Linked Data [[ld-bp]]-->
+Bij het ontwerp van het GWSW Datamodel spelen altijd de volgende **invalshoeken** mee:
+* Wordt het concept algemeen gebruikt in - native - databases, wordt het (straks) uitgewisseld via GWSW Datasets
+* Welke gevolgen heeft de aanpassing voor de toepassingen:
+  * Externe applicaties die GWSW Datasets gebruiken
+  * De geografische presentaties (en onderliggende queries)
+  * De uitwisselformaten HydX, RibX
+  * De kwaliteitsmetingen van datasets: dataverificatie met Nulmeting, SHACL
+* Zijn de aanpassingen relevant voor het GWSW als naslagwerk
 
-### Terminologie - Het vakgebied is leidend
+**"As is", een momentopname**  
+Het datamodel beschrijft de "as is" situatie, het bevat een momentopname van systemen en processen binnen de discipline stedelijk water. Het beschrijft dus geen historische gegevens of de levenscyclus van objecten zoals binnen de context van system engineering.
 
-(uitwerking: zie hst 3.1)
+## Structureren
 
-1.  Volg de gebruikelijke termen binnen het vakgebied, bedenk geen nieuwe conceptnamen die misschien de lading beter dekken of neutraler zijn. Dat geldt ook - waar mogelijk - voor abstracte concepten.
-2.  Geef alle gebruikelijke vakgebied-termen die gelden voor het te modelleren systeem of proces een plek, als apart concept of als synoniem van een concept. De zoekfunctie moet volledig zijn.
-3.  Laat algemene termen die niet specifiek bij de discipline horen zoveel mogelijk buiten beschouwing. Modelleer bijvoorbeeld het concept "calamiteit" alleen als het als supertype nodig is.
-4.  Verwijs voor algemene termen waar mogelijk naar andere databronnen (rdfs:seeAlso).
+Zoals genoemd is de datastructuur object-georiënteerd waarbij objecten in een aantal hoofdstructuren zijn ondergebracht:
 
-### Concepten en annotaties
+* Soortenboom (de taxonomie of klasse-indeling)
+* Samenstelling (de meronomie of deel-geheel indeling en de processchema's)
+* Proces (het activiteiten-schema)
+* Groeperingen (collecties van individuen of soorten)
 
-1.  Elk GWSW-concept is van het generieke type owl:Class.
-2.  Een concept wordt geïdentificeerd door de URI (prefix + naam) conform hst 3.1.1
-3.  Een concept wordt altijd voorzien van de annotaties zoals opgenomen in hst 3.1.2.
+Bij het ontwerp spelen deze structuren de hoofdrol, ze vormen het ontwerpkader. Met het principe van object-oriëntatie hanteert het model overerving-principes en maakt zo expliciet mogelijk onderscheid in (relaties tussen) subtypes.
 
-### Specialiseren - Onderscheidende kenmerken
+<div class="box"><strong>Voorbeelden:</strong>
+<br/>Afgeleide gegevens komen niet voor in de definitie van fysieke objecten, bijvoorbeeld het kenmerk "aantal pompen". Zo'n gegeven wordt (in presentaties) afgeleid uit het aantal voorkomens van de relatie <span class="blue">gwsw:hasPart</span> tussen Gemaal en Pomp. De objecten Gemaal en Pomp worden expliciet beschreven.  
+<br/>Afgeleide gegevens zoals rekenresultaten en data-analyses komen in het GWSW wel voor in de vorm van gemodelleerde rapportages, bijvoorbeeld in GWSW Kentallen. 
+<br/>Eigenschappen van de bovengrond en ondergrond (maaiveldhoogte, grondsoort) komen niet voor als aspecten van de fysieke objecten die zich daarin bevinden. Een leiding heeft niet als kenmerk "Grondsoort", wel wordt er een relatie <span class="blue">gwsw:isPartOf</span> met de ondergrond - en dus met bijbehorende kenmerken - gedefinieerd.</div>
 
-(het opbouwen van de soortenboom, uitwerking: zie hst 3.6)
+## Concepten en annotaties
 
-1.  Voor het classificeren van een concept uitgaan van zoeken op onderscheidende kenmerken in de (abstracte) soortenboom. Denk aan determineren van planten volgens Linnaeus: na het maken van een aantal keuzes wordt de soort gevonden
-2.  Streef ernaar om met de onderscheidende kenmerken de uitgeschreven definitie af te dekken
-3.  Gebruik de volgende onderscheidende kenmerken bij fysieke objecten:
-    -   Doel (waarvoor)
-    -   Toepassing (waarin)
-    -   Functie (wat doet het)
-    -   Uitvoering (hoe)
-    -   Structuur (waaruit)
+1. Elk GWSW-concept is van het generieke type owl:Class.
+2. Een concept en elke CE wordt altijd voorzien van de annotaties zoals opgenomen in hst [Annotaties bij concepten](#annotaties-bij-concepten)
+3. Voeg zoveel mogelijk extra informatie toe zoals afbeeldingen (verwijs via <span class="blue">rdfs:seeAlso</span>)
 
-4.  Activiteiten worden altijd gekenmerkt door de relaties
-    -   Invoer / hasInput (het lijdend voorwerp)
-    -   Uitvoer / hasOutput (het gewijzigde voorwerp, een rapport)
+## Naamgeving
 
-5.  Gebruik daarnaast de volgende onderscheidende kenmerken bij activiteiten:
-    -   Doel (waarvoor)
-    -   Toepassing (waarin)
-    -   Resultaat (wat doet het)
-    -   Technologie (werkwijze, eisen)
-    -   Mechanisme (waarmee)
-6.  Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus niet gebruikt (zijn - nog - onnodig).
+_Terminologie_
 
-### Specialiseren - Abstracte concepten (en collecties)
+Zie hst [Identificatie van concepten](#identificatie-van-concepten)
 
-1.  Hou ze beperkt, de soortenboom zo veel mogelijk concreet houden. Supertypes zijn vaak alleen verdichtingen, geen soort.
-2.  Concepten zijn herkenbaar als abstract wanneer ze bijvoorbeeld niet in de deel-geheel relaties (bijvoorbeeld als deel van een rioleringsgebied) voorkomen.
-3.  Abstracte concepten bij voorkeur als groep/collectie (en niet als supertype) definiëren. Bijvoorbeeld groepering naar thema's, denk aan infiltratievoorzieningen.
-4.  Subtypes op hetzelfde niveau dienen in grote lijn hetzelfde samenstellingsniveau te hebben.
+1. Een concept wordt geïdentificeerd door de URI (prefix + naam)
+2. Volg de gebruikelijke termen binnen het vakgebied, bedenk geen nieuwe conceptnamen die misschien de lading beter dekken of neutraler zijn. Dat geldt ook - waar mogelijk - voor abstracte concepten.
+3. Voorkom zoveel mogelijk het gebruik van handels- of merknamen in de conceptnamen.
+4. Geef alle gebruikelijke vakgebied-termen die gelden voor het te modelleren systeem of proces een plek, als apart concept of als synoniem van een concept. De zoekfunctie wordt daarmee volledig.
+5. Laat algemene termen die niet specifiek bij de discipline horen zoveel mogelijk buiten beschouwing. Modelleer bijvoorbeeld het concept "calamiteit" alleen als het als supertype nodig is.
+6. Verwijs voor algemene termen waar mogelijk naar andere databronnen (<span class="blue">rdfs:seeAlso</span>).
 
-### Specialiseren - Bladerobjecten
+## Data-afleiding en -verificatie
 
-1.  Specialiseer de concepten zoveel als mogelijk: definieer de subtypes, de "bladerobjecten".
-2.  Introduceer geen subtype als het geen onderscheidend kenmerk heeft. Bijvoorbeeld geen extra subtype "standaard hemelwaterstelsel" naast "verbeterd hemelwaterstelsel".
-3.  Hou er rekening mee dat de individuen zo specifiek mogelijk geclassificeerd dienen te worden. Classificatie met een supertype gebeurt alleen als het subtype niet van toepassing is (denk aan het eerdere voorbeeld "hemelwaterstelsel") of als het onbekend is en wel toegepast kan worden. Bijvoorbeeld bij gebruik van de inspectienorm voor "vrijverval rioolleidingen" (met subtypes gemengd, hemelwater, vuilwater).
+Definieer klassen zo uitgebreid mogelijk op basis van hun eigenschappen. Daarmee worden datasets op basis van het datamodel ruimer interpreteerbaar en beter valideerbaar. Hier volgt een opsomming van de mogelijke afleidingen (inferences) en uit de CE's afgeleide validaties. In enkele gevallen is reasoning op basis van het UNA (Unique Name Assumption) principe nodig. De controle op kardinaliteit is beperkt vanwege het OWA (Open World Assumption) principe in RDF.
 
-### Samenstellen - Definiërende onderdelen en verbindingen
+* Controle op hasReference-waarden binnen domein van collecties / keuzelijsten (UNA)
+* Controle op correcte typering binnen samenstellingen via <span class="blue">gwsw:hasPart</span>.
+  - Ruimte <span class="blue">gwsw:hasPart</span> “Object”. Object: alleen van de klasse Ruimte of FysiekObject
+  - FysiekObject <span class="blue">gwsw:hasPart</span> “Object”. Object: alleen van de klasse Ruimte of FysiekObject
+* Inferencing: Individu-klasse wordt afgeleid uit intrinsiek aspect.
+    - <span class="blue">gwsw:hasAspect</span> BreedteLeiding =&gt; Individu = Leiding
+* Inferencing: Individu-klasse wordt afgeleid uit onderscheidend kenmerk.
+    - <span class="blue">gwsw:hasAspect</span> Uitvoering + hasReference Klein =&gt; Individu = KleinObject
+* Controle op correct gebruik datatype bij <span class="blue">gwsw:hasValue</span>: decimal, string, integer, double, date, time, year.
+* Controle op numerieke waarden binnen minimum maximum grenzen
+* Kardinaliteit, aantal voorkomens per property boven het voor het type gedefinieerde maximum wordt gemeld (UNA)
+  - ook “inverse”-kardinaliteit wordt in de reasoning meegenomen
+  - minimum kardinaliteit en shall-relatie wel gemodelleerd, controle op strijdigheid met typering niet mogelijk (OWA)
+  
+## Soortenboom
 
-1.  Maak waar mogelijk de deel-geheel relatie definiërend. Een fysiek object heeft dan per definitie andere fysieke objecten als onderdeel.
-2.  Maak waar mogelijk ook de cardinaliteit definiërend, het aantal onderdelen is dan bepalend.
+<br/><img src="media/taxonomie.png" style="width:50%;" />
 
-### Samenstellen - Erven van samenstellingen
+<div class="box"><strong>Tips bij opbouw taxonomie</strong> (bron: Bart Bink)
+<br/>- basis is overerving (multiple inheritance)
+<br/>- start met de class die je kent
+<br/>- plaats ze in een hiërarchie door subtypering
+<br/>- geef aan in definitie waarin de class verschilt van de bovenliggende class
+<br/>- geef aan in eigenschappen waarin de class verschilt van de bovenliggende class en omliggende classes
+<br/>- let op orthogonaliteit
+<br/>- plaats een eigenschap zo hoog mogelijk
+</div>
 
-1.  Voorkom redundantie van deel-geheel relaties, die relatie mag niet dubbel voorkomen voor een subtype en het bijbehorende supertype.
-2.  Definieer de samenstelling dus niet op een te hoog niveau (blijft verleidelijk)
+### Onderscheidende kenmerken
 
-### Kenmerken - Horen exclusief bij een concept
+Het opbouwen van de soortenboom op basis van onderscheidende kenmerken, zie hst [Details onderscheidende kenmerken](#details-onderscheidende-kenmerken)
 
-1.  Kenmerken zijn altijd eigendom van een entiteit/geheel en kunnen niet bestaan zonder de eigenaar.
-2.  Vermeng dus geen kenmerken van entiteiten. Bijvoorbeeld Dekselmateriaal, Beheerdernaam kunnen geen kenmerken van een Put zijn, die horen bij het concept Deksel en Beheerder. Die concepten zijn vervolgens gerelateerd aan de put.
-3.  Voorkom het opnemen van optionele kenmerken bij een supertype (kenmerken die niet voor alle subtypes gelden), definieer de kenmerken dus niet op een te hoog niveau.
-4.  Gebruik bijvoorbeeld het multi-parent principe. Als alleen kunststof leidingen het gebruikte kenmerk "kleur" hebben, introduceer dan het concept "kunststof leiding" met het kenmerk "kleur". Een indivual is dan zowel een "vrijverval rioolleiding" als een "kunststof leiding" zijn en heeft daarmee dat extra kenmerk.
+1. Voor het classificeren van een concept uitgaan van onderscheidende kenmerken in de (abstracte) soortenboom. Denk aan determineren van planten volgens Linnaeus: na het maken van een aantal keuzes wordt de soort gevonden
+2. Streef ernaar om met de onderscheidende kenmerken de (in je hoofd) uitgeschreven definitie te vervangen
+3. Gebruik de beschreven onderscheidende kenmerken bij fysieke objecten en activiteiten
+4. Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus niet gebruikt (zijn - nog - onnodig)
 
-### Kenmerken - Geen typelijsten
+### Abstracte concepten
 
-1.  Kenmerken die verwijzen naar een typelijst (bijvoorbeeld het kenmerk Soort Deksel van het concept Deksel) mogen niet voorkomen. Een typelijst moet altijd uitgedrukt worden in de taxonomie, bijvoorbeeld subtypes van Deksel.
+_Klassen (en collecties) die niet voor classificatie worden gebruikt / niet instantieerbaar zijn_
 
-### Kenmerken - Specialiseren, maak ze intrinsiek
+1. Hou ze beperkt, hou de soortenboom zo veel mogelijk concreet. Supertypes zijn vaak alleen verdichtingen, geen soort.
+2. Concepten zijn herkenbaar als abstract wanneer ze bijvoorbeeld niet in de deel-geheel relaties (bijvoorbeeld als deel van een rioleringsgebied) voorkomen.
 
-1.  Specialiseer waar nodig de kenmerken, zodat restricties op de kenmerk-waarde zo specifiek mogelijk zijn. Bijvoorbeeld:
-    -   Definieer het generieke kenmerk "materiaal" met het subtype "materiaal put" met bijbehorende domeinwaarden
-    -   Definieer het generieke kenmerk "diameter" met het subtype "diameter leiding" met specifieke restricties op de afmetingen.
-2.  Intrinsieke kenmerken zijn geen noodzaak maar de combinatie met bepaalde restricties maakt ze waardevol en daarnaast wordt het model robuuster: als een individual het kenmerk heeft, dan hoort het van een bepaald type te zijn.
+<div class="box"><strong>Oormerken met behulp van conformiteitsklassen</strong><br/>
+Voor de eindgebruiker worden abstracte klassen gemarkeerd in de conformiteitsklasse. De conformiteitsklasse beschrijft onder andere de geldende klassen. <a href="#validity-context">Zie validity context</a>
+</div>
 
-### Contexten onderscheiden
+3. Abstracte concepten bij voorkeur als groep/collectie (en niet als supertype) definiëren. Bijvoorbeeld groepering naar thema's, denk aan infiltratievoorzieningen.
+4. Subtypes op hetzelfde niveau dienen in grote lijn hetzelfde samenstellingsniveau te hebben.
 
-TOP, BAS, hoe in te delen?
-Opsplitsen in model-bestanden?
-Combineren van model-bestanden in editor mogelijk? Onderscheid houden, ook na aanpassingen in de editor.
-Enkelvoudige contexten altijd in apart model-bestand?
+### Bladerobjecten
 
+1. Specialiseer de concepten zoveel als mogelijk: definieer de subtypes, de "bladerobjecten".
+2. Introduceer geen subtype als het geen onderscheidend kenmerk heeft. Bijvoorbeeld geen extra subtype "standaard hemelwaterstelsel" naast "verbeterd hemelwaterstelsel".
+3. Hou er rekening mee dat de individuen zo specifiek mogelijk geclassificeerd dienen te worden. Classificatie met een supertype gebeurt alleen als het subtype niet van toepassing is (denk aan het eerdere voorbeeld "hemelwaterstelsel") of als het onbekend is en wel toegepast kan worden. Bijvoorbeeld bij gebruik van de inspectienorm voor "vrijverval rioolleidingen" (met subtypes gemengd, hemelwater, vuilwater).
 
-Concepten, specialisatie
-------------------------
+### Orthogonaliteit
+
+Binnen de GWSW taxonomie kunnen begrippen haaks (orthogonaal) op elkaar staan, de orthogonaliteit is dus niet bepalend voor de opbouw van de soortenboom. Bijvoorbeeld kun je de in het GWSW opgenomen concepten Blinde Put en Overstortput als orthogonaal beschouwen, de één wordt onderscheiden vanwege de constructie, de ander wordt onderscheiden vanwege de functie.  
+Dat vraagt extra aandacht bij de toepassing ervan. Zo kan een individu zowel van het type Blinde Put als van het type Overstortput maar dat geldt niet voor de combinatie van de typen Overstortput als Stuwput. Die laatste combinatie conflicteert vanwege de scheiding in functie. In het datamodel kun je dat expliciteren door conflicterende typeringen met <span class="blue">owl:disjointWith</span> te beschrijven. In het GWSW datamodel is dat niet uitgewerkt, via de onderscheidende kenmerken is de orthogonaliteit wel herkenbaar.
+
+## Aspecten
+
+**Beschrijf alleen relevante - toegepaste - aspecten bij een concept.**
+
+1. Kenmerken zijn altijd eigendom van een entiteit/geheel en kunnen niet bestaan zonder de eigenaar
+2. Beschrijf met CE's de kardinaliteit op <span class="blue">gwsw:hasAspect</span> en op de inverse property <span class="blue">gwsw:isAspectOf</span>, ook als ze niet definiërend zijn. Hanteer de kardinaliteit "minimum=0" en "maximum=1" voor globale uitdrukkingen.
+
+<div class="box"><strong>Aspecten in CE's ondersteunen de data-afleiding</strong><br/>
+Als een individu kenmerk X heeft is het mogelijk van type Y
+</div>  
+
+3. Hou kenmerken en entiteiten gescheiden en blijf object-georiënteerd. Bijvoorbeeld Dekselmateriaal en Beheerdernaam kunnen geen kenmerken van een Put zijn, dat zijn aspecten van het concept Deksel en Beheerder. Die concepten zijn vervolgens gerelateerd aan de put.
+4. Voorkom het opnemen van optionele kenmerken bij een supertype (kenmerken die niet voor alle subtypes gelden), definieer de kenmerken dus niet op een te hoog niveau.
+5. Gebruik het multi-parent principe. Als alleen kunststof leidingen het gebruikte kenmerk "kleur" hebben, introduceer dan het concept "kunststof leiding" met het kenmerk "kleur". Een individu is dan zowel een "vrijverval rioolleiding" als een "kunststof leiding" en heeft daarmee dat extra kenmerk.
+
+**Geen typelijsten**  
+Kenmerken die verwijzen naar een typelijst (bijvoorbeeld het kenmerk Soort Deksel van het concept Deksel) komen niet voor. Een typelijst wordt uitgedrukt in de taxonomie (bijvoorbeeld als subtypes van Deksel).
+
+### Intrinsieke aspecten
+
+1. Specialiseer waar nodig de kenmerken, zodat restricties op de kenmerk-waarde zo specifiek mogelijk zijn. Bijvoorbeeld:
+    * Definieer het generieke kenmerk "materiaal" met het subtype "materiaal put" met bijbehorende domeinwaarden
+    * Definieer het generieke kenmerk "diameter" met het subtype "diameter leiding" met specifieke restricties op de afmetingen.
+2. Intrinsieke kenmerken zijn geen noodzaak maar de combinatie met restricties (bijvoorbeeld minimum/maximum waarde) maakt ze waardevol en daarnaast wordt het model robuuster: als een individu het kenmerk heeft, dan hoort het van een bepaald type te zijn.
+
+### Kwaliteitseisen
+
+Beschrijf in het datamodel de eisen voor de gegevenskwaliteit, met name die voor nauwkeurigheid via restricties aan waardetype en waardebereik.
+
+1. Specificeer altijd de waardetypes bij de aspectwaarden
+2. Specificeer waar nodig ook het waardebereik (in combinatie met het waardetype)
+3. Start de URI van een gemodelleerd datatype altijd met "Dt_"
+4. Modelleer waar nodig het metagegeven <span class="blue">gwsw:Inwinning</span> voor beschrijving van de actualiteit en betrouwbaarheid.
+
+## Relaties - Samenstelling en proces
+
+<br/><img src="media/meronomie.png" style="width:40%;" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="media/proces.png" style="width:35%;" />
+
+Definieer de samenstelling, de topologie en het proces op basis van de relaties bij een concept, zie hst [Details relaties](#details-relaties)
+
+1. Beschrijf met CE's de kardinaliteit van de relaties bij concepten, ook als ze niet definiërend zijn. Hanteer de kardinaliteit "minimum=0" en "maximum=1" voor globale uitdrukkingen.
+    * Met de kardinaliteit beschrijven we ook dat een fysiek object bijvoorbeeld per definitie andere fysieke objecten als onderdeel heeft.
+2. Beschrijf op dezelfde wijze ook altijd de inverse relatie. Voor de dataverificatie is die inverse vaak waardevol. Een constructie kan bijvoorbeeld meerdere delen bevatten (<span class="blue">gwsw:hasPart</span>) maar het deel hoort bij één constructie (<span class="blue">gwsw:isPartOf</span>).
+
+### Erven van samenstellingen
+
+1. Voorkom redundantie van deel-geheel relaties, die relatie mag niet dubbel voorkomen voor een subtype en het bijbehorende supertype.
+2. Definieer de samenstelling - hoewel verleidelijk - dus niet op een te hoog niveau
+
+## Deelmodellen
+
+<!-- Zie hst [Details deelmodellen](#details-deelmodellen) -->
+
+Vanaf GWSW versie 1.5.2 (na afscheid van het Gellish bronmodel) is de **Collection of Facts** (CoF) op conceptniveau in de RDF-bron opgenomen. De CoF speelt nog steeds een belangrijke rol in de RDF-versie van het GWSW. Het wordt beschreven met het annotatie-attribuut <span class="blue">skos:scopeNote</span>, de annotatie-waarde (de URI van een CollectionOfFacts-subklasse) verwijst naar een deelmodel (GWSW-Basis, GWSW-Kentallen, enz.) horen.
+
+Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel is een filter op het datamodel waarbij de klassen, de CE's en de individuen worden geselecteerd op de gekoppelde CoF. De deelmodellen hebben meerdere functies:
+
+* het overzichtelijk presenteren van specifieke GWSW onderdelen
+* het overzichtelijk onderhouden van het datamodel. Veel deelmodellen hebben een heel specifieke functie, anderen worden met een lage frequentie onderhouden. Denk bijvoorbeeld aan uitwisselformaten.
+* het samenstellen van conformiteitsklassen, data-verificatie voor bepaalde processen
+* het koppelen van alleen de relevante modelonderdelen aan datasets, afgestemd op de praktijk van uitwisselen
+
+Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
+
+# Details van de GWSW semantiek
+
+## Top Level soorten
 
 De "top level" concepten in de GWSW ontologie zijn de concepten die boven in de soortenboom staan. Deze concepten zijn geen subtype van andere concepten, ze zijn van het generieke type owl:Class.
 
 Tabel: Top Level-concepten
 
-<table class="default">
+<table class="simp">
 <thead>
 <tr class="header">
 <th>Naam</th>
@@ -321,34 +412,21 @@ Meer specifiek voor activiteiten:
 
 Daarnaast kunnen ook relaties tussen GWSW concepten definiërend voor de classificering zijn. Een gwsw:Inspectieput moet bijvoorbeeld een gwsw:Deksel hebben. De compositie (de deel-geheel relatie) is dan bepalend, er geldt een beperking voor de property <span class="blue">bs:hasPart</span> .
 
-Properties in de GWSW ontologie
--------------------------------
+## Overzicht properties
 
-Conform de NTA 8035 maken we voor de properties een onderscheid in attributen en relaties.
+### Properties in diagrammen
 
-### Attributen (en waardetypen) in het model
-
-Het oorspronkelijke Gellish-model bevat (meta)gegevens die zoveel als mogelijk in de linked data versie zijn meegenomen.
-
-De **Definitietekst, Opmerkingtekst** worden als annotaties bij de concepten opgenomen.
-
-De **Datum aanmaak/wijziging, Auteur aanmaak** wordt in Gellish op triple-niveau bijgehouden. In linked data vorm zou dit met reïficatie worden opgelost. Praktisch gezien lijkt alleen registratie als concept-annotatie haalbaar.
-
-**Auteur aanmaak** wordt meer algemeen **Editor**. Kan meervoudig voorkomen, zowel voor aanmaak als voor meerdere wijzigingen.
-
-De **Taalgemeenschap** wordt als extra naam bij de concepten (met property skos:altLabel) vermeld.
-
-De **Collection Of Facts** speelt een belangrijke rol in het GWSW-model, hiermee kan het model gefilterd worden voor een specifieke discipline (GWSW-Basis, GWSW-RIB, enz.). Belangrijk voor presentatie-doeleinden. Mogelijk via named graphs de triples per discipline groeperen.
-
-Het **Identificatie-nummer**, in het oorspronkelijke Gellish-model is een unieke nummer-identificatie (naast het unieke combinatie discipline+label) belangrijk. Dit nummer wordt voor naslag-doeleinden vermeld in het attribuut rdfs:comment, maar heeft geen waarde meer voor het actuele GWSW. De URI van een concept is de enige identificatie.
-
-**<span class="smallcaps">Overzicht attributen</span>**
-
-*Schema meta-model:*
+De toegepaste **attributen** (annotatie-properties en aspecten) in een diagram:
 
 <img src="media/image2.png" style="width:100%; height:85%" />
 
-De in het GWSW voorkomende attributen:
+De toegepaste **relaties** in een diagram:
+
+<img src="media/image3.png" style="width:100%;height:50%" />
+
+### Omschrijving properties
+
+**Attributen**
 
 <table class="default">
 <thead>
@@ -422,16 +500,21 @@ De in het GWSW voorkomende attributen:
 <td><em>Subject</em> <span class="blue">heeft als wijzigingsdatum</span> <em>Literal (kan meervoudig voorkomen)</em></td>
 </tr>
 <tr class="even">
-<td>gwsw:hasEditor</td>
-<td>gwsw:hasEditor</td>
-<td><em>Subject</em> <span class="blue">heeft als editor</span> <em>Literal</em> (naam persoon die het concept - op de startdatum of wijzigingsdatum - heeft gewijzigd)</td>
+<td>gwsw:hasAuthorStart</td>
+<td>gwsw:hasAuthorStart</td>
+<td><em>Subject</em> <span class="blue">heeft als auteur aanmaak</span> <em>Literal</em> (naam modelleur die het concept - op de startdatum - heeft aangemaakt)</td>
 </tr>
 <tr class="odd">
+<td>gwsw:hasAuthorChange</td>
+<td>gwsw:hasAuthorChange</td>
+<td><em>Subject</em> <span class="blue">heeft als auteur wijziging</span> <em>Literal</em> (naam modelleur die het concept - op de wijzigingsdatum - heeft gewijzigd)</td>
+</tr>
+<tr class="even">
 <td>gwsw:hasFactColl</td>
 <td>Gwsw:hasFactColl</td>
 <td><em>Subject</em> <span class="blue">heeft als feitencollectie</span> <em>Literal</em> (string met codes van één of meer collecties)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td colspan="3"><strong>Kwalitatieve aspecten</strong></td>
 </tr>
 <tr class="odd">
@@ -501,11 +584,383 @@ De in het GWSW voorkomende attributen:
 </tbody>
 </table>
 
-**<span class="smallcaps">Intrinsieke kenmerken, pocessed aspects</span>**
+**Relaties**
+
+De toepassing van **relaties** is in de GWSW-Ontologie aan regels gebonden door middel van een Class Expression (CE). In de volgende tabel is dat aangegeven met **CE**.
+
+<table class="default">
+<thead>
+<tr class="header">
+<th>Predicate</th>
+<th>Oude naam (1.5)</th>
+<th>Omschrijving</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td colspan="3">&nbsp;</td>
+</tr>
+<tr class="even">
+<td colspan="3"><strong>Classificatie</strong></td>
+</tr>
+<tr class="odd">
+<td>rdf:type</td>
+<td>rdf:type</td>
+<td><em>Subject</em> <span class="blue">is van het type</span> <em>Object</em></td>
+</tr>
+<tr class="even">
+<td>owl:inverseOf</td>
+<td>owl:inverseOf</td>
+<td><em>Subject-property</em> <span class="blue">is de inverse van</span> <em>Object-property</em></td>
+</tr>
+<tr class="odd">
+<td colspan="3"><strong>Specialisatie</strong></td>
+</tr>
+<tr class="even">
+<td>rdfs:subClassOf</td>
+<td>rdfs:subClassOf</td>
+<td><em>Subject</em> is van het subtype <em>Object</em></td>
+</tr>
+<tr class="odd">
+<td colspan="3"><strong>Compositie</strong></td>
+</tr>
+<tr class="even">
+<td><p>bs:hasPart</p>
+<p>(isPartOf)</p></td>
+<td><p>gwsw:hasPart</p>
+<p>(isPartOf)</p></td>
+<td><p><span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NTA heeft niet de inverse property</p>
+<p>Opmerking: de NTA 8035 hanteert bs:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft bs:hasPart voor het GWSW algemeen toepasbaar.</p></td>
+</tr>
+<tr class="odd">
+<td colspan="3"><strong>Associatie</strong></td>
+</tr>
+<tr class="even">
+<td><p>gwsw:hasInput</p>
+<p>(isInputOf)</p></td>
+<td><p>gwsw:hasInput</p>
+<p>(isInputOf)</p></td>
+<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasInput 0-n maal of min 0-n en max 1-n maal voorkomen</td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasOutput (isOutputOf)</td>
+<td>gwsw:hasOutput (isOutputOf)</td>
+<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasOutput 0-n maal of min 0-n en max 1-n maal voorkomen</td>
+</tr>
+<tr class="even">
+<td>gwsw:hasConnection</td>
+<td>gwsw:hasConnection</td>
+<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasConnection 0-n maal of min 0-n en max 1-n maal voorkomen</td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasRepresentation (isRepresentationOf)</td>
+<td>gwsw:hasRepresentation (isRepresentationOf)</td>
+<td>Verwijst naar (range is) InformationObject</td>
+</tr>
+</tbody>
+</table>
+
+Inverse properties zijn voor data-afleiding nodig om verschillen in cardinaliteit bij omgekeerde relaties te kunnen definiëren. Ze worden alleen gebruikt bij object-properties waarvan het type niet symmetrisch (<span class="blue">gwsw:hasConnection</span>) of functioneel is.
+
+Voor het uitdrukken van CE/OPE voorziet OWL in een groot aantal (restrictie) properties. Daarmee kunnen we klassen expliciet onderscheiden, de GWSW Ontologie bevat de volgende:
+
+<table class="default">
+<thead>
+<tr class="header">
+<th>Predicate</th>
+<th>Wijze van toepassing in GWSW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>owl:onClass</td>
+<td>Uitdrukken van cardinaliteit en onderscheidende kenmerken</td>
+</tr>
+<tr class="even">
+<td>owl:onProperty</td>
+<td>Uitdrukken van cardinaliteit en onderscheidende kenmerken</td>
+</tr>
+<tr class="odd">
+<td>owl:hasValue</td>
+<td>Uitdrukken van onderscheidende kenmerken</td>
+</tr>
+<tr class="even">
+<td>owl:allValuesFrom</td>
+<td>Uitdrukken van range bij waarden</td>
+</tr>
+<tr class="odd">
+<td>owl:qualifiedCardinality</td>
+<td>Uitdrukken van verplichte properties met een specifieke range</td>
+</tr>
+<tr class="even">
+<td>owl:maxQualifiedCardinality</td>
+<td>Uitdrukken van maximum aantal properties met een specifieke range</td>
+</tr>
+<tr class="odd">
+<td>owl:minQualifiedCardinality</td>
+<td>Uitdrukken van minimum aantal properties met een specifieke range</td>
+</tr>
+</tbody>
+</table>
+
+### Properties in de dataset
+
+In datasets conform het GWSW komen de volgende properties voor:
+
+<table class="default">
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Oude naam (1.5)</th>
+<th>Toelichting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td colspan="3">&nbsp</td>
+</tr>
+<tr class="even">
+<td colspan="3"><strong>Attributen</strong></td>
+</tr>
+<tr class="odd">
+<td>skos:prefLabel</td>
+<td>rdfs:label</td>
+<td><em>Subject</em> heeft als naam <em>Literal</em></td>
+</tr>
+<tr class="even">
+<td>gwsw:"kwaliteit"</td>
+<td>gwsw:hasReference</td>
+<td><em>Subject</em> heeft als "kwaliteit" <em>Kwalitatief aspect.</em> Het object is een kenmerk, een element uit een enumeratie.</td>
+</tr>
+<tr class="odd">
+<td>gwsw:"kwantiteit"</td>
+<td>gwsw:hasAspect</td>
+<td><em>Subject</em> heeft als "kwantiteit" <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type bs:QuantityValue</td>
+</tr>
+<tr class="even">
+<td colspan="3"><strong>Relaties</strong></td>
+</tr>
+<tr class="odd">
+<td>rdf:type</td>
+<td>rdf:type</td>
+<td><em>Subject</em> is van het type <em>Object</em> (klasse-naam)</td>
+</tr>
+<tr class="even">
+<td>rdf:value</td>
+<td>gwsw:hasValue</td>
+<td><em>Subject</em> heeft als waarde <em>Literal</em> (subject is attribuut)</td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasInput</td>
+<td>gwsw:hasInput</td>
+<td><em>Subject</em> heeft als invoer <em>Object</em></td>
+</tr>
+<tr class="even">
+<td>gwsw:hasOutput</td>
+<td>gwsw:hasOutput</td>
+<td><em>Subject</em> heeft als uitvoer <em>Object</em></td>
+</tr>
+<tr class="odd">
+<td>bs:hasPart</td>
+<td>gwsw:hasPart</td>
+<td><em>Subject</em> heeft als deel <em>Object</em></td>
+</tr>
+</tbody>
+</table>
+
+## Annotaties bij concepten
+
+De volgende annotaties worden bij een GWSW-concept opgenomen:
+
+<table class="default">
+<thead>
+<tr class="header">
+<th>Annotatie</th>
+<th>Omschrijving</th>
+<th>Voorwaarden</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>skos:prefLabel</td>
+<td>De voorkeursnaam van het concept</td>
+<td>Exact 1</td>
+</tr>
+<tr class="even">
+<td>skos:altLabel</td>
+<td>Synoniemen en vertalingen van het concept</td>
+<td>Onbeperkt (min=0)</td>
+</tr>
+<tr class="odd">
+<td>skos:editorialNote</td>
+<td>Notitie van de editor bij de aanpassingen</td>
+<td>Onbeperkt (min=0)</td>
+</tr>
+<tr class="even">
+<td>skos:notation</td>
+<td>De code van het concept, eventueel per context (zie verderop in dit hst)</td>
+<td>Maximaal 1 per context (min=0)</td>
+</tr>
+<tr class="odd">
+<td>skos:definition</td>
+<td>Een "interne" omschrijving, vastgesteld binnen het GWSW-project</td>
+<td>Onbeperkt (min=0)</td>
+</tr>
+<tr class="even">
+<td>rdfs:isDefinedBy</td>
+<td>Een "externe" omschrijving</td>
+<td><p>Onbeperkt (min=0)</p>
+<p>Opbouw: [externe bron] Omschrijving</p></td>
+</tr>
+<tr class="odd">
+<td>rdfs:seeAlso</td>
+<td>Een verwijzing naar een externe bron</td>
+<td><p>Onbeperkt (min=0)</p>
+<p>Opbouw: URI (webadres)</p></td>
+</tr>
+<tr class="even">
+<td>rdfs:comment</td>
+<td>Aanvullend commentaar en extra verwijzingen</td>
+<td><p>Onbeperkt (min=0)</p>
+<p>Algemene opbouw: Commentaar-tekst</p>
+<p>Verwijzing naar figuur: [Bijlage nnn.jpg]</p>
+<p>- als "nnn" identiek is aan de URI-naam: [Bijlage *.jpg]</p>
+<p>Verwijzing naar het oude Gellish-ID: [GellishID nnn] ("nnn" is vervallen Gellish-ID, heeft geen functie meer, is vervangen door de URI</p></td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasDateStart</td>
+<td>Datum waarop het concept is gemaakt</td>
+<td>Exact 1</td>
+</tr>
+<tr class="even">
+<td>gwsw:hasDateChange</td>
+<td>Datum waarop het concept is gewijzigd</td>
+<td>Onbeperkt (min=0), invullen als de waarde van één van de attributen wijzigt</td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasAuthorStart</td>
+<td>Naam van de modelleur die het concept heeft gemaakt</td>
+<td>Exact 1</td>
+</tr>
+<tr class="even">
+<td>gwsw:hasAuthorChange</td>
+<td>Naam van de modelleur die het concept heeft gewijzigd</td>
+<td>Onbeperkt (min=0)</td>
+</tr>
+<tr class="odd">
+<td>gwsw:hasFactColl</td>
+<td>Een literal met de verzameling codes van de factcollecties</td>
+<td>Exact 1</td>
+</tr>
+</tbody>
+</table>
+
+Een voorbeeld van gebruikte annotaties:
+
+<div class="example"><div class="example-title marker">Model:</div><pre>
+  gwsw:Put  rdf:type             owl:Class ;           
+            skos:prefLabel       "Put"@nl ;            
+            rdfs:subClassOf      bs:PhysicalObject ;   
+            skos:definition      "Verticale waterdichte ….”@nl ; # interne (eigen) definitie  
+            rdfs:seeAlso         "[IMGeo:1.0/2007] Gegraven of … "@nl ,
+				 "https://imgeo.geostandaarden.nl/def/imgeo-object/put" ;
+	    rdfs:comment         "Toelichting bij modellering put" ;
+	    gwsw:hasValidity	 "1f 3f 4f " ; # codering voor samenstellen conformiteitsklasse
+	    skos:scopeNote	 gwsw:_TOP ;
+	    gwsw:hasDateStart	 "2013-07-18"^^xsd:date .
+</pre></div>
+
+Coderingen komen veel voor in het GWSW, bijvoorbeeld als taalonafhankelijke aanduidigen van toestandsaspecten in de EN13508-2. Codes van concepten (voorbeeld "AAA") zijn literals bij de property skos:notation.
+
+Meerdere codes kunnen voorkomen voor verschillende contexten. Bijvoorbeeld bij het reinigen van een leiding worden andere codes gebruikt dan bij het inspecteren van een leiding. Voor dat onderscheid is in de GWSW-Ontologie een datatype aan de code toegevoegd. Dat datatype representeert het geldende notatie-schema.
+
+<div class="example"><div class="example-title marker">Model:</div><pre>
+    gwsw:StartNodeReference skos:notation  “AAB"^^gwsw:Dt_Notation_RIB .  # inspecteren leiding
+    gwsw:StartNodeReference skos:notation  "GAB"^^gwsw:Dt_Notation_RRB .  # reinigen leiding
+    gwsw:Dt_Notation_RRB    skos:prefLabel "Codering reinigen put/leiding"@nl ;
+                            rdf:type       rdfs:Datatype .            
+</pre></div>
+
+## Identificatie van concepten
+
+### URI-strategie
+
+<span style="font-size: 1.5em">De URI-strategie wordt herzien, zie https://geonovum.github.io/uri-bp . De inhoud van dit hoofdstuk is daarop nog niet aangepast.</span>
+
+De details van de URI-opbouw zijn beschreven in het document "GWSW URI Strategie". Daarin is op basis van de richtlijnen van het Platform Linked Data Nederland (PLDN) voor het GWSW-model de URI-opbouw beschreven.
+
+**<span class="smallcaps">Identificatie van concepten</span>**
+
+Om te verwijzen naar documentlocaties van GWSW-concepten gebruiken we:
+
+<pre class="simp">https://{domain}/{type}/{version}/{filter}/{reference}</pre>
+
+**{domain}** is het web-domein: voor de GWSW-Ontologie is {locatie}.gwsw.nl. Het subdomein {locatie} voor de ontologie is <span class="blue">data</span>.
+
+**{type}** is het soort resource: voor concepten / definities van een term is dat type <span class="blue">def</span>. In de URI hoeft het type niet te worden opgenomen, het default-type (bij ontbreken) is <span class="blue">def</span>.
+
+**{version}** is de versie: voor deze GWSW ontologie is dat <span class="blue">2.0</span>.
+
+**{filter}** is het geldende filter ("view") op de GWSW ontologie: om alle concepten op te kunnen vragen geldt filter <span class="blue">Totaal</span>.
+
+**{reference}** is de verwijzing naar het specifieke concept:
+
+Het hanteren van begrijpbare namen voor concepten is een gangbare RDF praktijk en ook voor het GWSW heel bruikbaar. We gaan uit van camelCase en CamelCase notatie van de namen voor respectievelijk de properties (starten met lowercase) en de klassen (starten met uppercase).
+
+Een <span class="blue">externe overstortput</span> is een GWSW concept (klasse) en heeft in GWSW versie 2.0 de URI 
+<pre class="simp">https://data.gwsw.nl/2.0/Totaal/ExterneOverstortput</pre>
+
+De <span class="blue">breedte</span> van een <span class="blue">put</span> is een attribuut en heeft de URI 
+<pre class="simp">https://data.gwsw.nl/2.0/Totaal/breedtePut></pre>
+
+Een URI van een GWSW-klasse bestaat dus uit een ontologie-locatie, aangevuld met de conceptnaam (in CamelCase). In de voorbeelden wordt de ontologie-locatie aangeduid met de prefix gwsw: .
+
+### Voorkeursnaam, synoniem, vertaling
+
+We volgen de NTA 8035, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NTA 8035 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
+
+<div class="example"><div class="example-title marker">Model: Voorbeeld URI en namen</div><pre>
+    @prefix gwsw:                         &lt;https://data.gwsw.nl/2.0/totaal/&gt; . 
+    gwsw:ExterneOverstortput              skos:prefLabel             "Externe overstortput"@nl ; 
+                                          skos:altLabel              "External weir"@en ; 
+                                          skos:altLabel              "Externe overstort"@nl . 
+    gwsw:breedtePut                       skos:prefLabel             "Breedte put"@nl . 
+</pre></div>
+
+### Identificatie individuen
+
+Het verwijzen naar individuen met URI’s is essentieel in het linked-data principe, zeker nu er meer linked-data platforms verschijnen en de GWSW datasets steeds breder worden toegepast.
+
+Een uniforme URI-strategie voor individuen in de "bebouwde omgeving" ontbreekt nog. In zo'n URI kan dan bijvoorbeeld de eigenaar van de gegevens (gemeente, samenwerkingsregio, waterschap, provincie) worden onderscheiden. Op korte termijn zou deze strategie uitgewerkt, vastgesteld en gebruikt moeten worden.
+
+Een voorbeeld van de mogelijkheden met gebruik van de eerder genoemde opbouw:
+<pre class="simp">https://{domain}/{type}/{organisatie}#{reference} </pre>
+
+**{domain}**: Identiek aan het GWSW-model
+
+**{type}**: Het betreft nu een individual, dus is het type een identifier <span class="blue">id</span>.
+
+**{organisatie}**: De organisatie/eigenaar/beheerder van het individu. Voor het organisatienummer (het identificeren van een lokaal pad) wordt conform de URI-strategie van het Digitaal Stelsel Omgevingswet de CBS-systematiek gehanteerd. Dit is de code van de overheidslaag (01 rijk, 02 uitvoeringsorgaan, 03 provincie, 04 waterschap, 05 gemeenschappelijke regeling, 06 gemeente) gevolgd door de viercijferige CBS-code van de overheidsinstelling. Voor "Roosendaal" betekent dit de code "0601674".
+
+**{reference}**: Als URL-fragment, de identificatie van het object (bijvoorbeeld een GUID).
+
+De URI naar een specifieke rioolput in gemeente Roosendaal wordt daarmee:
+<pre class="simp">https://data.gwsw.nl/id/061674#b2ad189a-8c46-49f2-557ba07c49a2</pre>
+
+Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit document de neutrale aanduiding van individuen.
+
+<div class="example-dataset"><div class="example-title marker">Dataset: Voorbeeld identificatie</div><pre>
+    @prefix gwsw: &lt;https://data.gwsw.nl/2.0/totaal/&gt; .
+    @prefix ex: &lt;https://w3id.org/def/example#&gt; .
+    ex:Put_1    rdf:type gwsw:ExterneOverstortput .
+</pre></div>
+
+
+### Intrinsieke kenmerken, pocessed aspects
 
 Intrinsieke kenmerken horen exclusief bij een klasse, ze hebben maar één domein. We gebruiken voor bijvoorbeeld de lengte van de klasse gwsw:Leiding niet de algemene property gwsw:lengte maar de gespecialiseerde property gwsw:lengteLeiding.
 
-**<span class="smallcaps">Waarden, grootheden en eenheden</span>**
+### Waarden, grootheden en eenheden
 
 Voor de specificatie van waarden bij de kwantitatieve aspecten (in het GWSW alleen rdf:value) hanteert de NTA 8035 de QUDT-ontologie versie 2.1 voor de definitie van grootheden en eenheden. QUDT is volledig afgestemd met ISO/IEC 80000 (systematiek, namen, definities, symbolen, enz.).
 
@@ -636,89 +1091,7 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 
 Uit praktische overwegingen worden de eenheden op model-niveau voorgeschreven, in de dataset wordt de eenheid niet meegegeven. Dat maakt de toepassingen op GWSW-datasets veel efficienter.
 
-### Relaties in het model
-
-*Schema meta-model:*
-
-<img src="media/image3.png" style="width:100%;height:50%" />
-
-De in het GWSW voorkomende relaties:
-
-<table class="default">
-<thead>
-<tr class="header">
-<th>Predicate</th>
-<th>Oude naam (1.5)</th>
-<th>Omschrijving</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td colspan="3">&nbsp;</td>
-</tr>
-<tr class="even">
-<td colspan="3"><strong>Classificatie</strong></td>
-</tr>
-<tr class="odd">
-<td>rdf:type</td>
-<td>rdf:type</td>
-<td><em>Subject</em> <span class="blue">is van het type</span> <em>Object</em></td>
-</tr>
-<tr class="even">
-<td>owl:inverseOf</td>
-<td>owl:inverseOf</td>
-<td><em>Subject-property</em> <span class="blue">is de inverse van</span> <em>Object-property</em></td>
-</tr>
-<tr class="odd">
-<td colspan="3"><strong>Specialisatie</strong></td>
-</tr>
-<tr class="even">
-<td>rdfs:subClassOf</td>
-<td>rdfs:subClassOf</td>
-<td><em>Subject</em> is van het subtype <em>Object</em></td>
-</tr>
-<tr class="odd">
-<td colspan="3"><strong>Compositie</strong></td>
-</tr>
-<tr class="even">
-<td><p>bs:hasPart</p>
-<p>(isPartOf)</p></td>
-<td><p>gwsw:hasPart</p>
-<p>(isPartOf)</p></td>
-<td><p><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NTA heeft niet de inverse property</p>
-<p>Opmerking: de NTA 8035 hanteert bs:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft bs:hasPart voor het GWSW algemeen toepasbaar.</p></td>
-</tr>
-<tr class="odd">
-<td colspan="3"><strong>Associatie</strong></td>
-</tr>
-<tr class="even">
-<td><p>gwsw:hasInput</p>
-<p>(isInputOf)</p></td>
-<td><p>gwsw:hasInput</p>
-<p>(isInputOf)</p></td>
-<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasInput 0-n maal of min 0-n en max 1-n maal voorkomen</td>
-</tr>
-<tr class="odd">
-<td>gwsw:hasOutput (isOutputOf)</td>
-<td>gwsw:hasOutput (isOutputOf)</td>
-<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasOutput 0-n maal of min 0-n en max 1-n maal voorkomen</td>
-</tr>
-<tr class="even">
-<td>gwsw:hasConnection</td>
-<td>gwsw:hasConnection</td>
-<td><span class="blue">CE</span> beschrijft restrictie op cardinaliteit: Bij subject mag property hasConnection 0-n maal of min 0-n en max 1-n maal voorkomen</td>
-</tr>
-<tr class="odd">
-<td>gwsw:hasRepresentation (isRepresentationOf)</td>
-<td>gwsw:hasRepresentation (isRepresentationOf)</td>
-<td>Verwijst naar (range is) InformationObject</td>
-</tr>
-</tbody>
-</table>
-
-Inverse properties zijn voor data-afleiding nodig om verschillen in cardinaliteit bij omgekeerde relaties te kunnen definiëren. Ze worden alleen gebruikt bij object-properties waarvan het type niet symmetrisch (<span class="blue">gwsw:hasConnection</span>) of functioneel is.
-
-**<span class="smallcaps">Netwerkbeschrijving</span>**
+### Netwerkbeschrijving
 
 Het GWSW definieert alle concepten voor een netwerkbeschrijving. Daarvoor worden de onderlinge verbindingen beschreven via de elementen "oriëntatie" die onderling gerelateerd zijn via <span class="blue">gwsw:hasConnection</span>.
 
@@ -726,139 +1099,8 @@ Het GWSW definieert alle concepten voor een netwerkbeschrijving. Daarvoor worden
 
 Een oriëntatie kan een vertex zijn of kan bestaan uit een egde met begin- en eindpunt (vertices). In een netwerk voor hydraulische modellering worden die twee vormen "knooppunt" en "verbinding" genoemd. Een verbinding kan dan zowel een leiding (de meest voorkomende) als een pomp, doorlaat of wand zijn.
 
-### Properties in de dataset
 
-In datasets conform het GWSW komen de volgende properties voor:
-
-<table class="default">
-<thead>
-<tr class="header">
-<th>Property</th>
-<th>Oude naam (1.5)</th>
-<th>Toelichting</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td colspan="3">&nbsp</td>
-</tr>
-<tr class="even">
-<td colspan="3"><strong>Attributen</strong></td>
-</tr>
-<tr class="odd">
-<td>skos:prefLabel</td>
-<td>rdfs:label</td>
-<td><em>Subject</em> heeft als naam <em>Literal</em></td>
-</tr>
-<tr class="even">
-<td>gwsw:"kwaliteit"</td>
-<td>gwsw:hasReference</td>
-<td><em>Subject</em> heeft als "kwaliteit" <em>Kwalitatief aspect.</em> Het object is een kenmerk, een element uit een enumeratie.</td>
-</tr>
-<tr class="odd">
-<td>gwsw:"kwantiteit"</td>
-<td>gwsw:hasAspect</td>
-<td><em>Subject</em> heeft als "kwantiteit" <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type bs:QuantityValue</td>
-</tr>
-<tr class="even">
-<td colspan="3"><strong>Relaties</strong></td>
-</tr>
-<tr class="odd">
-<td>rdf:type</td>
-<td>rdf:type</td>
-<td><em>Subject</em> is van het type <em>Object</em> (klasse-naam)</td>
-</tr>
-<tr class="even">
-<td>rdf:value</td>
-<td>gwsw:hasValue</td>
-<td><em>Subject</em> heeft als waarde <em>Literal</em> (subject is attribuut)</td>
-</tr>
-<tr class="odd">
-<td>gwsw:hasInput</td>
-<td>gwsw:hasInput</td>
-<td><em>Subject</em> heeft als invoer <em>Object</em></td>
-</tr>
-<tr class="even">
-<td>gwsw:hasOutput</td>
-<td>gwsw:hasOutput</td>
-<td><em>Subject</em> heeft als uitvoer <em>Object</em></td>
-</tr>
-<tr class="odd">
-<td>bs:hasPart</td>
-<td>gwsw:hasPart</td>
-<td><em>Subject</em> heeft als deel <em>Object</em></td>
-</tr>
-</tbody>
-</table>
-
-Reikwijdte data-afleiding en -verificatie
------------------------------------------
-
-Hier volgt een opsomming van de mogelijke afleidingen en verificaties. Definiërende specificaties van concepten en relaties (data-afleiding) worden beschreven in OWL. Validaties en specificaties die niet onderscheidend zijn voor de classificatie (data-verificatie) beschrijven we met de SHACL taal.
-
-Data verificatie met OWL is beperkt vanwege het niet-UNA (Unique Name Assumption) principe en het OWA (Open World Assumption) principe. Dat laatste principe beperkt vooral de controle-mogelijkheden op cardinaliteit.
-
-Mogelijke data-verificatie en -afleiding op datasets conform het GWSW:
-
-*  Controle op aspect-waarden binnen domein van collecties (enumeraties) (via SHACL) (niet-UNA principe beperkt de toepassing OWL)
-*  Inferencing: Individu-klasse wordt afgeleid uit intrinsiek kenmerk (via OWL)
-    *  <span class="blue">attribuut</span> breedteLeiding + domein = Leiding =&gt; individu = Leiding
-*  In vervolg daarop: controle op intrinsiek kenmerk bij objecttype (via SHACL)
-*  Inferencing: Individu-klasse wordt afgeleid uit onderscheidend kenmerk (via OWL)
-    *  <span class="blue">attribuut</span> uitvoering + bereik = Klein =&gt; individu = KleinObject
-*  In vervolg daarop: controle op onderscheidend kenmerk bij objecttype (via SHACL)
-*  Controle op correct gebruik datatype bij <span class="blue">rdf:value</span>: decimal, string, integer, double, date, time, year (via OWL, via SHACL)
-*  Controle op numerieke waarden binnen minimum maximum grenzen (via SHACL, indien definiërend ook via OWL)
-*  Inferencing: Individu-klasse wordt afgeleid van aantal voorkomende relaties (OWL)
-*  Controle op afwijkende cardinaliteit bij individu-klassen (via SHACL) (OWA principe beperkt de toepassing van OWL)
-    *  Deze data-afleiding en -verificatie geldt ook voor cardinaliteit op inverse-relaties
-*  Controle op mogelijke en verplichte properties (aspecten en relaties) bij individu-klasse. De mogelijke aspecten en relaties zijn eindig gespecificeerd per klasse. (via SHACL: sh:closed true)
-
-Voor het uitdrukken van CE/OPE voorziet OWL in een groot aantal (restrictie) properties. Daarmee kunnen we klassen expliciet onderscheiden, de GWSW Ontologie bevat de volgende:
-
-<table class="default">
-<thead>
-<tr class="header">
-<th>Predicate</th>
-<th>Wijze van toepassing in GWSW</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>owl:onClass</td>
-<td>Uitdrukken van cardinaliteit en onderscheidende kenmerken</td>
-</tr>
-<tr class="even">
-<td>owl:onProperty</td>
-<td>Uitdrukken van cardinaliteit en onderscheidende kenmerken</td>
-</tr>
-<tr class="odd">
-<td>owl:hasValue</td>
-<td>Uitdrukken van onderscheidende kenmerken</td>
-</tr>
-<tr class="even">
-<td>owl:allValuesFrom</td>
-<td>Uitdrukken van range bij waarden</td>
-</tr>
-<tr class="odd">
-<td>owl:qualifiedCardinality</td>
-<td>Uitdrukken van verplichte properties met een specifieke range</td>
-</tr>
-<tr class="even">
-<td>owl:maxQualifiedCardinality</td>
-<td>Uitdrukken van maximum aantal properties met een specifieke range</td>
-</tr>
-<tr class="odd">
-<td>owl:minQualifiedCardinality</td>
-<td>Uitdrukken van minimum aantal properties met een specifieke range</td>
-</tr>
-</tbody>
-</table>
-
-# Details GWSW ontologie
-
-Concepten, specialisatie
-------------------------
+## Details specialsatie en classificatie
 
 Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS en OWL. Ter illustratie de hiërachische indeling van de familie "put":
 
@@ -880,7 +1122,7 @@ Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS e
 
 In een dataset wordt altijd zoveel mogelijk verwezen naar de zogenaamde "bladerobjecten". Dat zijn de soorten waarvan geen subtypes bestaan, ze staan onderaan in de boomstructuur. In het GWSW model worden uit principe ook zo min mogelijk supertypes gedefinieerd. Die worden alleen opgenomen indien noodzakelijk voor de indeling (ervingsprincipe) of als de klasse voorkomt als gebruikelijke term.
 
-<div class="example"><div class="example-title marker">Dataset: individuen typeren als GWSW concept</div><pre>
+<div class="example-dataset"><div class="example-title marker">Dataset: individuen typeren als GWSW concept</div><pre>
     ex:Put_1        rdf:type      gwsw:Put .          # te generiek voor veel toepassingen
     ex:Put_2        rdf:type      gwsw:Stuwput ,      # specifiek genoeg voor veel toepassingen
                                   gwsw:BlindePut .    # tweede typering
@@ -888,190 +1130,44 @@ In een dataset wordt altijd zoveel mogelijk verwezen naar de zogenaamde "bladero
 
 Het individu ex:Put_2 is dus zowel een stuwput (een put met een stuwconstructie) als een blinde put (een put zonder deksel).
 
-Attributen
-----------
+## Details onderscheidende kenmerken
 
-## Annotaties bij concepten
+Een onderscheidend kenmerk speelt een belangrijke rol bij de specialisatie. Het wordt gemodelleerd als enumeratiewaarde van het type onderscheidend kenmerk.
 
-De volgende annotaties worden bij een GWSW-concept opgenomen:
-
-<table class="default">
-<thead>
-<tr class="header">
-<th>Annotatie</th>
-<th>Omschrijving</th>
-<th>Voorwaarden</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>skos:prefLabel</td>
-<td>De voorkeursnaam van het concept</td>
-<td>Exact 1</td>
-</tr>
-<tr class="even">
-<td>skos:altLabel</td>
-<td>Synoniemen en vertalingen van het concept</td>
-<td>Onbeperkt (min=0)</td>
-</tr>
-<tr class="odd">
-<td>skos:editorialNote</td>
-<td>Notitie van de editor bij de aanpassingen</td>
-<td>Onbeperkt (min=0)</td>
-</tr>
-<tr class="even">
-<td>skos:notation</td>
-<td>De code van het concept, eventueel per context (zie verderop in dit hst)</td>
-<td>Maximaal 1 per context (min=0)</td>
-</tr>
-<tr class="odd">
-<td>skos:definition</td>
-<td>Een "interne" omschrijving, vastgesteld binnen het GWSW-project</td>
-<td>Onbeperkt (min=0)</td>
-</tr>
-<tr class="even">
-<td>rdfs:isDefinedBy</td>
-<td>Een "externe" omschrijving</td>
-<td><p>Onbeperkt (min=0)</p>
-<p>Opbouw: [externe bron] Omschrijving</p></td>
-</tr>
-<tr class="odd">
-<td>rdfs:seeAlso</td>
-<td>Een verwijzing naar een externe bron</td>
-<td><p>Onbeperkt (min=0)</p>
-<p>Opbouw: URI (webadres)</p></td>
-</tr>
-<tr class="even">
-<td>rdfs:comment</td>
-<td>Aanvullend commentaar en extra verwijzingen</td>
-<td><p>Onbeperkt (min=0)</p>
-<p>Algemene opbouw: Commentaar-tekst</p>
-<p>Verwijzing naar figuur: [Bijlage nnn.jpg]</p>
-<p>- als "nnn" identiek is aan de URI-naam: [Bijlage *.jpg]</p>
-<p>Verwijzing naar het oude Gellish-ID: [GellishID nnn] ("nnn" is vervallen Gellish-ID, heeft geen functie meer, is vervangen door de URI</p></td>
-</tr>
-<tr class="odd">
-<td>gwsw:hasDateStart</td>
-<td>Datum waarop het concept is gemaakt</td>
-<td>Exact 1</td>
-</tr>
-<tr class="even">
-<td>gwsw:hasDateChange</td>
-<td>Datum waarop het concept is gewijzigd</td>
-<td>Onbeperkt (min=0), invullen als de waarde van één van de attributen wijzigt of als het concept andere properties (attributen/relaties) krijgt.</td>
-</tr>
-<tr class="odd">
-<td>gwsw:hasEditor</td>
-<td>Naam van de persoon die het concept heeft gemaakt of gewijzigd</td>
-<td>Onbeperkt (min=1)</td>
-</tr>
-<tr class="even">
-<td>gwsw:hasFactColl</td>
-<td>Een literal met de verzameling codes van de factcollecties</td>
-<td>Exact 1</td>
-</tr>
-</tbody>
-</table>
-
-Een voorbeeld van gebruikte annotaties:
-
-<div class="example"><div class="example-title marker">Model:</div><pre>
-  gwsw:Put  rdf:type             owl:Class ;           
-            skos:prefLabel       "Put"@nl ;            
-            rdfs:subClassOf      bs:PhysicalObject ;   
-            skos:definition      "Verticale waterdichte ….”@nl ; # interne (eigen) definitie  
-            rdfs:seeAlso         "[IMGeo:1.0/2007] Gegraven of … "@nl ,
-				 "https://imgeo.geostandaarden.nl/def/imgeo-object/put" ;
-	    rdfs:comment         "Toelichting bij modellering put" ;
-	    gwsw:hasValidity	 "1f 3f 4f " ; # codering voor samenstellen conformiteitsklasse
-	    skos:scopeNote	 gwsw:_TOP ;
-	    gwsw:hasDateStart	 "2013-07-18"^^xsd:date .
+<div class="example"><div class="example-title marker">Model: Definieer de onderscheidende kenmerken</div><pre>
+    gwsw:onderscheidendKenmerk rdf:type                 owl:ObjectProperty ;
+                               rdfs:range               gwsw:OnderscheidendKenmerk .
+    gwsw:OnderscheidendKenmerk rdf:type                 owl:Class ;         
+                               rdfs:subClassOf          bs:Enumerationtype .
+</pre></div>
+<div class="example"><div class="example-title marker">Model: Definieer type uitvoering "Klein" als onderscheidend Kenmerk</div><pre>
+    gwsw:uitvoering          rdf:type                   owl:ObjectProperty ;
+                             rdfs:subPropertyOf         gwsw:onderscheidendKenmerk ;  
+                             rdfs:range                 gwsw:Uitvoering ;   
+                             skos:prefLabel             "Wijze van uitvoering"@nl . 
+    gwsw:Uitvoering          rdf:type                   owl:Class ;         
+                             rdfs:subClassOf            gwsw:OnderscheidendKenmerk .
+    gwsw:Klein               rdf:type                   gwsw:Uitvoering ;   
+                             skos:definition            “dat is klein" .    
+</pre></div>
+<div class="example"><div class="example-title marker">Model: Combineer het kenmerk en de waarde ervan in een CE</div><pre>
+    gwsw:Putje               rdfs:subClassOf            bs:PhysicalObject ; 
+                             rdfs:subClassOf                                
+                             [        
+                               rdf:type                 owl:Restriction ;   
+                               owl:onProperty           gwsw:uitvoering ;   
+                               owl:hasValue             gwsw:Klein ;      # individu                  
+                             ] .      
 </pre></div>
 
-Coderingen komen veel voor in het GWSW, bijvoorbeeld als taalonafhankelijke aanduidigen van toestandsaspecten in de EN13508-2. Codes van concepten (voorbeeld "AAA") zijn literals bij de property skos:notation.
+Afgeleid wordt dat ex:Put_1 (ook) van het type gwsw:Putje is
 
-Meerdere codes kunnen voorkomen voor verschillende contexten. Bijvoorbeeld bij het reinigen van een leiding worden andere codes gebruikt dan bij het inspecteren van een leiding. Voor dat onderscheid is in de GWSW-Ontologie een datatype aan de code toegevoegd. Dat datatype representeert het geldende notatie-schema.
-
-<div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:StartNodeReference skos:notation  “AAB"^^gwsw:Dt_Notation_RIB .  # inspecteren leiding
-    gwsw:StartNodeReference skos:notation  "GAB"^^gwsw:Dt_Notation_RRB .  # reinigen leiding
-    gwsw:Dt_Notation_RRB    skos:prefLabel "Codering reinigen put/leiding"@nl ;
-                            rdf:type       rdfs:Datatype .            
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    ex:Put_1                 gwsw:uitvoering            gwsw:Klein .        
 </pre></div>
+ 
 
-### URI-strategie, naamgeving, identificatie
-
-<span style="font-size: 1.5em">De URI-strategie wordt herzien, zie https://geonovum.github.io/uri-bp . De inhoud van dit hoofdstuk is daarop nog niet aangepast.</span>
-
-De details van de URI-opbouw zijn beschreven in het document "GWSW URI Strategie". Daarin is op basis van de richtlijnen van het Platform Linked Data Nederland (PLDN) voor het GWSW-model de URI-opbouw beschreven.
-
-**<span class="smallcaps">Identificatie van concepten</span>**
-
-Om te verwijzen naar documentlocaties van GWSW-concepten gebruiken we:
-
-<pre class="simp">https://{domain}/{type}/{version}/{filter}/{reference}</pre>
-
-**{domain}** is het web-domein: voor de GWSW-Ontologie is {locatie}.gwsw.nl. Het subdomein {locatie} voor de ontologie is <span class="blue">data</span>.
-
-**{type}** is het soort resource: voor concepten / definities van een term is dat type <span class="blue">def</span>. In de URI hoeft het type niet te worden opgenomen, het default-type (bij ontbreken) is <span class="blue">def</span>.
-
-**{version}** is de versie: voor deze GWSW ontologie is dat <span class="blue">2.0</span>.
-
-**{filter}** is het geldende filter ("view") op de GWSW ontologie: om alle concepten op te kunnen vragen geldt filter <span class="blue">Totaal</span>.
-
-**{reference}** is de verwijzing naar het specifieke concept:
-
-Het hanteren van begrijpbare namen voor concepten is een gangbare RDF praktijk en ook voor het GWSW heel bruikbaar. We gaan uit van camelCase en CamelCase notatie van de namen voor respectievelijk de properties (starten met lowercase) en de klassen (starten met uppercase).
-
-Een <span class="blue">externe overstortput</span> is een GWSW concept (klasse) en heeft in GWSW versie 2.0 de URI 
-<pre class="simp">https://data.gwsw.nl/2.0/Totaal/ExterneOverstortput</pre>
-
-De <span class="blue">breedte</span> van een <span class="blue">put</span> is een attribuut en heeft de URI 
-<pre class="simp">https://data.gwsw.nl/2.0/Totaal/breedtePut></pre>
-
-Een URI van een GWSW-klasse bestaat dus uit een ontologie-locatie, aangevuld met de conceptnaam (in CamelCase). In de voorbeelden wordt de ontologie-locatie aangeduid met de prefix gwsw: .
-
-**<span class="smallcaps">Voorkeursnaam, synoniem, vertaling</span>**
-
-We volgen de NTA 8035, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NTA 8035 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
-
-<div class="example"><div class="example-title marker">Model: Voorbeeld URI en namen</div><pre>
-    @prefix gwsw:                         &lt;https://data.gwsw.nl/2.0/totaal/&gt; . 
-    gwsw:ExterneOverstortput              skos:prefLabel             "Externe overstortput"@nl ; 
-                                          skos:altLabel              "External weir"@en ; 
-                                          skos:altLabel              "Externe overstort"@nl . 
-    gwsw:breedtePut                       skos:prefLabel             "Breedte put"@nl . 
-</pre></div>
-
-**<span class="smallcaps">Identificatie individuen</span>**
-
-Het verwijzen naar individuen met URI’s is essentieel in het linked-data principe, zeker nu er meer linked-data platforms verschijnen en de GWSW datasets steeds breder worden toegepast.
-
-Een uniforme URI-strategie voor individuen in de "bebouwde omgeving" ontbreekt nog. In zo'n URI kan dan bijvoorbeeld de eigenaar van de gegevens (gemeente, samenwerkingsregio, waterschap, provincie) worden onderscheiden. Op korte termijn zou deze strategie uitgewerkt, vastgesteld en gebruikt moeten worden.
-
-Een voorbeeld van de mogelijkheden met gebruik van de eerder genoemde opbouw:
-<pre class="simp">https://{domain}/{type}/{organisatie}#{reference} </pre>
-
-**{domain}**: Identiek aan het GWSW-model
-
-**{type}**: Het betreft nu een individual, dus is het type een identifier <span class="blue">id</span>.
-
-**{organisatie}**: De organisatie/eigenaar/beheerder van het individu. Voor het organisatienummer (het identificeren van een lokaal pad) wordt conform de URI-strategie van het Digitaal Stelsel Omgevingswet de CBS-systematiek gehanteerd. Dit is de code van de overheidslaag (01 rijk, 02 uitvoeringsorgaan, 03 provincie, 04 waterschap, 05 gemeenschappelijke regeling, 06 gemeente) gevolgd door de viercijferige CBS-code van de overheidsinstelling. Voor "Roosendaal" betekent dit de code "0601674".
-
-**{reference}**: Als URL-fragment, de identificatie van het object (bijvoorbeeld een GUID).
-
-De URI naar een specifieke rioolput in gemeente Roosendaal wordt daarmee:
-<pre class="simp">https://data.gwsw.nl/id/061674#b2ad189a-8c46-49f2-557ba07c49a2</pre>
-
-Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit document de neutrale aanduiding van individuen.
-
-<div class="example-dataset"><div class="example-title marker">Dataset: Voorbeeld identificatie</div><pre>
-    @prefix gwsw: &lt;https://data.gwsw.nl/2.0/totaal/&gt; .
-    @prefix ex: &lt;https://w3id.org/def/example#&gt; .
-    ex:Put_1    rdf:type gwsw:ExterneOverstortput .
-</pre></div>
-
-### Aspecten
+## Details aspecten
 
 De NTA 8035 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NTA 8035 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse bs:QuantityValue.
 
@@ -1183,42 +1279,6 @@ Bij ex:Put_1 registreren dat de waarde van gwsw:hoogtePut is geschat
                              ] .      
 </pre></div>
 
-### Onderscheidende kenmerken
-
-Een onderscheidend kenmerk speelt een belangrijke rol bij de specialisatie. Het wordt gemodelleerd als enumeratiewaarde van het type onderscheidend kenmerk.
-
-<div class="example"><div class="example-title marker">Model: Definieer de onderscheidende kenmerken</div><pre>
-    gwsw:onderscheidendKenmerk rdf:type                 owl:ObjectProperty ;
-                               rdfs:range               gwsw:OnderscheidendKenmerk .
-    gwsw:OnderscheidendKenmerk rdf:type                 owl:Class ;         
-                               rdfs:subClassOf          bs:Enumerationtype .
-</pre></div>
-<div class="example"><div class="example-title marker">Model: Definieer type uitvoering "Klein" als onderscheidend Kenmerk</div><pre>
-    gwsw:uitvoering          rdf:type                   owl:ObjectProperty ;
-                             rdfs:subPropertyOf         gwsw:onderscheidendKenmerk ;  
-                             rdfs:range                 gwsw:Uitvoering ;   
-                             skos:prefLabel             "Wijze van uitvoering"@nl . 
-    gwsw:Uitvoering          rdf:type                   owl:Class ;         
-                             rdfs:subClassOf            gwsw:OnderscheidendKenmerk .
-    gwsw:Klein               rdf:type                   gwsw:Uitvoering ;   
-                             skos:definition            “dat is klein" .    
-</pre></div>
-<div class="example"><div class="example-title marker">Model: Combineer het kenmerk en de waarde ervan in een CE</div><pre>
-    gwsw:Putje               rdfs:subClassOf            bs:PhysicalObject ; 
-                             rdfs:subClassOf                                
-                             [        
-                               rdf:type                 owl:Restriction ;   
-                               owl:onProperty           gwsw:uitvoering ;   
-                               owl:hasValue             gwsw:Klein ;      # individu                  
-                             ] .      
-</pre></div>
-
-Afgeleid wordt dat ex:Put_1 (ook) van het type gwsw:Putje is
-
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Put_1                 gwsw:uitvoering            gwsw:Klein .        
-</pre></div>
- 
 
 ### Intrinsieke kenmerken
 
@@ -1395,8 +1455,7 @@ Specificeer de beperkingen voor gwsw:leidingDiameter:
                              ] .         
 </pre></div>
 
-Relaties
---------
+## Details relaties
 
 ### Relaties proces (activiteiten)
 
@@ -1552,8 +1611,7 @@ En we definiëren in SHACL de data-verificatie:
                              ] .         
 </pre></div>
 
-Groepen, collecties, enumeratie
--------------------------------
+## Collecties
 
 ### Enumeratie
 
@@ -1630,10 +1688,9 @@ In het GWSW komen verzamelingen van concepten en individuen voor die niet gestru
                                    rdfs:member                  gwsw:Infiltratieleiding .
 </pre></div>
 
-Voorbeelden data-afleiding en data-verificatie
-=======================================================
+# Voorbeelden data-afleiding en data-verificatie
 
-Zie ook hoofdstuk 1.2 met de uitgangspunten voor het modelleren van de GWSW Ontologie:
+Zie ook het hst met de modelleerprincipes van de GWSW Ontologie:
 
 **Toepassing OWL (data-afleiding)**  
 Voor de indeling in soorten, de vaststelling van de taxonomie volgen we het principe dat op basis van objecteigenschappen het objecttype wordt gedefinieerd. Om dat uit te drukken gebruiken we de class expressions in OWL.
@@ -1860,8 +1917,8 @@ ex:bridgeHeight
 ] .
 </pre>
 
-Bestand "Proef GWSW 2.0 query.rq"
----------------------------------
+## Bestand "Proef GWSW 2.0 query.rq"
+
 <pre class="file">
 PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
 PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
@@ -1882,8 +1939,8 @@ WHERE
 }
 </pre>
 
-Bestand "Proef GWSW 2.0 SHACL.txt"
-----------------------------------
+## Bestand "Proef GWSW 2.0 SHACL.txt"
+
 <pre class="file">
 @prefix bs: &lt;https://w3id.org/def/basicsemantics-owl#&gt; .
 @prefix ex: &lt;https://w3id.org/def/example#&gt; .
@@ -1991,10 +2048,9 @@ sh:property
 ] .
 </pre>
 
-Oefening: Leid af dat het individu een brug is
-----------------------------------------------
+## Oefening: Leid af dat het individu een brug is
 
-Iets is een brug als het minimaal één brugdek en een lengte tussen 0-200 heeft*
+Iets is een brug als het minimaal één brugdek en een lengte tussen 0-200 heeft.
 Beschrijf de onderscheidende kenmerken in OWL class expressions:
 
 <pre class="file">
