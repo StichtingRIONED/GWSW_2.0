@@ -768,7 +768,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 </tbody>
 </table>
 
-## Annotaties bij concepten
+### Annotaties bij concepten
 
 De volgende annotaties worden bij een GWSW-concept opgenomen:
 
@@ -956,11 +956,11 @@ Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit documen
 </pre></div>
 
 
-### Intrinsieke kenmerken, pocessed aspects
+## Intrinsieke kenmerken, pocessed aspects
 
 Intrinsieke kenmerken horen exclusief bij een klasse, ze hebben maar één domein. We gebruiken voor bijvoorbeeld de lengte van de klasse gwsw:Leiding niet de algemene property gwsw:lengte maar de gespecialiseerde property gwsw:lengteLeiding.
 
-### Waarden, grootheden en eenheden
+## Waarden, grootheden en eenheden
 
 Voor de specificatie van waarden bij de kwantitatieve aspecten (in het GWSW alleen rdf:value) hanteert de NTA 8035 de QUDT-ontologie versie 2.1 voor de definitie van grootheden en eenheden. QUDT is volledig afgestemd met ISO/IEC 80000 (systematiek, namen, definities, symbolen, enz.).
 
@@ -1091,7 +1091,7 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 
 Uit praktische overwegingen worden de eenheden op model-niveau voorgeschreven, in de dataset wordt de eenheid niet meegegeven. Dat maakt de toepassingen op GWSW-datasets veel efficienter.
 
-### Netwerkbeschrijving
+## Netwerkbeschrijving
 
 Het GWSW definieert alle concepten voor een netwerkbeschrijving. Daarvoor worden de onderlinge verbindingen beschreven via de elementen "oriëntatie" die onderling gerelateerd zijn via <span class="blue">gwsw:hasConnection</span>.
 
