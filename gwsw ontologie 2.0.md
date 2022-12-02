@@ -8,6 +8,7 @@
 Versie historie
 <div style="font-size: 0.90em">
 
+20221202: Overzicht verschillen met IMBOR-LD toegevoegd, hst ...
 20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]
 20201005: Hst Modelleerprincipes bijgewerkt
 20200817: Voorwaarden bij concept-annotaties uitgeschreven, hst 3.2.1  
@@ -338,6 +339,69 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 * het koppelen van alleen de relevante modelonderdelen aan datasets, afgestemd op de praktijk van uitwisselen
 
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
+
+## Mapping op IMBOR-LD
+
+Door CROW wordt het IMBOR omgezet naar een linked-data vorm (IMBOR-LD). De huidige linked-data-versie IMBOR2022 is onder andere gepubliceerd op https://begrippen.crow.nl/imbor/nl.
+Het IMBOR is, net zoals GWSW 2.0, gebaseerd op de NEN 2660.
+
+In de roadmap van het IMBOR Kernteam is opgenomen dat in 2022/2023 het meta-model voor de mapping van ontologiën wordt ontwikkeld. 
+De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW.
+
+Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn.
+
+Tussen de datamodellen IMBOR-LD en GWSW 2.0 blijven een aantal principiële verschillen bestaan:
+
+### Gehanteerde RDF-schema's
+
+IMBOR: RDFS/SHACL-gebaseerd (rdfs:Class)
+•	Bevat SHACL-gebaseerde validatie regels (closed-world)
+•	SHACL-expressies maken deel uit van het datamodel, toegepast voor data-verificatie
+GWSW: RDFS/OWL-gebaseerd (owl:Class)
+•	Bevat OWL-gebaseerde expressies en restricties (open-world), toegepast voor data-afleiding en data-integriteit
+•	SHACL-expressies staan naast het datamodel en worden gebruikt voor closed-world validaties, vaak toepassingsgericht via CFK’en
+
+
+?nog iets zeggen over huidige generatie met "annotatie-schakelaars" ?
+eventueel aangeven: zou anders/stricter kunnen: totale generatie van alle restricties (wellicht minder dan) en vervolgens uitbreiding naar doel met combi owl restr./shacl
+
+### IRI concepten
+
+IMBOR: URI van concepten is taalonafhankelijk (GUID)
+ihb: UUIDs (gegenereerd) 
+•	Voordeel: Eenvoudig te genereren
+•	Voordeel: … ???
+semantiekloos...handig bij bv homonymen (bank als zitbank en als geldbank: dan 2 UUIDs met event. beide Bank als prelabel. 
+•	
+•	Nadeel: Juiste tooling (label-georiënteerd) nodig voor leesbaarheid
+GWSW: URI van concepten is human-readable (taalafhankelijk)
+•	Voordeel: Leesbaar, ook met eenvoudige tools
+•	Nadeel: Minder eenvoudig aan te maken, kan uit de pas gaan lopen met labeling
+ 
+### Composities en processen
+
+Exclusief GWSW:
+•	Gebruikt meronomie-relaties (hasPart)
+"restricties op hasPart" is denk ik juister 
+•	
+•	Gebruikt proces-relaties (hasInput, hasOutpu)
+Output 
+•	
+•	Hanteert onderscheidende kenmerken (Uitvoering, Functie)
+ 
+
+### Model inrichting
+
+
+enumeratiewaarden bij crow in apart model, bij gwsw niet
+
+enumeratietypen moeten nog anders gemodelleerd: rdf:type ipv rdfs:subClassOf (nta>nen2660) 
+
+eventueel meer hergebruik gwsw van nen2660 toplevel (bv nen2660:SpatialRegion en nen2660:DiscreteObjecet etc.
+
+prefix bs > nen2660
+
+
 
 # Details van de GWSW semantiek
 
