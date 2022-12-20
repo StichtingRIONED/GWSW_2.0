@@ -162,8 +162,8 @@ Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkeli
 
 ## Reikwijdte model
 
-Het GWSW Datamodel volgt de ontwikkelingen in het vakgebied. Het bevat alleen concepten die actief worden toegepast (in uitwisseling en applicaties) of die in ontwerpen voor toepassing (bijvoorbeeld nieuwe uitwisselvormen) zijn opgenomen. Dat geldt ook (en vooral) voor kenmerken van objecten.  
-Terminologie waarbij het uitsluitend gaat om vastleggen van definities wordt met terughoudendheid opgenomen.
+Het GWSW Datamodel volgt de ontwikkelingen in het vakgebied. Het bevat concepten die actief worden toegepast (in uitwisseling en applicaties) of die in ontwerpen voor toepassing (bijvoorbeeld nieuwe uitwisselvormen) zijn opgenomen. Dat geldt ook (en vooral) voor kenmerken van objecten.  
+Terminologie waarbij het uitsluitend gaat om vastleggen van definities wordt met terughoudendheid opgenomen, maar het GWSW heeft zeker ook een woordenboek-functie.
 
 Bij het ontwerp van het GWSW Datamodel spelen altijd de volgende **invalshoeken** mee:
 * Wordt het concept algemeen gebruikt in - native - databases, wordt het (straks) uitgewisseld via GWSW Datasets
@@ -172,7 +172,7 @@ Bij het ontwerp van het GWSW Datamodel spelen altijd de volgende **invalshoeken*
   * De geografische presentaties (en onderliggende queries)
   * De uitwisselformaten HydX, RibX
   * De kwaliteitsmetingen van datasets: dataverificatie met Nulmeting, SHACL
-* Zijn de aanpassingen relevant voor het GWSW als naslagwerk
+* Zijn de aanpassingen relevant voor het GWSW als naslagwerk en woordenboek
 
 **"As is", een momentopname**  
 Het datamodel beschrijft de "as is" situatie, het bevat een momentopname van systemen en processen binnen de discipline stedelijk water. Het beschrijft dus geen historische gegevens of de levenscyclus van objecten zoals binnen de context van system engineering.
@@ -341,7 +341,7 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
 
-## Mapping op IMBOR-LD
+# Aansluiting op IMBOR-LD
 
 Door CROW wordt het IMBOR omgezet naar een linked-data vorm (IMBOR-LD). De huidige linked-data-versie IMBOR2022 is onder andere gepubliceerd op https://begrippen.crow.nl/imbor/nl.
 Het IMBOR is, net zoals GWSW 2.0, gebaseerd op de NEN 2660.
@@ -351,7 +351,7 @@ De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBO
 
 Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn. Tussen de datamodellen IMBOR-LD en GWSW 2.0 blijven een aantal principiële verschillen bestaan:
 
-### RDF-schema en SHACL
+## RDF-schema en SHACL
 
 **IMBOR**: RDFS/SHACL-gebaseerd (rdfs:Class)
 *	Bevat SHACL-gebaseerde validatie regels (closed-world)
@@ -367,27 +367,26 @@ Het GWSW bevat per concept en daaraan toegevoegde OWL-restricties het annotatie-
 SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het basis datamodel te introduceren (en niet alleen voor de CFK'en). In het datamodel is bijvoorbeeld met een OWL-restrictie beschreven dat een <span class="blue">gwsw:Overstortput</span> als deel een <span class="blue">gwsw:Overstortdrempel</span> moet hebben. Dat is een definiërende voorwaarde, maar in een CFK hoeft die OWL-restrictie niet persé te gelden (kan uitgeschakeld zijn via <span class="blue">gwsw:hasValidity</span>).</div>
 
 
-### IRI concepten
+## IRI concepten
 
 **IMBOR**: IRI van concepten is taalonafhankelijk (UUID)
-*	Voordeel: Eenvoudig te genereren
 *	Voordeel: Semantiekloos, daardoor bijvoorbeeld geen verwarring met homoniemen binnen één discipline
-*	Nadeel: Alleen goed leesbaar (van bijvoorbeeld turtle-files) met specifieke tooling (label-georiënteerd)
+*	Nadeel: Alleen goed leesbaar (in bijvoorbeeld turtle-files) met specifieke tooling (label-georiënteerd)
 
 **GWSW**: IRI van concepten is taalafhankelijk (human-readable)
 *	Voordeel: Leesbaarheid, ook met eenvoudige tools
-*	Nadeel: Minder eenvoudig aan te maken, kan uit de pas gaan lopen met labeling
- 
-### Composities en processen
+*	Nadeel: Minder eenvoudig aan te maken, is camelcase-notatie van het label, kan daarmee uit de pas gaan lopen
+
+## Composities en processen
 
 Exclusief **GWSW**:
 *	Gebruikt deel/geheel-relaties (restricties op <span class="blue">gwsw:hasPart</span>)
 *	Gebruikt proces-relaties (<span class="blue">gwsw:hasInput</span>, <span class="blue">gwsw:hasOutput</span>)
 * Hanteert onderscheidende kenmerken (Uitvoering, Functie) voor expliciete definities
 
-### Model inrichting
+## Model inrichting
 
-Enumeratiewaarden bij **IMBOR** in apart model, bij **GWSW** niet
+Enumeratiewaarden bij **IMBOR** in een apart datamodel, bij het **GWSW** niet.
 
 # Details van de GWSW semantiek
 
