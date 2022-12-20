@@ -5,6 +5,8 @@
 
 **Een beschrijving van de GWSW Ontologie op basis van de [NTA 8035:2020](https://www.nen.nl/NEN-Shop/Norm/NTA-80352020-nl.htm) (versie april 2020)**
 
+<span style="font-size: 1.5em">Dit document wordt herschreven op de NEN 2660, de inhoud is daarop grotendeels nog niet aangepast.</span>
+
 Versie historie
 <div style="font-size: 0.90em">
 
