@@ -377,12 +377,13 @@ SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het b
 *	Voordeel: Leesbaarheid, ook met eenvoudige tools
 *	Nadeel: Minder eenvoudig aan te maken, is camelcase-notatie van het label, kan daarmee uit de pas gaan lopen
 
-## Composities en processen
+## Reikwijdte datamodel
 
 Exclusief **GWSW**:
+* Hanteert onderscheidende kenmerken (Uitvoering, Functie) voor expliciete definities
 *	Gebruikt deel/geheel-relaties (restricties op <span class="blue">gwsw:hasPart</span>)
 *	Gebruikt proces-relaties (<span class="blue">gwsw:hasInput</span>, <span class="blue">gwsw:hasOutput</span>)
-* Hanteert onderscheidende kenmerken (Uitvoering, Functie) voor expliciete definities
+* Bevat topologie/netwerk definities (<span class="blue">gwsw:hasConnecion</span>)
 
 ## Model inrichting
 
