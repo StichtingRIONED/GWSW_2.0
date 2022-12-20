@@ -8,6 +8,8 @@
 Versie historie
 <div style="font-size: 0.90em">
 
+20221220: Eerste aanpassingen op vervanging NTA8035 door NEN2660
+20221220: Algemene update, hou synchroon met figerende GWSW Ontololgie-document
 20221202: Overzicht verschillen met IMBOR-LD toegevoegd  
 20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]  
 20201005: Hst Modelleerprincipes bijgewerkt
@@ -22,7 +24,7 @@ Versie historie
 20200408: SHACL toepassing voor data-verificatie toegevoegd  
 20200325: Bijgewerkt op basis (teams)overleg met TNO (Michel) (20200324)  
 20200214: Bijgewerkt op basis laatste versie van NTA 8035:2020 (20200211)  
-20200103: Opmerking toegevoegd: is Topologisch element wel een bs:Property?  
+20200103: Opmerking toegevoegd: is Topologisch element wel een nen2660:Property?  
 20200102: Voorstel integratie van NTA 8035
 </div> 
 
@@ -139,7 +141,7 @@ De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 <tr><td>OWL</td><td>owl:</td><td>&lt;http://www.w3.org/2002/07/owl#&gt;</td></tr>
 <tr><td>SHACL</td><td>sh:</td><td>&lt;http://www.w3.org/ns/shacl#&gt;</td></tr>
 <tr><td>SKOS</td><td>skos:</td><td>&lt;http://www.w3.org/2004/02/skos/core#&gt;</td></tr>
-<tr><td>NTA8035</td><td>bs:</td><td>&lt;https://w3id.org/def/basicsemantics-owl#&gt;</td></tr>
+<tr><td>NEN2660</td><td>nen2660:</td><td>&lt;https://w3id.org/nen2660/def#&gt;</td></tr>
 <tr><td></td><td>smls:</td><td>&lt;https://w3id.org/def/basicsemantics-shacl#&gt;</td></tr>
 <tr><td>Datatypes</td><td>xsd:</td><td>&lt;http://www.w3.org/2001/XMLSchema#&gt;</td></tr>
 <tr><td>Geo-definities</td><td>geo:</td><td>&lt;http://www.opengis.net/ont/geosparql#&gt;</td></tr>
@@ -407,35 +409,35 @@ Tabel: Top Level-concepten
 </thead>
 <tbody>
 <tr class="odd">
-<td>bs:Activity</td>
+<td>nen2660:Activity</td>
 <td>gwsw:Activiteit</td>
 <td>NTA 8035: Iets dat plaatsvindt of zou kunnen plaatsvinden in een concrete dan wel virtuele ruimte resp. tijd. Een activiteit transformeert fysieke objecten en/of informatie objecten en wordt uitgevoerd door een fysiek object. Informatie objecten kunnen als input resp. sturing dienen voor het uitvoeren van een activiteit.</td>
 </tr>
 <tr class="even">
-<td>bs:PhysicalObject</td>
+<td>nen2660:PhysicalObject</td>
 <td><p>gwsw:FysiekObject</p>
 <p>gwsw:Levensvorm</p>
 <p>gwsw:Ruimte</p></td>
 <td><p>NTA 8035: Iets dat bestaat of zou kunnen bestaan in ruimte en tijd, een manifestatie en een afbakening van materie en/of energie vormt en waarneembaar is door de zintuigen. Een fysiek object voert activiteiten uit, en wordt ook getransformeerd door activiteiten. (…) Ook een (levend) organisme is een FysiekObject, waarmee ook een mens een FysiekObject is maar ook een organisatie van mensen is een FysiekObject.</p>
-<p>Ook gsws:Ruimte is een FysiekObject. bs:SpatialRegion is een topologisch / representatie-element en daardoor geen logisch supertype voor gwsw:Ruimte.</p></td>
+<p>Ook gsws:Ruimte is een FysiekObject. nen2660:SpatialRegion is een topologisch / representatie-element en daardoor geen logisch supertype voor gwsw:Ruimte.</p></td>
 </tr>
 <tr class="odd">
-<td>bs:InformationObject</td>
+<td>nen2660:InformationObject</td>
 <td>gwsw:Informatiedrager</td>
 <td>NTA 8035: Een op zichzelf staand geheel van gegevens met een eigen identiteit.</td>
 </tr>
 <tr class="even">
 <td>gwsw:TopologischElement</td>
 <td>gwsw:TopologischElement</td>
-<td>Netwerkbeschrijving van knooppunt (vertex) of verbinding (edge en vertices). <span class="mark">(link met bs:SpatialRegion?)</span></td>
+<td>Netwerkbeschrijving van knooppunt (vertex) of verbinding (edge en vertices). <span class="mark">(link met nen2660:SpatialRegion?)</span></td>
 </tr>
 <tr class="odd">
-<td>bs:QuantityValue</td>
+<td>nen2660:QuantityValue</td>
 <td>gwsw:Kenmerk</td>
 <td>[Gellish] Is an individual object that is a phenomenon that is possessed by a totality and cannot exist without the existence of its possessor. It is an intrinsic, non-separable facet of its possessor</td>
 </tr>
 <tr class="even">
-<td>bs:EnumerationType</td>
+<td>nen2660:EnumerationType</td>
 <td>gwsw:VerzamelingSoorten</td>
 <td>Enumeratie, verzameling individuen</td>
 </tr>
@@ -453,7 +455,7 @@ Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS e
 
 <div class="example"><div class="example-title marker">Model: de put-familie</div><pre>
     gwsw:Put        rdf:type                   owl:Class ;                   
-                    rdfs:subClassOf            bs:PhysicalObject ; # het supertype uit NTA 8035
+                    rdfs:subClassOf            nen2660:PhysicalObject ; # het supertype uit NTA 8035
                     skos:prefLabel             "Put"@nl .
     gwsw:Rioolput   rdf:type                   owl:Class ;                   
                     rdfs:subClassOf            gwsw:Put ;
@@ -508,7 +510,7 @@ Een onderscheidend kenmerk wordt gemodelleerd met restricties binnen een CE. Bij
     gwsw:onderscheidendKenmerk rdf:type                 owl:ObjectProperty ;
                                rdfs:range               gwsw:OnderscheidendKenmerk .
     gwsw:OnderscheidendKenmerk rdf:type                 owl:Class ;         
-                               rdfs:subClassOf          bs:Enumerationtype .
+                               rdfs:subClassOf          nen2660:Enumerationtype .
 </pre></div>
 <div class="example"><div class="example-title marker">Model: Definieer type uitvoering "Klein" als onderscheidend Kenmerk</div><pre>
     gwsw:uitvoering          rdf:type                   owl:ObjectProperty ;
@@ -521,7 +523,7 @@ Een onderscheidend kenmerk wordt gemodelleerd met restricties binnen een CE. Bij
                              skos:definition            “dat is klein" .    
 </pre></div>
 <div class="example"><div class="example-title marker">Model: Combineer het kenmerk en de waarde ervan in een CE</div><pre>
-    gwsw:Putje               rdfs:subClassOf            bs:PhysicalObject ; 
+    gwsw:Putje               rdfs:subClassOf            nen2660:PhysicalObject ; 
                              rdfs:subClassOf                                
                              [        
                                rdf:type                 owl:Restriction ;   
@@ -549,7 +551,7 @@ Meer specifiek voor activiteiten:
 -   Technologie (werkwijze, eisen)
 -   Mechanisme (waarmee)
 
-Daarnaast kunnen ook relaties tussen GWSW concepten definiërend voor de classificering zijn. Een gwsw:Inspectieput moet bijvoorbeeld een gwsw:Deksel hebben. De compositie (de deel-geheel relatie) is dan bepalend, er geldt een beperking voor de property <span class="blue">bs:hasPart</span> .
+Daarnaast kunnen ook relaties tussen GWSW concepten definiërend voor de classificering zijn. Een gwsw:Inspectieput moet bijvoorbeeld een gwsw:Deksel hebben. De compositie (de deel-geheel relatie) is dan bepalend, er geldt een beperking voor de property <span class="blue">nen2660:hasPart</span> .
 
 ## Overzicht properties
 
@@ -697,12 +699,12 @@ De toegepaste **relaties** in een diagram:
 <td><em>Subject</em> <span class="blue">heeft als "kwaliteit"</span> <em>Kwalitatief aspect.</em> Het object is een kenmerk, een element uit een enumeratie.</td>
 </tr>
 <tr class="odd">
-<td>bs:quantityKind</td>
+<td>nen2660:quantityKind</td>
 <td></td>
 <td><em>Subject</em> <span class="blue">heeft als grootheid</span> <em>qudt:Quantitykind</em></td>
 </tr>
 <tr class="even">
-<td>bs:unit</td>
+<td>nen2660:unit</td>
 <td>gwsw:hasUnit</td>
 <td><em>Subject</em> <span class="blue">heeft als eenheid</span> <em>qudt:Unit</em></td>
 </tr>
@@ -718,7 +720,7 @@ De toegepaste **relaties** in een diagram:
 <td>gwsw:"kwantiteit"</td>
 <td><p>gwsw:hasAspect</p>
 <p>(isAspectOf)</p></td>
-<td><em>Subject</em> <span class="blue">heeft als "kwantiteit"</span> <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type bs:QuantityValue</td>
+<td><em>Subject</em> <span class="blue">heeft als "kwantiteit"</span> <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type nen2660:QuantityValue</td>
 </tr>
 </tbody>
 </table>
@@ -764,12 +766,12 @@ De toepassing van **relaties** is in de GWSW-Ontologie aan regels gebonden door 
 <td colspan="3"><strong>Compositie</strong></td>
 </tr>
 <tr class="even">
-<td><p>bs:hasPart</p>
+<td><p>nen2660:hasPart</p>
 <p>(isPartOf)</p></td>
 <td><p>gwsw:hasPart</p>
 <p>(isPartOf)</p></td>
 <td><p><span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NTA heeft niet de inverse property</p>
-<p>Opmerking: de NTA 8035 hanteert bs:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft bs:hasPart voor het GWSW algemeen toepasbaar.</p></td>
+<p>Opmerking: de NTA 8035 hanteert nen2660:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft nen2660:hasPart voor het GWSW algemeen toepasbaar.</p></td>
 </tr>
 <tr class="odd">
 <td colspan="3"><strong>Associatie</strong></td>
@@ -874,7 +876,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 <tr class="odd">
 <td>gwsw:"kwantiteit"</td>
 <td>gwsw:hasAspect</td>
-<td><em>Subject</em> heeft als "kwantiteit" <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type bs:QuantityValue</td>
+<td><em>Subject</em> heeft als "kwantiteit" <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type nen2660:QuantityValue</td>
 </tr>
 <tr class="even">
 <td colspan="3"><strong>Relaties</strong></td>
@@ -900,7 +902,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 <td><em>Subject</em> heeft als uitvoer <em>Object</em></td>
 </tr>
 <tr class="odd">
-<td>bs:hasPart</td>
+<td>nen2660:hasPart</td>
 <td>gwsw:hasPart</td>
 <td><em>Subject</em> heeft als deel <em>Object</em></td>
 </tr>
@@ -999,7 +1001,7 @@ Een voorbeeld van gebruikte annotaties:
 <div class="example"><div class="example-title marker">Model:</div><pre>
   gwsw:Put  rdf:type             owl:Class ;           
             skos:prefLabel       "Put"@nl ;            
-            rdfs:subClassOf      bs:PhysicalObject ;   
+            rdfs:subClassOf      nen2660:PhysicalObject ;   
             skos:definition      "Verticale waterdichte ….”@nl ; # interne (eigen) definitie  
             rdfs:seeAlso         "[IMGeo:1.0/2007] Gegraven of … "@nl ,
 				 "https://imgeo.geostandaarden.nl/def/imgeo-object/put" ;
@@ -1013,7 +1015,7 @@ Een voorbeeld van gebruikte annotaties:
 
 Een GWSW concept van het type owl:Class heeft altijd de volgende annotaties:
 
-* rdfs:label
+* skos:prefLabel
 * gwsw:hasDateStart
 * gwsw:hasAuthorStart
 * skos:scopeNote
@@ -1023,7 +1025,7 @@ Daarnaast zijn de volgende annotaties onder voorwaarden opgenomen:
 
 * rdfs:hasDateChange: indien andere annotaties zoals skos:definition gewijzigd zijn. Als een CE bij de klasse wijzigt wordt de wijzigingsdatum alleen bij die CE opgenomen.
 * rdfs:hasAuthorChange: indien hasDateChange is opgenomen
-* gwsw:hasUnit: indien de klasse een relatie rdfs:hasValue met een relevant datatype heeft
+* nen2660:unit: indien de klasse een kwantitatief aspect is
 
 ### Annotaties per CE
 
@@ -1032,13 +1034,11 @@ Een GWSW concept van het type owl:Restriction heeft altijd de volgende annotatie
 * gwsw:hasDateStart
 * gwsw:hasAuthorStart
 * skos:scopeNote
-* skos:definition
 
 Daarnaast zijn de volgende annotaties onder voorwaarden altijd opgenomen:
 
 * rdfs:hasDateChange: indien andere annotaties bij de CE gewijzigd zijn
 * rdfs:hasAuthorChange: indien hasDateChange is opgenomen
-* gwsw:hasUnit: indien de CE een relatie rdfs:hasValue met een relevant datatype heeft
 
 ### Identificatie van concepten
 
@@ -1119,9 +1119,9 @@ Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit documen
 
 Voor de specificatie van waarden bij de kwantitatieve aspecten (in het GWSW alleen rdf:value) hanteert de NTA 8035 de QUDT-ontologie versie 2.1 voor de definitie van grootheden en eenheden. QUDT is volledig afgestemd met ISO/IEC 80000 (systematiek, namen, definities, symbolen, enz.).
 
-Grootheden: http://qudt.org/vocab/quantitykind , wordt naar verwezen door de property <span class="blue">bs:quantityKind</span>.
+Grootheden: http://qudt.org/vocab/quantitykind , wordt naar verwezen door de property <span class="blue">nen2660:quantityKind</span>.
 
-Eenheden: http://qudt.org/vocab/unit , wordt naar verwezen door de property <span class="blue">bs:unit</span>.
+Eenheden: http://qudt.org/vocab/unit , wordt naar verwezen door de property <span class="blue">nen2660:unit</span>.
 
 Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodelleerd. We hanteren de volgende:
 
@@ -1358,7 +1358,7 @@ De letter geeft het soort kwaliteitseis aan:
 
 ## Details aspecten
 
-De NTA 8035 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NTA 8035 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse bs:QuantityValue.
+De NTA 8035 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NTA 8035 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
 
 Het GWSW hanteerde in voorgaande versies ook het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NTA 8035.
 
@@ -1367,10 +1367,10 @@ In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse ho
 Voorbeeld met de aspecten gwsw:begindatum en gwsw:leidingMateriaal:
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:Leiding             rdfs:subClassOf  bs:PhysicalObject .    
+    gwsw:Leiding             rdfs:subClassOf  nen2660:PhysicalObject .    
     gwsw:begindatum          rdf:type         owl:ObjectProperty ;     
-                             rdfs:domain      bs:PhysicalObject ;     # minimaal 1 domein          
-                             rdfs:range       bs:QuantityValue .      # 1 range (OWA: tenminste 1) 
+                             rdfs:domain      nen2660:PhysicalObject ;     # minimaal 1 domein          
+                             rdfs:range       nen2660:QuantityValue .      # 1 range (OWA: tenminste 1) 
     gwsw:leidingMateriaal    rdf:type         owl:ObjectProperty ;     
                              rdfs:domain      gwsw:Leiding ;          # minimaal 1 domein          
                              rdfs:range       gwsw:LeidingMateriaal .
@@ -1381,7 +1381,7 @@ Voorbeeld met de aspecten gwsw:begindatum en gwsw:leidingMateriaal:
     ex:Leiding_1  rdf:type              gwsw:Leiding ;
                   gwsw:begindatum                          # via blank node            
                   [                                   
-                    rdf:type            bs:QuantityValue ; # niet nodig, wordt impliciet getypeerd
+                    rdf:type            nen2660:QuantityValue ; # niet nodig, wordt impliciet getypeerd
                     rdf:value           "2012-05-01"^^xsd:date; 
                   ] ;     
                   gwsw:leidingMateriaal gwsw:Beton .  
@@ -1395,9 +1395,9 @@ De eenheden bij waarden definiëren we vooraf - op model-niveau - dat kan eenvou
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
     gwsw:diameterLeiding     rdf:type                   owl:ObjectProperty ;
-                             rdfs:domain                bs:PhysicalObject ; 
-                             rdfs:range                 bs:QuantityValue ;  
-                             bs:unit                    unit:MiLiM .        
+                             rdfs:domain                nen2660:PhysicalObject ; 
+                             rdfs:range                 nen2660:QuantityValue ;  
+                             nen2660:unit                    unit:MiLiM .        
 </pre></div>
 
 Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven eenheden op. Dat maakt toepassingen op de data veel efficienter.
@@ -1406,7 +1406,7 @@ Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven 
     ex:Leiding_1             gwsw:diameterLeiding                           
                              [        
                                rdf:value                0.160 ;             
-                               bs:unit                  unit:M ; # kwalitatief aspect        
+                               nen2660:unit                  unit:M ; # kwalitatief aspect        
                              ] .      
 </pre></div>
 
@@ -1414,7 +1414,7 @@ Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven 
     ex:Leiding_1             gwsw:diameterLeiding         
                              [         
                                 rdf:value               160.0 ;
-                                bs:unit                 unit:MiLiM ; # optioneel
+                                nen2660:unit                 unit:MiLiM ; # optioneel
                              ] .         
 </pre></div>
 
@@ -1425,7 +1425,7 @@ Verificatie van de gebruikte eenheid in de dataset wordt uitgedrukt in SHACL:
                                sh:targetObjectsOf   gwsw:diameterLeiding ;        
                                sh:property                                    
                                [        
-                                 sh:path            bs:unit ;           
+                                 sh:path            nen2660:unit ;           
                                  sh:hasValue        unit:MiLiM ;        
                                  sh:message         "Use unit Milimeter for value of gwsw:diameterLeiding " ; 
                                  sh:severity        sh:Violation ;      
@@ -1442,11 +1442,11 @@ Voor de beschrijving van de gegevenskwaliteit - met name nauwkeurigheid, actuali
     gwsw:inwinning           rdf:type                   owl:ObjectProperty ;   
                              rdfs:range                 gwsw:Inwinning .       
     gwsw:Inwinning           rdf:type                   owl:Class ;            
-                             rdfs:subClassOf            bs:InformationObject . 
+                             rdfs:subClassOf            nen2660:InformationObject . 
     gwsw:wijzeVanInwinning   rdf:type                   owl:ObjectProperty ;   
                              rdfs:range                 gwsw:WijzeVanInwinning .       
     gwsw:WijzeVanInwinning   rdf:type                   owl:Class ;            
-                             rdfs:subClassOf            bs:EnumerationType ;   
+                             rdfs:subClassOf            nen2660:EnumerationType ;   
                              owl:equivalentClass                               
                              [           
                                rdf:type                 owl:Class ;            
@@ -1525,7 +1525,7 @@ Intrinsieke kenmerken horen exclusief (per definitie) bij een klasse, ze hebben 
                              rdf:type                   owl:ObjectProperty ;
                              rdf:type                   owl:FunctionalProperty ;      # max 1 per object          
                              rdfs:domain                gwsw:Put ;          
-                             rdfs:range                 bs:QuantityValue .  
+                             rdfs:range                 nen2660:QuantityValue .  
 </pre></div>
 
 Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
@@ -1552,7 +1552,7 @@ Ter illustratie: de klasse Drukleiding is een subtype van Mechanische Transportl
 <div class="example"><div class="example-title marker">Model:</div><pre>
     gwsw:diameterLeiding     rdf:type                   owl:ObjectProperty ;
                              rdfs:domain                gwsw:Leiding ;      
-                             rdfs:range                 bs:QuantityValue .  
+                             rdfs:range                 nen2660:QuantityValue .  
     gwsw:Drukleiding         rdf:type                   owl:Class ;         
                              rdfs:subClassOf            gwsw:MechanischeTransportleiding ;
                              owl:equivalentClass                            
@@ -1563,7 +1563,7 @@ Ter illustratie: de klasse Drukleiding is een subtype van Mechanische Transportl
                                owl:onClass              gwsw:DiameterDrukleiding ;    
                              ] .      
     gwsw:DiameterDrukleiding rdf:type                   owl:Class ;         
-                             rdfs:subClassOf            bs:QuantityValue ;  
+                             rdfs:subClassOf            nen2660:QuantityValue ;  
                              owl:equivalentClass                            
                              [        
                                rdf:type                 owl:Restriction ;   
@@ -1710,7 +1710,7 @@ De relaties <span class="blue">gwsw:hasInput</span> en <span class="blue">gwsw:h
     gwsw:hasInput            rdf:type                   owl:ObjectProperty ;
                              skos:prefLabel             "has as input" .
     gwsw:InspecterenPut      rdf:type                   owl:Class ;
-                             rdfs:subClassOf            bs:Activity ;
+                             rdfs:subClassOf            nen2660:Activity ;
                              skos:prefLabel             "Inspecteren van een put"@nl .
 </pre></div>
 
@@ -1760,7 +1760,7 @@ De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie ka
 <div class="example-dataset"><div class="example-title marker">Dataset: In een netwerk is een put verbonden met een leiding</div><pre>
     ex:Leiding_1             gwsw:leidingorientatie         
                              [         
-                                bs:hasPart              ex:Eindpunt_1 ;
+                                nen2660:hasPart              ex:Eindpunt_1 ;
                              ] .         
     ex:Put_1                 gwsw:putorientatie         
                              [         
@@ -1771,7 +1771,7 @@ De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie ka
 
 ### Relaties compositie (deel-geheel)
 
-De NTA 8035 definieert <span class="blue">bs:hasPart</span> van het type owl:ObjectProperty, de relatie geldt tussen Fysiek Objecten (inclusief gwsw:Ruimte) onderling en Activiteiten onderling.
+De NTA 8035 definieert <span class="blue">nen2660:hasPart</span> van het type owl:ObjectProperty, de relatie geldt tussen Fysiek Objecten (inclusief gwsw:Ruimte) onderling en Activiteiten onderling.
 
 <div class="example"><div class="example-title marker">Model: Stuwput en zijn onderdelen</div><pre>
     gwsw:Stuwput             rdf:type                   owl:Class ;
@@ -1789,8 +1789,8 @@ De NTA 8035 definieert <span class="blue">bs:hasPart</span> van het type owl:Obj
                              skos:prefLabel             "0987/c1" .
     ex:Stuwput_1             rdf:type                   gwsw:Stuwput ;
                              skos:prefLabel             "0987" ;
-                             bs:hasPart                 ex:Stuwmuur_1 ;
-                             bs:hasPart                 ex:Comp_1 .
+                             nen2660:hasPart                 ex:Stuwmuur_1 ;
+                             nen2660:hasPart                 ex:Comp_1 .
 </pre></div>
 
 <div class="example"><div class="example-title marker">Model: Gebied en stelsel</div><pre>
@@ -1804,7 +1804,7 @@ De NTA 8035 definieert <span class="blue">bs:hasPart</span> van het type owl:Obj
     ex:Stelsel_1             rdf:type                   gwsw:Rioolstelsel;
                              skos:prefLabel             "Stelsel 1" .
     ex:Kern_1                rdf:type                   gwsw:Kern ;
-                             bs:hasPart                 ex:Stelsel_1 ;
+                             nen2660:hasPart                 ex:Stelsel_1 ;
                              skos:prefLabel             "Kern 1" .
 </pre></div>
 
@@ -1830,7 +1830,7 @@ Deze relaties beschrijven we definiërend in OWL. Voor de genoemde relaties geld
 
 **Inverse kardinaliteit**
 
-Kardinaliteit kan tweezijdig worden beschreven, daarvoor zijn er omgekeerde relaties nodig: gwsw:isPartOf is gedefinieerd als inverse van bs:hasPart.
+Kardinaliteit kan tweezijdig worden beschreven, daarvoor zijn er omgekeerde relaties nodig: gwsw:isPartOf is gedefinieerd als inverse van nen2660:hasPart.
 
 <div class="example"><div class="example-title marker">Model: Een deksel hoort bijvoorbeeld bij één inspectieput</div><pre>
     gwsw:Deksel              owl:equivalentClass         
@@ -1845,7 +1845,7 @@ Kardinaliteit kan tweezijdig worden beschreven, daarvoor zijn er omgekeerde rela
 Afgeleid wordt dat ex:Put_1 mogelijk een gwsw:Inspectieput is:
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Put_1                 bs:hasPart         
+    ex:Put_1                 nen2660:hasPart         
                              [         
                                 rdf:type                        gwsw:Deksel ;
                              ] .         
@@ -1858,7 +1858,7 @@ En we definiëren in SHACL de data-verificatie:
                              sh:targetClass                    gwsw:Inspectieput ;
                              sh:property         
                              [         
-                               sh:path                         bs:hasPart ;
+                               sh:path                         nen2660:hasPart ;
                                sh:class                        gwsw:Deksel ;
                                sh:minCount                     1 ;
                                sh:message                      "Inspectieput: deksel ontbreekt" ;
@@ -1875,7 +1875,7 @@ Voor de modellering van waarde-collecties gebruiken we een enumeratie van indivi
 
 <div class="example"><div class="example-title marker">Model: De putmaterialen</div><pre>
     gwsw:Materiaal           rdf:type             owl:Class ;
-                             rdfs:subClassOf      bs:EnumerationType .
+                             rdfs:subClassOf      nen2660:EnumerationType .
     gwsw:MateriaalPut        rdf:type             owl:Class ;
                              rdfs:subClassOf      gwsw:Materiaal ;
                              skos:prefLabel       "Materiaal put"@nl ;
@@ -1975,7 +1975,7 @@ Bestand <span class="blue">Proef GWSW 2.0 SHACL.txt</span> bevat de SHACL shapes
 Bestand "Proef GWSW 2.0.ttl"
 ----------------------------
 <pre class="file">
-@prefix bs: &lt;https://w3id.org/def/basicsemantics-owl#&gt; .
+@prefix nen2660: &lt;https://w3id.org/def/basicsemantics-owl#&gt; .
 @prefix ex: &lt;https://w3id.org/def/example#&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
@@ -1989,25 +1989,25 @@ Bestand "Proef GWSW 2.0.ttl"
 @prefix quantitykind: &lt;http://qudt.org/vocab/quantitykind/&gt; .
 
 # basic semantics -------------------------------------------------------------------------
-bs:QuantityValue rdf:type owl:Class .
-bs:EnumerationType rdf:type owl:Class .
-bs:InformationObject rdf:type owl:Class .
-bs:PhysicalObject rdf:type owl:Class .
-bs:hasPart rdf:type owl:ObjectProperty .
+nen2660:QuantityValue rdf:type owl:Class .
+nen2660:EnumerationType rdf:type owl:Class .
+nen2660:InformationObject rdf:type owl:Class .
+nen2660:PhysicalObject rdf:type owl:Class .
+nen2660:hasPart rdf:type owl:ObjectProperty .
 
 # concepten -------------------------------------------------------------------------------
 ex:Bridge rdf:type owl:Class ;
-rdfs:subClassOf bs:PhysicalObject .
+rdfs:subClassOf nen2660:PhysicalObject .
 ex:MetalBridge rdf:type owl:Class ;
 rdfs:subClassOf ex:Bridge .
 ex:ShortBridge rdf:type owl:Class ;
 rdfs:subClassOf ex:Bridge .
 ex:BridgeDeck rdf:type owl:Class ;
-rdfs:subClassOf bs:PhysicalObject .
+rdfs:subClassOf nen2660:PhysicalObject .
 ex:Obtainment rdf:type owl:Class ;
-rdfs:subClassOf bs:InformationObject .
+rdfs:subClassOf nen2660:InformationObject .
 ex:Material rdf:type owl:Class ;
-rdfs:subClassOf bs:EnumerationType ;
+rdfs:subClassOf nen2660:EnumerationType ;
 owl:equivalentClass
 [
   rdf:type owl:Class ;
@@ -2017,7 +2017,7 @@ ex:Steel rdf:type ex:Material . # individu
 ex:Iron rdf:type ex:Material . # individu
 ex:Concrete rdf:type ex:Material .
 ex:ObtainedBy rdf:type owl:Class ; # wijze van inwinning
-rdfs:subClassOf bs:EnumerationType ;
+rdfs:subClassOf nen2660:EnumerationType ;
 owl:equivalentClass
 [
   rdf:type owl:Class ;
@@ -2028,10 +2028,10 @@ ex:Revision rdf:type ex:ObtainedBy . # vanuit revisie
 
 # attributen en properties -------------------------------------------------------------------
 ex:length rdf:type owl:ObjectProperty ;
-rdfs:range bs:QuantityValue .
+rdfs:range nen2660:QuantityValue .
 ex:bridgeHeight rdf:type owl:ObjectProperty ;
 rdfs:domain ex:Bridge ;
-rdfs:range bs:QuantityValue .
+rdfs:range nen2660:QuantityValue .
 ex:material rdf:type owl:ObjectProperty ;
 rdfs:range ex:Material . # geen rdfs:range - via SHACL
 ex:obtainment rdf:type owl:ObjectProperty ;
@@ -2039,7 +2039,7 @@ rdfs:range ex:Obtainment .
 ex:obtainedBy rdf:type owl:ObjectProperty ;
 rdfs:range ex:ObtainedBy . # geen rdfs:range - via SHACL
 ex:obtainedDate rdf:type owl:ObjectProperty ;
-rdfs:range bs:QuantityValue .
+rdfs:range nen2660:QuantityValue .
 
 # Voorwaarde 1a -------------------------------------------------------------------------------
 # Iets is een brug als het minimaal één brugdek heeft
@@ -2049,12 +2049,12 @@ ex:Bridge owl:equivalentClass
 [
   rdf:type owl:Restriction ;
   owl:minQualifiedKardinality "1"^^xsd:nonNegativeInteger ;
-  owl:onProperty bs:hasPart ;
+  owl:onProperty nen2660:hasPart ;
   owl:onClass ex:BridgeDeck ;
 ] .
 
 # Een OWL-reasoner kan afleiden dat Bridge_1 van het type ex:Bridge is:
-ex:Bridge_1 bs:hasPart
+ex:Bridge_1 nen2660:hasPart
 [
   rdf:type ex:BridgeDeck ;
 ] .
@@ -2100,7 +2100,7 @@ owl:equivalentClass
   owl:onClass ex:Max100m ;
 ] .
 ex:Max100m rdf:type owl:Class ;
-rdfs:subClassOf bs:QuantityValue ;
+rdfs:subClassOf nen2660:QuantityValue ;
 owl:equivalentClass
 [
   rdf:type owl:Restriction ;
@@ -2130,13 +2130,13 @@ ex:Bridge_1 ex:length
 #--- Data bij SHACL proef -----------------------------------------------------------------
 ex:Bridge_1b rdf:type ex:Bridge .
 ex:Bridge_2b rdf:type ex:MetalBridge ;
-bs:hasPart
+nen2660:hasPart
 [
   rdf:type ex:BridgeDeck ;
 ] ;
 ex:material ex:Concrete .
 ex:Bridge_3b rdf:type ex:ShortBridge ;
-bs:hasPart
+nen2660:hasPart
 [
   rdf:type ex:BridgeDeck ;
 ] ;
@@ -2145,7 +2145,7 @@ ex:length
   rdf:value 100.0 ;
 ] .
 ex:Bridge_4
-bs:hasPart
+nen2660:hasPart
 [
   rdf:type ex:BridgeDeck ;
 ] ;
@@ -2180,7 +2180,7 @@ PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
 PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-PREFIX bs: &lt;https://w3id.org/def/basicsemantics-owl#&gt;
+PREFIX nen2660: &lt;https://w3id.org/def/basicsemantics-owl#&gt;
 PREFIX ex: &lt;https://w3id.org/def/example#&gt;
 
 SELECT *
@@ -2197,7 +2197,7 @@ WHERE
 ## Bestand "Proef GWSW 2.0 SHACL.txt"
 
 <pre class="file">
-@prefix bs: &lt;https://w3id.org/def/basicsemantics-owl#&gt; .
+@prefix nen2660: &lt;https://w3id.org/def/basicsemantics-owl#&gt; .
 @prefix ex: &lt;https://w3id.org/def/example#&gt; .
 @prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .
 @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
@@ -2218,7 +2218,7 @@ ex:BridgeShape rdf:type sh:NodeShape ;
 sh:targetClass ex:Bridge ;
 sh:property
 [ # impliciete typering sh:PropertyShape
-  sh:path bs:hasPart ;
+  sh:path nen2660:hasPart ;
   sh:class ex:BridgeDeck ;
   sh:minCount 1 ;
   sh:message "Bridge: BridgeDeck is missing as part" ;
@@ -2317,7 +2317,7 @@ ex:Bridge 	owl:equivalentClass
 
 _:x	rdf:type                      			owl:Restriction ;
 	owl:minQualifiedKardinality	"1"^^xsd:nonNegativeInteger ;
-	owl:onProperty                		bs:hasPart ;
+	owl:onProperty                		nen2660:hasPart ;
 	owl:onClass      			ex:BridgeDeck . 
 
 _:y	rdf:type                      		owl:Restriction ;
@@ -2326,7 +2326,7 @@ _:y	rdf:type                      		owl:Restriction ;
 	owl:allValuesFrom
 	[
 	     owl:intersectionOf		# zowel QuanVal als CE-restrictie op rdf:value
-	     (  bs:QuantityValue
+	     (  nen2660:QuantityValue
 	        [
 	          rdf:type		owl:Restriction ;
 	          owl:onProperty		rdf:value ;
@@ -2350,7 +2350,7 @@ _:y	rdf:type                      		owl:Restriction ;
 Een OWL-reasoner leidt af dat ex:Bridge_1 van het type ex:Brigde is:
 
 <pre class="file">
-ex:Brigde_1	bs:hasPart			
+ex:Brigde_1	nen2660:hasPart			
 	[
 	  rdf:type		ex:BridgeDeck;
 	] ; 
