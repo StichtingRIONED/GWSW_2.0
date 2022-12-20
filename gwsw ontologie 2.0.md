@@ -387,7 +387,8 @@ Exclusief **GWSW**:
 
 ## Model inrichting
 
-Enumeratiewaarden bij **IMBOR** in een apart datamodel, bij het **GWSW** niet.
+Exclusief **IMBOR**:
+* Enumeratiewaarden staan in een apart datamodel
 
 # Details van de GWSW semantiek
 
