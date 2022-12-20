@@ -10,7 +10,7 @@
 Versie historie
 <div style="font-size: 0.90em">
 
-20221220: Eerste aanpassingen op vervanging NTA8035 door NEN2660
+20221220: Eerste aanpassingen op vervanging NTA8035 door NEN2660  
 20221220: Algemene update, hou synchroon met figerende GWSW Ontololgie-document
 20221202: Overzicht verschillen met IMBOR-LD toegevoegd  
 20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]  
