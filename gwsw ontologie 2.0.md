@@ -343,7 +343,9 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
 
-# Aansluiting op IMBOR-LD
+# Aansluiting op externe (meta)modellen
+
+## IMBOR
 
 Door CROW is het - oorspronkelijk in MS Access uitgewerkte - IMBOR datamodel omgezet naar een linked-data vorm, gebaseerd op de NEN 2660-2. Dat was een belangrijke aanleiding om ook het GWSW 2.0 af te stemmen op de NEN 2660.
 
@@ -357,7 +359,7 @@ De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBO
 
 Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn. Tussen de datamodellen IMBOR-LD en GWSW 2.0 blijven een aantal principiële verschillen bestaan:
 
-## RDF-schema en SHACL
+### RDF-schema en SHACL
 
 **IMBOR**: RDFS/SHACL-gebaseerd (rdfs:Class)
 *	Bevat SHACL-gebaseerde validatie regels (closed-world)
@@ -373,8 +375,7 @@ Het GWSW bevat per concept en daaraan toegevoegde OWL-restricties het annotatie-
 SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het basis datamodel te introduceren (en niet alleen voor de CFK'en). In het datamodel is bijvoorbeeld met een OWL-restrictie beschreven dat een <span class="blue">gwsw:Overstortput</span> als deel een <span class="blue">gwsw:Overstortdrempel</span> moet hebben. Dat is een definiërende voorwaarde, maar in een CFK hoeft die OWL-restrictie niet persé te gelden (kan uitgeschakeld zijn via <span class="blue">gwsw:hasValidity</span>).
 </div>
 
-
-## IRI concepten
+### IRI concepten
 
 **IMBOR**: IRI van concepten is taalonafhankelijk (UUID)
 *	Voordeel: Semantiekloos, daardoor bijvoorbeeld geen verwarring met homoniemen binnen één discipline
@@ -384,7 +385,7 @@ SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het b
 *	Voordeel: Leesbaarheid, ook met eenvoudige tools
 *	Nadeel: Minder eenvoudig aan te maken en te onderhouden (de IRI is een camelcase-notatie van het concept-label en kan daarmee uit de pas gaan lopen)
 
-## Reikwijdte datamodel
+### Reikwijdte datamodel
 
 Exclusief **GWSW**:
 * Hanteert onderscheidende kenmerken (Uitvoering, Functie) voor expliciete definities
@@ -392,10 +393,36 @@ Exclusief **GWSW**:
 *	Gebruikt proces-relaties (<span class="blue">gwsw:hasInput</span>, <span class="blue">gwsw:hasOutput</span>)
 * Bevat topologie/netwerk definities (<span class="blue">gwsw:hasConnecion</span>)
 
-## Model inrichting
+### Model inrichting
 
 Exclusief **IMBOR**:
 * Enumeratiewaarden staan in een apart datamodel
+
+## Relatiemodel Harmonisator
+
+Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
+
+<table class="default">
+R-model en GWSW 2.0
+<tr><th>R-model</th><th>GWSW</th></tr>
+<tr><td>R0 - is van type</td><td>rdf:type</td></tr>
+<tr><td>R1 - verwant</td><td></td></tr>
+<tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
+<tr><td>R2U - kenmerkcluster </td><td>(was gwsw:hasAspect/gwsw:hasAspect)</td></tr>
+<tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
+<tr><td>R4 - samenstelling</td><td>nen2660::hasPart (cardinaliteit n,n)</td></tr>
+<tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
+<tr><td>R4G - groep</td><td></td></tr>
+<tr><td>R5 - overerving</td><td>rdfs:subClassOf</td></tr>
+<tr><td>R6 - regelset</td><td></td></tr>
+<tr><td>R7 - functie/activiteit</td><td>gwsw:hasInput, gwsw:hasOutput</td></tr>
+<tr><td>R8 - collectie</td><td>owl:oneOf</td></tr>
+<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference)</td></tr>
+</table>
+
+## MIM
+
+
 
 # Details van de GWSW semantiek
 
@@ -728,28 +755,6 @@ De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram
 </table>
 
 ### Relaties
-
-** Relatiemodel Harmonisator **
-
-Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
-
-<table class="default">
-R-model en GWSW 2.0
-<tr><th>R-model</th><th>GWSW</th></tr>
-<tr><td>R0 - is van type</td><td>rdf:type</td></tr>
-<tr><td>R1 - verwant</td><td></td></tr>
-<tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
-<tr><td>R2U - kenmerkcluster </td><td>(was gwsw:hasAspect/gwsw:hasAspect)</td></tr>
-<tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
-<tr><td>R4 - samenstelling</td><td>nen2660::hasPart (cardinaliteit n,n)</td></tr>
-<tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
-<tr><td>R4G - groep</td><td></td></tr>
-<tr><td>R5 - overerving</td><td>rdfs:subClassOf</td></tr>
-<tr><td>R6 - regelset</td><td></td></tr>
-<tr><td>R7 - functie/activiteit</td><td>gwsw:hasInput, gwsw:hasOutput</td></tr>
-<tr><td>R8 - collectie</td><td>owl:oneOf</td></tr>
-<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference)</td></tr>
-</table>
 
 De toegepaste **relaties** in een diagram:
 
