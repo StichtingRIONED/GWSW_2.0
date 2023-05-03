@@ -734,7 +734,7 @@ Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties
 
 <table class="simp">
 R-model en GWSW 2.0
-<tr><th>R-model</th><th>GWSW</th><tr>
+<tr><th>R-model</th><th>GWSW</th></tr>
 <tr><td>R0 - is van type</td><td>rdf:type</td></tr>
 <tr><td>R1 - verwant</td><td></td></tr>
 <tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
@@ -747,7 +747,7 @@ R-model en GWSW 2.0
 <tr><td>R6 - regelset</td><td></td></tr>
 <tr><td>R7 - functie/activiteit</td><td>gwsw:hasInput, gwsw:hasOutput</td></tr>
 <tr><td>R8 - collectie</td><td>owl:oneOf</td></tr>
-<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference</td></tr>
+<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference)</td></tr>
 </table>
 
 De toegepaste **relaties** in een diagram:
