@@ -48,7 +48,7 @@ In deze inleiding vindt u de gebruikte begrippen en uitgangspunten bij de modell
 RDF staat voor Resource Description Framework, de basisdefinitie van modellen op basis van subject-predicate-object. In de tekst verstaan we onder "linked data" de combinatie van RDF en de daarop gebaseerde schema's RDFS (RDF Schema), OWL 2 (Web Ontology Language) en SHACL (Shapes Constraint Language). Met de term OWL wordt OWL 2 aangeduid.
 
 **CE, OPE, DPE**  
-Deze termen hanteren we in de OWL definities. De afkorting CE wordt gebruikt voor Class Expressions (in Description Logics “complex concepts”). CE’s worden ondermeer gevormd door Classes te binden aan Object Property Expressions (OPE). Data Property Expressions (DPE) beschrijven restricties op de waardetypes.
+Deze afkortingen hanteren we in de OWL definities. De afkorting CE wordt gebruikt voor Class Expressions (in Description Logics “complex concepts”). CE’s worden ondermeer gevormd door Classes te binden aan Object Property Expressions (OPE). Data Property Expressions (DPE) beschrijven restricties op de waardetypes.
 
 **Concept**  
 De mentale voorstelling van iets uit de werkelijkheid (NTA 8035).
@@ -59,8 +59,8 @@ Een instantie van een concept, iets (potentieel) aanwijsbaars uit de werkelijkhe
 **Klasse, subtype, supertype**  
 Concepten die hiërarchisch zijn onderverdeeld in groepen noemen we klassen, het zijn de bouwstenen van de soortenboom. Zo'n soortenboom wordt ook wel taxonomie genoemd. In de GWSW-hiërarchie gebruiken we de termen Supertype - Concept - Subtype. Een subtype is de "specialisatie" van de klasse, het supertype is de "generalisatie" van de klasse.
 
-**Property, predicate**  
-Voor de relatie (tussen subject en object) zijn meerdere namen gebruikelijk (“predicate”, “property name”). Conform de NTA 8035 hanteren we de term "property" voor attributen (inclusief aspecten) en relaties.
+**Property, predicate (attribuut, relatie)**  
+Voor de relatie (tussen subject en object) zijn meerdere namen gebruikelijk (“predicate”, “property”). Conform de NEN 2660-2 hanteren we de term "attribuut" voor kenmerken en annotaties, en voor de overigen de term "relatie". Voor de verzamelnaam gebruiken we "property"
 
 **Ontologie**  
 Een samenhangende gegevensstructuur bestaande uit concepten, hun attributen en onderlinge relaties, instanties van die concepten en waardetypen (verkort vanuit de NTA 8035).
@@ -345,8 +345,12 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 # Aansluiting op IMBOR-LD
 
-Door CROW wordt het IMBOR omgezet naar een linked-data vorm (IMBOR-LD). De huidige linked-data-versie IMBOR2022 is onder andere gepubliceerd op https://begrippen.crow.nl/imbor/nl.
-Het IMBOR is, net zoals GWSW 2.0, gebaseerd op de NEN 2660.
+Door CROW is het - oorspronkelijk in MS Access uitgewerkte - IMBOR datamodel omgezet naar een linked-data vorm, gebaseerd op de NEN 2660-2. Dat was een belangrijke aanleiding om ook het GWSW 2.0 af te stemmen op de NEN 2660.
+
+De binnen dit kader relevante links naar CROW publicatie over het IMBOR:
+* De huidige linked-data-versie IMBOR2022, https://begrippen.crow.nl/imbor/nl
+* Het delen van IMBOR gegevens middels RDF, https://docs.crow.nl/imbor/uitwisseling_rdf 
+* Ontologie-alignment: https://docs.crow.nl/ontology-alignment/whitepaper/
 
 In de roadmap van het IMBOR Kernteam is opgenomen dat in 2022/2023 het meta-model voor de mapping van ontologiën wordt ontwikkeld. 
 De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW.
@@ -377,7 +381,7 @@ SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het b
 
 **GWSW**: IRI van concepten is taalafhankelijk (human-readable)
 *	Voordeel: Leesbaarheid, ook met eenvoudige tools
-*	Nadeel: Minder eenvoudig aan te maken, is camelcase-notatie van het label, kan daarmee uit de pas gaan lopen
+*	Nadeel: Minder eenvoudig aan te maken en te onderhouden (de IRI is een camelcase-notatie van het concept-label en kan daarmee uit de pas gaan lopen)
 
 ## Reikwijdte datamodel
 
@@ -558,19 +562,13 @@ Daarnaast kunnen ook relaties tussen GWSW concepten definiërend voor de classif
 
 ## Overzicht properties
 
-### Properties in diagrammen
+### Attributen
 
-De toegepaste **attributen** (annotatie-properties en aspecten) in een diagram:
+De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram:
 
 <img src="media/image2.png" style="width:100%; height:85%" />
 
-De toegepaste **relaties** in een diagram:
-
-<img src="media/image3.png" style="width:100%;height:50%" />
-
-### Omschrijving properties
-
-**Attributen**
+**Omschrijving attributen**
 
 <table class="default">
 <thead>
@@ -585,7 +583,7 @@ De toegepaste **relaties** in een diagram:
 <td colspan="3">&nbsp</td>
 </tr>
 <tr class="even">
-<td colspan="3"><strong>Annotaties</strong></td>
+<td colspan="3"><strong>Annotatie-attributen</strong></td>
 </tr>
 <tr class="odd">
 <td>owl:versionInfo</td>
@@ -659,7 +657,7 @@ De toegepaste **relaties** in een diagram:
 <td><em>Subject</em> <span class="blue">heeft als feitencollectie</span> <em>Literal</em> (string met codes van één of meer collecties)</td>
 </tr>
 <tr class="odd">
-<td colspan="3"><strong>Kwalitatieve aspecten</strong></td>
+<td colspan="3"><strong>Kwalitatieve attributen</strong></td>
 </tr>
 <tr class="odd">
 <td>gwsw:doel</td>
@@ -717,7 +715,7 @@ De toegepaste **relaties** in een diagram:
 <td></td>
 </tr>
 <tr class="even">
-<td colspan="3"><strong>Kwantitatieve aspecten</strong></td>
+<td colspan="3"><strong>Kwantitatieve attibuten</strong></td>
 </tr>
 <tr class="odd">
 <td>gwsw:"kwantiteit"</td>
@@ -727,6 +725,34 @@ De toegepaste **relaties** in een diagram:
 </tr>
 </tbody>
 </table>
+
+### Relaties
+
+** Relatiemodel Harmonisator **
+
+Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
+
+<table class="simp">
+R-model en GWSW 2.0
+<tr><th>R-model</th><th>GWSW</th><tr>
+<tr><td>R0 - is van type</td><td>rdf:type</td></tr>
+<tr><td>R1 - verwant</td><td></td></tr>
+<tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
+<tr><td>R2U - kenmerkcluster </td><td>(was gwsw:hasAspect/gwsw:hasAspect)</td></tr>
+<tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
+<tr><td>R4 - samenstelling</td><td>nen2660::hasPart (cardinaliteit n,n)</td></tr>
+<tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
+<tr><td>R4G - groep</td><td></td></tr>
+<tr><td>R5 - overerving</td><td>rdfs:subClassOf</td></tr>
+<tr><td>R6 - regelset</td><td></td></tr>
+<tr><td>R7 - functie/activiteit</td><td>gwsw:hasInput, gwsw:hasOutput</td></tr>
+<tr><td>R8 - collectie</td><td>owl:oneOf</td></tr>
+<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference</td></tr>
+</table>
+
+De toegepaste **relaties** in een diagram:
+
+<img src="media/image3.png" style="width:100%;height:50%" />
 
 **Relaties**
 
@@ -912,7 +938,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 </tbody>
 </table>
 
-## Details annotaties
+## Details annotatie-attributen
 
 De volgende annotaties worden bij een GWSW-concept opgenomen (zie voor een toelichting ook het [Overzicht properties](#overzicht-properties)):
 
@@ -1359,7 +1385,7 @@ De letter geeft het soort kwaliteitseis aan:
 </tbody>
 </table>
 
-## Details aspecten
+## Details kwalitatieve en kwantitatieve attributen
 
 De NTA 8035 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NTA 8035 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
 
