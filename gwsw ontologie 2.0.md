@@ -733,7 +733,7 @@ De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram
 
 Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
 
-<table class="simp">
+<table class="default">
 R-model en GWSW 2.0
 <tr><th>R-model</th><th>GWSW</th></tr>
 <tr><td>R0 - is van type</td><td>rdf:type</td></tr>
