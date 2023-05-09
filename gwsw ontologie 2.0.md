@@ -402,6 +402,8 @@ Exclusief **IMBOR**:
 
 Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
 
+<img src="media/harmonisator.png" style="width:100%; height:85%" />
+
 <table class="default">
 R-model en GWSW 2.0
 <tr><th>R-model</th><th>GWSW</th></tr>
@@ -422,7 +424,9 @@ R-model en GWSW 2.0
 
 ## MIM
 
+Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
+Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde??
 
 # Details van de GWSW semantiek
 
