@@ -400,9 +400,14 @@ Exclusief **IMBOR**:
 
 ## Relatiemodel Harmonisator
 
-Het Relatiemodel Harmonisator (R-model) rubriceert de mogelijke concept-relaties in ontologiën
+De Harmonisator vergelijkt de (meta)datamodellen die binnen gemeentelijke organisaties in gebruik zijn.
+Voor die analyse hanteert de Harmonisator onder andere het Relatiemodel Harmonisator (R-model). 
+Met dat model worden de mogelijke concept-relaties in datamodellen gerubriceerd en vergelijkbaar gemaakt.
 
-<img src="media/harmonisator.png" style="width:100%; height:85%" />
+<img src="media/Harmonisator.png" style="width:100%; height:85%" />
+
+De indeling van de relaties in het R-model komt voor een groot deel overeen met de gebruikte GWSW-relaties.
+In de volgende tabel staat de vergelijking.
 
 <table class="default">
 R-model en GWSW 2.0
