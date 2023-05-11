@@ -1,17 +1,14 @@
 # GWSW Ontologie 2.0
 
-<!-- gebruik voor lokaal editen -->
-<script src="./builds/respec-rioned.js"></script>
+<!-- gebruik voor lokaal editen
+<script src="./builds/respec-rioned.js"></script> -->
 
 **Een beschrijving van de GWSW Ontologie op basis van de [NEN 2660-2:2022 nl](https://www.nen.nl/nen-2660-2-2022-nl-291667)**
-
-Definieer expliciet kenmerk-property (range = verwijzen naar : gwsw:AspectProperty rdsf:subPropertyOf owl:ObjectProperty 
-
-
 
 Versie historie
 <div style="font-size: 0.90em">
 
+20230511: Vervolg implementatie NEN2660
 20221220: Eerste aanpassingen op vervanging NTA 8035 door NEN2660  
 20221220: Algemene update, hou synchroon met figerende GWSW Ontololgie-document  
 20221202: Overzicht verschillen met IMBOR-LD toegevoegd  

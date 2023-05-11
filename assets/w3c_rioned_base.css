@@ -752,10 +752,10 @@ table.simp {
   margin-top: 1em;
   font-size: 0.95em;
   background-color:  rgb(245, 247, 255);
-	border: 1px solid lightgray;
 }
 table.simp th, table.simp td  { /** mv: eenvoudige basistabel */
   padding: 0.3em 0 0.3em 0.5em;
+	border: 1px solid lightgray;
 }
 /* mv: preformatted text (20200927) */
 
