@@ -1091,10 +1091,11 @@ Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" ke
 Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
-                              rdfs:range          nen2660:QualityValue .
-    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
-                              rdfs:range          nen2660:QuantityValue .
+# niet nodig, af te leiden uit range bij objectproperty
+#    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
+#                              rdfs:range          nen2660:QualityValue .
+#    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
+#                              rdfs:range          nen2660:QuantityValue .
     gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
     gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
                               rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
@@ -1119,10 +1120,12 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                                 owl:onProperty    rdf:hasValue ;
                                 owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                               ] .
-    gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
+#    gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
+    gwsw:begindatum           rdf:type            owl:ObjectProperty ;     
                               rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
                               rdfs:range          gwsw:Begindatum .             # 1 range (OWA: tenminste 1) 
-    gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
+#    gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
+    gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
                               rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
                               rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
 </pre></div>
