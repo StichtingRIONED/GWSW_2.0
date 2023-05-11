@@ -1027,7 +1027,7 @@ De letter geeft het soort kwaliteitseis aan:
 
 ### Kenmerken: simpel versus complex
 
-<span class="mark">Dit hoofdstuk espreken met Michel</span>
+<span class="mark">Dit hoofdstuk bespreken met Michel</span>
 
 De NEN2660 specificeert diverse modelleerpatronen - zowel eenvoudig als complex - voor attributen en relaties. Met de complexe modelleerpatronen worden samengestelde kwanteiten en metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve of kwantitatieve attribuut "geobjectiviceerd".
 
@@ -1096,7 +1096,14 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
     gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
                               rdfs:range          nen2660:QuantityValue .
     gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
-    gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue .
+    gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
+                              rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
+                              rdfs:subClassOf
+                              [
+                                rdf:type          owl:Restriction ;
+                                owl:onProperty    rdf:hasValue ;
+                                owl:allValuesFrom xsd:date ;
+                              ] .
     gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
     gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?<span> (alternatief is rdfs:Container, skos:Collection)
                               rdfs:subClassOf
@@ -1105,11 +1112,12 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                                 owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
                               ] .
     gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:QualityValue ;        # Het object, met waarde en metakenmerken
-                              rdfs:subClassOf    
+                              rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
+                              rdfs:subClassOf                                   # restricties op object-niveau
                               [ 
                                 rdf:type          owl:Restriction;
                                 owl:onProperty    rdf:hasValue ;
-                                owl:allValuesFrom gwsw:MateriaalLeidingColl.
+                                owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                               ] .
     gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
                               rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
