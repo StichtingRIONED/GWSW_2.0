@@ -3,14 +3,16 @@
 <!-- gebruik voor lokaal editen -->
 <script src="./builds/respec-rioned.js"></script>
 
-**Een beschrijving van de GWSW Ontologie op basis van de [NTA 8035:2020](https://www.nen.nl/NEN-Shop/Norm/NTA-80352020-nl.htm) (versie april 2020)**
+**Een beschrijving van de GWSW Ontologie op basis van de [NEN 2660-2:2022 nl](https://www.nen.nl/nen-2660-2-2022-nl-291667)**
 
-<span style="font-size: 1.5em">Dit document wordt herschreven op de NEN 2660, de inhoud is daarop grotendeels nog niet aangepast.</span>
+Definieer expliciet kenmerk-property (range = verwijzen naar : gwsw:AspectProperty rdsf:subPropertyOf owl:ObjectProperty 
+
+
 
 Versie historie
 <div style="font-size: 0.90em">
 
-20221220: Eerste aanpassingen op vervanging NTA8035 door NEN2660  
+20221220: Eerste aanpassingen op vervanging NTA 8035 door NEN2660  
 20221220: Algemene update, hou synchroon met figerende GWSW Ontololgie-document  
 20221202: Overzicht verschillen met IMBOR-LD toegevoegd  
 20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]  
@@ -34,7 +36,7 @@ Versie historie
 
 Het W3C definieert standaarden voor het Semantisch Web met als basis de triple-vorm: de Subject-Predicate-Object constructie. Het basisprotocol dat hieraan ten grondslag ligt is de linked data taal RDF.
 
-Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020 (verder genoemd NTA 8035). <span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NTA 8035 voor de discipline Stedelijk Water.
+Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020, opgevolgd door de NEN 2660 deel 1 en 2.<span class="mark">Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, functioneel zal de uitwisseling van de GWSW linked data gegevens niet veel gaan wijzigen</span> GWSW versie 2.0 beschrijft de RDF-implementatie op de NEN 2660-2 (verder genoemd NEN2660) voor de discipline Stedelijk Water.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van RDF/RDFS/OWL 2/SHACL en het uitwisselformaat Turtle.
 
@@ -51,10 +53,10 @@ RDF staat voor Resource Description Framework, de basisdefinitie van modellen op
 Deze afkortingen hanteren we in de OWL definities. De afkorting CE wordt gebruikt voor Class Expressions (in Description Logics “complex concepts”). CE’s worden ondermeer gevormd door Classes te binden aan Object Property Expressions (OPE). Data Property Expressions (DPE) beschrijven restricties op de waardetypes.
 
 **Concept**  
-De mentale voorstelling van iets uit de werkelijkheid (NTA 8035).
+De mentale voorstelling van iets uit de werkelijkheid (NEN 2660-1).
 
 **Individu**  
-Een instantie van een concept, iets (potentieel) aanwijsbaars uit de werkelijkheid (NTA 8035). Zoals individu “0980” in werkelijkheid de betonnen constructie van de klasse/concept “rioolput” is.
+Een individueel concept (NEN 2660-1), iets (potentieel) aanwijsbaars uit de werkelijkheid. Zoals individu “0980” in werkelijkheid de betonnen constructie van de klasse/concept “rioolput” is.
 
 **Klasse, subtype, supertype**  
 Concepten die hiërarchisch zijn onderverdeeld in groepen noemen we klassen, het zijn de bouwstenen van de soortenboom. Zo'n soortenboom wordt ook wel taxonomie genoemd. In de GWSW-hiërarchie gebruiken we de termen Supertype - Concept - Subtype. Een subtype is de "specialisatie" van de klasse, het supertype is de "generalisatie" van de klasse.
@@ -63,7 +65,7 @@ Concepten die hiërarchisch zijn onderverdeeld in groepen noemen we klassen, het
 Voor de relatie (tussen subject en object) zijn meerdere namen gebruikelijk (“predicate”, “property”). Conform de NEN 2660-2 hanteren we de term "attribuut" voor kenmerken en annotaties, en voor de overigen de term "relatie". Voor de verzamelnaam gebruiken we "property"
 
 **Ontologie**  
-Een samenhangende gegevensstructuur bestaande uit concepten, hun attributen en onderlinge relaties, instanties van die concepten en waardetypen (verkort vanuit de NTA 8035).
+Een samenhangende gegevensstructuur bestaande uit concepten, hun attributen en onderlinge relaties, instanties van die concepten en waardetypen.
 
 **Model, Dataset**  
 Binnen de GWSW ontologie beschrijft het datamodel (model) de concepten en hun relaties, de dataset bevat de “individuen”, bijvoorbeeld een fysiek stedelijk water systeem. Voor het model wordt ook wel de term TBox gebruikt: “terminological components”. Voor de dataset wordt ook de term ABox gebruikt: “assertion components”.
@@ -80,7 +82,7 @@ De belangrijkste "top level" concepten (supertypes) zijn:
 -   Fysiek object
 -   Activiteit
 
-Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de NTA 8035 vormen ze het ontwerpkader, de ruggengraat van het GWSW. De GWSW ontologie onderscheidt zich door diepgang in semantiek en reikwijdte in de toepassing (van systeem tot proces). De soortenboom van het GWSW bevat op dit moment (versie 1.5) circa 1500 klassen.
+Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de NEN2660 vormen ze het ontwerpkader, de ruggengraat van het GWSW. De GWSW ontologie onderscheidt zich door diepgang in semantiek en reikwijdte in de toepassing (van systeem tot proces). De soortenboom van het GWSW bevat op dit moment (versie 1.5) circa 1500 klassen.
 
 ## Drie bestandsvormen
 
@@ -117,7 +119,7 @@ Uitgangspunten bij de bouw van de GWSW ontologie:
 * Bij de indeling van soorten, de vaststelling van de taxonomie, wordt de onderscheidende definitie zo expliciet mogelijk beschreven.
 *  Validaties en specificaties voor data-verificatie beschrijven we in SHACL.
 *  De SHACL shapes kunnen in meerdere vormen voorkomen en staan naast de GWSW ontologie. De shapes worden gebaseerd op de vereiste datakwaliteit per proces. De zogenaamde conformiteitsklassen.
-*  De ontologie is volledig gebaseerd op de NTA 8035, uitgave voorjaar 2020. Het GWSW gebruikt ook de NTA-methode voor het beschrijven van attributen. Die is geïnspireerd op de Ontology for Property Management (OPM), zie https://w3c-lbd-cg.github.io/opm .
+*  De ontologie is volledig gebaseerd op de NEN2660. Het GWSW gebruikt ook de NEN-methode voor het beschrijven van attributen. Die is geïnspireerd op de Ontology for Property Management (OPM), zie https://w3c-lbd-cg.github.io/opm .
 *  De modellering wordt getest met Protégé 5.5.0, in combinatie met de HermiT- en Pellet-reasoners en SPARQL- en SHACL-plugins.
 
 Het laatste hoofdstuk bevat voorbeelden waarbij deze uitgangspunten worden toegepast.
@@ -132,7 +134,7 @@ De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 <tr><td>OWL </td><td>Web Ontology Language (versie 2), voegt mogelijkheden toe om klassen, properties en datatypes door middel van restricties te definiëren</td></tr>
 <tr><td>SHACL </td><td>Shapes Constraint Language, een taal waarmee restricties op RDF graphs beschreven worden</td></tr>
 <tr><td>SKOS </td><td>Simple Knowledge Organization System. Gericht op het uitdrukken van kennisorganisatie systemen (KOS) zoals vocabulaires, woordenboeken en thesauri.
-<tr><td>NTA 8035 </td><td>De door NEN gepubliceerde Nederlands Technische Afspraak voor Semantische gegevensmodellering in de gebouwde omgeving. Gebaseerd op RDF, RDFS, SKOS, OWL en SHACL. Het Conceptuele Meta Model van de NTA 8035 is in OWL geïmplementeerd onder de naam "basissemantics-owl".</td></tr>
+<tr><td>NEN2660 </td><td>De door NEN gepubliceerde Regels voor informatiemodellering van de gebouwde omgeving - Deel 2: Praktische configuratie, extensie en implementatie van NEN 2660-1. Gebaseerd op RDF, RDFS, SKOS, OWL en SHACL.</td></tr>
 </table>
 
 ### Gebruikte namespaces 
@@ -397,6 +399,12 @@ Exclusief **GWSW**:
 
 Exclusief **IMBOR**:
 * Enumeratiewaarden staan in een apart datamodel
+* Specificatie qudt op dataset-niveau ??
+* Geen complexe kanmerken, kenmerken zijn properties, geen objecten ??
+
+Exclusief **GWSW**:
+* Specificatie qudt op model-niveau
+* Complexe kenmerken
 
 ## Relatiemodel Harmonisator
 
@@ -417,7 +425,7 @@ R-model en GWSW 2.0
 <tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
 <tr><td>R2U - kenmerkcluster </td><td>(was gwsw:hasAspect/gwsw:hasAspect)</td></tr>
 <tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
-<tr><td>R4 - samenstelling</td><td>nen2660::hasPart (cardinaliteit n,n)</td></tr>
+<tr><td>R4 - samenstelling</td><td>nen2660:hasPart (cardinaliteit n,n)</td></tr>
 <tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
 <tr><td>R4G - groep</td><td></td></tr>
 <tr><td>R5 - overerving</td><td>rdfs:subClassOf</td></tr>
@@ -455,31 +463,29 @@ Tabel: Top Level-concepten
 <tr>
 <td>nen2660:Activity</td>
 <td>gwsw:Activiteit</td>
-<td>NTA 8035: Iets dat plaatsvindt of zou kunnen plaatsvinden in een concrete dan wel virtuele ruimte resp. tijd. Een activiteit transformeert fysieke objecten en/of informatie objecten en wordt uitgevoerd door een fysiek object. Informatie objecten kunnen als input resp. sturing dienen voor het uitvoeren van een activiteit.</td>
+<td><p>NEN 2660-1: Een entiteit die plaatsvindt of kan plaatsvinden in een concrete ruimte-tijd. Een activiteit transformeert objecten en wordt uitgevoerd door een object.</p>
+<p>Informatie objecten kunnen als input resp. sturing dienen voor het uitvoeren van een activiteit.</p></td>
 </tr>
 <tr>
 <td>nen2660:PhysicalObject</td>
 <td><p>gwsw:FysiekObject</p>
 <p>gwsw:Levensvorm</p>
 <p>gwsw:Ruimte</p></td>
-<td><p>NTA 8035: Iets dat bestaat of zou kunnen bestaan in ruimte en tijd, een manifestatie en een afbakening van materie en/of energie vormt en waarneembaar is door de zintuigen. Een fysiek object voert activiteiten uit, en wordt ook getransformeerd door activiteiten. (…) Ook een (levend) organisme is een FysiekObject, waarmee ook een mens een FysiekObject is maar ook een organisatie van mensen is een FysiekObject.</p>
+<td><p>NEN 2660-1: Object dat bestaat of kan bestaan binnen de fysieke 4D ruimte-tijd. Een fysiek object vormt een manifestatie en een afbakening van materie en/of energie, en is (in)direct waarneembaar door de zintuigen.</p> 
+<p>Een fysiek object voert activiteiten uit, en wordt ook getransformeerd door activiteiten. (…) Ook een (levend) organisme is een FysiekObject, waarmee ook een mens een FysiekObject is maar ook een organisatie van mensen is een FysiekObject.</p>
 <p>Ook gsws:Ruimte is een FysiekObject. nen2660:SpatialRegion is een topologisch / representatie-element en daardoor geen logisch supertype voor gwsw:Ruimte.</p></td>
 </tr>
 <tr>
 <td>nen2660:InformationObject</td>
 <td>gwsw:Informatiedrager</td>
-<td>NTA 8035: Een op zichzelf staand geheel van gegevens met een eigen identiteit.</td>
+<td>NEN 2660-1: Een object dat een beschrijving vormt van een ding in de werkelijkheid.</td>
 </tr>
 <tr>
 <td>gwsw:TopologischElement</td>
 <td>gwsw:TopologischElement</td>
 <td>Netwerkbeschrijving van knooppunt (vertex) of verbinding (edge en vertices). <span class="mark">(link met nen2660:SpatialRegion?)</span></td>
 </tr>
-<tr>
-<td>nen2660:QuantityValue</td>
-<td>gwsw:Kenmerk</td>
-<td>[Gellish] Is an individual object that is a phenomenon that is possessed by a totality and cannot exist without the existence of its possessor. It is an intrinsic, non-separable facet of its possessor</td>
-</tr>
+<tr><td><p>nen2660:QuantityValue</p><p>nen2660:QualityValue</p></td><td>gwsw:Kenmerk</td><td>[Gellish] Is an individual object that is a phenomenon that is possessed by a totality and cannot exist without the existence of its possessor. It is an intrinsic, non-separable facet of its possessor</td></tr>
 <tr>
 <td>nen2660:EnumerationType</td>
 <td>gwsw:VerzamelingSoorten</td>
@@ -499,7 +505,7 @@ Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS e
 
 <div class="example"><div class="example-title marker">Model: de put-familie</div><pre>
     gwsw:Put        rdf:type                   owl:Class ;                   
-                    rdfs:subClassOf            nen2660:PhysicalObject ; # het supertype uit NTA 8035
+                    rdfs:subClassOf            nen2660:PhysicalObject ; # het supertype uit NEN2660
                     skos:prefLabel             "Put"@nl .
     gwsw:Rioolput   rdf:type                   owl:Class ;                   
                     rdfs:subClassOf            gwsw:Put ;
@@ -609,29 +615,13 @@ De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram
 
 <table class="simp">
 <thead>
-<tr class="header">
-<th>Predicate</th>
-<th>Oude naam (1.5)</th>
-<th>Omschrijving</th>
-</tr>
+<tr class="header"><th>Predicate</th><th>Oude naam (1.5)</th><th>Omschrijving</th></tr>
 </thead>
 <tbody>
-<tr>
-<td colspan="3">&nbsp</td>
-</tr>
-<tr>
-<td colspan="3"><strong>Annotatie-attributen</strong></td>
-</tr>
-<tr>
-<td>owl:versionInfo</td>
-<td>owl:versionInfo</td>
-<td><em>Subject (ontologie)</em> <span class="blue">heeft versieomschrijving</span> <em>Literal</em></td>
-</tr>
-<tr>
-<td>skos:prefLabel</td>
-<td>rdfs:label</td>
-<td><em>Subject</em> <span class="blue">heeft als voorkeursnaam</span> <em>Literal</em> (één per concept)</td>
-</tr>
+<tr><td colspan="3">&nbsp</td></tr>
+<tr><td colspan="3"><strong>Annotatie-attributen</strong></td></tr>
+<tr><td>owl:versionInfo </td><td>owl:versionInfo</td><td><em>Subject (ontologie)</em> <span class="blue">heeft versieomschrijving</span> <em>Literal</em></td></tr>
+<tr><td>skos:prefLabel</td><td>rdfs:label</td><td><em>Subject</em> <span class="blue">heeft als voorkeursnaam</span> <em>Literal</em> (één per concept)</td></tr>
 <tr>
 <td>skos:altLabel</td>
 <td>skos:altLabel</td>
@@ -731,11 +721,7 @@ De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram
 <td></td>
 <td><em>Subject</em> <span class="blue">heeft als mechanisme</span> <em>Kwalitatief aspect.</em> Het object is een onderscheidend kenmerk ("waarmee")</td>
 </tr>
-<tr>
-<td>gwsw:"kwaliteit"</td>
-<td>gwsw:hasReference</td>
-<td><em>Subject</em> <span class="blue">heeft als "kwaliteit"</span> <em>Kwalitatief aspect.</em> Het object is een kenmerk, een element uit een enumeratie.</td>
-</tr>
+<tr><td>gwsw:"kwaliteit"</td><td>gwsw:hasReference</td><td><em>Subject</em> <span class="blue">heeft als "kwaliteit"</span> <em>Kwalitatief aspect.</em> Het object is een kenmerk, een element uit een enumeratie.</td></tr>
 <tr>
 <td>nen2660:quantityKind</td>
 <td></td>
@@ -746,20 +732,11 @@ De toegepaste **attributen** (annotatie, kwaliteit en kwantiteit) in een diagram
 <td>gwsw:hasUnit</td>
 <td><em>Subject</em> <span class="blue">heeft als eenheid</span> <em>qudt:Unit</em></td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tr><td></td></tr>
 <tr>
 <td colspan="3"><strong>Kwantitatieve attibuten</strong></td>
 </tr>
-<tr>
-<td>gwsw:"kwantiteit"</td>
-<td><p>gwsw:hasAspect</p>
-<p>(isAspectOf)</p></td>
-<td><em>Subject</em> <span class="blue">heeft als "kwantiteit"</span> <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type nen2660:QuantityValue</td>
-</tr>
+<tr><td>gwsw:"kwantiteit"</td><td><p>gwsw:hasAspect</p><p>(isAspectOf)</p></td><td><em>Subject</em> <span class="blue">heeft als "kwantiteit"</span> <em>Kwantitatief aspect.</em> Het object is een kenmerk, een individu van het type nen2660:QuantityValue</td></tr>
 </tbody>
 </table>
 
@@ -814,8 +791,8 @@ De toepassing van **relaties** is in de GWSW-Ontologie aan regels gebonden door 
 <p>(isPartOf)</p></td>
 <td><p>gwsw:hasPart</p>
 <p>(isPartOf)</p></td>
-<td><p><span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NTA heeft niet de inverse property</p>
-<p>Opmerking: de NTA 8035 hanteert nen2660:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft nen2660:hasPart voor het GWSW algemeen toepasbaar.</p></td>
+<td><p><span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NEN heeft niet de inverse property</p>
+<p>Opmerking: de NEN2660 hanteert nen2660:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft nen2660:hasPart voor het GWSW algemeen toepasbaar.</p></td>
 </tr>
 <tr>
 <td colspan="3"><strong>Associatie</strong></td>
@@ -1116,7 +1093,7 @@ De <span class="blue">breedte</span> van een <span class="blue">put</span> is ee
 
 Een URI van een GWSW-klasse bestaat dus uit een ontologie-locatie, aangevuld met de conceptnaam (in CamelCase). In de voorbeelden wordt de ontologie-locatie aangeduid met de prefix gwsw: .
 
-We volgen de NTA 8035, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NTA 8035 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
+We volgen de NEN2660, de voorkeursterm van een GWSW concept wordt aangeduid met de property skos:prefLabel. Voor vertalingen en synoniemen van de voorkeursterm gebruiken we de property skos:altLabel. (Over de te gebruiken property voor vertalingen doet de NEN2660 overigens geen uitspraak, wel geeft de NTA aan dat skos:prefLabel precies één keer wordt gebruikt)
 
 <div class="example"><div class="example-title marker">Model: Voorbeeld URI en namen</div><pre>
     @prefix gwsw:                         &lt;https://data.gwsw.nl/2.0/totaal/&gt; . 
@@ -1157,7 +1134,7 @@ Vanwege het ontbreken van een uniforme identificatie gebruiken we in dit documen
 
 ### Waarden, grootheden en eenheden
 
-Voor de specificatie van waarden bij de kwantitatieve aspecten (in het GWSW alleen rdf:value) hanteert de NTA 8035 de QUDT-ontologie versie 2.1 voor de definitie van grootheden en eenheden. QUDT is volledig afgestemd met ISO/IEC 80000 (systematiek, namen, definities, symbolen, enz.).
+Voor de specificatie van waarden bij de kwantitatieve aspecten (in het GWSW alleen rdf:value) hanteert de NEN2660 de QUDT-ontologie versie 2.1 voor de definitie van grootheden en eenheden. QUDT is volledig afgestemd met ISO/IEC 80000 (systematiek, namen, definities, symbolen, enz.).
 
 Grootheden: http://qudt.org/vocab/quantitykind , wordt naar verwezen door de property <span class="blue">nen2660:quantityKind</span>.
 
@@ -1398,36 +1375,114 @@ De letter geeft het soort kwaliteitseis aan:
 
 ## Details kwalitatieve en kwantitatieve attributen
 
-De NTA 8035 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NTA 8035 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
+De NEN2660 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NEN2660 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
 
-Het GWSW hanteerde in voorgaande versies ook het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NTA 8035.
+Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NEN2660.
 
-In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
+In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
 
-Voorbeeld met de aspecten gwsw:begindatum en gwsw:leidingMateriaal:
+Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW
+
+SIMPLE
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:Leiding             rdfs:subClassOf  nen2660:PhysicalObject .    
-    gwsw:begindatum          rdf:type         owl:ObjectProperty ;     
-                             rdfs:domain      nen2660:PhysicalObject ;     # minimaal 1 domein          
-                             rdfs:range       nen2660:QuantityValue .      # 1 range (OWA: tenminste 1) 
-    gwsw:leidingMateriaal    rdf:type         owl:ObjectProperty ;     
-                             rdfs:domain      gwsw:Leiding ;          # minimaal 1 domein          
-                             rdfs:range       gwsw:LeidingMateriaal .
-    gwsw:Beton               rdf:type         gwsw:LeidingMateriaal . # wordt individu             
+    gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+    gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
+    gwsw:begindatum         rdf:type              owl:DatatypeProperty ;     
+                            rdfs:domain           nen2660:PhysicalObject ;     # minimaal 1 domein          
+                            rdfs:range            xsd:date .      # 1 range (OWA: tenminste 1) 
+    gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
+                            rdfs:domain           gwsw:Leiding ;          # minimaal 1 domein          
+                            rdfs:range            gwsw:MateriaalLeiding .
+    gwsw:Beton              rdf:type              gwsw:MateriaalLeiding . # wordt individu             
+</pre></div>
+
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    ex:Leiding_1            rdf:type              gwsw:Leiding ;
+                            gwsw:begindatum       "2012-05-01"^^xsd:date ;          
+                            gwsw:materiaalLeiding gwsw:Beton .
+</pre></div>
+
+COMPLEX
+
+De NEN2660 specificeert een modelleerpatroon voor "complexe" kenmerken:
+
+<div class="example"><div class="example-title marker">Model:</div><pre>
+    gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+    gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
+    gwsw:Begindatum         rdfs:subClassOf       nen2660:QuantityValue .
+    gwsw:begindatum         rdf:type              owl:ObjectProperty ;     
+                            rdfs:domain           nen2660:PhysicalObject ;      # minimaal 1 domein          
+                            rdfs:range            gwsw:Begindatum .             # 1 range (OWA: tenminste 1) 
+    gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
+                            rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range            gwsw:MateriaalLeiding .       # 1 range (OWA: tenminste 1)
+    gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # wordt individu             
+</pre></div>
+
+Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de property 
+
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    ex:Leiding_1            rdf:type              gwsw:Leiding ;
+                            gwsw:begindatum       
+                            [ 
+                              rdf:hasValue "2012-05-01"^^xsd:date; 
+                            ] ; 
+                            gwsw:materiaalLeiding gwsw:Beton .
+</pre></div>
+
+COMPLEX - NEN 2660 + GWSW
+
+Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
+
+Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
+
+<div class="example"><div class="example-title marker">Model:</div><pre>
+    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # extra property met gespecificeerde range (hou de quality-props herkenbaar)
+                              rdfs:range          nen2660:QualityValue .
+    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # extra property met gespecificeerde range (hou de quantity-props herkenbaar)
+                              rdfs:range          nen2660:QuantityValue .
+    gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
+    gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue .
+    gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
+    gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # bestaat deze?? (alternatief is rdfs:Container, skos:Collection)
+                              rdfs:subClassOf
+                              [
+                                rdf:type          owl:Class ;
+                                owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
+                              ] .
+    gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:QualityValue ;        # Het object, met waarde en metakenmerken
+                              rdfs:subClassOf    
+                              [ 
+                                rdf:type          owl:Restriction;
+                                owl:onProperty    rdf:hasValue ;
+                                owl:allValuesFrom gwsw:MateriaalLeidingColl.
+                              ] .
+    gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
+                              rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
+                              rdfs:range          gwsw:Begindatum .             # 1 range (OWA: tenminste 1) 
+    gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
+                              rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                              rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
     ex:Leiding_1  rdf:type              gwsw:Leiding ;
-                  gwsw:begindatum                          # via blank node            
+                  gwsw:begindatum                                               # impliciet gwsw:Begindatum            
                   [                                   
-                    rdf:type            nen2660:QuantityValue ; # niet nodig, wordt impliciet getypeerd
+                    rdf:type            gwsw:Begindatum ;                       # niet nodig, wordt impliciet getypeerd
                     rdf:value           "2012-05-01"^^xsd:date; 
                   ] ;     
-                  gwsw:leidingMateriaal gwsw:Beton .  
+                  gwsw:materiaalLeiding                                         # impliciet gwsw:MateriaalLeiding, heeft meta-data
+                  [ 
+                    gwsw:inwinning      [                                       # impliciet gwsw:Inwinning
+                      gwsw:datumInwinning [                                     # impliciet gwsw:DatumInwinning
+                        rdf:hasValue "2023-05-11"^^xsd:date ;
+                      ]
+                    ] ;
+                    rdf:value           gwsw:Beton ;
+                  ] .
 </pre></div>
-
-Individuals van kenmerken zoals vorm en materiaal worden direct gekoppeld via de property gwsw:leidingMateriaal. Vanaf GWSW 2.0 is voor elke koppeling met een individu een exclusief predicate gemodelleerd.
 
 **<span class="smallcaps">Eenheden op model-niveau</span>**
 
@@ -1437,10 +1492,10 @@ De eenheden bij waarden definiëren we vooraf - op model-niveau - dat kan eenvou
     gwsw:diameterLeiding     rdf:type                   owl:ObjectProperty ;
                              rdfs:domain                nen2660:PhysicalObject ; 
                              rdfs:range                 nen2660:QuantityValue ;  
-                             nen2660:unit                    unit:MiLiM .        
+                             nen2660:unit               unit:MiLiM .        
 </pre></div>
 
-Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven eenheden op. Dat maakt toepassingen op de data veel efficienter.
+Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven eenheden op. Dat maakt toepassingen op de data efficienter.
 
 <div class="example-dataset"><div class="example-title marker">Dataset: niet correct</div><pre>
     ex:Leiding_1             gwsw:diameterLeiding                           
@@ -1523,7 +1578,7 @@ De eisen aan nauwkeurigheid drukken we uit als restrictie op de kenmerk-waarde:
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
 gwsw:hasAspect     rdf:type               owl:ObjectProperty .
-gwsw:hasValue      rdf:type               owl:DatatypeProperty ;
+# gwsw:hasValue      rdf:type               owl:DatatypeProperty ;
                    rdf:type               owl:FunctionalProperty . # waarde-relatie altijd max 1
 gwsw:HoogtePut     rdfs:subClassOf        gwsw:Kenmerk ;
   rdfs:label                              “Put hoogte” ;
@@ -1579,11 +1634,11 @@ Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
 
 ### Kwalificatie standaardwaardes
 
-Met de komst van de NTA 8035 definiëren we in het model kwalificerende aspecten als properties met een specifieke kwaliteit (als bereik).
+Met de komst van de NEN2660 definiëren we in het model kwalificerende aspecten als properties met een specifieke kwaliteit (als bereik).
 
 ### Beperking en afleiding
 
-Conform de NTA 8035 maakt het GWSW onderscheid in definiërende en specificerende beperkingen op attributen en datatypes.
+Conform de NEN2660 maakt het GWSW onderscheid in definiërende en specificerende beperkingen op attributen en datatypes.
 
 **Definiërende beperking, Afleiding**
 
@@ -1762,7 +1817,7 @@ Het individu ex:Rioolput_1 is onderwerp van inspectie ex:InspecterenPut_1:
                              gwsw:hasInput              ex:Rioolput_1 .
 </pre></div>
 
-### Relaties topologie (verbindingen)
+### Relaties topologie (netwerk)
 
 *Netwerkbeschrijving* 
 
@@ -1811,7 +1866,7 @@ De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie ka
 
 ### Relaties compositie (deel-geheel)
 
-De NTA 8035 definieert <span class="blue">nen2660:hasPart</span> van het type owl:ObjectProperty, de relatie geldt tussen Fysiek Objecten (inclusief gwsw:Ruimte) onderling en Activiteiten onderling.
+De NEN2660 definieert <span class="blue">nen2660:hasPart</span> van het type owl:ObjectProperty, de relatie geldt tussen Fysiek Objecten (inclusief gwsw:Ruimte) onderling en Activiteiten onderling.
 
 <div class="example"><div class="example-title marker">Model: Stuwput en zijn onderdelen</div><pre>
     gwsw:Stuwput             rdf:type                   owl:Class ;
@@ -1850,7 +1905,7 @@ De NTA 8035 definieert <span class="blue">nen2660:hasPart</span> van het type ow
 
 ### Beperking en afleiding
 
-Ook voor relaties maken we conform de NTA 8035 onderscheid in definiërende en specificerende beperkingen. Relaties die een deel-geheel, een proces of een topologie beschrijven zijn vaak definiërend voor de classificatie. Zo geldt bijvoorbeeld:
+Ook voor relaties maken we conform de NEN2660 onderscheid in definiërende en specificerende beperkingen. Relaties die een deel-geheel, een proces of een topologie beschrijven zijn vaak definiërend voor de classificatie. Zo geldt bijvoorbeeld:
 
 *   de activiteit Putinspectie heeft als invoer minimaal één Rioolput (proces)
 *   het concept Inpectieput moet minimaal één Deksel hebben (deel-geheel)
