@@ -349,6 +349,8 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 ## IMBOR
 
+De GWSW Ontologie wordt met de introductie van versie 2.0 onderdeel van IMBOR.
+
 Door CROW is het - oorspronkelijk in MS Access uitgewerkte - IMBOR datamodel omgezet naar een linked-data vorm, gebaseerd op de NEN 2660-2. Dat was een belangrijke aanleiding om ook het GWSW 2.0 af te stemmen op de NEN 2660.
 
 Relevante links naar CROW publicaties over het IMBOR:
@@ -399,8 +401,8 @@ Exclusief **GWSW**:
 
 Exclusief **IMBOR**:
 * Enumeratiewaarden staan in een apart datamodel
-* Specificatie eenheden (nen2660:unit) op dataset-niveau ??
-* Geen complexe kanmerken. Kenmerken zijn properties, geen objecten ??
+* <span class="mark">Specificatie eenheden (nen2660:unit) op dataset-niveau</span>
+* <span class="mark">Geen complexe kanmerken. Kenmerken zijn properties, geen objecten</span>
 
 Exclusief **GWSW**:
 * Specificatie eenheden (nen2660:unit) op model-niveau
@@ -422,8 +424,8 @@ R-model en GWSW 2.0
 <tr><th>R-model</th><th>GWSW</th></tr>
 <tr><td>R0 - is van type</td><td>rdf:type</td></tr>
 <tr><td>R1 - verwant</td><td></td></tr>
-<tr><td>R2 - kenmerk</td><td>(was gwsw:hasAspect)</td></tr>
-<tr><td>R2U - kenmerkcluster </td><td>(was gwsw:hasAspect/gwsw:hasAspect)</td></tr>
+<tr><td>R2 - kenmerk</td><td>nen2660:QualityValue, nen2660:QuantityValue</td></tr>
+<tr><td>R2U - kenmerkcluster </td><td>kenmerk/kenmerk (kenmerk van kenmerk)</td></tr>
 <tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
 <tr><td>R4 - samenstelling</td><td>nen2660:hasPart (cardinaliteit n,n)</td></tr>
 <tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
@@ -439,7 +441,7 @@ R-model en GWSW 2.0
 
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
-Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde??
+<span class="mark">Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde</span>
 
 # Details van de GWSW semantiek
 
@@ -1026,6 +1028,8 @@ De letter geeft het soort kwaliteitseis aan:
 
 ## Details kwalitatieve en kwantitatieve attributen
 
+### Kenmerken: simpel versus complex
+
 De NEN2660 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NEN2660 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
 
 Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NEN2660.
@@ -1034,7 +1038,7 @@ In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse ho
 
 Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW
 
-SIMPLE
+**SIMPEL**
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
     gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
@@ -1054,7 +1058,7 @@ SIMPLE
                             gwsw:materiaalLeiding gwsw:Beton .
 </pre></div>
 
-COMPLEX
+**COMPLEX**
 
 De NEN2660 specificeert een modelleerpatroon voor "complexe" kenmerken:
 
@@ -1082,21 +1086,21 @@ Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de 
                             gwsw:materiaalLeiding gwsw:Beton .
 </pre></div>
 
-COMPLEX - NEN 2660 + GWSW
+**COMPLEX - NEN 2660 + GWSW**
 
 Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
 
 Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # extra property met gespecificeerde range (hou de quality-props herkenbaar)
+    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
                               rdfs:range          nen2660:QualityValue .
-    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # extra property met gespecificeerde range (hou de quantity-props herkenbaar)
+    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
                               rdfs:range          nen2660:QuantityValue .
     gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
     gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue .
     gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
-    gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # bestaat deze?? (alternatief is rdfs:Container, skos:Collection)
+    gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?<span> (alternatief is rdfs:Container, skos:Collection)
                               rdfs:subClassOf
                               [
                                 rdf:type          owl:Class ;
@@ -1446,7 +1450,7 @@ Het GWSW definieert relaties voor de samenstelling (meronomie) en de verbindinge
 > hasPart  
 > hasInput  
 > hasOutput  
-> hasConnection  
+> hasConnection  <span class="mark">optioneel<span>nen2660:isConnectedTo geldt voor Fysieke Objecten, is geen topologisch element</span>
 
 ### Relaties proces (activiteiten)
 
