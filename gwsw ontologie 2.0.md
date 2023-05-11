@@ -1027,13 +1027,12 @@ De letter geeft het soort kwaliteitseis aan:
 
 ### Kenmerken: simpel versus complex
 
-De NEN2660 hanteert voor alle aspecten predicates van het type owl:ObjectProperty. Aan bijvoorbeeld kwantitatieve attributen worden metagegevens zoals de eenheid gekoppeld. De NEN2660 geeft de voorkeur aan impliciete typering van de attribuut-waarde-klasse nen2660:QuantityValue.
+De NEN2660 specificeert diverse modelleerpatronen - zowel eenvoudig als complex - voor attributen en relaties. Met de complexe modelleerpatronen worden samengestelde kwanteiten en metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve of kwantitatieve attribuut "geobjectiviceerd".
 
-Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NEN2660.
+Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
 
-In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
-
-Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW
+Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW. 
+Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
 
 **SIMPEL**
 
