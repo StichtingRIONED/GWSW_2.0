@@ -1110,7 +1110,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
 <div class="example"><div class="example-title marker">Model:</div><pre>
   gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
   gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
-                            rdfs:label          "Begindatum" ;                # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
+                            rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
                             rdfs:subClassOf
                             [
                               rdf:type          owl:Restriction ;
@@ -1118,7 +1118,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:allValuesFrom xsd:date ;
                             ] .
   gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
-  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # bestaat deze? (alternatief is rdfs:Container, skos:Collection)
+  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?</span> (alternatief is rdfs:Container, skos:Collection)
                             owl:equivalentClass
                             [
                               rdf:type          owl:Class ;
@@ -1131,7 +1131,10 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               rdf:type          owl:Restriction;
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom gwsw:MateriaalLeidingColl ;
-                            ] . # De GWSW 2.0 attribuut-definitie, dit deel wijkt structureel af van oudere GWSW-versies:
+                            ] . 
+</pre></div>
+
+<div class="example"><div class="example-title marker">Attribuut-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
 
   gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-IRI is consequent de range-class-naam, startend met lower-case
                             rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
