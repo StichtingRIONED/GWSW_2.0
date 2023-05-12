@@ -344,6 +344,8 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 # Modelleerprincipes - Aanpassingen vanaf versie 2.0
 
+## test
+
 * Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
 * Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
 * Kwalitatieve of kwantitatieve attributen hebben altijd de naam van de range-class met het eerste karakter in lowercase
