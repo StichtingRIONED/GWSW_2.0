@@ -1160,7 +1160,6 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-
     ex:Leiding_1  rdf:type              gwsw:Leiding ;
                   gwsw:begindatum                                                         
                   [
@@ -1178,8 +1177,8 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                       ]
                     ] ;
                   ] .
-  
 </pre></div>
+
 <div class="example-dataset"><div class="example-title marker">De "oude" GWSW (versie 1.n) attribuut-declaratie:</div><pre>
   ex:Leiding_1  rdf:type              gwsw:Leiding ;
                 gwsw:hasAspect                                                            
