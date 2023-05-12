@@ -1131,10 +1131,10 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               rdf:type          owl:Restriction;
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom gwsw:MateriaalLeidingColl ;
-                            ] .# In GWSW 2.0 wijkt dit deel (de attribuut-definitie) essentieel af van oudere GWSW-versies:
+                            ] .
+                            
+       # De GWSW 2.0 attribuut-definitie, dit deel wijkt structureel af van oudere GWSW-versies:
 
-    
-  
   gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-IRI is consequent de range-class-naam, startend met lower-case
                             rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
                             rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
@@ -1144,14 +1144,14 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
 </pre></div>
 
 <div class="example"><div class="example-title marker">De "oude" GWSW (versie 1.n) attribuut-definitie:</div><pre>
-  gwsw:Leiding              rdfs:subClassOf
+  gwsw:FysiekObject         rdfs:subClassOf
                             [
                               rdf:type                      owl:Restriction ;
                               owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
                               owl:onProperty                gwsw:hasAspect ;  # de "oude" generieke attribuut-property
                               owl:onClass                   gwsw:Begindatum .
-                            ] , 
-                            [
+                            ] . 
+  gwsw:Leiding              [
                               rdf:type                      owl:Restriction ;
                               owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
                               owl:onProperty                gwsw:hasAspect ;
