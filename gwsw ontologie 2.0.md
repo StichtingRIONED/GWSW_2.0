@@ -1033,63 +1033,6 @@ De letter geeft het soort kwaliteitseis aan:
 
 ### Kenmerken: simpel versus complex
 
-<span class="mark">Dit hoofdstuk bespreken met Michel</span>
-
-De NEN2660 specificeert diverse modelleerpatronen - zowel eenvoudig als complex - voor attributen en relaties. Met de complexe modelleerpatronen worden samengestelde kwanteiten en metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve of kwantitatieve attribuut "geobjectiviceerd".
-
-Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen.
-Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
-
-Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW. 
-Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
-
-**SIMPEL**
-
-<div class="example"><div class="example-title marker">Model:</div><pre>
-  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
-  gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
-  gwsw:begindatum         rdf:type              owl:DatatypeProperty ;     
-                          rdfs:domain           nen2660:PhysicalObject ;    # minimaal 1 domein          
-                          rdfs:range            xsd:date .                  # exact 1 range (OWA: tenminste 1) 
-  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           gwsw:Leiding ;              # minimaal 1 domein          
-                          rdfs:range            gwsw:MateriaalLeiding .     # exact 1 range 
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # wordt individu             
-</pre></div>
-
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_1            rdf:type              gwsw:Leiding ;
-                            gwsw:begindatum       "2012-05-01"^^xsd:date ;          
-                            gwsw:materiaalLeiding gwsw:Beton .
-</pre></div>
-
-**COMPLEX**
-
-De NEN2660 specificeert een modelleerpatroon voor "complexe" kenmerken:
-
-<div class="example"><div class="example-title marker">Model:</div><pre>
-  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
-  gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
-  gwsw:Begindatum         rdfs:subClassOf       nen2660:QuantityValue .
-  gwsw:begindatum         rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           nen2660:PhysicalObject ;      # minimaal 1 domein          
-                          rdfs:range            gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
-  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
-                          rdfs:range            gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # wordt individu             
-</pre></div>
-
-Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de property 
-
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-  ex:Leiding_1            rdf:type              gwsw:Leiding ;
-                          gwsw:begindatum       
-                          [ 
-                            rdf:value           "2012-05-01"^^xsd:date; 
-                          ] ; 
-                          gwsw:materiaalLeiding gwsw:Beton .
-</pre></div>
 
 **COMPLEX - NEN 2660 + GWSW**
 
