@@ -1106,7 +1106,6 @@ Niet echt nodig, af te leiden uit range bij objectproperty:
   gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
 </pre></div>
 
-
 Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
 Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
 
