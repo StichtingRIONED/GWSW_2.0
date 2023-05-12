@@ -1146,7 +1146,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                             rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
 </pre></div>
 
-<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-definitie:</strong>
+<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-definitie:</strong><pre>
   gwsw:Leiding              rdfs:subClassOf
                             [
                               rdf:type                      owl:Restriction ;
@@ -1160,7 +1160,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty                gwsw:hasAspect ;
                               owl:onClass                   gwsw:Materiaalleiding .
                             ] . 
-</div>
+</pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
 
@@ -1183,7 +1183,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                   ] .
   
 </pre></div>
-<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-declaratie:</strong>
+<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-declaratie:</strong><pre>
   ex:Leiding_1  rdf:type              gwsw:Leiding ;
                 gwsw:hasAspect                                                            
                 [                                   
@@ -1204,7 +1204,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                   ] ;
                   gwsw:hasReference   gwsw:Beton ;
                 ] .
-</div>
+</pre></div>
 
 **<span class="smallcaps">Eenheden op model-niveau</span>**
 
@@ -1335,17 +1335,14 @@ gwsw:Dt_HoogtePut  rdf:type       rdfs:Datatype ; # typering verplicht in OWL RL
 
 ### Intrinsieke kenmerken
 
-Intrinsieke kenmerken horen exclusief (per definitie) bij een klasse, ze hebben maar één domein. We gebruiken voor bijvoorbeeld de lengte van de klasse gwsw:Leiding niet de algemene property gwsw:lengte maar de gespecialiseerde property gwsw:lengteLeiding. Voor een intrinsiek kenmerk is exact één domein gespecificeerd.
+Intrinsieke kenmerken horen exclusief (per definitie) bij een klasse, ze hebben maar één domein. We gebruiken voor bijvoorbeeld de hoogte van de klasse gwsw:Put niet de algemene property gwsw:hoogte maar de gespecialiseerde property gwsw:hoogtePut. Voor een intrinsiek kenmerk is exact één domein gespecificeerd.
 
 <div class="example"><div class="example-title marker">Model: Definiërend</div><pre>
-    gwsw:hoogtePut           rdfs:comment               “Intrinsiek kenmerk” ;        
-                             rdf:type                   owl:ObjectProperty ;
+    gwsw:hoogtePut           rdf:type                   owl:ObjectProperty ;
                              rdf:type                   owl:FunctionalProperty ;      # max 1 per object          
                              rdfs:domain                gwsw:Put ;          
-                             rdfs:range                 nen2660:QuantityValue .  
+                             rdfs:range                 gwsw:HoogtePut .  
 </pre></div>
-
-Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
     ex:Object_1              gwsw:hoogtePut ;   
@@ -1353,6 +1350,8 @@ Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
                                rdf:value                "2000"^^xsd:integer ;        
                              ] .      
 </pre></div>
+
+Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
 
 ### Kwalificatie standaardwaardes
 
@@ -1405,34 +1404,6 @@ WHERE
 }
 </pre>
 
-**Verificatie attribuutwaarden**
-Verificatie van attribuutwaarden gebeurt op kenmerk-niveau via datatypes, zie hst [Nauwkeurigheid](#nauwkeurigheid). Vaak zijn die kenmerken niet intrinsiek, hetzelfde kenmerk komt bij meerdere klassen voor. Het bijbehorede datatype definieert dan vaak generieke kwaliteitseisen. Die eisen kunnen verschillen, afhankelijk van het attribuut-domein. Voor verificatie in die gevallen is SHACL de aangewezen weg. Ter illustratie: een drukleiding heeft een kleine diameter, het datatype bij het generieke kenmerk DiameterLeiding defineert veel ruimere grenzen (min=63mm, max =4000mm).
-
-Met SHACL scherpen we de verificatie aan:
-
-<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
-    gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
-                             sh:targetClass         gwsw:Drukleiding ;
-                             sh:property         
-                             [         
-                                sh:path             (gwsw:diameterLeiding rdf:value) ;
-                                sh:minInclusive     50 ;
-                                sh:maxInclusive     160 ;
-                                sh:message          "diameterLeiding: value is out of bounds" ;
-                                sh:severity         sh:Violation ;
-                             ] .         
-</pre></div>
-
-SHACL rapporteert dat de typering van ex:Leiding_2 niet consistent is
-
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_2             rdf:type              gwsw:Drukleiding ;
-                             gwsw:diameterLeiding         
-                             [          
-                                rdf:value          163 ;
-                             ] .         
-</pre></div>
-
 **Specificerende beperking**
 
 Dit type beperkingen gebruiken we voor data-verificatie. In de conformiteitsklassen is altijd volledig beschreven welke aspecten per klasse kunnen voorkomen, binnen die reeks kunnen ook aspecten verplicht zijn.
@@ -1458,9 +1429,10 @@ Bijvoorbeeld de klasse Leiding kent alleen de aspecten gwsw:begindatum en gwsw:d
                              ] .         
 </pre></div>
 
-Individuele aspecten worden soms verder beperkt. Bijvoorbeeld dient de waarde van gwsw:diameterLeiding een geheel getal (integer) te zijn tussen 50 en 4000.
+Individuele aspecten worden soms verder beperkt. Bijvoorbeeld dient de waarde van gwsw:diameterLeiding een geheel getal (integer) te zijn tussen 50 en 4000. 
+In de ontologie zijn die restricties op kenmerk-niveau via datatypes opgenomen, zie hst [Nauwkeurigheid](#nauwkeurigheid).
 
-Specificeer de beperkingen voor gwsw:leidingDiameter:
+Specificeer de generieke beperkingen voor gwsw:leidingDiameter voor een SHACL-validatie:
 
 <div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
     gwsw:diameterLeidingShape  rdf:type                sh:NodeShape ;
@@ -1487,6 +1459,33 @@ Specificeer de beperkingen voor gwsw:leidingDiameter:
                                sh:maxExclusive         4000 ;
                                sh:message              "diameterLeiding: out of bounds" ;
                                sh:severity             sh:Warning ;
+                             ] .         
+</pre></div>
+
+Vaak zijn kenmerken niet intrinsiek, hetzelfde kenmerk komt bij meerdere klassen voor. Het bijbehorede datatype definieert dan vaak generieke kwaliteitseisen. Die eisen kunnen verschillen, afhankelijk van het attribuut-domein. Voor verificatie in die gevallen is SHACL de aangewezen weg. Ter illustratie: een drukleiding heeft een kleine diameter, het datatype bij het generieke kenmerk DiameterLeiding defineert veel ruimere grenzen (min=63mm, max =4000mm).
+
+Met SHACL scherpen we de verificatie aan:
+
+<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
+    gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
+                             sh:targetClass         gwsw:Drukleiding ;
+                             sh:property         
+                             [         
+                                sh:path             (gwsw:diameterLeiding rdf:value) ;
+                                sh:minInclusive     50 ;
+                                sh:maxInclusive     160 ;
+                                sh:message          "diameterLeiding: value is out of bounds" ;
+                                sh:severity         sh:Violation ;
+                             ] .         
+</pre></div>
+
+SHACL rapporteert dat de typering van ex:Leiding_2 niet consistent is
+
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    ex:Leiding_2             rdf:type              gwsw:Drukleiding ;
+                             gwsw:diameterLeiding         
+                             [          
+                                rdf:value          163 ;
                              ] .         
 </pre></div>
 
