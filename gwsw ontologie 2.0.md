@@ -1095,16 +1095,16 @@ Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de 
 
 **COMPLEX - NEN 2660 + GWSW**
 
-<div class="box"><strong>Optie: attributen specialiseren</strong>
+<div class="example"><div class="example-title marker">Optie: attributen specialiseren</div><pre>
 Niet echt nodig, af te leiden uit range bij objectproperty:
 
-  gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
+  gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # Extra property met gespecificeerde range (hou de quality-props herkenbaar)
                             rdfs:range          nen2660:QualityValue .
-  gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
+  gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # Extra property met gespecificeerde range (hou de quantity-props herkenbaar)
                             rdfs:range          nen2660:QuantityValue .
   gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
   gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
-</div>
+</pre></div>
 
 
 Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
