@@ -1,7 +1,7 @@
 # GWSW Ontologie 2.0
 
-<!-- gebruik voor lokaal editen
-<script src="./builds/respec-rioned.js"></script> -->
+<!-- gebruik voor lokaal editen -->
+<script src="./builds/respec-rioned.js"></script>
 
 **Een beschrijving van de GWSW Ontologie op basis van de [NEN 2660-2:2022 nl](https://www.nen.nl/nen-2660-2-2022-nl-291667)**
 
@@ -157,7 +157,7 @@ Voor de concepten en relaties uit de GWSW-Ontologie hanteren we in de voorbeelde
 <tr><td>GWSW-Dataset</td><td>ex:</td><td>&lt;https://w3id.org/def/example#&gt;</td></tr>
 </table>
 
-# Modelleerprincipes
+# Modelleerprincipes - Alle GWSW versies
 
 Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkelijke opzet (gestart in 2006) van het model in Gellish-vorm. Deze principes zijn natuurlijk taalonafhankelijk, ook in de RDF-vorm blijven ze van groot belang. Veel dank gaat naar Andries van Renssen, geestelijk vader van Gellish en Matthé van Koetsveld, intensief betrokken bij de modellering in Gellish van het GWSW en zijn voorlopers.
 
@@ -191,7 +191,7 @@ Bij het ontwerp spelen deze structuren de hoofdrol, ze vormen het ontwerpkader. 
 
 <div class="box"><strong>Voorbeelden:</strong>
 <br/>Afgeleide gegevens komen niet voor in de definitie van fysieke objecten, bijvoorbeeld het kenmerk "aantal pompen". Zo'n gegeven wordt (in presentaties) afgeleid uit het aantal voorkomens van de relatie <span class="blue">gwsw:hasPart</span> tussen Gemaal en Pomp. De objecten Gemaal en Pomp worden expliciet beschreven.  
-<br/>Afgeleide gegevens zoals rekenresultaten en data-analyses komen in het GWSW wel voor in de vorm van gemodelleerde rapportages, bijvoorbeeld in GWSW Kentallen. 
+<br/>Afgeleide gegevens zoals rekenresultaten en data-analyses komen in het GWSW wel voor in de vorm van gemodelleerde rapportages, bijvoorbeeld in GWSW Kengetallen. 
 <br/>Eigenschappen van de bovengrond en ondergrond (maaiveldhoogte, grondsoort) komen niet voor als aspecten van de fysieke objecten die zich daarin bevinden. Een leiding heeft niet als kenmerk "Grondsoort", wel wordt er een relatie <span class="blue">gwsw:isPartOf</span> met de ondergrond - en dus met bijbehorende kenmerken - gedefinieerd.</div>
 
 ## Concepten en annotaties
@@ -331,7 +331,7 @@ Definieer de samenstelling, de topologie en het proces op basis van de relaties 
 
 <Zie hst [Details deelmodellen](#details-deelmodellen)>
 
-Vanaf GWSW versie 1.5.2 (na afscheid van het Gellish bronmodel) is de **Collection of Facts** (CoF) op conceptniveau in de RDF-bron opgenomen. De CoF speelt nog steeds een belangrijke rol in de RDF-versie van het GWSW. Het wordt beschreven met het annotatie-attribuut <span class="blue">skos:scopeNote</span>, de annotatie-waarde (de URI van een CollectionOfFacts-subklasse) verwijst naar een deelmodel (GWSW-Basis, GWSW-Kentallen, enz.) horen.
+Vanaf GWSW versie 1.5.2 (na afscheid van het Gellish bronmodel) is de **Collection of Facts** (CoF) op conceptniveau in de RDF-bron opgenomen. De CoF speelt nog steeds een belangrijke rol in de RDF-versie van het GWSW. Het wordt beschreven met het annotatie-attribuut <span class="blue">skos:scopeNote</span>, de annotatie-waarde (de URI van een CollectionOfFacts-subklasse) verwijst naar een deelmodel (GWSW-Basis, GWSW-Kengetallen, enz.) horen.
 
 Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel is een filter op het datamodel waarbij de klassen, de CE's en de individuen worden geselecteerd op de gekoppelde CoF. De deelmodellen hebben meerdere functies:
 
@@ -341,6 +341,12 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 * het koppelen van alleen de relevante modelonderdelen aan datasets, afgestemd op de praktijk van uitwisselen
 
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
+
+# Modelleerprincipes - Aanpassingen vanaf versie 2.0 
+
+* Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
+* Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
+* Kwalitatieve of kwantitatieve attributen hebben altijd de naam van de range-class met het eerste karakter in lowercase
 
 # Aansluiting op externe (meta)modellen
 
@@ -948,7 +954,7 @@ In het GWSW Datamodel worden context-specifieke coderingen meestal gecombineerd 
 
 ### Details deelmodellen
 
-Deelmodellen worden gemarkeerd met het annotatie-attribuut <span class="blue">skos:scopeNote</span>, de bijbehorende waarde geeft aan welke triples bij welk deelmodel (GWSW-Basis, GWSW-Kentallen, enz.) horen. De deelmodel-markeringen zijn van het type <span class="blue">gwsw:CollectionOfFacts</span>, ze zijn als volgt in het GWSW datamodel opgenomen:
+Deelmodellen worden gemarkeerd met het annotatie-attribuut <span class="blue">skos:scopeNote</span>, de bijbehorende waarde geeft aan welke triples bij welk deelmodel (GWSW-Basis, GWSW-Kengetallen, enz.) horen. De deelmodel-markeringen zijn van het type <span class="blue">gwsw:CollectionOfFacts</span>, ze zijn als volgt in het GWSW datamodel opgenomen:
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
 gwsw:clsTOP
@@ -960,11 +966,11 @@ gwsw:cofTOP
   rdf:type                      gwsw:clsTOP ; # wordt hiermee individu
   skos:definition               "Bevat algemene supertypes"@nl ;
 .
-gwsw:DeelmodelKentallen
+gwsw:DeelmodelKengetallen
   rdf:type                      owl:Class ;
-  rdfs:label                    "Deelmodel Kentallen"@nl ;
+  rdfs:label                    "Deelmodel Kengetallen"@nl ;
   rdfs:subClassOf               gwsw:GWSWDeelmodel ;
-  skos:definition               "Deelmodel voor afvoerscenario's en kentallen. Bevat het rioleringsnetwerk, het afvoernetwerk (verbindingen tussen stelsels) en gemeentelijke activiteiten voor optimaliseren afvalwaterketen"@nl ;
+  skos:definition               "Deelmodel voor afvoerscenario's en kengetallen. Bevat het rioleringsnetwerk, het afvoernetwerk (verbindingen tussen stelsels) en gemeentelijke activiteiten voor optimaliseren afvalwaterketen"@nl ;
 .
 </pre></div>
 
@@ -1031,7 +1037,8 @@ De letter geeft het soort kwaliteitseis aan:
 
 De NEN2660 specificeert diverse modelleerpatronen - zowel eenvoudig als complex - voor attributen en relaties. Met de complexe modelleerpatronen worden samengestelde kwanteiten en metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve of kwantitatieve attribuut "geobjectiviceerd".
 
-Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen. Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
+Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde attributen", de attributen werden echter via de generieke relatie "hasAspect" aan het subject toegewezen.
+Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk aspect minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
 
 Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW. 
 Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
@@ -1039,15 +1046,15 @@ Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
 **SIMPEL**
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
-    gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
-    gwsw:begindatum         rdf:type              owl:DatatypeProperty ;     
-                            rdfs:domain           nen2660:PhysicalObject ;     # minimaal 1 domein          
-                            rdfs:range            xsd:date .      # 1 range (OWA: tenminste 1) 
-    gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
-                            rdfs:domain           gwsw:Leiding ;          # minimaal 1 domein          
-                            rdfs:range            gwsw:MateriaalLeiding .
-    gwsw:Beton              rdf:type              gwsw:MateriaalLeiding . # wordt individu             
+  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+  gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
+  gwsw:begindatum         rdf:type              owl:DatatypeProperty ;     
+                          rdfs:domain           nen2660:PhysicalObject ;    # minimaal 1 domein          
+                          rdfs:range            xsd:date .                  # exact 1 range (OWA: tenminste 1) 
+  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
+                          rdfs:domain           gwsw:Leiding ;              # minimaal 1 domein          
+                          rdfs:range            gwsw:MateriaalLeiding .     # exact 1 range 
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # wordt individu             
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
@@ -1061,91 +1068,140 @@ Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
 De NEN2660 specificeert een modelleerpatroon voor "complexe" kenmerken:
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
-    gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
-    gwsw:Begindatum         rdfs:subClassOf       nen2660:QuantityValue .
-    gwsw:begindatum         rdf:type              owl:ObjectProperty ;     
-                            rdfs:domain           nen2660:PhysicalObject ;      # minimaal 1 domein          
-                            rdfs:range            gwsw:Begindatum .             # 1 range (OWA: tenminste 1) 
-    gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
-                            rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range            gwsw:MateriaalLeiding .       # 1 range (OWA: tenminste 1)
-    gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # wordt individu             
+  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+  gwsw:MateriaalLeiding   rdfs:subClassOf       nen2660:QualityValue .
+  gwsw:Begindatum         rdfs:subClassOf       nen2660:QuantityValue .
+  gwsw:begindatum         rdf:type              owl:ObjectProperty ;     
+                          rdfs:domain           nen2660:PhysicalObject ;      # minimaal 1 domein          
+                          rdfs:range            gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
+  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
+                          rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
+                          rdfs:range            gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # wordt individu             
 </pre></div>
 
 Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de property 
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_1            rdf:type              gwsw:Leiding ;
-                            gwsw:begindatum       
-                            [ 
-                              rdf:hasValue "2012-05-01"^^xsd:date; 
-                            ] ; 
-                            gwsw:materiaalLeiding gwsw:Beton .
+  ex:Leiding_1            rdf:type              gwsw:Leiding ;
+                          gwsw:begindatum       
+                          [ 
+                            rdf:value           "2012-05-01"^^xsd:date; 
+                          ] ; 
+                          gwsw:materiaalLeiding gwsw:Beton .
 </pre></div>
 
 **COMPLEX - NEN 2660 + GWSW**
 
-Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
+<div class="box"><strong>Optie: attributen specialiseren</strong>
+Niet echt nodig, af te leiden uit range bij objectproperty:
 
+  gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
+                            rdfs:range          nen2660:QualityValue .
+  gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
+                            rdfs:range          nen2660:QuantityValue .
+  gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
+  gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
+</div>
+
+
+Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
 Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-# niet nodig, af te leiden uit range bij objectproperty
-#    gwsw:qualityProperty      rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span> extra property met gespecificeerde range (hou de quality-props herkenbaar)
-#                              rdfs:range          nen2660:QualityValue .
-#    gwsw:quantityProperty     rdf:type            owl:ObjectProperty ;          # <span class="mark">optioneel<span>extra property met gespecificeerde range (hou de quantity-props herkenbaar)
-#                              rdfs:range          nen2660:QuantityValue .
-    gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
-    gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
-                              rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
-                              rdfs:subClassOf
-                              [
-                                rdf:type          owl:Restriction ;
-                                owl:onProperty    rdf:hasValue ;
-                                owl:allValuesFrom xsd:date ;
-                              ] .
-    gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
-    gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?<span> (alternatief is rdfs:Container, skos:Collection)
-                              rdfs:subClassOf
-                              [
-                                rdf:type          owl:Class ;
-                                owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
-                              ] .
-    gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:QualityValue ;        # Het object, met waarde en metakenmerken
-                              rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
-                              rdfs:subClassOf                                   # restricties op object-niveau
-                              [ 
-                                rdf:type          owl:Restriction;
-                                owl:onProperty    rdf:hasValue ;
-                                owl:allValuesFrom gwsw:MateriaalLeidingColl ;
-                              ] .
-#    gwsw:begindatum           rdfs:subPropertyOf  gwsw:quantityProperty ;     
-    gwsw:begindatum           rdf:type            owl:ObjectProperty ;     
-                              rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
-                              rdfs:range          gwsw:Begindatum .             # 1 range (OWA: tenminste 1) 
-#    gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
-    gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
-                              rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                              rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
+  gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
+  gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
+                            rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
+                            rdfs:subClassOf
+                            [
+                              rdf:type          owl:Restriction ;
+                              owl:onProperty    rdf:value ;
+                              owl:allValuesFrom xsd:date ;
+                            ] .
+  gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
+  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?</span> (alternatief is rdfs:Container, skos:Collection)
+                            rdfs:subClassOf
+                            [
+                              rdf:type          owl:Class ;
+                              owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
+                            ] .
+  gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:QualityValue ;        # het object, met waarde en metakenmerken
+                            rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
+                            rdfs:subClassOf                                   # restricties op object-niveau
+                            [ 
+                              rdf:type          owl:Restriction;
+                              owl:onProperty    rdf:value ;
+                              owl:allValuesFrom gwsw:MateriaalLeidingColl ;
+                            ] .
+
+    # In GWSW 2.0 wijkt dit deel (de attribuut-definitie) essentieel af van oudere GWSW-versies:
+  
+  gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-IRI is consequent de range-class-naam, startend met lower-case
+                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
+                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
+  gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
+
+  <div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-definitie:</strong>
+  gwsw:Leiding              rdfs:subClassOf
+                            [
+                              rdf:type                      owl:Restriction ;
+                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
+                              owl:onProperty                gwsw:hasAspect ;  # de "oude" generieke attribuut-property
+                              owl:onClass                   gwsw:Begindatum .
+                            ] , 
+                            [
+                              rdf:type                      owl:Restriction ;
+                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
+                              owl:onProperty                gwsw:hasAspect ;
+                              owl:onClass                   gwsw:Materiaalleiding .
+                            ] . 
+  </div>
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+
     ex:Leiding_1  rdf:type              gwsw:Leiding ;
-                  gwsw:begindatum                                               # impliciet gwsw:Begindatum            
-                  [                                   
-                    rdf:type            gwsw:Begindatum ;                       # niet nodig, wordt impliciet getypeerd
+                  gwsw:begindatum                                                         
+                  [
+                    rdf:type            gwsw:Begindatum ;                       # expliciet typeren niet nodig, liever niet (redundant)
                     rdf:value           "2012-05-01"^^xsd:date; 
                   ] ;     
                   gwsw:materiaalLeiding                                         # impliciet gwsw:MateriaalLeiding, heeft meta-data
-                  [ 
-                    gwsw:inwinning      [                                       # impliciet gwsw:Inwinning
-                      gwsw:datumInwinning [                                     # impliciet gwsw:DatumInwinning
-                        rdf:hasValue "2023-05-11"^^xsd:date ;
+                  [
+                    rdf:value           gwsw:Beton ;
+                    gwsw:inwinning                                              # impliciet gwsw:Inwinning
+                    [
+                      gwsw:datumInwinning                                       # impliciet gwsw:DatumInwinning
+                      [
+                        rdf:value       "2023-05-11"^^xsd:date ;
                       ]
                     ] ;
-                    rdf:value           gwsw:Beton ;
                   ] .
+  
+  <div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-declaratie:</strong>
+    ex:Leiding_1  rdf:type              gwsw:Leiding ;
+                  gwsw:hasAspect                                                            
+                  [                                   
+                    rdf:type            gwsw:Begindatum ;                       # expliciet typeren
+                    gwsw:hasValue       "2012-05-01"^^xsd:date; 
+                  ] ,     
+                  [ 
+                    rdf:type            gwsw:MateriaalLeiding ;                 # expliciet typeeren
+                    gwsw:hasAspect
+                    [ 
+                      rdf:type          gwsw:Inwinning                          # expliciet typeeren
+                      [ 
+                        gwsw:hasAspect 
+                        [      
+                          rdf:type      gwsw:Datuminwinning                     # expliciet typeeren
+                          gwsw:hasValue "2023-05-11"^^xsd:date ;
+                        ]
+                    ] ;
+                    gwsw:hasReference   gwsw:Beton ;
+                  ] .
+  </div>
 </pre></div>
 
 **<span class="smallcaps">Eenheden op model-niveau</span>**
@@ -1159,7 +1215,7 @@ De eenheden bij waarden definiëren we vooraf - op model-niveau - dat kan eenvou
                              nen2660:unit               unit:MiLiM .        
 </pre></div>
 
-Zoals genoemd nemen we in de datasets geen eenheden of alleen de voorgeschreven eenheden op. Dat maakt toepassingen op de data efficienter.
+In de datasets nemen we dus geen eenheden of alleen de voorgeschreven eenheden op. Dat maakt toepassingen met de data efficienter.
 
 <div class="example-dataset"><div class="example-title marker">Dataset: niet correct</div><pre>
     ex:Leiding_1             gwsw:diameterLeiding                           
@@ -1271,7 +1327,7 @@ gwsw:Dt_HoogtePut  rdf:type       rdfs:Datatype ; # typering verplicht in OWL RL
                      rdf:type   rdfs:Datatype ;
                      owl:onDatatype   xsd:integer
                      owl:withRestrictions
-                     ( [xsd:minInclusive "0"^^xsd:integer] [xsd:maxExclusive "10000"^^xsd:integer] )
+                     ( [xsd:minInclusive "300"^^xsd:integer] [xsd:maxExclusive "4000"^^xsd:integer] )
                    ] .
 </pre></div>
 
@@ -1304,47 +1360,25 @@ Met de komst van de NEN2660 definiëren we in het model kwalificerende aspecten 
 
 Conform de NEN2660 maakt het GWSW onderscheid in definiërende en specificerende beperkingen op attributen en datatypes.
 
-**Definiërende beperking, Afleiding**
+**Definiërende beperking, afleiding**
 
-Ter illustratie: de klasse Drukleiding is een subtype van Mechanische Transportleiding. Een drukleiding onderscheidt zich vanwege de kleine diameter, leidingen met grotere diameter worden anders geclassificeerd (als voorbeeld, de werkelijkheid ligt iets anders). De kleine diameter is in dit geval een defiërende beperking waarmee een afleiding (iets met een kleine diameter is een Drukleiding) wordt gemaakt.
+Het afleiden van klasse-typering blijft bij attributen beperkt tot de inferencing van predicates rdfs:domain en rdfs:range bij kwalitatieve attributen.
+Als de typering van een subject is af te leiden uit rdfs:domain betreft het een intrinsiek kenmerk (zie hst [Intrinsieke kenmerken](#intrinsieke-kenmerken)). 
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-    gwsw:diameterLeiding     rdf:type                   owl:ObjectProperty ;
-                             rdfs:domain                gwsw:Leiding ;      
-                             rdfs:range                 nen2660:QuantityValue .  
-    gwsw:Drukleiding         rdf:type                   owl:Class ;         
-                             rdfs:subClassOf            gwsw:MechanischeTransportleiding ;
-                             owl:equivalentClass                            
-                             [        
-                               rdf:type                 owl:Restriction ;   
-                               owl:qualifiedKardinality "1"^^xsd:nonNegativeInteger ; 
-                               owl:onProperty           gwsw:diameterLeiding ;        
-                               owl:onClass              gwsw:DiameterDrukleiding ;    
-                             ] .      
-    gwsw:DiameterDrukleiding rdf:type                   owl:Class ;         
-                             rdfs:subClassOf            nen2660:QuantityValue ;  
-                             owl:equivalentClass                            
-                             [        
-                               rdf:type                 owl:Restriction ;   
-                               owl:onProperty           rdf:value ;         
-                               owl:allValuesFrom                            
-                               [      
-                                 skos:prefLabel         “Diameter drukleiding - datatype” ;
-                                 owl:equivalentClass                        
-                                 [    
-                                    rdf:type            rdfs:Datatype ;     
-                                    owl:onDatatype      xsd:integer ;       
-                                    owl:withRestrictions                    
-                                    ( 
-                                      [xsd:minInclusive "50"^^xsd:integer] 
-                                      [xsd:maxExclusive "160"^^xsd:integer] 
-                                    ) ;         
-                                 ] ;  
-                               ] ;    
-                             ] .      
+    gwsw:diameterLeiding      rdf:type                  owl:ObjectProperty ;
+                              rdf:type                  owl:FunctionalProperty ; # attribuut komt max 1x voor
+                              rdfs:domain               gwsw:Leiding ;      
+                              rdfs:range                gwsw:DiameterLeiding .
+    gwsw:DiameterLeiding      rdf:type                  owl:Class ;         
+                              rdfs:subClassOf           nen2660:QuantityValue ;  
+                              nen2660:unit              unit:MiLiM ;
+                              rdfs:label                "Diameter leiding" ;
+                              skos:definition           "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" .
+    gwsw:Drukleiding          rdf:type                  owl:Class ;         
+                              rdfs:subClassOf           gwsw:Leiding .
+      
 </pre></div>
-
-Afgeleid wordt dat ex:Leiding_1 van de klasse Drukleiding is
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
     ex:Leiding_1             gwsw:diameterLeiding         
@@ -1353,32 +1387,26 @@ Afgeleid wordt dat ex:Leiding_1 van de klasse Drukleiding is
                              ] .         
 </pre></div>
 
-Gesignaleerd wordt dat de typering van ex:Leiding_2 niet consistent is
+De reasoner leidt af dat ex:Leiding_1 van de (super)klasse Leiding is en dat ex:Leiding_1 een kenmerk van de klasse DiameterLeiding heeft. 
+Met een query kan vervolgens het leidingtype (?type), het kenmerk en de bijbehorende definitie (?defDia) worden opgevraagd.
 
-<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_2             rdf:type              gwsw:Drukleiding ;
-                             gwsw:diameterLeiding         
-                             [          
-                                rdf:value          163 ;
-                             ] .         
-</pre></div>
+<pre class="file">
+SELECT *
+WHERE 
+{
+    ?sub gwsw:diameterLeiding [
+      rdf:type [
+        skos:definition ?defDia ;
+      ]
+    ] .
+    ?sub sesame:directType ?type .
+}
+</pre>
 
-Een reasoner leidt op basis van het model af of de QuantityValye van het type gwsw:DiameterDrukleiding is.
-Vervolgens zal de validator rapporteren dat de typering van ex:Leiding_2 in de vorige dataset niet consistent is
+**Verificatie attribuutwaarden**
+Verificatie van attribuutwaarden gebeurt op kenmerk-niveau via datatypes, zie hst [Nauwkeurigheid](#nauwkeurigheid). Vaak zijn die kenmerken niet intrinsiek, hetzelfde kenmerk komt bij meerdere klassen voor. Het bijbehorede datatype definieert dan vaak generieke kwaliteitseisen. Die eisen kunnen verschillen, afhankelijk van het attribuut-domein. Voor verificatie in die gevallen is SHACL de aangewezen weg. Ter illustratie: een drukleiding heeft een kleine diameter, het datatype bij het generieke kenmerk DiameterLeiding defineert veel ruimere grenzen (min=63mm, max =4000mm).
 
-<div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
-    gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
-                             sh:targetClass         gwsw:Drukleiding ;
-                             sh:property         
-                             [         
-                                sh:path             (gwsw:diameterLeiding rdf:value) ;
-                                sh:class            gwsw:DiameterDrukleiding ;
-                                sh:message          "diameterLeiding: QuantityValue incorrect" ;
-                                sh:severity         sh:Violation ;
-                             ] .         
-</pre></div>
-
-Of, validatie zonder gebruik te maken van de gespecificeerde gwsw:DiameterDrukleiding:
+Met SHACL scherpen we de verificatie aan:
 
 <div class="example-shapes"><div class="example-title marker">Shapes:</div><pre>
     gwsw:DrukleidingShape    rdf:type               sh:NodeShape ;
@@ -1390,6 +1418,16 @@ Of, validatie zonder gebruik te maken van de gespecificeerde gwsw:DiameterDrukle
                                 sh:maxInclusive     160 ;
                                 sh:message          "diameterLeiding: value is out of bounds" ;
                                 sh:severity         sh:Violation ;
+                             ] .         
+</pre></div>
+
+SHACL rapporteert dat de typering van ex:Leiding_2 niet consistent is
+
+<div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
+    ex:Leiding_2             rdf:type              gwsw:Drukleiding ;
+                             gwsw:diameterLeiding         
+                             [          
+                                rdf:value          163 ;
                              ] .         
 </pre></div>
 
