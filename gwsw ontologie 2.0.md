@@ -1,7 +1,7 @@
 # GWSW Ontologie 2.0
 
-<!-- gebruik voor lokaal editen
-<script src="./builds/respec-rioned.js"></script> -->
+<!-- gebruik voor lokaal editen -->
+<script src="./builds/respec-rioned.js"></script>
 
 **Een beschrijving van de GWSW Ontologie op basis van de [NEN 2660-2:2022 nl](https://www.nen.nl/nen-2660-2-2022-nl-291667)**
 
@@ -1110,7 +1110,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
 <div class="example"><div class="example-title marker">Model:</div><pre>
   gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
   gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
-                            rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
+                            rdfs:label          "Begindatum" ;                # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
                             rdfs:subClassOf
                             [
                               rdf:type          owl:Restriction ;
@@ -1118,8 +1118,8 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:allValuesFrom xsd:date ;
                             ] .
   gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
-  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?</span> (alternatief is rdfs:Container, skos:Collection)
-                            rdfs:subClassOf
+  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # bestaat deze? (alternatief is rdfs:Container, skos:Collection)
+                            owl:equivalentClass
                             [
                               rdf:type          owl:Class ;
                               owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
