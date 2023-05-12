@@ -1,7 +1,7 @@
 # GWSW Ontologie 2.0
 
-<!-- gebruik voor lokaal editen -->
-<script src="./builds/respec-rioned.js"></script>
+<!-- gebruik voor lokaal editen
+<script src="./builds/respec-rioned.js"></script> -->
 
 **Een beschrijving van de GWSW Ontologie op basis van de [NEN 2660-2:2022 nl](https://www.nen.nl/nen-2660-2-2022-nl-291667)**
 
@@ -343,8 +343,6 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
 
 # Modelleerprincipes - Aanpassingen vanaf versie 2.0
-
-## test
 
 * Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
 * Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
