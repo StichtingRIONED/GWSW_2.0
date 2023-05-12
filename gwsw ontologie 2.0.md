@@ -342,7 +342,7 @@ Op basis van de CoF worden dus de GWSW deelmodellen samengesteld. Zo'n deelmodel
 
 Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combineren van deelmodellen met behoud van overzicht is in RDF-editors mogelijk. Handhaaf een logisch onderverdeling door modelaanpassingen in het juiste bronbestand (geïmporteerde turtle-bestand) te doen en consequent de annotatie skos:scopeNote te vullen.
 
-# Modelleerprincipes - Aanpassingen vanaf versie 2.0 
+# Modelleerprincipes - Aanpassingen vanaf versie 2.0
 
 * Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
 * Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
@@ -1142,8 +1142,9 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
   gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
                             rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
+</pre></div>
 
-  <div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-definitie:</strong>
+<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-definitie:</strong>
   gwsw:Leiding              rdfs:subClassOf
                             [
                               rdf:type                      owl:Restriction ;
@@ -1157,8 +1158,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty                gwsw:hasAspect ;
                               owl:onClass                   gwsw:Materiaalleiding .
                             ] . 
-  </div>
-</pre></div>
+</div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
 
@@ -1180,29 +1180,29 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                     ] ;
                   ] .
   
-  <div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-declaratie:</strong>
-    ex:Leiding_1  rdf:type              gwsw:Leiding ;
-                  gwsw:hasAspect                                                            
-                  [                                   
-                    rdf:type            gwsw:Begindatum ;                       # expliciet typeren
-                    gwsw:hasValue       "2012-05-01"^^xsd:date; 
-                  ] ,     
-                  [ 
-                    rdf:type            gwsw:MateriaalLeiding ;                 # expliciet typeeren
-                    gwsw:hasAspect
-                    [ 
-                      rdf:type          gwsw:Inwinning                          # expliciet typeeren
-                      [ 
-                        gwsw:hasAspect 
-                        [      
-                          rdf:type      gwsw:Datuminwinning                     # expliciet typeeren
-                          gwsw:hasValue "2023-05-11"^^xsd:date ;
-                        ]
-                    ] ;
-                    gwsw:hasReference   gwsw:Beton ;
-                  ] .
-  </div>
 </pre></div>
+<div class="box"><strong>De "oude" GWSW (versie 1.n) attribuut-declaratie:</strong>
+  ex:Leiding_1  rdf:type              gwsw:Leiding ;
+                gwsw:hasAspect                                                            
+                [                                   
+                  rdf:type            gwsw:Begindatum ;                       # expliciet typeren
+                  gwsw:hasValue       "2012-05-01"^^xsd:date; 
+                ] ,     
+                [ 
+                  rdf:type            gwsw:MateriaalLeiding ;                 # expliciet typeeren
+                  gwsw:hasAspect
+                  [ 
+                    rdf:type          gwsw:Inwinning                          # expliciet typeeren
+                    [ 
+                      gwsw:hasAspect 
+                      [      
+                        rdf:type      gwsw:Datuminwinning                     # expliciet typeeren
+                        gwsw:hasValue "2023-05-11"^^xsd:date ;
+                      ]
+                  ] ;
+                  gwsw:hasReference   gwsw:Beton ;
+                ] .
+</div>
 
 **<span class="smallcaps">Eenheden op model-niveau</span>**
 
