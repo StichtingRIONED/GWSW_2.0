@@ -1104,7 +1104,7 @@ Niet echt nodig, af te leiden uit range bij objectproperty:
   gwsw:materiaalLeiding     rdfs:subPropertyOf  gwsw:QualityProperty ;     
 </pre></div>
 
-Het GWSW sluit aan op het NEN2660-modelleerpatroon, we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
+Het GWSW sluit aan op het NEN2660-modelleerpatroon en we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
 Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
@@ -1117,13 +1117,13 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:date ;
                             ] .
+  gwsw:begindatum           rdf:type            owl:ObjectProperty ;     
+                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
+                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
+  gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:EnumerationType;      # <span class="mark">geen rdf:type toch?</span>
+                            owl:oneOf           (gwsw:Beton gwsw:Pvc) .       # individuen
   gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
-  gwsw:MateriaalLeidingColl rdfs:subClassOf     nen2660:Group ;               # <span class="mark">bestaat deze?</span> (alternatief is rdfs:Container, skos:Collection)
-                            owl:equivalentClass
-                            [
-                              rdf:type          owl:Class ;
-                              owl:oneOf         (gwsw:Beton gwsw:Pvc)         # individuen
-                            ] .
   gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:QualityValue ;        # het object, met waarde en metakenmerken
                             rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
                             rdfs:subClassOf                                   # restricties op object-niveau
@@ -1132,6 +1132,10 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                             ] . 
+  gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;     
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
+
 </pre></div>
 
 <div class="example"><div class="example-title marker">Attribuut-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
@@ -1249,26 +1253,32 @@ Verificatie van de gebruikte eenheid in de dataset wordt uitgedrukt in SHACL:
 
 ### Betrouwbaarheid, actualiteit
 
+<span class="mark">Dit hst bespreken met Michel (ook omgaan met enumeraties)</span>
+
 **<span class="smallcaps">Metagegeven Inwinning (kenmerk van kenmerk)</span>**
 
 Voor de beschrijving van de gegevenskwaliteit - met name nauwkeurigheid, actualiteit en betrouwbaarheid - definieert de GWSW Ontologie voor veel kenmerken het metagegeven <span class="blue">Inwinning</span>. Dat is volgens het class-central principe eenvoudig te beschrijven:
 
 <div class="example"><div class="example-title marker">Model: het aspect/metagegeven gwsw:inwinning</div><pre>
-    gwsw:inwinning           rdf:type                   owl:ObjectProperty ;   
-                             rdfs:range                 gwsw:Inwinning .       
-    gwsw:Inwinning           rdf:type                   owl:Class ;            
-                             rdfs:subClassOf            nen2660:InformationObject . 
-    gwsw:wijzeVanInwinning   rdf:type                   owl:ObjectProperty ;   
-                             rdfs:range                 gwsw:WijzeVanInwinning .       
-    gwsw:WijzeVanInwinning   rdf:type                   owl:Class ;            
-                             rdfs:subClassOf            nen2660:EnumerationType ;   
-                             owl:equivalentClass                               
-                             [           
-                               rdf:type                 owl:Class ;            
-                               owl:oneOf                (gwsw:Inmeting gwsw:Schatting) ; 
-                             ]           
-    gwsw:Inmeting            rdf:type                   gwsw:WijzeVanInwinning . # waarde is ingemeten
-    gwsw:Schatting           rdf:type                   gwsw:WijzeVanInwinning . # waarde is geschat
+    gwsw:inwinning              rdf:type                    owl:ObjectProperty ;   
+                                rdfs:range                  gwsw:Inwinning .       
+    gwsw:Inwinning              rdf:type                    owl:Class ;            
+                                rdfs:subClassOf             nen2660:InformationObject .   # <span class="mark">ok?</span>
+    gwsw:wijzeVanInwinning      rdf:type                    owl:ObjectProperty ;   
+                                rdfs:range                  gwsw:WijzeVanInwinning .       
+    gwsw:WijzeVanInwinning      rdfs:subClassOf             nen2660:QualityValue ;        # het object, met waarde en metakenmerken
+                                rdfs:label                  "Wijze van inwinning" ;       # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
+                                rdfs:subClassOf                                           # restricties op object-niveau
+                                [ 
+                                  rdf:type                  owl:Restriction;
+                                  owl:onProperty            rdf:value ;
+                                  owl:allValuesFrom         gwsw:WijzeVanInwinningColl ;
+                                ] . 
+    gwsw:WijzeVanInwinningColl  rdf:type                    owl:Class ;            
+                                rdfs:subClassOf             nen2660:EnumerationType ;   
+                                owl:oneOf                   (gwsw:Inmeting gwsw:Schatting) ; 
+    gwsw:Inmeting               rdf:type                   gwsw:WijzeVanInwinningColl .   # waarde is ingemeten
+    gwsw:Schatting              rdf:type                   gwsw:WijzeVanInwinningColl .   # waarde is geschat
 </pre></div>
 
 Bij ex:Put_1 registreren dat de waarde van gwsw:hoogtePut is geschat
@@ -1279,13 +1289,19 @@ Bij ex:Put_1 registreren dat de waarde van gwsw:hoogtePut is geschat
                                rdf:value                1000^^xsd:integer ; 
                                gwsw:inwinning                               
                                [      
-                                 gwsw:wijzeVanInwinning gwsw:Schatting ;    
-                                 gwsw:datumInwinning    "2020-05-03"^^xsd:date ;      
+                                 gwsw:wijzeVanInwinning [                                #
+                                  rdf:value             gwsw:Schatting ;
+                                 ]
+                                 gwsw:datumInwinning    [
+                                  rdf:value             "2020-05-03"^^xsd:date ;
+                                 ]
                                ] ;    
                              ] .      
 </pre></div>
 
 ### Nauwkeurigheid
+
+<span class="mark">Dit hoofdstuk bespreken met Michel</span>
 
 <span class="smallcaps">Minimum/maximum waarde, datatype</span>
 
@@ -1297,15 +1313,12 @@ We hanteren twee soorten datatypes:
 De eisen aan nauwkeurigheid drukken we uit als restrictie op de kenmerk-waarde:
 
 <div class="example"><div class="example-title marker">Model:</div><pre>
-gwsw:hasAspect     rdf:type               owl:ObjectProperty .
-# gwsw:hasValue      rdf:type               owl:DatatypeProperty ;
-                   rdf:type               owl:FunctionalProperty . # waarde-relatie altijd max 1
-gwsw:HoogtePut     rdfs:subClassOf        gwsw:Kenmerk ;
-  rdfs:label                              “Put hoogte” ;
-                   rdfs:subClassOf
-                   [
-                     rdf:type             owl:Restriction ;
-                     owl:onProperty       gwsw:hasValue ;
+gwsw:HoogtePut      rdfs:subClassOf        nen2660:QuantityValue ;
+                    rdfs:label                              “Put hoogte” ;
+                    rdfs:subClassOf
+                    [
+                      rdf:type             owl:Restriction ;
+                      owl:onProperty       rdf:value ;
 </pre></div>
 
 Alleen een restrictie op het standaard datatype:
@@ -1320,7 +1333,7 @@ Of restricties op min/max waarde met een GWSW-datatype:
 <div class="example"><div class="example-title marker">Model:</div><pre>
                      owl:allValuesFrom   gwsw:dt_PutHoogte  
                    ] .
-gwsw:Dt_HoogtePut  rdf:type       rdfs:Datatype ; # typering verplicht in OWL RL
+gwsw:Dt_HoogtePut  rdf:type       rdfs:Datatype ;           # typering verplicht in OWL RL
                    rdfs:label     “Put hoogte - datatype” ;
                    owl:equivalentClass
                    [
