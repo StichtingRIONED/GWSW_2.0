@@ -12,7 +12,7 @@ Versie historie
 20221220: Eerste aanpassingen op vervanging NTA 8035 door NEN2660  
 20221220: Algemene update, hou synchroon met figerende GWSW Ontololgie-document  
 20221202: Overzicht verschillen met IMBOR-LD toegevoegd  
-20211025: Hoofdstuk indeling afgestemd op document [GWSW Ontologie in RDF]  
+20211025: Hoofdstuk indeling afgestemd op document GWSW Ontologie in RDF
 20201005: Hst Modelleerprincipes bijgewerkt
 20200817: Voorwaarden bij concept-annotaties uitgeschreven, hst 3.2.1  
 20200814: Annotaties vanuit Gellish toegevoegd (editor, fact-collectie)  
@@ -422,29 +422,47 @@ Met dat model worden de mogelijke concept-relaties in datamodellen gerubriceerd 
 De indeling van de relaties in het R-model komt voor een groot deel overeen met de gebruikte GWSW-relaties.
 In de volgende tabel staat de vergelijking.
 
-<table class="default">
 R-model en GWSW 2.0
-<tr><th>R-model</th><th>GWSW</th></tr>
-<tr><td>R0 - is van type</td><td>rdf:type</td></tr>
-<tr><td>R1 - verwant</td><td></td></tr>
-<tr><td>R2 - kenmerk</td><td>nen2660:QualityValue, nen2660:QuantityValue</td></tr>
-<tr><td>R2U - kenmerkcluster </td><td>kenmerk/kenmerk (kenmerk van kenmerk)</td></tr>
-<tr><td>R3 - relatie</td><td>nen2660:isConnectedTo (was gwsw:hasConnection)</td></tr>
-<tr><td>R4 - samenstelling</td><td>nen2660:hasPart (cardinaliteit n,n)</td></tr>
-<tr><td>R4C - compositie</td><td>nen2660:hasPart (cardinaliteit 0,n)</td></tr>
-<tr><td>R4G - groep</td><td></td></tr>
-<tr><td>R5 - overerving</td><td>rdfs:subClassOf</td></tr>
-<tr><td>R6 - regelset</td><td></td></tr>
-<tr><td>R7 - functie/activiteit</td><td>gwsw:hasInput, gwsw:hasOutput</td></tr>
-<tr><td>R8 - collectie</td><td>owl:oneOf</td></tr>
-<tr><td>R9 - waarde</td><td>rdf:value (was gwsw:hasValue, gwsw:hasReference)</td></tr>
-</table>
+| R-model                 | GWSW                                           | Opmerking                            |
+|-------------------------|------------------------------------------------|--------------------------------------|
+| R0 - is van type        | rdf:type                                       |                                      |
+| R1 - verwant            |                                                |                                      |
+| R2 - kenmerk            | nen2660:QualityValue, nen2660:QuantityValue    |                                      |
+| R2U - kenmerkcluster    | kenmerk/kenmerk (kenmerk van kenmerk)          |                                      |
+| R3 - relatie            | nen2660:isConnectedTo (was gwsw:hasConnection) | was gwsw:hasConnection               |
+| R4 - samenstelling      | nen2660:hasPart (cardinaliteit n,n)            | cardinaliteit n,n                    |
+| R4C - compositie        | nen2660:hasPart (cardinaliteit 0,n)            | cardinaliteit 0,n                    |
+| R4G - groep             |                                                |                                      |
+| R5 - overerving         | rdfs:subClassOf                                |                                      |
+| R6 - regelset           |                                                |                                      |
+| R7 - functie/activiteit | gwsw:hasInput, gwsw:hasOutput                  |                                      |
+| R8 - collectie          | owl:oneOf                                      |                                      |
+| R9 - waarde             | rdf:value                                      | was gwsw:hasValue, gwsw:hasReference |
 
 ## MIM
 
+<span class="mark">Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde?</span>
+
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
-<span class="mark">Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde</span>
+
+MIM voegt geen inhoudelijke waarde toe aan semantische modellen beschreven in RDF/RDFS/OWL als die zijn uitgebreid met SKOS en de NEN2660. De MIM metagegevens zijn ook beschreven in de RDF-gebaseerde talen. Volgens conventionele begrippen staat het RDF op M2-niveau (conform MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (conform MOF: een taal voor semantische domein modellen).
+
+In de tabel zijn GWSW en MIM vergeleken
+
+GWSW  2.0                    | MIM                   | Opmerking
+-----------------------------|-----------------------|-------------------
+**Annotatie-atributen**      |                       |
+skos:definition              | mim:definition        |
+skos:prefLabel               | mim:alias             |
+skos:altLabel                | mim:alias             |
+nen2660:unit                 |                       |
+rdfs:seeAlso                 | mim:herkomstDefinitie |
+**Kwalitatieve attributen**  |                       |
+                             | mim:attribuut         | was gwsw:hasAspect
+**Kwantitatieve attributen** |                       |
+                             | mim:attribuut         |
+**Relaties**                 |                       |
 
 # Details van de GWSW semantiek
 
@@ -1168,7 +1186,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
     ex:Leiding_1  rdf:type              gwsw:Leiding ;
                   gwsw:begindatum                                                         
                   [
-                    # rdf:type            gwsw:Begindatum ;                     expliciet typeren niet nodig, liever niet (redundant)
+                    # rdf:type          gwsw:Begindatum ;                         expliciet typeren niet nodig, liever niet (redundant)
                     rdf:value           "2012-05-01"^^xsd:date; 
                   ] ;     
                   gwsw:materiaalLeiding                                         # impliciet gwsw:MateriaalLeiding, heeft meta-data
