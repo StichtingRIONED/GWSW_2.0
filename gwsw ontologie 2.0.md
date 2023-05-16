@@ -440,13 +440,21 @@ R-model en GWSW 2.0
 | R8 - collectie          | owl:oneOf                                      |                                      |
 | R9 - waarde             | rdf:value                                      | was gwsw:hasValue, gwsw:hasReference |
 
-## MIM
+## MIM - Metamodel Informatie Modellering
 
 <span class="mark">Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde?</span>
 
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
-Als semantische modellen beschreven in RDF/RDFS/OWL zijn uitgebreid met SKOS en de NEN2660 voegt MIM nauwelijks inhoudelijke waarde toe. Conform MOF (Meta Object Facility, definieert modelleringstalen ) staat het RDF op M2-niveau (MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (MOF: een taal voor semantische domein modellen).
+
+MIM-1 Het begrippen model
+MIM-2 Het conceptuele informatie model
+MIM-3 Logisch informatie- of gegevensmodel 
+MIM-4 Fysiek of techisch gegevens- of datamodel
+
+MIM-3 en MIM-4 niet van toepassing op het GWSW 2.0
+
+Als semantische modellen beschreven in RDF/RDFS/OWL zijn uitgebreid met SKOS en de NEN2660 voegt MIM-2 nauwelijks inhoudelijke waarde toe. Conform MOF (Meta Object Facility, definieert modelleringstalen ) staat het RDF op M2-niveau (MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (MOF: een taal voor semantische domein modellen).
 
 Een beperkte vergelijking tussen GWSW en MIM:
 
@@ -1485,10 +1493,10 @@ SHACL rapporteert dat de typering van ex:Leiding_2 niet consistent is
 
 Het GWSW definieert relaties voor de samenstelling (meronomie) en de verbindingen (netwerk, topologie) Deze samenstelling-relaties komen voor in datasets en in het datamodel, het datamodel beschrijft de restricties op deze relaties. De volgende relaties worden gebruikt:
 
-> hasPart  
-> hasInput  
-> hasOutput  
-> hasConnection  <span class="mark">optioneel<span>nen2660:isConnectedTo geldt voor Fysieke Objecten, is geen topologisch element</span>
+> hasPart  <span class="mark">ook in de NEN 2660-2, ook voor ruimtelijke dingen?</span>
+> hasInput  <span class="mark">staat in de NEN 2660-1, niet overgenomen in de NEN 2660-2</span>
+> hasOutput  <span class="mark">staat in de NEN 2660-1, niet overgenomen in de NEN 2660-2</span>
+> hasConnection  <span class="mark">nen2660:isConnectedTo geldt voor Fysieke Objecten, is geen topologisch element</span>
 
 ### Relaties proces (activiteiten)
 
