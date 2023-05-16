@@ -423,6 +423,7 @@ De indeling van de relaties in het R-model komt voor een groot deel overeen met 
 In de volgende tabel staat de vergelijking.
 
 R-model en GWSW 2.0
+
 | R-model                 | GWSW                                           | Opmerking                            |
 |-------------------------|------------------------------------------------|--------------------------------------|
 | R0 - is van type        | rdf:type                                       |                                      |
@@ -445,10 +446,9 @@ R-model en GWSW 2.0
 
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
-
 Als semantische modellen beschreven in RDF/RDFS/OWL zijn uitgebreid met SKOS en de NEN2660 voegt MIM nauwelijks inhoudelijke waarde toe. Volgens conventionele begrippen staat het RDF op M2-niveau (conform MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (conform MOF: een taal voor semantische domein modellen).
 
-In de tabel zijn GWSW en MIM vergeleken
+Een - beperkte - vergelijking tussen GWSW en MIM:
 
 | GWSW  2.0                    | MIM                   | Opmerking          |
 |------------------------------|-----------------------|--------------------|
