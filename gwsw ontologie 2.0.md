@@ -446,23 +446,23 @@ R-model en GWSW 2.0
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
 
-MIM voegt geen inhoudelijke waarde toe aan semantische modellen beschreven in RDF/RDFS/OWL als die zijn uitgebreid met SKOS en de NEN2660. De MIM metagegevens zijn ook beschreven in de RDF-gebaseerde talen. Volgens conventionele begrippen staat het RDF op M2-niveau (conform MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (conform MOF: een taal voor semantische domein modellen).
+Als semantische modellen beschreven in RDF/RDFS/OWL zijn uitgebreid met SKOS en de NEN2660 voegt MIM nauwelijks inhoudelijke waarde toe. Volgens conventionele begrippen staat het RDF op M2-niveau (conform MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (conform MOF: een taal voor semantische domein modellen).
 
 In de tabel zijn GWSW en MIM vergeleken
 
-GWSW  2.0                    | MIM                   | Opmerking
------------------------------|-----------------------|-------------------
-**Annotatie-atributen**      |                       |
-skos:definition              | mim:definition        |
-skos:prefLabel               | mim:alias             |
-skos:altLabel                | mim:alias             |
-nen2660:unit                 |                       |
-rdfs:seeAlso                 | mim:herkomstDefinitie |
-**Kwalitatieve attributen**  |                       |
-                             | mim:attribuut         | was gwsw:hasAspect
-**Kwantitatieve attributen** |                       |
-                             | mim:attribuut         |
-**Relaties**                 |                       |
+| GWSW  2.0                    | MIM                   | Opmerking          |
+|------------------------------|-----------------------|--------------------|
+| **Annotatie-atributen**      |                       |                    |
+| skos:definition              | mim:definition        |                    |
+| skos:prefLabel               | mim:alias             |                    |
+| skos:altLabel                | mim:alias             |                    |
+| nen2660:unit                 |                       |                    |
+| rdfs:seeAlso                 | mim:herkomstDefinitie |                    |
+| **Kwalitatieve attributen**  |                       |                    |
+|                              | mim:attribuut         | was gwsw:hasAspect |
+| **Kwantitatieve attributen** |                       |                    |
+|                              | mim:attribuut         |                    |
+| **Relaties**                 |                       |                    |
 
 # Details van de GWSW semantiek
 
