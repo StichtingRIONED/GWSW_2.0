@@ -757,8 +757,19 @@ table.simp th, table.simp td  { /** mv: eenvoudige basistabel */
   padding: 0.3em 0 0.3em 0.5em;
 	border: 1px solid lightgray;
 }
-/* mv: preformatted text (20200927) */
+/** mv: markdown - vertaling naar html-tabel (20230516) */
+table {
+	border-collapse: collapse; /* enkele border-line tussen de cellen */
+}
+table th, table td  {
+  padding: 0.3em 0.5em 0.3em 0.5em;
+  border: 1px solid lightgray;
+}
+tr:nth-child(even) { /* kleur elke "even" rij */
+	background-color: rgb(245, 247, 255);
+}
 
+/* mv: preformatted text (20200927) */
 pre.simp {
   color: black;
   background-color:  rgb(245, 247, 255);
