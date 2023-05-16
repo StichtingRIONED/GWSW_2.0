@@ -440,19 +440,21 @@ R-model en GWSW 2.0
 | R8 - collectie          | owl:oneOf                                      |                                      |
 | R9 - waarde             | rdf:value                                      | was gwsw:hasValue, gwsw:hasReference |
 
-## MIM - Metamodel Informatie Modellering
+## MOF en MIM
 
-<span class="mark">Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde?</span>
+
+MOF Meta Object Facility
+MIM - Metamodel Informatie Modellering
 
 Het document (17 feb 2022):  https://docs.geostandaarden.nl/mim/mim/ 
 
-
-MIM-1 Het begrippen model
-MIM-2 Het conceptuele informatie model
-MIM-3 Logisch informatie- of gegevensmodel 
-MIM-4 Fysiek of techisch gegevens- of datamodel
+* MIM-1 Het begrippen model
+* MIM-2 Het conceptuele informatie model
+* MIM-3 Logisch informatie- of gegevensmodel
+* MIM-4 Fysiek of techisch gegevens- of datamodel
 
 MIM-3 en MIM-4 niet van toepassing op het GWSW 2.0
+<span class="mark">MIM-1 en MIM-2 - Ten opzichte van de metamodellen RDF/RDFS/OWL/SKOS/ toegevoegde waarde?</span>
 
 Als semantische modellen beschreven in RDF/RDFS/OWL zijn uitgebreid met SKOS en de NEN2660 voegt MIM-2 nauwelijks inhoudelijke waarde toe. Conform MOF (Meta Object Facility, definieert modelleringstalen ) staat het RDF op M2-niveau (MOF: een taal voor modelspecificaties). RDFS/OWL/SKOS en de NEN2660 zijn, net als het MIM, informatiemodellen op M1-niveau (MOF: een taal voor semantische domein modellen).
 
