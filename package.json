@@ -1,0 +1,14 @@
+{
+  "name": "gwsw_2.0",
+  "version": "1.0.0",
+  "description": "Respec for GWSW 2.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
