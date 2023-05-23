@@ -1052,9 +1052,6 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:integer ;
                             ] .
-  gwsw:begindatum           rdf:type            owl:ObjectProperty ;     
-                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
-                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
                             rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
                             rdfs:subClassOf
@@ -1063,13 +1060,10 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:date ;
                             ] .
-  gwsw:begindatum           rdf:type            owl:ObjectProperty ;     
-                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
-                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                             rdf:type            nen2660:EnumerationType;      # punning: is klasse en individu
                             owl:oneOf           (gwsw:Beton gwsw:Pvc) .       # individuen
-  gwsw:Beton                rdf:type            gwsw:LeidingMateriaalColl .   # wordt individu             
+  gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu             
   gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # het object, met waarde en metakenmerken
                             rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
                             rdfs:subClassOf                                   # restricties op object-niveau
@@ -1078,20 +1072,19 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                             ] . 
-  gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;     
-                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
-
 </pre></div>
 
 <div class="example"><div class="example-title marker">Attribuut-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
 
+  gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
   gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
                             rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
                             rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range
+                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
 </pre></div>
 
 <div class="example"><div class="example-title marker">De "oude" GWSW (versie 1.n) attribuut-definitie:</div><pre>
