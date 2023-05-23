@@ -1074,7 +1074,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                             ] . 
 </pre></div>
 
-<div class="example"><div class="example-title marker">Attribuut-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
+<div class="example"><div class="example-title marker">Kenmerk-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
 
   gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
@@ -1087,7 +1087,7 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
                             rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
 </pre></div>
 
-<div class="example"><div class="example-title marker">De "oude" GWSW (versie 1.n) attribuut-definitie:</div><pre>
+<div class="example"><div class="example-title marker">De "oude" GWSW (versie 1.n) kenmerk-definitie:</div><pre>
   gwsw:FysiekObject         rdfs:subClassOf
                             [
                               rdf:type                      owl:Restriction ;
