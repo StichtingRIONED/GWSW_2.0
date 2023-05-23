@@ -1040,7 +1040,7 @@ Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de 
 **COMPLEX - NEN2660 + GWSW**
 
 Het GWSW sluit aan op het NEN2660-modelleerpatroon en we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
-Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:MateriaalLeiding.
+Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:DiameterLeiding, gwsw:Begindatum en gwsw:MateriaalLeiding.
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
@@ -1075,7 +1075,6 @@ Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:Begindatum en gwsw:Mater
 </pre></div>
 
 <div class="example"><div class="example-title marker">Kenmerk-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
-
   gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
                             rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
