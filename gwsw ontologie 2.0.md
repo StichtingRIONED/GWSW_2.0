@@ -651,15 +651,15 @@ De toepassing van properties is in de GWSW-Ontologie vaak aan regels gebonden do
  | nen2660:isConnectedTo                       | gwsw:hasConnection                          | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasConnection 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                           |
  | gwsw:hasRepresentation (isRepresentationOf) | gwsw:hasRepresentation (isRepresentationOf) | Verwijst naar (range is) InformationObject                                                                                                                                                                                                                                                                                                                                                                                          |
  | **Referentie**                              |                                             |                                                                                                                                                                                                                                                                                                                                                                                                                                     |
- | nen2660:hasQuantityKind                     |                                             | *Subject* <span class="blue">heeft als grootheid</span> *qudt:Quantitykind.* Het object is een grootheid-individu                                                                                                                                                                                                                                                                                                                                                        |
- | nen2660:unit                                | gwsw:hasUnit                                | *Subject* <span class="blue">heeft als eenheid</span> *qudt:Unit*. Het object is een eenheid-individu                                                                                                                                                                                                                                                                                                                                                                   |
- | gwsw:doel                                   |                                             | *Subject* <span class="blue">heeft als doel</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu("waarvoor")                                                                                                                                                                                                                                                                                                      |
- | gwsw:toepassing                             |                                             | *Subject* <span class="blue">heeft als toepassing</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waarin")                                                                                                                                                                                                                                                                                                  |
- | gwsw:functie                                |                                             | *Subject* <span class="blue">heeft als functie</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("wat doet het")                                                                                                                                                                                                                                                                                               |
- | gwsw:uitvoering                             |                                             | *Subject* <span class="blue">heeft als uitvoering</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("hoe")                                                                                                                                                                                                                                                                                                     |
- | gwsw:structuur                              |                                             | *Subject* <span class="blue">heeft als structuur</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waaruit")                                                                                                                                                                                                                                                                                                  |
- | gwsw:technologie                            |                                             | *Subject* <span class="blue">heeft als technologie</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("werkwijze")                                                                                                                                                                                                                                                                                              |
- | gwsw:mechanisme                             |                                             | *Subject* <span class="blue">heeft als mechanisme</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waarmee")                                                                                                                                                                                                                                                                                                 |
+ | nen2660:hasQuantityKind                     |                                             | *Subject* <span class="blue">heeft als grootheid</span> *qudt:Quantitykind.* Het object is een grootheid-individu                                                                                                                                                                                                                                                                                                                   |
+ | nen2660:unit                                | gwsw:hasUnit                                | *Subject* <span class="blue">heeft als eenheid</span> *qudt:Unit*. Het object is een eenheid-individu                                                                                                                                                                                                                                                                                                                               |
+ | gwsw:doel                                   |                                             | *Subject* <span class="blue">heeft als doel</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu("waarvoor")                                                                                                                                                                                                                                                                                              |
+ | gwsw:toepassing                             |                                             | *Subject* <span class="blue">heeft als toepassing</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waarin")                                                                                                                                                                                                                                                                                         |
+ | gwsw:functie                                |                                             | *Subject* <span class="blue">heeft als functie</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("wat doet het")                                                                                                                                                                                                                                                                                      |
+ | gwsw:uitvoering                             |                                             | *Subject* <span class="blue">heeft als uitvoering</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("hoe")                                                                                                                                                                                                                                                                                            |
+ | gwsw:structuur                              |                                             | *Subject* <span class="blue">heeft als structuur</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waaruit")                                                                                                                                                                                                                                                                                         |
+ | gwsw:technologie                            |                                             | *Subject* <span class="blue">heeft als technologie</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("werkwijze")                                                                                                                                                                                                                                                                                     |
+ | gwsw:mechanisme                             |                                             | *Subject* <span class="blue">heeft als mechanisme</span> *Kwalitatief aspect.* Het object is een onderscheidend-kenmerk-individu ("waarmee")                                                                                                                                                                                                                                                                                        |
  
 
 Inverse properties zijn voor data-afleiding nodig om verschillen in kardinaliteit bij omgekeerde relaties te kunnen definiëren. Ze worden alleen gebruikt bij object-properties waarvan het type niet symmetrisch (<span class="blue">nen2660:isConnectedTo</span>) of functioneel is.
@@ -957,11 +957,11 @@ Het cijfer in deze condering staat voor het type conformiteitsklasse:
 
 De letter geeft het soort kwaliteitseis aan:
 
-| Letter | Betekenis |
-|---|---|---|---|
-| t |  Draai de kardinaliteit, bijvoorbeeld *minimaal 0* wordt *exact 1* |
-| d |  De klasse doet niet mee in de kwaliteitseis, meestal gaat het om een CE |
-| f |  De klasse is te abstract binnen de conformiteitsklasse. Bij de aanmaak van het RDF bestand met de conformiteitsklasse wordt op basis van deze code de Opmerking-kolom bijgewerkt met tekst: \[cfk fout\]. Deze tekst wordt gescand in validatie-queries |
+| Letter | Betekenis                                                                                                                                                                                                                                               |
+|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| t      | Draai de kardinaliteit, bijvoorbeeld *minimaal 0* wordt *exact 1*                                                                                                                                                                                       |
+| d      | De klasse doet niet mee in de kwaliteitseis, meestal gaat het om een CE                                                                                                                                                                                 |
+| f      | De klasse is te abstract binnen de conformiteitsklasse. Bij de aanmaak van het RDF bestand met de conformiteitsklasse wordt op basis van deze code de Opmerking-kolom bijgewerkt met tekst: \[cfk fout\]. Deze tekst wordt gescand in validatie-queries |
 
 ## Details kenmerken
 
@@ -969,30 +969,47 @@ De letter geeft het soort kwaliteitseis aan:
 
 ### Kenmerken: simpel versus complex
 
-De NEN2660 specificeert diverse modelleerpatronen - zowel eenvoudig als complex - voor attributen en relaties. Met de complexe modelleerpatronen worden samengestelde kwanteiten en/of metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve attribuut, het kwantitatieve attribuut of de kenmerk-relatie "geobjectiviceerd".
+De NEN2660 specificeert voor kenmerk-attributen en -relaties meerdere modelleerpatronen, zowel eenvoudig als complex. 
 
-Het GWSW hanteerde ook in voorgaande versies het principe van "geobjectiviceerde kenmerken", de kenmerken werden echter via de generieke relatie "hasAspect" (type owl:ObjectProperty) aan het subject toegewezen.
-Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk kenmerk minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit of kwaliteit heeft het: rdfs:range). Alle mogelijke domeinen en de range van een aspect zijn in de ontologie opgenomen.
+Met de complexe modelleerpatronen worden samengestelde kwanteiten en/of metadata voor waarden gemodelleerd. In die modelleervorm wordt het kwalitatieve/kwantitatieve attribuut of de kenmerk-relatie "geobjectiviceerd". In het GWSW hanteren we ook het principe van "geobjectiviceerde kenmerken", de kenmerken werden in voorgaande GWSW versies echter via de generieke relatie "hasAspect" (type owl:ObjectProperty) aan het subject toegewezen.
 
-Hierna volgen drie voorbeelden van kenmerk-modellering: SIMPLE, COMPLEX, COMPLEX GWSW. 
-Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
+Vanaf versie 2.0 volgt het GWSW de NEN2660. In de GWSW ontologie heeft elk kenmerk minimaal één domein (bij welke klasse hoort het: rdfs:domain) en exact één bereik (welke kwantiteit,  kwaliteit of referentie heeft het: rdfs:range). Alle mogelijke domeinen en de range van een kenmerk zijn in de ontologie opgenomen.
+
+Hierna volgen drie voorbeelden van kenmerk-modellering: 
+* SIMPLE
+* COMPLEX
+* COMPLEX/GWSW
+
+Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm. Dit modelleerpatroon biedt een uitgebreidere semantiek en heeft daarom de voorkeur vanwege:
+* Door objectificering van het kenmerk kan het eenvoudig in meerdere relaties gebruikt, bijvoorbeeld het kenmerk met de relatie “hasInput” aan een berekening (activiteit) koppelen.
+* Het kenmerk kan (via kenmerk-relaties) zelf kenmerken bevatten, bijvoorbeeld metagegevens over de inwinning (datum en wijze van inwinning). In GWSW datasets wordt dit veel toegepast.
+* De uitgebreidere semantiek kan in een dataset met beperkte syntax worden beschreven (helemaal conform COMPLEX).
+
+In de hierna volgende voorbeelden staat een leiding met de volgende kenmerken:
+* diameter leiding (integer, in mm)
+* begindatum (datum aanleg, kenmerk van supertype "fysiek object")
+* materiaal leiding (individu, een materiaal)
+
+Deze leiding wordt volgens de genoemde patronen gemodelleerd (datamodel) en als individu (dataset) uitgewerkt.
 
 **SIMPEL - NEN 2660**
+
+Een voorbeeld van het modelleerpatroon voor "simpele" kenmerken:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
   gwsw:diameterLeiding    rdf:type              owl:DatatypeProperty ;      # kwantitatief attribuut
-                          rdfs:domain           gwsw:Leiding ;              # minimaal 1 domein          
-                          rdfs:range            xsd:integer .               # exact 1 range
+                          rdfs:domain           gwsw:Leiding ;                        
+                          rdfs:range            xsd:integer .               
   gwsw:begindatum         rdf:type              owl:DatatypeProperty ;      # kwalitatief attribuut
-                          rdfs:domain           nen2660:PhysicalObject ;    # minimaal 1 domein          
-                          rdfs:range            xsd:date .                  # exact 1 range (OWA: tenminste 1) 
+                          rdfs:domain           nen2660:PhysicalObject ;             
+                          rdfs:range            xsd:date .                   
   gwsw:MateriaalLeiding   rdf:type              owl:Class ;
-                          rdf:type              nen2660:EnumerationType .   # punning: is klasse en individu
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # wordt individu             
+                          rdf:type              nen2660:EnumerationType .   # punning: is klasse en wordt hier individu
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # individu             
   gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;        # kwalitatief attribuut
-                          rdfs:domain           gwsw:Leiding ;              # minimaal 1 domein          
-                          rdfs:range            gwsw:MateriaalLeiding .     # exact 1 range
+                          rdfs:domain           gwsw:Leiding ;                       
+                          rdfs:range            gwsw:MateriaalLeiding .     
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
@@ -1002,24 +1019,30 @@ Het GWSW datamodel hanteert de laatste (meest gedetailleerde) modelvorm.
                           gwsw:materiaalLeiding gwsw:Beton .
 </pre></div>
 
-**COMPLEX - NEN2660**
+**COMPLEX**
 
-De NEN2660 specificeert een modelleerpatroon voor "complexe" kenmerken:
+Een voorbeeld van het modelleerpatroon voor "complexe" kenmerken:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
-  gwsw:diameterLeiding    rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
-                          rdfs:range            nen2660:QuantityValue .       # exact 1 range (OWA: tenminste 1)
-  gwsw:begindatum         rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           nen2660:PhysicalObject ;      # minimaal 1 domein          
-                          rdfs:range            nen2660:QualityValue .        # exact 1 range (OWA: tenminste 1) 
+  gwsw:diameterLeiding    rdf:type              owl:ObjectProperty ;          # kwantitatief attribuut
+                          rdfs:label            "Diameter leiding" ;
+                          rdfs:domain           gwsw:Leiding ;                         
+                          rdfs:range            nen2660:QuantityValue ;
+                          nen2660:hasUnit       unit:MiliM .                   
+  gwsw:begindatum         rdf:type              owl:ObjectProperty ;          # kwalitatief attribuut
+                          rdfs:label            "Begindatum" ;
+                          rdfs:domain           nen2660:PhysicalObject ;              
+                          rdfs:range            nen2660:QualityValue ;
+                          nen2660:hasUnit       unit:YR, unit:MO, unit:DAY .  # datum op deze manier? ...
   gwsw:MateriaalLeiding   rdf:type              owl:Class ;
-                          rdf:type              nen2660:EnumerationType .     # punning: is klasse en individu
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # wordt individu             
-  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;     
-                          rdfs:domain           gwsw:Leiding ;                # minimaal 1 domein          
-                          rdfs:range            nen2660:RelationReference .   # exact 1 range (OWA: tenminste 1)
+                          rdf:type              nen2660:EnumerationType ;     # punning: is klasse en wordt hier individu
+                          owl:oneOf             (gwsw:Beton) .                # individuen
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # individu             
+  gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;          # kenmerk-relatie
+                          rdfs:label            "Materiaal leiding" ;
+                          rdfs:domain           gwsw:Leiding ;                        
+                          rdfs:range            gwsw:MateriaalLeiding .   
 </pre></div>
 
 Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de property 
@@ -1037,75 +1060,63 @@ Individuals van kenmerken zoals leidingmateriaal worden direct gekoppeld via de 
                           gwsw:materiaalLeiding gwsw:Beton .
 </pre></div>
 
-**COMPLEX - NEN2660 + GWSW**
+**COMPLEX/GWSW**
 
-Het GWSW sluit aan op het NEN2660-modelleerpatroon en we hanteren de "complexe" kenmerk patronen ook voor kwalitatieve attributen.
-Voorbeeld met volledig geobjectiviceerde kenmerken gwsw:DiameterLeiding, gwsw:Begindatum en gwsw:MateriaalLeiding.
+Het GWSW sluit aan op het NEN2660-modelleerpatroon. 
+Voor de eenduidigheid worden alle (meta)kemerken geobjectiviceerd. De annotaties bij het kenmerk worden - zoals in de NEN2660 - aan de property gekoppeld.
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
   gwsw:DiameterLeiding      rdfs:subClassOf     nen2660:QuantityValue ;       
-                            rdfs:label          "Diameter leiding" ;          # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
                             rdfs:subClassOf
                             [
                               rdf:type          owl:Restriction ;
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:integer ;
                             ] .
-  gwsw:Begindatum           rdfs:subClassOf     nen2660:QuantityValue ;       
-                            rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op object-niveau (niet bij attribuut-property)</span>
+  gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
+                            rdfs:label          "Diameter leiding" ;          
+                            nen2660:hasUnit     unit:MiliM ;                   
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
+  gwsw:Begindatum           rdfs:subClassOf     nen2660:QualityValue ;       
+                            rdfs:label          "Begindatum" ;                # <span class="mark">kenmerk-annotaties op klasse-niveau (niet bij attribuut-property)</span>
                             rdfs:subClassOf
                             [
                               rdf:type          owl:Restriction ;
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:date ;
                             ] .
+  gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
+                            nen2660:hasUnit     unit:YR, unit:MO, unit:DAY .  # datum op deze manier? ...                  
+                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
+                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                             rdf:type            nen2660:EnumerationType;      # punning: is klasse en individu
-                            owl:oneOf           (gwsw:Beton gwsw:Pvc) .       # individuen
+                            owl:oneOf           (gwsw:Beton) .                # individuen
   gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu             
-  gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # het object, met waarde en metakenmerken
-                            rdfs:label          "Materiaal leiding" ;         # kenmerk-annotaties op object-niveau (niet bij attribuut-property)
-                            rdfs:subClassOf                                   # restricties op object-niveau
+  gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # de kenmerk-klasse
+                            rdfs:subClassOf                                   # restricties op klasse-niveau
                             [ 
                               rdf:type          owl:Restriction;
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                             ] . 
-</pre></div>
-
-<div class="example"><div class="example-title marker">Kenmerk-definitie wijkt structureel af van eerdere GWSW-versies:</div><pre>
-  gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
-                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
-  gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-naam, startend met lower-case
-                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
-                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
+                            rdfs:label          "Materiaal leiding" ;         
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
                             rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
 </pre></div>
 
-<div class="example"><div class="example-title marker">De "oude" GWSW (versie 1.n) kenmerk-definitie:</div><pre>
-  gwsw:FysiekObject         rdfs:subClassOf
-                            [
-                              rdf:type                      owl:Restriction ;
-                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
-                              owl:onProperty                gwsw:hasAspect ;  # de "oude" generieke attribuut-property
-                              owl:onClass                   gwsw:Begindatum .
-                            ] . 
-  gwsw:Leiding              [
-                              rdf:type                      owl:Restriction ;
-                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
-                              owl:onProperty                gwsw:hasAspect ;
-                              owl:onClass                   gwsw:Materiaalleiding .
-                            ] . 
-</pre></div>
-
-In de dataset komt de declaratie helemaal overeen met die van COMPLEX - NEN2660
+In de dataset komt de declaratie helemaal overeen met die van COMPLEX. 
+Aan het kenmerk "materiaal leiding" is, ter illustratie van de voordelen van kenmerk-objectificatie, het meta-kenmerk "inwinning" toegevoegd.
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
-    ex:Leiding_1  rdf:type              gwsw:Leiding ;
+    ex:Leiding_1  rdf:type              gwsw:Leiding ;  
+                  gwsw:diameterLeiding                                                         
+                  [
+                    rdf:value           400 ; 
+                  ] ;     
                   gwsw:begindatum                                                         
                   [
                     # rdf:type          gwsw:Begindatum ;                         expliciet typeren niet nodig, liever niet (redundant)
@@ -1124,8 +1135,36 @@ In de dataset komt de declaratie helemaal overeen met die van COMPLEX - NEN2660
                   ] .
 </pre></div>
 
-<div class="example-dataset"><div class="example-title marker">De "oude" GWSW (versie 1.n) attribuut-declaratie:</div><pre>
+<div class="box">
+<div class="example"><div class="example-title marker">De OUDE GWSW (versie 1.n) kenmerk-domein-definitie:</div><pre>
+  gwsw:Leiding              rdfs:subClassOf
+                            [
+                              rdf:type                      owl:Restriction ;
+                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
+                              owl:onProperty                gwsw:hasAspect ;  # de "oude" generieke attribuut-property
+                              owl:onClass                   gwsw:DiameterLeiding ;
+                            ] . 
+  gwsw:FysiekObject         rdfs:subClassOf
+                            [
+                              rdf:type                      owl:Restriction ;
+                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
+                              owl:onProperty                gwsw:hasAspect ;  # de "oude" generieke attribuut-property
+                              owl:onClass                   gwsw:Begindatum .
+                            ] . 
+  gwsw:Leiding              [
+                              rdf:type                      owl:Restriction ;
+                              owl:minQualifiedCardinality   "0"^^xsd: nonNegativeInteger ;
+                              owl:onProperty                gwsw:hasAspect ;
+                              owl:onClass                   gwsw:Materiaalleiding ;
+                            ] . 
+</pre></div>
+<div class="example-dataset"><div class="example-title marker">De oude GWSW (versie 1.n) attribuut-declaratie:</div><pre>
   ex:Leiding_1  rdf:type              gwsw:Leiding ;
+                gwsw:hasAspect                                                            
+                [                                   
+                  rdf:type            gwsw:Begindatum ;                       # expliciet typeren
+                  gwsw:hasValue       "2012-05-01"^^xsd:date; 
+                ] ,     
                 gwsw:hasAspect                                                            
                 [                                   
                   rdf:type            gwsw:Begindatum ;                       # expliciet typeren
@@ -1146,6 +1185,7 @@ In de dataset komt de declaratie helemaal overeen met die van COMPLEX - NEN2660
                   gwsw:hasReference   gwsw:Beton ;
                 ] .
 </pre></div>
+</div>
 
 ### Eenheden op datamodel-niveau
 
@@ -1252,7 +1292,7 @@ De eisen aan nauwkeurigheid drukken we uit als restrictie op de kenmerk-waarde:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
 gwsw:HoogtePut      rdfs:subClassOf        nen2660:QuantityValue ;
-                    rdfs:label                              “Put hoogte” ;
+                    rdfs:label             “Hoogte put” ;
                     rdfs:subClassOf
                     [
                       rdf:type             owl:Restriction ;
@@ -1300,6 +1340,19 @@ Intrinsieke kenmerken horen exclusief (per definitie) bij een klasse, ze hebben 
                              ] .      
 </pre></div>
 
+<div class="box">
+In GWSW 1.n was de definitie van intrinsieke kenmerken meer complex:
+
+<div class="example"><div class="example-title marker">Datamodel: OUDE (versie 1.n) kenmerk-definitie:</div><pre>
+  gwsw:Put                    rdfs:subClassOf
+                              [   
+                                rdf:type              owl:Restriction ;
+                                owl:onProperty        gwsw:hasAspect ;
+                                owl:someValuesFrom    gwsw:HoogtePut ;
+                              ] .
+</pre></div>
+</div>
+
 Afgeleid wordt dat ex:Object_1 mogelijk van de klasse Put is
 
 ### Kwalificatie standaardwaardes
@@ -1318,13 +1371,13 @@ Als de typering van een subject is af te leiden uit rdfs:domain betreft het een 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
     gwsw:diameterLeiding      rdf:type                  owl:ObjectProperty ;
                               rdf:type                  owl:FunctionalProperty ; # attribuut komt max 1x voor
+                              nen2660:unit              unit:MiLiM ;
+                              rdfs:label                "Diameter leiding" ;
+                              skos:definition           "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" ;
                               rdfs:domain               gwsw:Leiding ;      
                               rdfs:range                gwsw:DiameterLeiding .
     gwsw:DiameterLeiding      rdf:type                  owl:Class ;         
-                              rdfs:subClassOf           nen2660:QuantityValue ;  
-                              nen2660:unit              unit:MiLiM ;
-                              rdfs:label                "Diameter leiding" ;
-                              skos:definition           "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" .
+                              rdfs:subClassOf           nen2660:QuantityValue .  
     gwsw:Drukleiding          rdf:type                  owl:Class ;         
                               rdfs:subClassOf           gwsw:Leiding .
       
