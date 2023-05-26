@@ -1,14 +1,15 @@
 /**
  * Bouwfase: reload automatisch lokale pagina (20230522)
- */ 
-const itv = 10 * 1000;  
+ */
+const itv = 2 * 1000;
 
-//if (localStorage.getItem('scrollpos'))
-//  window.hidden = true;
-
+let body = document.getElementById("body");
 let timerId = setInterval(chkUpdate, itv);
-setTimeout(scrollIt, 500); // Vertraag: laat document volledig laden
 
+if (localStorage.getItem('scrollpos')) {
+  body.hidden = true; // Voorkom onrustige opbouw
+  setTimeout(scrollIt, 500); // Vertraag: laat document volledig laden
+}
 function chkUpdate() {
   fetch("http://localhost:3000/reload").then((res) => {
 
@@ -17,20 +18,17 @@ function chkUpdate() {
       document.location.hash = ""; // Verwijder hst-link
       document.location.reload();
     }
-    
-  }).catch((err) => { // Geen localhost, publicatie-fase?
+
+  }).catch((err) => { // Geen localhost, publicatie-fase? Stop update-check
     clearTimeout(timerId);
   });
 }
 function scrollIt() {
-  const y = 350; // offset bij scrolling
-
+  const y = 0;  //350; // offset bij scrolling (bij hidden-body offset niet meer nodig)
   var scrollpos = localStorage.getItem('scrollpos');
-  if (scrollpos) {
-    window.scrollTo({ top: scrollpos - y, left: 0, behavior: "instant" });
-    localStorage.removeItem('scrollpos');
-  }
-  //window.hidden = false;
+  body.hidden = false; // Nu zichtbaar maken, anders werkt scroll niet
+  window.scrollTo({ top: scrollpos - y, left: 0, behavior: "instant" });
+  localStorage.removeItem('scrollpos');
 }
 /**
  * Deze werkt niet, reageert te vroeg? (style en images moeten nog laden)
