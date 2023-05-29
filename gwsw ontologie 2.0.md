@@ -356,7 +356,8 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 * Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
 * Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
-* Kwalitatieve of kwantitatieve attributen hebben altijd de naam van de range-class met het eerste karakter in lowercase
+* Kenmerk-relaties hebben altijd exact 1 range van een specialisatie van nen2660:RelationReference
+* Kwalitatieve attributen, kwantitatieve attributen of kenmerk-relaties hebben altijd de naam van de range-class met het eerste karakter in lowercase
 
 # Aansluiting op externe (meta)modellen
 
@@ -1075,11 +1076,11 @@ Voorbeeld van het modelleerpatroon voor "complexe" kenmerkwaarden:
                           gwsw:begindatum       
                           [ 
                             rdf:value           "2012-05-01"^^xsd:date ;
-                            rdfs:comment        "commentaar bij begindatum" ;
+                            rdfs:comment        "commentaar bij deze begindatum" ;
                           ] ; 
                           gwsw:materiaalLeiding [
                             rdf:value           gwsw:Beton ;
-                            rdfs:comment        "commentaar bij materiaalleiding" ;
+                            rdfs:comment        "commentaar bij deze materiaalleiding" ;
                           ] .
 </pre></div>
 
@@ -1324,7 +1325,7 @@ Bij ex:Put_1 registreren dat de waarde van gwsw:hoogtePut is geschat
                               ] .      
 </pre></div>
 
-### Nauwkeurigheid
+### Nauwkeurigheid, kwaliteit
 
 <span class="smallcaps">Minimum/maximum waarde, datatype</span>
 
