@@ -8,7 +8,7 @@
 Versie historie
 <div style="font-size: 0.90em">
 
-20230528: Oplevering openbaar concept-document 
+20230530: Oplevering openbaar concept-document 
 20230522: Eerste commentaarronde (Michel Bohms) verwerkt  
 20230511: Vervolg implementatie NEN2660  
 20221220: Eerste aanpassingen op vervanging NTA 8035 door NEN2660  
