@@ -7,9 +7,10 @@
     {
       "type": "msedge",
       "request": "launch",
-      "name": "Launch Edge against localhost",
+      "name": "Launch Edge against Respec on localhost",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "npm: start",
     }
   ]
 }
