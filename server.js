@@ -7,6 +7,7 @@ const mdFile = __dirname + "/gwsw ontologie 2.0.md";
 
 let date = Date.now();
 const srv = express();
+const port = 3010; // Sync met reload
 
 /**
  * Reload-test vanuit client: is er een update gedaan
@@ -25,8 +26,8 @@ srv.use("/", express.static("./"));
 srv.use("/builds", express.static("./builds"));
 srv.use("/assets/", express.static("./assets"));
 
-srv.listen(3000, () => {
-  console.log("express listening on port 3000");
+srv.listen(port, () => {
+  console.log(`express listening on port ${port}`);
 });
 /**
  * Update nodig? (20230522)

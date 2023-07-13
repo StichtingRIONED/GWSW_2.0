@@ -1,7 +1,8 @@
 /**
  * Bouwfase: reload automatisch lokale pagina (20230522)
  */
-const itv = 2 * 1000;
+const itv = 2 * 1000; // Frequentie check op aanpassingen
+const port = 3010; // Sync met server
 
 let body = document.getElementById("body");
 let timerId = setInterval(chkUpdate, itv);
@@ -11,7 +12,7 @@ if (localStorage.getItem('scrollpos')) {
   setTimeout(scrollIt, 500); // Vertraag: laat document volledig laden
 }
 function chkUpdate() {
-  fetch("http://localhost:3000/reload").then((res) => {
+  fetch(`http://localhost:${port}/reload`).then((res) => {
 
     if (res.status == 200) {
       localStorage.setItem('scrollpos', window.scrollY);

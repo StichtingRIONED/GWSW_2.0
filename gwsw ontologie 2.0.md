@@ -8,7 +8,8 @@
 Versie historie
 <div style="font-size: 0.90em">
 
-20230530: Oplevering openbaar concept-document 
+20230711: Samenvatting uitgebreid, tekst correcties   
+20230530: Oplevering openbaar concept-document  
 20230522: Eerste commentaarronde (Michel Bohms) verwerkt  
 20230511: Vervolg implementatie NEN2660  
 20221220: Eerste aanpassingen op vervanging NTA 8035 door NEN2660  
@@ -35,7 +36,7 @@ Versie historie
 
 Het W3C definieert standaarden voor het Semantisch Web met als basis de triple-vorm: de Subject-Predicate-Object constructie. Het basisprotocol dat hieraan ten grondslag ligt is de linked data taal RDF.
 
-Begin 2020 is gegestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020, opgevolgd door de NEN 2660 deel 1 en 2. Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, de uitwisseling en toepassinge van de GWSW linked data gegevens zal functioneel nauwelijks gaan wijzigen. GWSW versie 2.0 beschrijft de RDF-implementatie op de NEN 2660-2 (verder genoemd NEN2660) voor de discipline Stedelijk Water.
+Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020, opgevolgd door de NEN 2660 deel 1 en 2. Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, de uitwisseling en toepassing van de GWSW linked data gegevens zal functioneel nauwelijks gaan wijzigen. GWSW versie 2.0 beschrijft de RDF-implementatie op de NEN 2660-2 (verder genoemd NEN2660) voor de discipline Stedelijk Water.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van het RDF en daarop gebaseerde standaarden. Ook kennis van het uitwisselformaat Turtle is aanbevolen, in de voorbeelden (van datamodel, dataset en SHACLshapes) en in de praktijk (bij uitwisseling van GWSW-gegevens) gebruiken we dat Turtle-formaat.
 

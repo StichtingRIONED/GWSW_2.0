@@ -21,9 +21,9 @@ var respecConfig =
   }],
   authors: [{
     name: "Marinus Vonhof",
-    url: "mailto:marinus.vonhof@rioned.org",
-    company: "Stichting RIONED",
-    companyURL: "https://www.riool.net"
+    url: "mailto:marinus.vonhof@marivon.nl",
+    company: "marIvon",
+    companyURL: "https://www.marivon.nl"
   }],
   otherLinks: [{
     key: "GitHub", href: "https://github.com/stichtingrioned/GWSW_2.0/"
