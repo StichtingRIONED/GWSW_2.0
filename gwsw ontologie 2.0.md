@@ -36,7 +36,7 @@ Versie historie
 
 Het W3C definieert standaarden voor het Semantisch Web met als basis de triple-vorm: de Subject-Predicate-Object constructie. Het basisprotocol dat hieraan ten grondslag ligt is de linked data taal RDF.
 
-Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020, opgevolgd door de NEN 2660 deel 1 en 2. Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, de uitwisseling en toepassing van de GWSW linked data gegevens zal functioneel nauwelijks gaan wijzigen. GWSW versie 2.0 beschrijft de RDF-implementatie op de NEN 2660-2 (verder genoemd NEN2660) voor de discipline Stedelijk Water.
+Begin 2020 is gestart met het ontwerp van GWSW 2.0, gebaseerd op de in die tijd uitgebrachte NEN NTA 8035:2020, opgevolgd door de NEN 2660 deel 1 en 2. Het generieke uitwisselformaat GWSW-OroX wordt hiermee ook herzien, de uitwisseling en toepassing van de GWSW linked data gegevens zal functioneel nauwelijks gaan wijzigen. GWSW versie 2.0 beschrijft de RDF-implementatie op de NEN 2660-2 (verder genoemd NEN2660) voor de discipline Stedelijk Water. In een enkel geval wordt teruggegrepen op de NEN 2660-1, dat wordt dan expliciet vermeld.
 
 Bij de uitwerking van dit document is er van uitgegaan dat de lezer bekend is met de principes van het RDF en daarop gebaseerde standaarden. Ook kennis van het uitwisselformaat Turtle is aanbevolen, in de voorbeelden (van datamodel, dataset en SHACLshapes) en in de praktijk (bij uitwisseling van GWSW-gegevens) gebruiken we dat Turtle-formaat.
 
@@ -69,9 +69,9 @@ Een samenhangende gegevensstructuur bestaande uit concepten, hun attributen en o
 Binnen de GWSW ontologie beschrijft het datamodel de concepten met hun attributen en relaties. De dataset bevat de individuen, bijvoorbeeld een gemeentelijk afvalwatersysteem. Voor het datamodel wordt ook wel de term TBox gebruikt: “terminological components”. Voor de dataset wordt ook de term ABox gebruikt: “assertion components”.
 
 **OWA, CWA, UNA**  
-OWA / Open World Assumption: neem aan dat individuen binnen de dataset ook elders beschreven kunnen zijn
-CWA / Closed World Assumption: neem aan dat individuen alleen binnen de dataset beschreven zijn
-UNA / Unique Name Assumption: neem aan dat individuen een unieke naam (URI) hebben 
+OWA / Open World Assumption: neem aan dat individuen binnen de dataset ook elders beschreven kunnen zijn  
+CWA / Closed World Assumption: neem aan dat individuen alleen binnen de dataset beschreven zijn  
+UNA / Unique Name Assumption: neem aan dat individuen een unieke naam (URI) hebben  
 
 ## Hoofdstructuur datamodel
 
@@ -87,17 +87,32 @@ De belangrijkste "top level" concepten (supertypes) zijn:
 
 Bij het ontwerp van de datastructuur spelen deze elementen de hoofdrol. Met de NEN2660 vormen ze het ontwerpkader, de ruggengraat van het GWSW. De GWSW ontologie onderscheidt zich door diepgang in semantiek en reikwijdte in de toepassing (van systeem tot proces). De soortenboom van het GWSW bevat op dit moment (versie 1.6) circa 1500 klassen.
 
-## Drie bestandsvormen
+## Modelvormen
 
 De ontologie omvat zowel het datamodel (de klassen, attributen en relaties, zie [data.gwsw.nl](https://data.gwsw.nl)) als de daarop gebaseerde datasets (de individuen, zie [apps.gwsw.nl](https://apps.gwsw.nl)). Vanaf GWSW 2.0 wordt naast het <span class="blue">Datamodel</span> en <span class="blue">Dataset</span> een derde datastructuur gebruikt: de <span class="blue">Shapes</span> met daarin SHACL graphs als constraints voor data -verificatie (de conformiteitsklasse - CFK). (De Shapes vervangen de filters op vorige GWSW-versies met daarin aangescherpte OWL-restricties).
 
-Het datamodel is zo ingericht dat hiermee vergaande afleiding van de data in de Dataset mogelijk is ("inferencing"). Daarnaast dienen de Shapes om - afhankelijk van het toepassingsproces - kwaliteitseisen te formuleren en via de SHACL processor te verifiëren.  
+Het datamodel kan nog worden onderverdeeld naar modelvormen (zie ook hst [MOF en MIM](#mof-en-mim)), de integratie in IMBOR vraagt mogelijk om zo'n onderverdeling:
 
-*De rol van de drie bestandsvormen datamodel, Dataset en Shapes bij de toepassing van het GWSW:*
+**Begrippenmodel en conceptueel model (vocabulaire)**  
+Een modelvorm met het begrippenkader (het universe of discourse) en een beschrijving van de data-betekenis en structuur.  
+Deze modelvorm bevat voor GWSW 2.0 de soortenboom (supertypes, klassen, subtypes) met hun annotaties (labels en definitie).
+Deze modelvorm kunnen we ook beschouwen als woordenboek/vocabulaire, geschikt voor op zichzelf staande presentaties (conform IMBOR). 
+
+**Logisch model**
+Beschrijft de interactie tussen systemen en hun gebruikers en tussen systemen onderling.  
+Deze modelvorm bevat voor GWSW 2.0 de OWL-restricties op relaties en attributen. Daarmee worden alle interacties beschreven.
+
+**Technisch model**  
+Beschrijft de technologie waarin de informatie wordt vastgelegd of uitgewisseld.  
+RDF vormt het kader voor het technisch model. De SHACL-graphs (Shapes) met verificatie-specificaties kunnen we als onderdeel van het technisch model beschouwen. 
+
+Het *datamodel* is zo ingericht dat hiermee vergaande afleiding van de data in de *dataset* mogelijk is ("inferencing"). Daarnaast dienen de *shapes* om - afhankelijk van het toepassingsproces - kwaliteitseisen te formuleren en via de SHACL processor te verifiëren.  
+
+*De rol van de bestandsvormen Datamodel, Dataset en Shapes bij de toepassing van het GWSW:*
 
 <img src="media/image1.png" style="width:100%;height:40%" />
 
-Voorbeelden van de drie bestandsvormen zijn in dit document als volgt gemarkeerd:
+Voorbeelden van de bestandsvormen zijn in dit document als volgt gemarkeerd:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
     Voorbeeld datamodel
@@ -142,7 +157,7 @@ De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 
 ### Gebruikte namespaces  
 
-| Taal           | Prefix        | Url                                                 |
+| Onderwerp      | Prefix        | Url                                                 |
 |----------------|---------------|-----------------------------------------------------|
 | RDF            | rdf:          | &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; |
 | RDFS           | rdfs:         | &lt;http://www.w3.org/2000/01/rdf-schema#&gt;       |
@@ -154,13 +169,16 @@ De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 | Geo-definities | geo:          | &lt;http://www.opengis.net/ont/geosparql#&gt;       |
 | Grootheden     | quantitykind: | &lt;http://qudt.org/vocab/quantitykind/&gt;         |
 | Eenheden       | unit:         | &lt;http://qudt.org/vocab/unit/&gt;                 |
+| IMBOR          | imbor:        | &lt;https://data.crow.nl/imbor/def/&gt;             |
 
 Voor de concepten en relaties uit de GWSW-Ontologie hanteren we in de voorbeelden de prefix “gwsw:”. Voor individuen in een dataset wordt de prefix “ex:” gebruikt.
 
-| Onderwerp      | Prefix | Url                                      |
-|----------------|--------|------------------------------------------|
-| GWSW-Datamodel | gwsw:  | &lt;https://data.gwsw.nl/2.0/totaal/&gt; |
-| GWSW-Dataset   | ex:    | &lt;https://w3id.org/def/example#&gt;    |
+| Onderwerp      | Prefix | Url                                       |
+|----------------|--------|-------------------------------------------|
+| GWSW-Datamodel | gwsw:  | &lt;https://data.gwsw.nl/2.0/totaal/&gt;  |
+| GWSW-Dataset   | ex:    | &lt;https://sparql.gwsw.nl/id/Juinen#&gt; |
+
+ (https://data.gwsw.nl/2.0/totaal/ is een alias voor https://data.gwsw.nl/def/2.0/totaal/)
 
 # Modelleerprincipes - Algemeen
 
@@ -183,6 +201,11 @@ Bij het ontwerp van het GWSW Datamodel spelen altijd de volgende **invalshoeken*
 **"As is", de momentopname**  
 Het datamodel beschrijft de "as is" situatie, het bevat een momentopname van systemen en processen binnen de discipline stedelijk water. Het beschrijft dus geen historische gegevens of de levenscyclus van objecten zoals bij bitemporeel datamanagement of binnen de context van system engineering.
 
+<div class="box"><strong>Versioning objecten in IMBOR</strong>
+
+IMBOR bevat vanaf 2024 een kader voor versionering van objecten (implementatie NEN 3610: temporele aspecten). Het moet tussen IMBOR en GWSW duidelijk zijn of deze tijdlijngegevens wel of niet tot de alignment gaan behoren.
+</div>
+
 ## Structureren
 
 Zoals genoemd is de datastructuur object-georiënteerd waarbij objecten in een aantal hoofdstructuren zijn ondergebracht:
@@ -200,7 +223,13 @@ Afgeleide gegevens komen niet voor in de definitie van fysieke objecten, bijvoor
 
 Afgeleide gegevens zoals rekenresultaten en data-analyses komen in het GWSW wel voor in de vorm van gemodelleerde rapportages, bijvoorbeeld in GWSW Kengetallen. 
 
-Eigenschappen van de bovengrond en ondergrond (maaiveldhoogte, grondsoort) komen niet voor als aspecten van de fysieke objecten die zich daarin bevinden. Een leiding heeft niet als kenmerk "Grondsoort", wel wordt er een relatie <span class="blue">is deel van</span> met de ondergrond - en dus met bijbehorende kenmerken - gedefinieerd.</div>
+Eigenschappen van de bovengrond en ondergrond (maaiveldhoogte, grondsoort) komen niet voor als aspecten van de fysieke objecten die zich daarin bevinden. Een leiding heeft niet als kenmerk "Grondsoort", wel wordt er een relatie <span class="blue">is deel van</span> met de ondergrond - en dus met bijbehorende kenmerken - gedefinieerd.
+
+<strong>Consistentie met topmodel IMBOR</strong>
+
+Met het GWSW als onderdeel van IMBOR is hier meer integratie binnen het topmodel nodig. In IMBOR is bijvoorbeeld Beheerder een kenmerk van de top-level-klasse FysiekObject terwijl in het GWSW de klasse Beheerder een subtype van Levensvorm is met <span class="blue">heeft invoer</span> het FysiekObject.  
+Het streven is om de concepten op topniveau op gelijke wijze te modelleren, als die integratie niet volledig lukt moet de afstemming minstens via alignment worden bereikt. Op discipline-niveau (de specialisaties van de top-level-klassen) is er natuurlijk meer modelleervrijheid.
+</div>
 
 ## Concepten en annotaties
 
@@ -223,7 +252,7 @@ Zie hst [Identificatie van concepten](#identificatie-van-concepten)
 
 ## Data-afleiding en -verificatie
 
-Definieer klassen zo uitgebreid mogelijk op basis van hun eigenschappen. Daarmee worden datasets op basis van het datamodel ruimer interpreteerbaar en beter verifieerbaar. Hier volgt een opsomming van de mogelijke afleidingen (inferences) en uit de CE's afgeleide validaties. In enkele gevallen is reasoning op basis van het UNA principe nodig. De controle op kardinaliteit is beperkt vanwege het OWA principe in RDF.
+Bij de definitie van klassen ligt de focus op data-afleiding (determinatie). Definieer klassen zo uitgebreid mogelijk op basis van hun eigenschappen. Daarmee worden datasets op basis van het datamodel ruimer interpreteerbaar en beter verifieerbaar. Hier volgt een opsomming van de mogelijke afleidingen (inferences) en uit de CE's afgeleide validaties. In enkele gevallen is reasoning op basis van het UNA principe nodig. De controle op kardinaliteit is beperkt vanwege het OWA principe in RDF.
 
 * Controle op referentie-waarden binnen domein van collecties / keuzelijsten (CWA/UNA)
 * Controle op correcte typering binnen samenstellingen via "heeft deel" relatie.
@@ -263,13 +292,13 @@ Bouw de soortenboom op basis van onderscheidende kenmerken, zie hst [Details ond
 1. Voor het classificeren van een concept uitgaan van onderscheidende kenmerken in de (abstracte) soortenboom. Denk aan determineren van planten volgens Linnaeus: na het maken van een aantal keuzes wordt de soort gevonden
 2. Streef ernaar om met de onderscheidende kenmerken de (in je hoofd) uitgeschreven definitie te vervangen
 3. Gebruik de beschreven onderscheidende kenmerken bij fysieke objecten en activiteiten
-4. Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus niet gebruikt (zijn - nog - onnodig)
+4. Kwalificeer het onderscheidende kenmerk impliciet (gwsw:uitvoering "groot"). Expliciete kwalificaties (in de vorm van subtypes van generieke kenmerken) worden dus (nog) niet gebruikt
 
 ### Abstracte klassen
 
-_Hier verstaan we onder "abstract" de klassen (en collecties) die niet voor classificatie worden gebruikt / niet instantieerbaar zijn_
+*Hier verstaan we onder "abstract" de klassen (en collecties) die niet voor classificatie worden gebruikt / niet instantieerbaar zijn*
 
-1. Hou ze beperkt, hou de soortenboom zo veel mogelijk concreet. Supertypes zijn vaak alleen verdichtingen, geen soort.
+1. Hou ze beperkt, hou de soortenboom zo veel mogelijk concreet. Supertypes zijn vaak alleen verdichtingen, geen soort dus abstract.
 2. Concepten zijn herkenbaar als abstract wanneer ze bijvoorbeeld niet in de deel-geheel relaties (bijvoorbeeld als deel van een rioleringsgebied) voorkomen.
 3. Abstracte concepten bij voorkeur als groep/collectie (en niet als supertype) definiëren. Bijvoorbeeld groepering naar thema's, denk aan infiltratievoorzieningen.
 4. Subtypes op hetzelfde niveau dienen in grote lijn hetzelfde samenstellingsniveau te hebben.
@@ -283,6 +312,8 @@ In een conformiteitsklasse spelen de abstracte klassen geen rol, ze blijven dan 
 1. Specialiseer de klassen zoveel als mogelijk, tot aan de "bladerobjecten", het ultieme subtype, de klasse zonder subtype.
 2. Introduceer geen subtype als het geen onderscheidend kenmerk heeft. Bijvoorbeeld geen extra subtype "standaard hemelwaterstelsel" naast "verbeterd hemelwaterstelsel".
 3. Hou er rekening mee dat de individuen in de dataset zo specifiek mogelijk geclassificeerd worden. Classificatie gebeurt op bladerobject-niveau tenzij dat bladerobject niet van toepassing is (denk aan het eerdere voorbeeld "hemelwaterstelsel") of als het type onbekend is. Bijvoorbeeld wordt het supertype "kolk" gebruikt als het subtype (straatkolk, trottoirkolk) onbekend is.
+
+In IMBOR heten deze bladerobjecten "Concrete klassen", de subtypes van nen2650:Object heten "Objecttypen". 
 
 ### Orthogonaliteit
 
@@ -321,7 +352,7 @@ Beschrijf in het datamodel de eisen voor de gegevenskwaliteit, met name die voor
 1. Specificeer altijd de waardetypes bij de aspectwaarden
 2. Specificeer waar nodig ook het waardebereik (in combinatie met het waardetype)
 3. Start de URI van een gemodelleerd datatype altijd met "Dt_"
-4. Modelleer waar nodig het metagegeven <span class="blue">gwsw:Inwinning</span> voor beschrijving van de actualiteit en betrouwbaarheid.
+4. Modelleer waar nodig het metagegeven <span class="blue">heeft inwinning</span> voor beschrijving van de actualiteit en betrouwbaarheid.
 
 ## Relaties - Samenstelling en proces
 
@@ -331,7 +362,11 @@ Definieer de samenstelling, de topologie en het proces op basis van de relaties 
 
 1. Beschrijf met CE's de kardinaliteit van de relaties bij concepten, ook als ze niet definiërend zijn. Hanteer de kardinaliteit "minimum=0" en "maximum=1" voor globale uitdrukkingen.
     * Met de kardinaliteit beschrijven we ook dat een fysiek object bijvoorbeeld per definitie andere fysieke objecten als onderdeel heeft.
-2. Beschrijf op dezelfde wijze ook altijd de inverse relatie. Voor de dataverificatie is die inverse vaak waardevol. Een constructie kan bijvoorbeeld meerdere delen bevatten (<span class="blue">nen2660:hasPart</span>) maar het deel hoort bij één constructie (<span class="blue">gwsw:isPartOf</span>).
+2. Beschrijf op dezelfde wijze ook altijd de inverse relatie. Voor de dataverificatie is die inverse vaak waardevol. Een constructie kan bijvoorbeeld meerdere delen bevatten (<span class="blue">heeft als deel</span>) maar het deel hoort bij één constructie (<span class="blue">is deel van</span>).
+
+<div class="box">
+De meronomie speelt in IMBOR geen grote rol maar voor het GWSW is die heel belangrijk voor het structureren van datasets en data-afleiding.
+</div>
 
 ### Erven van samenstellingen
 
@@ -355,12 +390,13 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 # Modelleerprincipes - Specifiek GWSW 2.0
 
-* Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van nen2660:QualityValue
-* Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van nen:2660:QuantityValue
-* Kenmerk-relaties hebben altijd exact 1 range van een specialisatie van nen2660:RelationReference
+* Kwalitatieve attributen hebben altijd exact 1 range van een specialisatie van <span class="blue">nen2660:QualityValue</span>
+* Kwantitatieve attributen hebben altijd exact 1 range van een specialisatie van <span class="blue">nen:2660:QuantityValue</span>
+* Kenmerk-relaties hebben altijd exact 1 range van een specialisatie van<span class="blue"> nen2660:RelationReference</span>
 * Kwalitatieve attributen, kwantitatieve attributen of kenmerk-relaties hebben altijd de naam van de range-class met het eerste karakter in lowercase
+* Definieer abstracte klassen expliciet als subtype van <span class="blue">nen2660:AbstractConcept</span>
 
-# Aansluiting op externe (meta)modellen
+# Relatie met andere (meta)modellen
 
 ## IMBOR
 
@@ -381,10 +417,11 @@ Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk 
 ### RDF-schema en SHACL
 
 **IMBOR**: RDFS/SHACL-gebaseerd (rdfs:Class)
-*	Bevat SHACL-gebaseerde validatie regels (CWA)
+* Gebruikt SKOS voor de vocabulaire, RDFS voor de klasse-definitie en SHACL voor (shapes met) verificatie-regels (CWA)
 *	SHACL-expressies maken deel uit van het datamodel, toegepast voor globale verificaties
 
 **GWSW**: RDFS/OWL-gebaseerd (owl:Class)
+* Gebruikt RDFS en SKOS voor de vocabulaire, RDFS en OWL voor de klasse-definitie en SHACL voor (shapes met) verificatie-regels (CWA)
 *	Bevat OWL-gebaseerde expressies en restricties (OWA), toegepast voor data-afleiding en data-integriteit
 * SHACL-expressies staan naast het datamodel (worden ervan afgeleid) en worden gebruikt voor CWA verificaties (algemeen en toepassingsgericht via CFK’en)
 
@@ -397,12 +434,17 @@ SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het b
 ### URI concepten
 
 **IMBOR**: URI van concepten is taalonafhankelijk (UUID)
-*	Voordeel: Semantiekloos, daardoor bijvoorbeeld geen verwarring met homoniemen binnen één discipline
+*	Voordeel: Semantiekloos, daardoor bijvoorbeeld geen verwarring met homoniemen (IMBOR beschrijft veel klassen uit verschillende disciplines)
+* Voordeel: Flexibeler als er veel mutaties in klasse-namen voorkomen
 *	Nadeel: Alleen goed leesbaar (in bijvoorbeeld turtle-files) met specifieke tooling (label-georiënteerd)
+* Nadeel: Query-ontwerp lastiger (de waarde van skos:prefLabel is mutatie-gevoelig)
 
 **GWSW**: URI van concepten is human-readable (taalafhankelijk)
-*	Voordeel: Leesbaarheid, ook met eenvoudige tools
+*	Voordeel: Leesbaarheid van datamodel, datasets en queries. Ook met eenvoudige tools
 *	Nadeel: Minder eenvoudig aan te maken en te onderhouden (de URI is een camelcase-notatie van het concept-label en kan daarmee uit de pas gaan lopen)
+
+In SPARQ-queries zal het IMBOR datamodel vaak worden bevraagd met het leesbare <span class="blue">skos:prefLabel</span> voor de selectie op klasse, in queries op het GWSW datamodel wordt hiervoor de klasse-URI gebruikt.
+Dit verschil in aanpak kan naast elkaar bestaan, het is technisch geen punt maar moet wel gedocumenteerd en gemotiveerd worden.
 
 ### Reikwijdte datamodel
 
@@ -410,7 +452,7 @@ Exclusief **GWSW**:
 * Hanteert onderscheidende kenmerken (Uitvoering, Functie) voor expliciete definities
 *	Gebruikt deel/geheel-relaties (restricties op <span class="blue">nen2660:hasPart</span>)
 *	Gebruikt proces-relaties (<span class="blue">gwsw:hasInput</span>, <span class="blue">gwsw:hasOutput</span>)
-* Bevat topologie/netwerk definities (<span class="blue">gwsw:hasConnecion</span>)
+* Bevat drie "lagen": fysiek, topologie, geometrie (netwerk via <span class="blue">gwsw:hasConnecion</span>)
 
 ### Datamodel inrichting
 
@@ -504,15 +546,38 @@ Een beperkte vergelijking tussen GWSW en MIM:
 | kenmerk-relatie              | mim:attribuut         | was gwsw:hasAspect |
 | nen2660:hasPart              |                       |                    |
 
+## Onderscheid met vorige GWSW versies
+
+De belangrijkste wijzigingen in GWSW 2.0 ten opzichte van vorige versies (GWSW 1.n):
+
+* Kenmerken uitdrukken als kwalitatieve/kwantitatieve attributen, relatie gwsw:hasAspect vervalt
+* Annotatie skos:editorialNote vervangt gwsw:hasDateStart, gwsw:hasDateChange, gwsw:hasAuthorStart, gwsw:hasAuthorChange
+* Annotatie skos:prefLabel vervangt rdfs:label
+* Geometrie-waarde uitdrukken als WKT, was GML in vorige versies
+* Vocabulaire binnen datamodel onderscheiden en apart publiceren/presenteren
+
+Samenvatting van gewijzigde klassen:
+
+| Naam                      | Oude naam (1.6)         | Toelichting                                                               |
+|---------------------------|-------------------------|---------------------------------------------------------------------------|
+| nen2660:Activity          | gwsw:Activiteit         |                                                                           |
+| nen2660:PhysicalObject    | gwsw:FysiekObject       |                                                                           |
+| nen2660:Matter            | gwsw:Materie            | gwsw:Materiaal is subtype van nen2660:Matter (was subtype van gwsw:Kenmerk) |
+| nen2660:QuantityValue     | gwsw:Kenmerk            |                                                                           |
+| nen2660:QualityValue      | gwsw:Kenmerk            |                                                                           |
+| nen2660:RelationReference | gwsw:Kenmerk            |                                                                           |
+| nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                           |
+| rdfs:Container            | gwsw:VerzamelingSoorten |                                                                           |
+
 # Details van de GWSW semantiek
 
 ## Details soortenboom
 
-### Top Level soorten
+### Top-level-klassen
 
-De "top level" concepten in de GWSW ontologie zijn de concepten die boven in de soortenboom staan. Deze concepten zijn geen subtype van andere concepten, ze zijn van het generieke type owl:Class.
+De top-level-klassen in de GWSW ontologie zijn de concepten die boven in de soortenboom staan. Deze concepten zijn geen subtype van andere concepten, ze zijn van het generieke type owl:Class.
 
-Tabel: Top Level-concepten
+Tabel: Top-level-klassen
 
 | Naam                      | Oude naam (1.6)                                       | Toelichting / definitie                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |---------------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -543,7 +608,11 @@ Voor de definitie van de soortenboom gebruiken we basiselementen uit RDF, RDFS e
                   skos:prefLabel             “Weir”@en .      
   gwsw:BlindePut  rdf:type                   owl:Class ;                   
                   rdfs:subClassOf            gwsw:Rioolput ;               
-                  skos:prefLabel             "Blinde put"@nl .             
+                  skos:prefLabel             "Blinde put"@nl .
+  gwsw:Hulpstuk   rdf:type                   owl:Class ;      
+                  rdfs:subClassOf            gwsw:Constructieonderdeel ;
+                  rdfs:subClassOf            nen2660:AbstractConcept . # Hulpstuk is een abstracte klasse, kan niet in een dataset voorkomen
+       
 </pre></div>
 
 In een dataset wordt altijd zoveel mogelijk verwezen naar de [bladerobjecten](#bladerobjecten).
@@ -555,6 +624,13 @@ In een dataset wordt altijd zoveel mogelijk verwezen naar de [bladerobjecten](#b
 </pre></div>
 
 Het individu ex:Put_2 is dus zowel een stuwput (een put met een stuwconstructie) als een blinde put (een put zonder deksel).
+
+Verificatie van het gebruik van abstracte klassen wordt uitgedrukt in SHACL:
+
+<div class="example-shapes"><div class="example-title marker">Shapes: Controleer op abstracte klasse</div><pre>
+  gwsw:Hulpstuk   rdf:type      rdfs:Class,         # om impliciet TargetClass te definiëren
+                  dash:abstract true .
+</pre></div>
 
 
 ### Details onderscheidende kenmerken
@@ -629,40 +705,40 @@ De toegepaste **relaties** in een diagram: WORDT NOG UITGEWERKT
 
 De toepassing van properties is in de GWSW-Ontologie vaak aan regels gebonden door middel van een Class Expression (CE). In de volgende tabel is dat aangegeven met **CE**.
 
- | Predicate                                   | Oude naam (1.6)                                                                           | Omschrijving                                                                                                                                                                                                                                                                                                                                                                                                                            |
- |---------------------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
- | **Annotatie-attributen**                    |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | owl:versionInfo                             | owl:versionInfo                                                                           | *Subject (ontologie)* <span class="blue">heeft versieomschrijving</span> *Literal*                                                                                                                                                                                                                                                                                                                                                      |
- | skos:prefLabel                              | rdfs:label                                                                                | *Subject* <span class="blue">heeft als voorkeursnaam</span> *Literal* (één per concept)                                                                                                                                                                                                                                                                                                                                                 |
- | skos:altLabel                               | skos:altLabel                                                                             | *Subject* <span class="blue">heeft als synoniem</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                        |
- | skos:notation                               | skos:notation                                                                             | *Subject* <span class="blue">heeft als code</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                            |
- | skos:definition                             | skos:definition                                                                           | *Subject* <span class="blue">heeft als definitie</span> *Literal* (komt enkelvoudig per taal voor, interne definitie *zonder* bron-referentie)                                                                                                                                                                                                                                                                                          |
- | rdfs:isDefinedBy                            | rdfs:isDefinedBy                                                                          | *Subject* <span class="blue">is gedefinieerd door</span> *Literal* (kan meevoudig voorkomen, definitie *met* bron-referentie)                                                                                                                                                                                                                                                                                                           |
- | rdfs:seeAlso                                | rdfs:seeAlso                                                                              | *Subject* <span class="blue">heeft aanvullende infomatie op</span> *Literal* (URL)                                                                                                                                                                                                                                                                                                                                                      |
- | rdfs:comment                                | rdfs:comment<br/>skos:hiddenLabel                                                         | *Subject* <span class="blue">heeft als commentaar</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                      |
- | skos:editorialNote                          | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat altijd *datum start + initialen auteur* en *data wijziging + initialen auteur*)                                                                                                                                                                                                                                       |
- |                                             | gwsw:hasDateChange                                                                        | *Subject* <span class="blue">heeft als wijzigingsdatum</span> *Literal* (kan meervoudig voorkomen)                                                                                                                                                                                                                                                                                                                                      |
- |                                             | gwsw:hasAuthorStart                                                                       | *Subject* <span class="blue">heeft als auteur aanmaak</span> *Literal* (naam modelleur die het concept - op de startdatum - heeft aangemaakt)                                                                                                                                                                                                                                                                                           |
- |                                             | gwsw:hasAuthorChange                                                                      | *Subject* <span class="blue">heeft als auteur wijziging</span> *Literal* (naam modelleur die het concept - op de wijzigingsdatum - heeft gewijzigd)                                                                                                                                                                                                                                                                                     |
- | gwsw:hasFactColl                            | gwsw:hasFactColl                                                                          | *Subject* <span class="blue">heeft als feitencollectie</span> *Literal* (string met codes van één of meer graphs) (feiten-collectie in Gellish-taal)                                                                                                                                                                                                                                                                                                                   |
- |  gwsw:hasValidity                            | gwsw:hasValitity                                                                                          |     *Subject* <span class="blue">heeft als validatie-code</span> *Literal* (code voor dataverificate, gebruikt voor SHACL-definities en conformiteitsklassen)                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-  | **Kwantitatief attibuut**                   |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | gwsw:"kwantiteit"                           | gwsw:hasAspect<br/>(gwsw:isAspectOf)                                                           | *Subject* <span class="blue">heeft als "kwantiteit"</span> *Waarde*. Het object is een kenmerk, een subtype van nen2660:QuantityValue met een numerieke waarde                                                                                                                                                                                                                                                                          |
-| **Kwalitatief attribuut**                   |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | gwsw:"kwaliteit"                            | gwsw:hasAspect<br/>(gwsw:isAspectOf)                                                           | *Subject* <span class="blue">heeft als "kwaliteit"</span> *Waarde*. Het object is een kenmerk, een subtype van nen2660:QualityValue met een tekenreeks-waarde                                                                                                                                                                                                                                                                           |
- | **Classificatie**                           |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | rdf:type                                    | rdf:type                                                                                  | *Subject* <span class="blue">is van het type</span> *Object*                                                                                                                                                                                                                                                                                                                                                                            |
- | owl:inverseOf                               | owl:inverseOf                                                                             | *Subject-property* <span class="blue">is de inverse van</span> *Object-property*                                                                                                                                                                                                                                                                                                                                                        |
- | **Specialisatie**                           |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | rdfs:subClassOf                             | rdfs:subClassOf                                                                           | *Subject* <span class="blue">is van het subtype</span> *Object*                                                                                                                                                                                                                                                                                                                                                                         |
- | **Compositie**                              |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | nen2660:hasPart<br/>(gwsw:isPartOf)              | gwsw:hasPart<br/>(gwsw:isPartOf)                                                            | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NEN2660 heeft niet de inverse property<br/>Opmerking: de NEN2660 hanteert nen2660:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft nen2660:hasPart voor het GWSW algemeen toepasbaar. |
- | **Associatie**                              |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
- | gwsw:hasInput<br/>(gwsw:isInputOf)               | gwsw:hasInput<br/>(gwsw:isInputOf)                                                             | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasInput 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                                    |
- | gwsw:hasOutput (gwsw:isOutputOf)                 | gwsw:hasOutput (gwsw:isOutputOf)                                                               | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasOutput 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                                   |
- | nen2660:isConnectedTo                       | gwsw:hasConnection                                                                        | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasConnection 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                               |
- | gwsw:hasRepresentation (gwsw:isRepresentationOf) | gwsw:hasRepresentation (gwsw:isRepresentationOf)                                               | Verwijst naar (range is) InformationObject                                                                                                                                                                                                                                                                                                                                                                                              |
- | **Referentie**                              |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | Predicate                                        | Oude naam (1.6)                                                                           | Omschrijving                                                                                                                                                                                                                                                                                                                                                                                                                            |
+ |--------------------------------------------------|-------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+ | **Annotatie-attributen**                         |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | owl:versionInfo                                  | owl:versionInfo                                                                           | *Subject (ontologie)* <span class="blue">heeft versieomschrijving</span> *Literal*                                                                                                                                                                                                                                                                                                                                                      |
+ | skos:prefLabel                                   | rdfs:label                                                                                | *Subject* <span class="blue">heeft als voorkeursnaam</span> *Literal* (één per concept)                                                                                                                                                                                                                                                                                                                                                 |
+ | skos:altLabel                                    | skos:altLabel                                                                             | *Subject* <span class="blue">heeft als synoniem</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                        |
+ | skos:notation                                    | skos:notation                                                                             | *Subject* <span class="blue">heeft als code</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                            |
+ | skos:definition                                  | skos:definition                                                                           | *Subject* <span class="blue">heeft als definitie</span> *Literal* (komt enkelvoudig per taal voor, interne definitie *zonder* bron-referentie)                                                                                                                                                                                                                                                                                          |
+ | rdfs:isDefinedBy                                 | rdfs:isDefinedBy                                                                          | *Subject* <span class="blue">is gedefinieerd door</span> *Literal* (kan meevoudig voorkomen, definitie *met* bron-referentie)                                                                                                                                                                                                                                                                                                           |
+ | rdfs:seeAlso                                     | rdfs:seeAlso                                                                              | *Subject* <span class="blue">heeft aanvullende infomatie op</span> *Literal* (URL)                                                                                                                                                                                                                                                                                                                                                      |
+ | rdfs:comment                                     | rdfs:comment<br/>skos:hiddenLabel                                                         | *Subject* <span class="blue">heeft als commentaar</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                      |
+ | skos:editorialNote                               | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat altijd *datum start + initialen auteur* en *data wijziging + initialen auteur*)                                                                                                                                                                                                                                       |
+ |                                                  | gwsw:hasDateChange                                                                        | *Subject* <span class="blue">heeft als wijzigingsdatum</span> *Literal* (kan meervoudig voorkomen)                                                                                                                                                                                                                                                                                                                                      |
+ |                                                  | gwsw:hasAuthorStart                                                                       | *Subject* <span class="blue">heeft als auteur aanmaak</span> *Literal* (naam modelleur die het concept - op de startdatum - heeft aangemaakt)                                                                                                                                                                                                                                                                                           |
+ |                                                  | gwsw:hasAuthorChange                                                                      | *Subject* <span class="blue">heeft als auteur wijziging</span> *Literal* (naam modelleur die het concept - op de wijzigingsdatum - heeft gewijzigd)                                                                                                                                                                                                                                                                                     |
+ | gwsw:hasFactColl                                 | gwsw:hasFactColl                                                                          | *Subject* <span class="blue">heeft als feitencollectie</span> *Literal* (string met codes van één of meer graphs) (feiten-collectie in Gellish-taal)                                                                                                                                                                                                                                                                                    |
+ | gwsw:hasValidity                                 | gwsw:hasValitity                                                                          | *Subject* <span class="blue">heeft als validatie-code</span> *Literal* (code voor dataverificate, gebruikt voor SHACL-definities en conformiteitsklassen)                                                                                                                                                                                                                                                                               |
+ | **Kwantitatief attibuut**                        |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | gwsw:"kwantiteit"                                | gwsw:hasAspect<br/>(gwsw:isAspectOf)                                                      | *Subject* <span class="blue">heeft als "kwantiteit"</span> *Waarde*. Het object is een kenmerk, een subtype van nen2660:QuantityValue met een numerieke waarde                                                                                                                                                                                                                                                                          |
+ | **Kwalitatief attribuut**                        |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | gwsw:"kwaliteit"                                 | gwsw:hasAspect<br/>(gwsw:isAspectOf)                                                      | *Subject* <span class="blue">heeft als "kwaliteit"</span> *Waarde*. Het object is een kenmerk, een subtype van nen2660:QualityValue met een tekenreeks-waarde                                                                                                                                                                                                                                                                           |
+ | **Classificatie**                                |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | rdf:type                                         | rdf:type                                                                                  | *Subject* <span class="blue">is van het type</span> *Object*                                                                                                                                                                                                                                                                                                                                                                            |
+ | owl:inverseOf                                    | owl:inverseOf                                                                             | *Subject-property* <span class="blue">is de inverse van</span> *Object-property*                                                                                                                                                                                                                                                                                                                                                        |
+ | **Specialisatie**                                |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | rdfs:subClassOf                                  | rdfs:subClassOf                                                                           | *Subject* <span class="blue">is van het subtype</span> *Object*                                                                                                                                                                                                                                                                                                                                                                         |
+ | **Compositie**                                   |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | nen2660:hasPart<br/>(gwsw:isPartOf)              | gwsw:hasPart<br/>(gwsw:isPartOf)                                                          | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasPart 0-n maal of min 0-n en max 1-n maal voorkomen. De NEN2660 heeft niet de inverse property<br/>Opmerking: de NEN2660 hanteert nen2660:hasPart alleen voor relaties tussen FysiekObject, InformatieObject of Activiteit onderling. Ruimte is ook een FysiekObject, daarmee blijft nen2660:hasPart voor het GWSW algemeen toepasbaar. |
+ | **Associatie**                                   |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+ | gwsw:hasInput<br/>(gwsw:isInputOf)               | gwsw:hasInput<br/>(gwsw:isInputOf)                                                        | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasInput 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                                    |
+ | gwsw:hasOutput (gwsw:isOutputOf)                 | gwsw:hasOutput (gwsw:isOutputOf)                                                          | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasOutput 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                                   |
+ | nen2660:isConnectedTo                            | gwsw:hasConnection                                                                        | <span class="blue">CE</span> beschrijft restrictie op kardinaliteit: Bij subject mag property hasConnection 0-n maal of min 0-n en max 1-n maal voorkomen                                                                                                                                                                                                                                                                               |
+ | gwsw:hasRepresentation (gwsw:isRepresentationOf) | gwsw:hasRepresentation (gwsw:isRepresentationOf)                                          | Verwijst naar (range is) InformationObject                                                                                                                                                                                                                                                                                                                                                                                              |
+ | **Referentie**                                   |                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                         |
   | rdfs:member | | *Subject* <span class="blue">heeft lid in verzameling</span> *Referentie* Het object is een klasse of individu
  | nen2660:hasQuantityKind                     |                                             | *Subject* <span class="blue">heeft als grootheid</span> *qudt:Quantitykind*. Het object is een grootheid-individu                                                                                                                                                                                                                                                                                                                       |
  | nen2660:unit                                | gwsw:hasUnit                                | *Subject* <span class="blue">heeft als eenheid</span> *qudt:Unit*. Het object is een eenheid-individu                                                                                                                                                                                                                                                                                                                                   |
@@ -1571,18 +1647,18 @@ Het individu ex:Rioolput_1 is onderwerp van inspectie ex:InspecterenPut_1:
                              gwsw:hasInput              ex:Rioolput_1 .
 </pre></div>
 
-### Relaties topologie (netwerk)
+### Topologie
 
 *Netwerkbeschrijving* 
 
-Het GWSW definieert ook de concepten voor een netwerkbeschrijving. Daarvoor worden de onderlinge verbindingen beschreven via de elementen "oriëntatie" die onderling gerelateerd zijn via <span class="blue">nen2660:isConnectedTo</span>. Deze relatie is van het type owl:SymmetricProperty.
+Het GWSW definieert ook de concepten voor een (topologische) netwerkbeschrijving. In het datamodel kunnen we drie lagen onderscheiden: fysiek, topologie en geometrie. 
+De topologie beschrijft de samenhang en oriëntatie van de fysieke objecten, al dan niet binnen een netwerk. Daarvoor worden de onderlinge verbindingen beschreven via de elementen "oriëntatie" die onderling gerelateerd zijn via <span class="blue">nen2660:isConnectedTo</span>. Deze relatie is van het type owl:SymmetricProperty.
 
 <img src="media/image4.png" style="width:100%;height:50%" />
 
-De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie kan een vertex zijn of kan bestaan uit een egde met begin- en eindpunt (vertices). 
-In een netwerk voor hydraulische modellering worden die twee vormen "knooppunt" en "verbinding" genoemd. Een verbinding kan dan zowel een leiding (de meest voorkomende) als een pomp, doorlaat of wand zijn.
+De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie kan een vertex zijn of kan bestaan uit een egde met begin- en eindpunt (vertices). Het topologische element "face" voor vlakken wordt niet toegepast. In een hydraulische netwerkmodel worden vertex en edge gemodelleerd als "knooppunt" en "verbinding". Een verbinding kan dan zowel een leiding (de meest voorkomende) als een pomp, doorlaat of wand zijn.
 
-<span class="blue">nen2660:isConnectedTo</span> is van het type owl:SymmetricProperty (heeft geen inverse). Voor de netwerk-beschrijving is deze relatie essentieel, het is dan de relatie tussen topologische elementen van fysieke objecten. De relatie wordt echter ook voor de algemene beschrijving gebruikt, bijvoorbeeld om te beschrijven dat een gemaal vaak verbonden is met een persleiding.
+<span class="blue">nen2660:isConnectedTo</span> is van het type owl:SymmetricProperty (heeft geen inverse). Voor de netwerk-beschrijving is deze relatie bepalend, het verbindt de topologische elementen van fysieke objecten. De relatie wordt echter ook voor de algemene fysieke beschrijving gebruikt, bijvoorbeeld om te beschrijven dat een gemaal verbonden is met een persleiding.
 
 <div class="example"><div class="example-title marker">Datamodel: Topologie-elementen bij leiding en put</div><pre>
   gwsw:leidingorientatie    rdf:type                  owl:ObjectProperty ;
@@ -1619,6 +1695,43 @@ In een netwerk voor hydraulische modellering worden die twee vormen "knooppunt" 
                             [         
                               nen2660:isConnectedTo      ex:Eindpunt_1 ;
                             ] .         
+</pre></div>
+
+### Geometrie
+
+In het datamodel onderscheiden we drie geometrie-elementen, allen subtype van <span class="blue">gwsw:Geometrie</span>:
+* gwsw:Punt - een subtype van het topologie-element vertex
+* gwsw:Lijn - een subtype van het topologie-element edge
+* gwsw:Buitengrens - een subtype van het topologie-element edge
+
+Zie ook hst [Topologie](#topologie)
+
+Een voorbeeld met <span class="blue">gwsw:Lijn</span>
+
+<div class="example"><div class="example-title marker">Datamodel:</div><pre>
+  gwsw:Lijn           rdfs:subClassOf       nen2660:QualityValue ;
+                      rdfs:subClassOf
+                      [
+                        rdf:type            owl:Restriction ;
+                        owl:onProperty      rdf:value ;
+                        owl:allValuesFrom   geo:wktLiteral ;            # was geo:gmlLiteral in vorige versies
+                      ] .
+  gwsw:lijn           rdf:type            owl:ObjectProperty ;
+                      rdfs:label          "Lijn" ;               
+                      rdfs:domain         gwsw:TopologischElement ;     # gekoppeld aan de topologie
+                      rdfs:range          gwsw:Lijn .                   # exact 1 range (OWA: tenminste 1) 
+
+</pre></div>
+
+<div class="example-dataset"><div class="example-title marker">Dataset: De geometrie bij de leidingoriëntatie</div><pre>
+  ex:Leiding_1        gwsw:leidingorientatie         
+                      [         
+                        nen2660:hasPart   ex:Eindpunt_1 ;
+                        gwsw:lijn 
+                        [ 
+                          rdf:value       "LINESTRING (30 10, 10 30, 40 40)"^^geo:wktLiteral ;
+                        ] ;
+                      ] .         
 </pre></div>
 
 ### Relaties compositie (deel-geheel)
@@ -1881,16 +1994,17 @@ gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de
                           rdfs:label          "Begindatum" ;               
                           rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
                           rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
-gwsw:MateriaalColl        rdf:type            owl:Class ;
+gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                           rdf:type            nen2660:EnumerationType;      # punning: is klasse en wordt hier ook individu
                           owl:oneOf           (gwsw:Beton) .                # individuen
-gwsw:Beton                rdf:type            gwsw:MateriaalColl .          # wordt individu             
+#gwsw:Beton                rdf:type            gwsw:MateriaalColl .          # wordt individu             
+gwsw:Beton                rdf:type            gwsw:Materiaal .              # wordt individu             
 gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
                           rdfs:subClassOf                                   # restricties op klasse-niveau
                           [ 
                             rdf:type          owl:Restriction;
                             owl:onProperty    rdf:value ;
-                            owl:allValuesFrom gwsw:MateriaalColl ;
+                            owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                           ] ; 
                           rdfs:subClassOf                                   # restricties op klasse-niveau
                           [ 
