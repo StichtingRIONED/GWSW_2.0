@@ -8,6 +8,7 @@
 Versie historie
 <div style="font-size: 0.90em">
 
+20230802: Review CROW en Johan Post verwerkt   
 20230711: Samenvatting uitgebreid, tekst correcties   
 20230530: Oplevering openbaar concept-document  
 20230522: Eerste commentaarronde (Michel Bohms) verwerkt  
@@ -338,12 +339,13 @@ Als een individu kenmerk X heeft is het mogelijk van type Y ("sufficient")
 **Geen typelijsten**  
 Kenmerken die verwijzen naar een typelijst (bijvoorbeeld het kenmerk Soort Deksel van het concept Deksel) komen niet voor. Een typelijst wordt uitgedrukt in de taxonomie (bijvoorbeeld als subtypes van Deksel).
 
-### Intrinsieke aspecten
+### Intrinsieke kenmerken
 
 1. Specialiseer waar nodig de kenmerken, zodat restricties op de kenmerk-waarde zo specifiek mogelijk zijn. Bijvoorbeeld:
     * Definieer het kenmerk "materiaal put" als subtype van "materiaal" met bijbehorende - beperkte - domeinwaarden
     * Definieer het kenmerk "diameter leiding" als subtype van "diameter" met specifieke restricties (min/max) op de afmetingen.
-2. Intrinsieke kenmerken zijn geen noodzaak maar de combinatie met restricties (bijvoorbeeld minimum/maximum waarde) maakt ze waardevol en daarnaast wordt het datamodel robuuster: als een individu het kenmerk heeft, dan hoort het van een bepaald type te zijn.
+2. Intrinsieke kenmerken zijn niet altijd noodzakelijk maar de combinatie met restricties (bijvoorbeeld minimum/maximum waarde) maakt ze waardevol en daarnaast wordt het datamodel robuuster: als een individu het kenmerk heeft, dan hoort het van een bepaald type te zijn.
+3. Intrinsieke kenmerken zijn waardevol/noodzakelijk als ze een toegevoegde definitie hebben. Bijvoorbeeld de beschrijving of de "diameter leiding" de inwendige of uitwendige maat is. 
 
 ### Kwaliteitseisen
 
@@ -402,17 +404,28 @@ Hou rekening met de onderverdeling van de context-specifieke deelmodellen. Combi
 
 De GWSW Ontologie wordt met de introductie van versie 2.0 onderdeel van IMBOR.
 
-Door CROW is het - oorspronkelijk in MS Access uitgewerkte - IMBOR datamodel omgezet naar een linked-data vorm, gebaseerd op de NEN 2660-2. Dat was een belangrijke aanleiding om ook het GWSW 2.0 af te stemmen op de NEN 2660.
+Door CROW is het - oorspronkelijk in MS Access uitgewerkte - IMBOR datamodel omgezet naar een linked-data vorm, gebaseerd op de NEN 2660-2. Dat was een belangrijke aanleiding om het GWSW 2.0 te ontwikkelen.
 
-Relevante links naar CROW publicaties over het IMBOR:
+Relevante links naar CROW publicaties over het IMBOR (versie 2022):
 * De huidige linked-data-versie IMBOR2022, https://begrippen.crow.nl/imbor/nl
 * Het delen van IMBOR gegevens middels RDF, https://docs.crow.nl/imbor/uitwisseling_rdf 
 * Ontologie-alignment: https://docs.crow.nl/ontology-alignment/whitepaper/
 
 In de roadmap van het IMBOR Kernteam is opgenomen dat in 2022/2023 het meta-model voor de mapping van ontologiën wordt ontwikkeld. 
-De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW.
 
-Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn. Tussen de datamodellen IMBOR-LD en GWSW 2.0 blijven een aantal principiële verschillen bestaan:
+De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW. Het datamodel GWSW wordt volledig geïntegreerd en de module IMBOR Riolering komt te vervallen. Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn, daarvoor worden datamodellen in lijn gebracht (alignment). 
+
+<div class="box">
+Schematisch overzicht IMBOR basisstructuur
+
+NOG TOEVOEGEN:
+* SCHEMA IMBOR-TOPMODEL, BASISMODEL EN (EXTERNE) DEELMODELLEN
+* ALIGNMENT PRINCIPES
+* POSITIE DISCIPLINE-DATASETS
+* DATASTORES EN FEDERATED QUERIES
+</div>
+
+Tussen het basismodel IMBOR en deelmodellen zoals GWSW 2.0 kunnen en mogen natuurlijk verschillen bestaan vanwege disciplinecontext en data-toepassingen. Hierna volgt een overzicht van de belangrijkste principiële verschillen tussen IMBOR en GWSW.
 
 ### RDF-schema en SHACL
 
@@ -434,12 +447,24 @@ SHACL kan voor het GWSW nog meer strikt worden toegepast door het ook voor het b
 ### URI concepten
 
 **IMBOR**: URI van concepten is taalonafhankelijk (UUID)
+<div class="example"><div class="example-title marker">Datamodel:</div><pre>
+imbor:f8c9faf7-ba95-4d70-a1b9-9586ca55d0f1
+        skos:definition  "Een rioolput met een inrichting bestemd voor het verpompen van afvalwater."@nl ;
+        skos:prefLabel   "Pompput"@nl .
+</div>
+
 *	Voordeel: Semantiekloos, daardoor bijvoorbeeld geen verwarring met homoniemen (IMBOR beschrijft veel klassen uit verschillende disciplines)
 * Voordeel: Flexibeler als er veel mutaties in klasse-namen voorkomen
 *	Nadeel: Alleen goed leesbaar (in bijvoorbeeld turtle-files) met specifieke tooling (label-georiënteerd)
-* Nadeel: Query-ontwerp lastiger (de waarde van skos:prefLabel is mutatie-gevoelig)
+* Nadeel: Query-ontwerp lastiger (de waarde van skos:prefLabel is mutatie-gevoelig en garandeert geen unieke identificatie, het kan/mag meervoudig voorkomen bij verschillende concepten)
 
 **GWSW**: URI van concepten is human-readable (taalafhankelijk)
+<div class="example"><div class="example-title marker">Datamodel:</div><pre>
+gwsw:Pompput 
+        skos:definition  "Een rioolput met een inrichting bestemd voor het verpompen van afvalwater."@nl ;
+        skos:prefLabel   "Pompput"@nl .
+</div>
+
 *	Voordeel: Leesbaarheid van datamodel, datasets en queries. Ook met eenvoudige tools
 *	Nadeel: Minder eenvoudig aan te maken en te onderhouden (de URI is een camelcase-notatie van het concept-label en kan daarmee uit de pas gaan lopen)
 
@@ -459,7 +484,7 @@ Exclusief **GWSW**:
 Exclusief **IMBOR**:
 * Enumeratiewaarden staan in een apart datamodel
 * <span class="mark">Specificatie eenheden (nen2660:unit) op dataset-niveau</span>
-* <span class="mark">Geen complexe kanmerken. Kenmerken zijn properties, geen objecten</span>
+* <span class="mark">Geen complexe kenmerken. Kenmerken zijn properties, geen objecten</span>
 
 Exclusief **GWSW**:
 * Specificatie eenheden (nen2660:unit) op datamodel-niveau
@@ -558,16 +583,16 @@ De belangrijkste wijzigingen in GWSW 2.0 ten opzichte van vorige versies (GWSW 1
 
 Samenvatting van gewijzigde klassen:
 
-| Naam                      | Oude naam (1.6)         | Toelichting                                                               |
-|---------------------------|-------------------------|---------------------------------------------------------------------------|
-| nen2660:Activity          | gwsw:Activiteit         |                                                                           |
-| nen2660:PhysicalObject    | gwsw:FysiekObject       |                                                                           |
+| Naam                      | Oude naam (1.6)         | Toelichting                                                                 |
+|---------------------------|-------------------------|-----------------------------------------------------------------------------|
+| nen2660:Activity          | gwsw:Activiteit         |                                                                             |
+| nen2660:PhysicalObject    | gwsw:FysiekObject       |                                                                             |
 | nen2660:Matter            | gwsw:Materie            | gwsw:Materiaal is subtype van nen2660:Matter (was subtype van gwsw:Kenmerk) |
-| nen2660:QuantityValue     | gwsw:Kenmerk            |                                                                           |
-| nen2660:QualityValue      | gwsw:Kenmerk            |                                                                           |
-| nen2660:RelationReference | gwsw:Kenmerk            |                                                                           |
-| nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                           |
-| rdfs:Container            | gwsw:VerzamelingSoorten |                                                                           |
+| nen2660:QuantityValue     | gwsw:Kenmerk            |                                                                             |
+| nen2660:QualityValue      | gwsw:Kenmerk            |                                                                             |
+| nen2660:RelationReference | gwsw:Kenmerk            |                                                                             |
+| nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                             |
+| rdfs:Container            | gwsw:VerzamelingSoorten |                                                                             |
 
 # Details van de GWSW semantiek
 
@@ -934,6 +959,7 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 | NUM                                                                                                                   | pcs         | xsd:integer    |
 | PPM                                                                                                                   | ppm         | xsd:integer    |
 | Geen eenheid: string "hh:mm:ss"                                                                                       | hhmmss      | xsd:time       |
+| <span class="mark">mg/L (nog niet in gebruik, mogelijk straks bij concepten BZV, CZV)</span><br/>                     | -           | xsd:integer    |
 | Geen eenheid: string "wkt..."  (was gmlLiteral in GWSW 1.n)<br/><span class="mark">Datatype "gml" wordt "wkt"</span>  | gml         | geo:wktLiteral |
 | Geen eenheid: getal                                                                                                   | - (factor)  | xsd:decimal    |
 
@@ -1012,7 +1038,7 @@ Voor de volgende concepten is de scope per definitie identiek aan de scope van k
 
 Voor de definitie van conformiteitsklassen.
 
-Vergelijkbaar met de Collection of Facts speelt ook de **Validity context** vanuit Gellish nog steeds een rol in de RDF-vorm van het GWSW. Met de annotatie **gwsw:hasValidity** worden de triples nabewerkt voor een bepaalde conformiteitsklasse (met kwaliteitseisen per proces).
+Vergelijkbaar met de Collection of Facts speelt ook de **Validity context** vanuit Gellish nog steeds een rol in de RDF-vorm van het GWSW. Met de annotatie **gwsw:hasValidity** worden de triples nabewerkt voor een bepaalde conformiteitsklasse (met kwaliteitseisen per proces). Deze annotatie wordt in veel gevallen toegevoegd aan de CE's bij een concept, als deze annotatie ontbreekt wordt de CE-inhoud ongewijzigd vertaald naar kwaliteitseisen voor de betreffence conformiteitsklasse.
 
 De waarde bij gwsw:hasValidity bevat een codering voor toepassing van de conformiteitsklassen. Het is een string met de volgende opbouw:
 
@@ -1435,9 +1461,11 @@ Voor extra restricties op min/max waarde voegen we een apart datatype toe, daari
                       ] .
 </pre></div>
 
-### Intrinsieke kenmerken
+### Details intrinsieke kenmerken
 
 Intrinsieke kenmerken horen exclusief (per definitie) bij een klasse, ze hebben maar één domein. We gebruiken voor bijvoorbeeld de hoogte van de klasse gwsw:Put niet de algemene property gwsw:hoogte maar de gespecialiseerde property gwsw:hoogtePut. Voor een intrinsiek kenmerk is exact één domein gespecificeerd.
+
+Zie hst [Intrinsieke kenmerken](#intrinsieke-kenmerken)
 
 <div class="example"><div class="example-title marker">Datamodel: Definiërend</div><pre>
   gwsw:hoogtePut            rdf:type                   owl:ObjectProperty ;
@@ -1479,7 +1507,7 @@ Conform de NEN2660 maakt het GWSW onderscheid in definiërende en specificerende
 **Definiërende beperking, afleiding**
 
 Het afleiden van klasse-typering blijft bij attributen beperkt tot de inferencing van predicates rdfs:domain en rdfs:range bij kenmerken.
-Als de typering van een subject is af te leiden uit rdfs:domain betreft het een intrinsiek kenmerk (zie hst [Intrinsieke kenmerken](#intrinsieke-kenmerken)). 
+Als de typering van een subject is af te leiden uit rdfs:domain betreft het een intrinsiek kenmerk (zie hst [Details intrinsieke kenmerken](#details-intrinsieke-kenmerken)). 
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:diameterLeiding      rdf:type                  owl:ObjectProperty ;
