@@ -413,12 +413,14 @@ Relevante links naar CROW publicaties over het IMBOR (versie 2022):
 
 In de roadmap van het IMBOR Kernteam is opgenomen dat in 2022/2023 het meta-model voor de mapping van ontologiën wordt ontwikkeld. 
 
-De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW. Het datamodel GWSW wordt volledig geïntegreerd en de module IMBOR Riolering komt te vervallen. Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel eenvoudig te koppelen zijn, daarvoor worden datamodellen in lijn gebracht (alignment). 
+De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW. Het datamodel GWSW wordt volledig geïntegreerd en de module IMBOR Riolering komt te vervallen. Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel voldoende te koppelen zijn, daarvoor worden de datamodellen in lijn gebracht ("alignment"). 
 
 <div class="box">
+
+<span class="mark">NOG TOEVOEGEN:</span>
+
 Schematisch overzicht IMBOR basisstructuur
 
-NOG TOEVOEGEN:
 * SCHEMA IMBOR-TOPMODEL, BASISMODEL EN (EXTERNE) DEELMODELLEN
 * ALIGNMENT PRINCIPES
 * POSITIE DISCIPLINE-DATASETS
@@ -468,8 +470,8 @@ gwsw:Pompput
 *	Voordeel: Leesbaarheid van datamodel, datasets en queries. Ook met eenvoudige tools
 *	Nadeel: Minder eenvoudig aan te maken en te onderhouden (de URI is een camelcase-notatie van het concept-label en kan daarmee uit de pas gaan lopen)
 
-In SPARQ-queries zal het IMBOR datamodel vaak worden bevraagd met het leesbare <span class="blue">skos:prefLabel</span> voor de selectie op klasse, in queries op het GWSW datamodel wordt hiervoor de klasse-URI gebruikt.
-Dit verschil in aanpak kan naast elkaar bestaan, het is technisch geen punt maar moet wel gedocumenteerd en gemotiveerd worden.
+Bij het ontwerp van SPARQ-queries zal om praktische redenen het IMBOR datamodel vaak worden bevraagd met het leesbare <span class="blue">skos:prefLabel</span> voor de selectie op klasse. Dat label is echter geen unieke identificatie, dat vraagt extra aandacht bij het modelleren. In queries op het GWSW datamodel kan voor de selectie op klasse eenvoudig de human-readable URI gebruikt.
+Dit verschil in aanpak kan naast elkaar bestaan, het is technisch geen punt maar moet wel goed gedocumenteerd worden.
 
 ### Reikwijdte datamodel
 
@@ -483,12 +485,12 @@ Exclusief **GWSW**:
 
 Exclusief **IMBOR**:
 * Enumeratiewaarden staan in een apart datamodel
-* <span class="mark">Specificatie eenheden (nen2660:unit) op dataset-niveau</span>
-* <span class="mark">Geen complexe kenmerken. Kenmerken zijn properties, geen objecten</span>
+* Specificatie eenheden (nen2660:unit) op dataset-niveau
+* Geen complexe kenmerken, kenmerken zijn datatype-properties, geen gebruik van waarde-objecten
 
 Exclusief **GWSW**:
 * Specificatie eenheden (nen2660:unit) op datamodel-niveau
-* Hanteert consequent complexe kenmerken
+* Hanteert consequent complexe kenmerken, kenmerken zijn object-properties die verwijzen naar waarde-objecten 
 
 ## Relatiemodel Harmonisator
 
@@ -1079,9 +1081,9 @@ Vanaf versie 2.0 volgt het GWSW de NEN2660 en hanteert het de modelvorm COMPLEX.
 Het modelleerpatroon COMPLEX biedt een uitgebreide semantiek, het GWSW voegt daar nog iets aan toe door subtypes te definiëren van de kenmerkwaarden nen2660:QuantityValue, nen2660:QualityValue en nen2660:RelationReference (modelleerpatroon COMPLEX+).
 
 Het patroon COMPLEX+ heeft een aantal voordelen die van nut zijn voor het GWSW:
-* Geobjectificeerde kenmerkwaarden kunnen worden uitgedrukt in class-expressions (CE), bijvoorbeeld voor restricties op datatype (de range). 
-* De kenmerkwaarde kan zelf kenmerkwaarden bevatten, bijvoorbeeld metagegevens over de inwinning (datum en wijze van inwinning). In GWSW datasets wordt dit veel toegepast.
-* De kenmerkwaarde kan eenvoudig in andere relaties voorkomen, bijvoorbeeld gekopppeld aan een berekening (activiteit) met de relatie "heeft invoer".
+* Geobjectificeerde kenmerkwaarden (waarde-objecten) kunnen worden uitgedrukt in class-expressions (CE), bijvoorbeeld voor restricties op datatype (de range). 
+* Het waarde-object kan zelf waarde-objecten bevatten, bijvoorbeeld metagegevens over de inwinning (datum en wijze van inwinning). In GWSW datasets wordt dit veel toegepast.
+* Het waarde-object kan eenvoudig in andere relaties voorkomen, bijvoorbeeld gekopppeld aan een berekening (activiteit) met de relatie "heeft invoer".
 
 Het modelleerpatroon COMPLEX+ resulteert in een uitgebreider datamodel maar de complexiteit blijft in datasets (de praktijk van gegevensuitwisseling) beperkt. De syntax in datasets is identiek aan het modelleerpatroon COMPLEX.
  
@@ -1113,7 +1115,7 @@ Voorbeeld van het modelleerpatroon voor "simpele" kenmerkwaarden:
                           rdfs:range            xsd:date .                  # tekenreeks 
   gwsw:MateriaalLeiding   rdf:type              owl:Class ;
                           rdf:type              nen2660:EnumerationType .   # punning: is klasse en wordt hier ook individu
-                          owl:oneOf             (gwsw:Beton) .                # individuen
+                          owl:oneOf             (gwsw:Beton) .              # individuen
   gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # individu             
   gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;        # relatie-referentie
                           rdfs:label            "Materiaal leiding" ;
