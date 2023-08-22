@@ -8,6 +8,7 @@
 Versie historie
 <div style="font-size: 0.90em">
 
+20230822: Review Wouter van Riel verwerkt   
 20230802: Review CROW en Johan Post verwerkt   
 20230711: Samenvatting uitgebreid, tekst correcties   
 20230530: Oplevering openbaar concept-document  
