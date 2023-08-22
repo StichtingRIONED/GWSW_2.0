@@ -573,6 +573,20 @@ Een beperkte vergelijking tussen GWSW en MIM:
 | kenmerk-relatie              | mim:attribuut         | was gwsw:hasAspect |
 | nen2660:hasPart              |                       |                    |
 
+## DCMI
+
+DCMI - Dublin Core™ Metadata Initiative
+
+Het DCMI voorziet in 15 metadata-elementen (zie http://purl.org/dc/elements/1.1/, prefix dc:) en een uitbreiding daarop (zie http://purl.org/dc/terms/, prefix dcterms:). De metadata-elementen zijn vooral gericht op interoperabel gebruik van datamodellen (dus ook linked-data oplossingen), zodat bijvoorbeeld eigenaar en geldigheidsdatum van een datamodel herkenbaar zijn.
+
+In IMBOR worden op deelmodel-niveau (vocabulaire-schema) de volgende DCMI elementen gebruikt:
+* dc:creator - De verantwoordelijke organisatie <span class="mark">Opnemen in GWSW 2.0</span>
+* dc:description - Een beschrijving van de deelmodel-inhoud
+* dc:format - Het gebruikte basis RDF-schema
+* dc:language - De gebruikte taal <span class="mark">Opnemen in GWSW 2.0</span>
+
+* dcterms:dateAccepted - Datum datamodel-versie <span class="mark">Opnemen in GWSW 2.0 (staat niet in IMBOR)</span>
+
 ## Onderscheid met vorige GWSW versies
 
 De belangrijkste wijzigingen in GWSW 2.0 ten opzichte van vorige versies (GWSW 1.n):
@@ -743,7 +757,7 @@ De toepassing van properties is in de GWSW-Ontologie vaak aan regels gebonden do
  | rdfs:isDefinedBy                                 | rdfs:isDefinedBy                                                                          | *Subject* <span class="blue">is gedefinieerd door</span> *Literal* (kan meevoudig voorkomen, definitie *met* bron-referentie)                                                                                                                                                                                                                                                                                                           |
  | rdfs:seeAlso                                     | rdfs:seeAlso                                                                              | *Subject* <span class="blue">heeft aanvullende infomatie op</span> *Literal* (URL)                                                                                                                                                                                                                                                                                                                                                      |
  | rdfs:comment                                     | rdfs:comment<br/>skos:hiddenLabel                                                         | *Subject* <span class="blue">heeft als commentaar</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                      |
- | skos:editorialNote                               | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat altijd *datum start + initialen auteur* en *data wijziging + initialen auteur*)                                                                                                                                                                                                                                       |
+ | skos:editorialNote                               | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat bij voorkeur *datum*, *auteur* en *soort wijziging*)                                                                                                                                                                                                                                       |
  |                                                  | gwsw:hasDateChange                                                                        | *Subject* <span class="blue">heeft als wijzigingsdatum</span> *Literal* (kan meervoudig voorkomen)                                                                                                                                                                                                                                                                                                                                      |
  |                                                  | gwsw:hasAuthorStart                                                                       | *Subject* <span class="blue">heeft als auteur aanmaak</span> *Literal* (naam modelleur die het concept - op de startdatum - heeft aangemaakt)                                                                                                                                                                                                                                                                                           |
  |                                                  | gwsw:hasAuthorChange                                                                      | *Subject* <span class="blue">heeft als auteur wijziging</span> *Literal* (naam modelleur die het concept - op de wijzigingsdatum - heeft gewijzigd)                                                                                                                                                                                                                                                                                     |
@@ -826,16 +840,24 @@ Een voorbeeld van gebruikte annotaties:
             rdfs:comment          "Toelichting bij modellering put" ;
             gwsw:hasValidity	    "1f 3f 4f " ; # codering voor samenstellen conformiteitsklasse
             skos:scopeNote	      gwsw:_TOP ;
-            skos:editorialNote    "20060523/ft: Toegevoegd" ;
-            skos:editorialNote    "20220523/evg: Aangepast" .
+            skos:editorialNote    "Gemaakt dd 23 mei 2006, door Tini Feitsma" ;
+            skos:editorialNote    "20220523/evg: Definitie aangepast" .
 </pre></div>
+
+<div class="box"><strong>skos:editorialNote</strong>
+
+Vanaf GWSW 2.0 volstaat skos:editorialNote voor vermelding van bijvoorbeeld auteur en wijzingsdatum. In eerdere versies werd de auteur en datum bij aanmaak en wijziging van een klasse of CE in vier annotatie-attributen opgenomen (hasDateStart, hasDateChange, hasAuthorStart, :hasAuthorChange).
+Op elementniveau (klassen, CE's) binnen één datamodel/discipline wordt de metadata over historie (tijdstip en wijze van aanmaak) al voldoende in andere bronnen gedocumenteerd.
+
+Metadata op datamodel-niveau met bijvoorbeeld de naam van de eigenaar en de geldigheidsdatum is voor linked-data-toepassingen natuurlijk wel wenselijk. Zie hst [DCMI](#dcmi)
+</div>
 
 ### Annotaties per klasse
 
 Een GWSW concept van het type owl:Class heeft altijd de volgende annotaties:
 
 * skos:prefLabel
-* skos:editorialNote (datum + initialen auteur, aangevuld met minimaal tekst "toegevoegd")
+* skos:editorialNote (met bij voorkeur datum, auteur en soort wijziging)
 * skos:scopeNote
 * skos:definition
 
@@ -848,12 +870,12 @@ Daarnaast zijn de volgende annotaties onder voorwaarden opgenomen:
 
 Een GWSW concept van het type owl:Restriction heeft altijd de volgende annotaties:
 
-* skos:editorialNote (datum + initialen auteur, aangevuld met minimaal tekst "toegevoegd")
+* skos:editorialNote (met bij voorkeur datum, auteur en soort wijziging)
 * skos:scopeNote
 
 Daarnaast wordt elke aanpassing van concepten in een annotatie opgenomen:
 
-* skos:editorialNote (datum + initialen auteur, aangevuld met minimaal tekst "aangepast")
+* skos:editorialNote (met bij voorkeur datum, auteur en soort wijziging)
 
 ### Identificatie van concepten
 
@@ -1026,7 +1048,7 @@ De annotatie skos:scopeNote kan meervoudig voorkomen (als het concept in meerder
 
 <div class="box"><strong>Individuen, een speciaal geval</strong>
 
-Individuen in het GWSW Datamodel kunnen veelvoudig geclassificeerd zijn. Bijvoorbeeld: het individu gwsw:Rond is geclassificeerd als gwsw:VormPutColl, gwsw:VormLeidingColl, gwsw:VormStroomprofiel. Om te kunnen bepalen of de classificatie van een individu binnen een deelmodel valt moet zowel de skos:scopeNote van het individu als de skos:scopeNote van de klasse binnen het deelmodel vallen.   
+Individuen in het GWSW Datamodel kunnen meervoudig geclassificeerd zijn. Bijvoorbeeld: het individu gwsw:Rond is geclassificeerd als gwsw:VormPutColl, gwsw:VormLeidingColl, gwsw:VormStroomprofiel. Om te kunnen bepalen of de classificatie van een individu binnen een deelmodel valt moet zowel de skos:scopeNote van het individu als de skos:scopeNote van de klasse binnen het deelmodel vallen.   
 </div>
 
 Voor de volgende concepten is de scope per definitie identiek aan de scope van klasse-typering. De annotatie skos:scopeNote wordt daarom **niet** opgenomen bij:
@@ -1063,6 +1085,10 @@ De letter geeft het soort kwaliteitseis aan:
 | t      | Draai de kardinaliteit, bijvoorbeeld *minimaal 0* wordt *exact 1*                                                                                                                                                                                       |
 | d      | De klasse doet niet mee in de kwaliteitseis, meestal gaat het om een CE                                                                                                                                                                                 |
 | f      | De klasse is te abstract binnen de conformiteitsklasse. Bij de aanmaak van het RDF bestand met de conformiteitsklasse wordt op basis van deze code de Opmerking-kolom bijgewerkt met tekst: \[cfk fout\]. Deze tekst wordt gescand in validatie-queries |
+
+<div class="box">
+Voorlopig is de range van gwsw:hasValidity een xsd:string. De structuur van deze waarde is nu nog experimenteel, zodra het concept meer vaste vorm krijgt kunnen conformiteitsklassen en kwaliteitseisen ook als enumeratie-waarde worden beschreven.
+</div>
 
 ## Details kenmerken
 
@@ -1104,7 +1130,8 @@ Deze leiding wordt volgens de genoemde patronen gemodelleerd (datamodel) en als 
 Voorbeeld van het modelleerpatroon voor "simpele" kenmerkwaarden:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
-  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+  gwsw:Leiding            rdf:type              owl:Class ;
+                          rdfs:subClassOf       nen2660:PhysicalObject .
   gwsw:diameterLeiding    rdf:type              owl:DatatypeProperty ;      # kwantitatief attribuut
                           rdfs:label            "Diameter leiding" ;
                           rdfs:domain           gwsw:Leiding ;                        
@@ -1137,7 +1164,8 @@ Individuals van leidingmateriaal worden direct gekoppeld via de property
 Voorbeeld van het modelleerpatroon voor "complexe" kenmerkwaarden:
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
-  gwsw:Leiding            rdfs:subClassOf       nen2660:PhysicalObject .
+  gwsw:Leiding            rdf:type              owl:Class ;
+                          rdfs:subClassOf       nen2660:PhysicalObject .
   gwsw:diameterLeiding    rdf:type              owl:ObjectProperty ;          # kwantitatief attribuut
                           rdfs:label            "Diameter leiding" ;
                           rdfs:domain           gwsw:Leiding ;                         
@@ -1155,7 +1183,6 @@ Voorbeeld van het modelleerpatroon voor "complexe" kenmerkwaarden:
                           rdfs:domain           gwsw:Leiding ;                        
                           rdfs:range            nen2660:RelationReference .   
 </pre></div>
-
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
   ex:Leiding_1            rdf:type              gwsw:Leiding ;
@@ -1184,8 +1211,10 @@ Zie voor de definitie van dat meta-kenmerk hst [Betrouwbaarheid, actualiteit](#b
 De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property gekoppeld. 
 
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
-  gwsw:Leiding              rdfs:subClassOf     nen2660:PhysicalObject .
-  gwsw:DiameterLeiding      rdfs:subClassOf     nen2660:QuantityValue ;       
+  gwsw:Leiding              rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:PhysicalObject .
+  gwsw:DiameterLeiding      rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:QuantityValue ;       
                             rdfs:subClassOf                                   # restricties op klasse-niveau
                             [
                               rdf:type          owl:Restriction ;
@@ -1203,7 +1232,8 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                             skos:definition     "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" ;
                             rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
                             rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
-  gwsw:Begindatum           rdfs:subClassOf     nen2660:QualityValue ;       
+  gwsw:Begindatum           rdf:type              owl:Class ;
+                            rdfs:subClassOf     nen2660:QualityValue ;       
                             rdfs:subClassOf                                   # restricties op klasse-niveau
                             [
                               rdf:type          owl:Restriction ;
@@ -1215,10 +1245,11 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                             rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
                             rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:MateriaalColl        rdf:type            owl:Class ;
-                            rdf:type            nen2660:EnumerationType;      # punning: is klasse en wordt hier ook individu
+                            rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
                             owl:oneOf           (gwsw:Beton) .                # individuen
   gwsw:Beton                rdf:type            gwsw:MateriaalColl .          # wordt individu             
-  gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
+  gwsw:MateriaalLeiding     rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
                             rdfs:subClassOf                                   # restricties op klasse-niveau
                             [ 
                               rdf:type          owl:Restriction;
@@ -1237,7 +1268,7 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                             rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
 </pre></div>
 
-In de dataset komt de declaratie helemaal overeen met die van COMPLEX. 
+In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarnaast kan in COMPLEX+ (zoals inwinningsgegevens) nu metadata bij het kenmerk worden opgenomen.
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
   ex:Leiding_1  rdf:type              gwsw:Leiding ;  
@@ -1306,23 +1337,18 @@ In de dataset komt de declaratie helemaal overeen met die van COMPLEX.
                   rdf:type            gwsw:Begindatum ;                       # expliciet typeren
                   gwsw:hasValue       "2012-05-01"^^xsd:date; 
                 ] ,     
-                gwsw:hasAspect                                                            
-                [                                   
-                  rdf:type            gwsw:Begindatum ;                       # expliciet typeren
-                  gwsw:hasValue       "2012-05-01"^^xsd:date; 
-                ] ,     
                 [ 
-                  rdf:type            gwsw:MateriaalLeiding ;                 # expliciet typeeren
+                  rdf:type            gwsw:MateriaalLeiding ;                 # expliciet typeren
                   gwsw:hasAspect
                   [ 
-                    rdf:type          gwsw:Inwinning                          # expliciet typeeren
+                    rdf:type          gwsw:Inwinning                          # expliciet typeren
                     [ 
                       gwsw:hasAspect 
                       [      
-                        rdf:type      gwsw:Datuminwinning                     # expliciet typeeren
+                        rdf:type      gwsw:Datuminwinning                     # expliciet typeren
                         gwsw:hasValue "2023-05-11"^^xsd:date ;
                       ]
-                  ] ;
+                  ] ] ;
                   gwsw:hasReference   gwsw:Beton ;
                 ] .
 </pre></div>
@@ -1345,7 +1371,7 @@ De eenheden bij waarden definiëren we op datamodel-niveau, dat kan eenvoudig do
                             ] ; 
 </pre></div>
 
-In datasets is het specificeren van de eenheid uit het datamodel niet voorgeschreven maar vanwege federatief (linked) gegevensgebruik wordt het wel aanbevolen. Van het datamodel afwijkende eenheden zijn niet toegestaan. 
+In datasets kan een eenheid bij de waarde worden opgenomen, maar dan is alleen de eenheid uit het datamodel toegestaan. Het specificeren van de eenheid in de dataset is niet voorgeschreven maar vanwege linked-gegevensgebruik wordt het wel aanbevolen.
 
 <div class="example-dataset"><div class="example-title marker">Dataset: wel correct</div><pre>
   ex:Leiding_1             gwsw:diameterLeiding         
@@ -1364,7 +1390,7 @@ GWSW toepassingen hanteren de datamodel-eenheid, datasets met afwijkende eenhede
                             [        
                               sh:path            nen2660:unit ;           
                               sh:hasValue        unit:MiLiM ;        
-                              sh:message         "Use unit Milimeter for value of gwsw:diameterLeiding " ; 
+                              sh:message         "Use unit Milimeter for value of gwsw:diameterLeiding" ; 
                               sh:severity        sh:Violation ;      
                             ] .      
 </pre></div>
@@ -1450,7 +1476,7 @@ Voor extra restricties op min/max waarde voegen we een apart datatype toe, daari
                       [
                         rdf:type            owl:Restriction ;
                         owl:onProperty      rdf:value ;
-                        owl:allValuesFrom   gwsw:dt_PutHoogte  
+                        owl:allValuesFrom   gwsw:Dt_HoogtePut
                       ] .
   gwsw:Dt_HoogtePut   rdf:type              rdfs:Datatype ;           # typering verplicht in OWL RL
                       rdfs:label            “Put hoogte - datatype” ;
@@ -1500,7 +1526,15 @@ In GWSW 1.n was de definitie van intrinsieke kenmerken meer complex:
 
 ### Kwalificatie standaardwaardes
 
-Met de komst van de NEN2660 definiëren we in het datamodel kwalificerende aspecten als properties met een specifieke kwaliteit (als bereik).
+In eerdere GWSW-versies was het mogelijk om kenmerken bij concepten te definiëren met een specifieke kwalificatie, bijvoorbeeld om het kenmerk "versie" te definiëren en daaraan een vaste waarde toe te kennen. Dit modelleeraspect word sporadisch gebruikt. Met de komst van de NEN2660 definiëren we dergelijke kenmerken als annotatie-attributen met een specifieke kwaliteit (waarde).
+
+<div class="example"><div class="example-title marker">Datamodel:</div><pre>
+  gwsw:version              rdf:type                owl:AnnotationProperty ;
+                            rdfs:label              "Heeft versie"@nl ;
+                            rdfs:range              xsd:string .
+  gwsw:DeelmodelBasis       rdfs:label              "Deelmodel Basis"@nl ;
+                            gwsw:version            "2.0" .
+</div>
 
 ### Beperking en afleiding
 
@@ -1652,10 +1686,10 @@ SHACL rapporteert dat de typering van ex:Leiding_2 niet consistent is
 
 Het GWSW definieert relaties voor de samenstelling (meronomie) en de verbindingen (netwerk, topologie). Het datamodel beschrijft de restricties op deze relaties. De volgende relaties worden gebruikt (in datamodel en dataset):
 
-> nen2660:hasPart, gwsw:isPartOf
-> gwsw:hasInput, gwsw:isInputOf (staat in de NEN 2660-1, maar is niet overgenomen in de NEN 2660-2)
-> gwsw:hasOutput, gwsw:isOutputOf (staat in de NEN 2660-1, maar is niet overgenomen in de NEN 2660-2)
-> nen2660:hasConnection  (symetrisch, geldt voor fysieke objecten, niet voor topologische elementen?)
+* nen2660:hasPart, gwsw:isPartOf
+* gwsw:hasInput, gwsw:isInputOf (staat in de NEN 2660-1, maar is niet overgenomen in de NEN 2660-2)
+* gwsw:hasOutput, gwsw:isOutputOf (staat in de NEN 2660-1, maar is niet overgenomen in de NEN 2660-2)
+* nen2660:hasConnection  (symetrisch, geldt voor fysieke objecten, niet voor topologische elementen?)
 
 ### Relaties proces (activiteiten)
 
@@ -1686,7 +1720,7 @@ De topologie beschrijft de samenhang en oriëntatie van de fysieke objecten, al 
 
 <img src="media/image4.png" style="width:100%;height:50%" />
 
-De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie kan een vertex zijn of kan bestaan uit een egde met begin- en eindpunt (vertices). Het topologische element "face" voor vlakken wordt niet toegepast. In een hydraulische netwerkmodel worden vertex en edge gemodelleerd als "knooppunt" en "verbinding". Een verbinding kan dan zowel een leiding (de meest voorkomende) als een pomp, doorlaat of wand zijn.
+De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie kan een subtype van een vertex of edge zijn. Het topologische element "face" voor vlakken wordt niet toegepast. In een hydraulische netwerkmodel worden vertex en edge gemodelleerd als "knooppunt" en "verbinding". Een verbinding kan dan zowel een leiding (de meest voorkomende) als een pomp, doorlaat of wand zijn. Voor de netwerkdefinitie worden begin- en eindpunt van een edge beschreven, dat zijn vertices die de punt-objecten representeren.
 
 <span class="blue">nen2660:isConnectedTo</span> is van het type owl:SymmetricProperty (heeft geen inverse). Voor de netwerk-beschrijving is deze relatie bepalend, het verbindt de topologische elementen van fysieke objecten. De relatie wordt echter ook voor de algemene fysieke beschrijving gebruikt, bijvoorbeeld om te beschrijven dat een gemaal verbonden is met een persleiding.
 
@@ -1716,14 +1750,15 @@ De topologie wordt beschreven via de elementen "oriëntatie". Een oriëntatie ka
                             skos:prefLabel            "Putoriëntatie"@nl .
 </pre></div>
 
-<div class="example-dataset"><div class="example-title marker">Dataset: In een netwerk is een put verbonden met een leiding</div><pre>
-  ex:Leiding_1             gwsw:leidingorientatie         
+<div class="example-dataset"><div class="example-title marker">Dataset: In een netwerk is een put via begin- en eindpunt verbonden met een leiding</div><pre>
+  ex:Leiding_1              gwsw:leidingorientatie         
                             [         
-                              nen2660:hasPart              ex:Eindpunt_1 ;
-                            ] .         
-  ex:Put_1                 gwsw:putorientatie         
+                              nen2660:hasPart         ex:Eindpunt_1 ;
+                            ] .
+  ex:Eindpunt_1             rdf:type                  gwsw:EindpuntLeiding .         
+  ex:Put_1                  gwsw:putorientatie         
                             [         
-                              nen2660:isConnectedTo      ex:Eindpunt_1 ;
+                              nen2660:isConnectedTo   ex:Eindpunt_1 ;
                             ] .         
 </pre></div>
 
@@ -1744,63 +1779,88 @@ Een voorbeeld met <span class="blue">gwsw:Lijn</span>
                       [
                         rdf:type            owl:Restriction ;
                         owl:onProperty      rdf:value ;
-                        owl:allValuesFrom   geo:wktLiteral ;            # was geo:gmlLiteral in vorige versies
+                        owl:allValuesFrom   geo:wktLiteral ;              # was geo:gmlLiteral in vorige versies
                       ] .
-  gwsw:lijn           rdf:type            owl:ObjectProperty ;
-                      rdfs:label          "Lijn" ;               
-                      rdfs:domain         gwsw:TopologischElement ;     # gekoppeld aan de topologie
-                      rdfs:range          gwsw:Lijn .                   # exact 1 range (OWA: tenminste 1) 
-
+  gwsw:lijn           rdf:type              owl:ObjectProperty ;
+                      rdfs:label            "Lijn" ;               
+                      rdfs:domain           gwsw:TopologischElement ;     # gekoppeld aan de topologie
+                      rdfs:range            gwsw:Lijn .                   # exact 1 range (OWA: tenminste 1) 
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset: De geometrie bij de leidingoriëntatie</div><pre>
   ex:Leiding_1        gwsw:leidingorientatie         
                       [         
-                        nen2660:hasPart   ex:Eindpunt_1 ;
+                        nen2660:hasPart     ex:Eindpunt_1 ;
                         gwsw:lijn 
                         [ 
-                          rdf:value       "LINESTRING (30 10, 10 30, 40 40)"^^geo:wktLiteral ;
+                          rdf:value         "LINESTRING (30 10, 10 30, 40 40)"^^geo:wktLiteral ;
                         ] ;
-                      ] .         
+                      ] .
+  ex:Eindpunt_1       rdf:type              gwsw:EindpuntLeiding .         
 </pre></div>
 
 ### Relaties compositie (deel-geheel)
 
 De NEN2660 definieert <span class="blue">nen2660:hasPart</span> van het type owl:ObjectProperty, de relatie geldt tussen Fysiek Objecten (inclusief gwsw:Ruimte) onderling en Activiteiten onderling.
 
+Compositie op constructie-niveau:
+
 <div class="example"><div class="example-title marker">Datamodel: Stuwput en zijn onderdelen</div><pre>
-  gwsw:Stuwput            rdf:type                   owl:Class ;
-                          rdfs:subClassOf            gwsw:Rioolput .
-  gwsw:Stuwmuur           rdf:type                   owl:Class ;
-                          rdfs:subClassOf            gwsw:Wand .
-  gwsw:Compartiment       rdf:type                   owl:Class ;
-                          rdfs:subClassOf            gwsw:Ruimte .
+  gwsw:Stuwput            rdf:type                        owl:Class ;
+                          rdfs:subClassOf                 gwsw:Rioolput ;
+                          rdfs:subClassOf
+                          [              
+                            rdf:type                      owl:Restriction ;
+                            owl:qualifiedCardinality      "1"^^xsd:nonNegativeInteger ; # exact 1 stuwmuur, zie ook volgende hoofdstuk
+                            owl:onProperty                nen2660:hasPart ;
+                            owl:onClass                   gwsw:Stuwmuur .
+                          ] ;    
+                          rdfs:subClassOf
+                          [              
+                            rdf:type                      owl:Restriction ;
+                            owl:minQualifiedCardinality   "2"^^xsd:nonNegativeInteger ; # min 2 compartimenten, zie ook volgende hoofdstuk
+                            owl:onProperty                nen2660:hasPart ;
+                            owl:onClass                   gwsw:Compartiment .
+                          ] .    
+  gwsw:Stuwmuur           rdf:type                        owl:Class ;
+                          rdfs:subClassOf                 gwsw:Wand .
+  gwsw:Compartiment       rdf:type                        owl:Class ;
+                          rdfs:subClassOf                 gwsw:Ruimte .
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset: Compositie van een stuwput, heeft als deel een stuwmuur en een compartiment</div><pre>
-  ex:Stuwmuur_1           rdf:type                   gwsw:Stuwmuur ;
-                          skos:prefLabel             "0987/w1" .
-  ex:Comp_1               rdf:type                   gwsw:Compartiment;
-                          skos:prefLabel             "0987/c1" .
-  ex:Stuwput_1            rdf:type                   gwsw:Stuwput ;
-                          skos:prefLabel             "0987" ;
-                          nen2660:hasPart            ex:Stuwmuur_1 ;
-                          nen2660:hasPart            ex:Comp_1 .
+  ex:Stuwmuur_1           rdf:type                        gwsw:Stuwmuur ;
+                          skos:prefLabel                  "0987/w1" .
+  ex:Comp_1               rdf:type                        gwsw:Compartiment;
+                          skos:prefLabel                  "0987/c1" .
+  ex:Stuwput_1            rdf:type                        gwsw:Stuwput ;
+                          skos:prefLabel                  "0987" ;
+                          nen2660:hasPart                 ex:Stuwmuur_1 ;
+                          nen2660:hasPart                 ex:Comp_1 .
 </pre></div>
 
+Compositie op gebieds-niveau:
+
 <div class="example"><div class="example-title marker">Datamodel: Gebied en stelsel</div><pre>
-  gwsw:Kern               rdf:type                   owl:Class ;
-                          rdfs:subClassOf            gwsw:Ruimte .
-  gwsw:Rioolstelsel       rdf:type                   owl:Class ;
-                          rdfs:subClassOf            gwsw:Stelsel .
+  gwsw:Kern               rdf:type                        owl:Class ;
+                          rdfs:subClassOf                 gwsw:Ruimte ;
+                          rdfs:subClassOf
+                          [              
+                            rdf:type                      owl:Restriction ;
+                            owl:minQualifiedCardinality   "0"^^xsd:nonNegativeInteger ; # kan een stelsel bevatten, zie ook volgende hoofdstuk
+                            owl:onProperty                nen2660:hasPart ;
+                            owl:onClass                   gwsw:Stelsel .
+                          ] .
+  gwsw:Rioolstelsel       rdf:type                        owl:Class ;
+                          rdfs:subClassOf                 gwsw:Stelsel .
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset: Het gebied bevat het stelsel</div><pre>
-  ex:Stelsel_1            rdf:type                   gwsw:Rioolstelsel;
-                          skos:prefLabel             "Stelsel 1" .
-  ex:Kern_1               rdf:type                   gwsw:Kern ;
+  ex:Stelsel_1            rdf:type                        gwsw:Rioolstelsel;
+                          skos:prefLabel                  "Stelsel 1" .
+  ex:Kern_1               rdf:type                        gwsw:Kern ;
                           nen2660:hasPart                 ex:Stelsel_1 ;
-                          skos:prefLabel             "Kern 1" .
+                          skos:prefLabel                  "Kern 1" .
 </pre></div>
 
 ### Beperking en afleiding
