@@ -56,7 +56,7 @@ Deze afkortingen hanteren we in de OWL definities. De afkorting CE wordt gebruik
 We hanteren deze begrippen zoals gesymboliseerd in de "betekenisdriehoek" (aangehaald in de NEN 2660-1): een individueel ding is iets dat waarneembaar of voorstelbaar is in de werkelijkheid, een individueel concept is de mentale voorstelling van het ding, een symbool is altijd iets materieels (meestal een woord) dat het concept (en ding) representeert.  
 
 **Individu**  
-Een individueel concept (NEN 2660-1), iets (potentieel) aanwijsbaars uit de werkelijkheid. Zoals individu “0980” in werkelijkheid de betonnen constructie van de klasse/concept “rioolput” is.
+Een synoniem van Individueel Concept (NEN 2660-1): een enkelplaatsig (unair) Individueel Ding (in de "Werkelijke Wereld") dat existentieel onafhankelijk is, de conceptualisatie van iets aanwijsbaars of voorstelbaars uit de werkelijkheid. Zoals individu “0980” in werkelijkheid de betonnen constructie van de klasse/concept “rioolput” is.
 
 **Klasse, subtype, supertype**  
 Klassen zijn de bouwstenen van de soortenboom, ook wel taxonomie genoemd. In de GWSW-hiërarchie gebruiken we de termen Supertype - Klasse - Subtype. Een subtype is de "specialisatie" van de klasse, het supertype is de "generalisatie" van de klasse.
@@ -305,8 +305,13 @@ Bouw de soortenboom op basis van onderscheidende kenmerken, zie hst [Details ond
 3. Abstracte concepten bij voorkeur als groep/collectie (en niet als supertype) definiëren. Bijvoorbeeld groepering naar thema's, denk aan infiltratievoorzieningen.
 4. Subtypes op hetzelfde niveau dienen in grote lijn hetzelfde samenstellingsniveau te hebben.
 
-<div class="box">**Oormerken met behulp van conformiteitsklassen**<br/>
-In een conformiteitsklasse spelen de abstracte klassen geen rol, ze blijven dan verborgen voor de gebruiker. <a href="#validity-context">Zie validity context</a>
+<div class="box"><strong>Oormerken met behulp van conformiteitsklassen</strong><br/>
+In deelmodellen met conformiteitsklassen (CFK) worden abstracte klassen gemarkeerd en daarop gevalideerd. In CFK-presentaties blijven ze verborgen. <a href="#validity-context">Zie validity context</a>
+</div>
+
+<div class="box"><strong>Abstracte klassen in SHACL</strong><br/>
+De DASH Data Shapes Vocabulary definieert een abstracte klasse als "A class is called abstract if it cannot have direct instances - only non-abstract subclasses of an abstract class can be instantiated directly". DASH bevat de property <span class="blue">dash:abstract</span> met domein <span class="blue">rdfs:Class</span> en range <span class="blue">true</span> voor het markeren van abstracte klassen.
+<a href="#details-specialsatie-en-classificatie">Zie Details specialsatie en classificatie</a>
 </div>
 
 ### Bladerobjecten
@@ -414,19 +419,13 @@ Relevante links naar CROW publicaties over het IMBOR (versie 2022):
 
 In de roadmap van het IMBOR Kernteam is opgenomen dat in 2022/2023 het meta-model voor de mapping van ontologiën wordt ontwikkeld. 
 
-De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW. Het datamodel GWSW wordt volledig geïntegreerd en de module IMBOR Riolering komt te vervallen. Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel voldoende te koppelen zijn, daarvoor worden de datamodellen in lijn gebracht ("alignment"). 
+De bedoeling is dat de GWSW Ontologie op zichzelf blijft bestaan en dat het IMBOR voor de discipline Stedelijk Water koppelt aan het GWSW. Het datamodel GWSW wordt volledig geïntegreerd en de module IMBOR Riolering komt te vervallen. Het GWSW wordt dus niet omgezet conform IMBOR-LD principes maar moet natuurlijk wel voldoende te koppelen zijn, daarvoor worden de datamodellen in lijn gebracht ("alignment").
 
-<div class="box">
+Schematisch overzicht IMBOR basisstructuur/architectuur
 
-<span class="mark">NOG TOEVOEGEN:</span>
+<img src="media/IMBOR LD.png" style="width:80%; height:85%" />
 
-Schematisch overzicht IMBOR basisstructuur
-
-* SCHEMA IMBOR-TOPMODEL, BASISMODEL EN (EXTERNE) DEELMODELLEN
-* ALIGNMENT PRINCIPES
-* POSITIE DISCIPLINE-DATASETS
-* DATASTORES EN FEDERATED QUERIES
-</div>
+<span class="mark">NOG TOEVOEGEN: ALIGNMENT PRINCIPES</span>
 
 Tussen het basismodel IMBOR en deelmodellen zoals GWSW 2.0 kunnen en mogen natuurlijk verschillen bestaan vanwege disciplinecontext en data-toepassingen. Hierna volgt een overzicht van de belangrijkste principiële verschillen tussen IMBOR en GWSW.
 
