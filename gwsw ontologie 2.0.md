@@ -1140,14 +1140,14 @@ Voorbeeld van het modelleerpatroon voor "simpele" kenmerkwaarden:
                           rdfs:label            "Begindatum" ;
                           rdfs:domain           nen2660:PhysicalObject ;             
                           rdfs:range            xsd:date .                  # tekenreeks 
-  gwsw:MateriaalLeiding   rdf:type              owl:Class ;
-                          rdf:type              nen2660:EnumerationType .   # punning: is klasse en wordt hier ook individu
-                          owl:oneOf             (gwsw:Beton) .              # individuen
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # individu             
   gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;        # relatie-referentie
                           rdfs:label            "Materiaal leiding" ;
                           rdfs:domain           gwsw:Leiding ;                       
                           rdfs:range            gwsw:MateriaalLeiding .     
+  gwsw:MateriaalLeiding   rdf:type              owl:Class ;
+                          rdf:type              nen2660:EnumerationType .   # punning: is klasse en wordt hier ook individu
+                          owl:oneOf             (gwsw:Beton) .              # individuen
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .     # individu             
 </pre></div>
 
 Individuals van leidingmateriaal worden direct gekoppeld via de property 
@@ -1174,14 +1174,14 @@ Voorbeeld van het modelleerpatroon voor "complexe" kenmerkwaarden:
                           rdfs:label            "Begindatum" ;
                           rdfs:domain           nen2660:PhysicalObject ;              
                           rdfs:range            nen2660:QualityValue ;
-  gwsw:MateriaalLeiding   rdf:type              owl:Class ;
-                          rdf:type              nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
-                          owl:oneOf             (gwsw:Beton) .                # individuen
-  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # individu             
   gwsw:materiaalLeiding   rdf:type              owl:ObjectProperty ;          # relatie-referentie
                           rdfs:label            "Materiaal leiding" ;
                           rdfs:domain           gwsw:Leiding ;                        
                           rdfs:range            nen2660:RelationReference .   
+  gwsw:MateriaalLeiding   rdf:type              owl:Class ;
+                          rdf:type              nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
+                          owl:oneOf             (gwsw:Beton) .                # individuen
+  gwsw:Beton              rdf:type              gwsw:MateriaalLeiding .       # individu             
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
@@ -1213,6 +1213,11 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
 <div class="example"><div class="example-title marker">Datamodel:</div><pre>
   gwsw:Leiding              rdf:type            owl:Class ;
                             rdfs:subClassOf     nen2660:PhysicalObject .
+  gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-URI, startend met lower-case
+                            rdfs:label          "Diameter leiding" ; 
+                            skos:definition     "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" ;
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
   gwsw:DiameterLeiding      rdf:type            owl:Class ;
                             rdfs:subClassOf     nen2660:QuantityValue ;       
                             rdfs:subClassOf                                   # restricties op klasse-niveau
@@ -1227,11 +1232,10 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                               owl:onProperty    nen2660:unit ;
                               owl:hasValue      unit:MiliM ;
                             ] .
-  gwsw:diameterLeiding      rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-URI, startend met lower-case
-                            rdfs:label          "Diameter leiding" ; 
-                            skos:definition     "De lengte van de middellijn van de cirkel die de binnenzijde van de leidingdoorsnede beschrijft" ;
-                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range          gwsw:DiameterLeiding .        # exact 1 range (OWA: tenminste 1) 
+  gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-URI, startend met lower-case
+                            rdfs:label          "Begindatum" ;               
+                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
+                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
   gwsw:Begindatum           rdf:type              owl:Class ;
                             rdfs:subClassOf     nen2660:QualityValue ;       
                             rdfs:subClassOf                                   # restricties op klasse-niveau
@@ -1240,21 +1244,17 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                               owl:onProperty    rdf:value ;
                               owl:allValuesFrom xsd:date ;
                             ] .
-  gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de attribuut-URI is consequent de range-class-URI, startend met lower-case
-                            rdfs:label          "Begindatum" ;               
-                            rdfs:domain         nen2660:PhysicalObject ;      # minimaal 1 domein          
-                            rdfs:range          gwsw:Begindatum .             # exact 1 range (OWA: tenminste 1) 
-  gwsw:MateriaalColl        rdf:type            owl:Class ;
-                            rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
-                            owl:oneOf           (gwsw:Beton) .                # individuen
-  gwsw:Beton                rdf:type            gwsw:MateriaalColl .          # wordt individu             
+  gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
+                            rdfs:label          "Materiaal leiding" ;         
+                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
+                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
   gwsw:MateriaalLeiding     rdf:type            owl:Class ;
                             rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
                             rdfs:subClassOf                                   # restricties op klasse-niveau
-                            [ 
+                            [
                               rdf:type          owl:Restriction;
                               owl:onProperty    rdf:value ;
-                              owl:allValuesFrom gwsw:MateriaalColl ;
+                              owl:allValuesFrom gwsw:MateriaalLeidingColl ;
                             ] ; 
                             rdfs:subClassOf                                   # restricties op klasse-niveau
                             [ 
@@ -1262,10 +1262,10 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
                               owl:onProperty    gwsw:inwinning ;
                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                             ] . 
-  gwsw:materiaalLeiding     rdf:type            owl:ObjectProperty ;
-                            rdfs:label          "Materiaal leiding" ;         
-                            rdfs:domain         gwsw:Leiding ;                # minimaal 1 domein          
-                            rdfs:range          gwsw:MateriaalLeiding .       # exact 1 range (OWA: tenminste 1)
+  gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
+                            rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
+                            owl:oneOf           (gwsw:Beton) .                # individuen
+  gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu
 </pre></div>
 
 In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarnaast kan in COMPLEX+ (zoals inwinningsgegevens) nu metadata bij het kenmerk worden opgenomen.
@@ -1293,6 +1293,43 @@ In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarna
                   ] ;
                 ] .
 </pre></div>
+
+<span class="mark">VARIANT MET nen2660:Matter </span>
+
+<div class="example"><div class="example-title marker">Datamodel: <span class="mark">Variant met nen2660:Matter</span></div><pre>
+  gwsw:Leiding              rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:RealObject ;          # NEN2660: hoeveelheid materie (domein van nen2660:consistsOf)
+                            rdfs:subClassOf                                   # restricties op klasse-niveau
+                            [ 
+                              rdf:type          owl:Restriction;
+                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onProperty    nen2660:consistsOf ;
+                              owl:onClass       gwsw:MateriaalLeiding ;
+                            ] . 
+  gwsw:MateriaalLeiding     rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:Matter ;              # range van nen2660:consistsOf
+                            rdfs:subClassOf                                   # restricties op klasse-niveau
+                            [ 
+                              rdf:type          owl:Restriction;
+                              owl:onProperty    rdf:value ;
+                              owl:allValuesFrom gwsw:MateriaalLeidingColl ;
+                            ] . 
+  gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
+                            rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
+                            owl:oneOf           (gwsw:Beton) .                # individuen
+  gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .              # wordt individu             
+</pre></div>
+
+<div class="example-dataset"><div class="example-title marker">Dataset: <span class="mark">Variant met nen2660:Matter</span></div><pre>
+  ex:Leiding_1  rdf:type              gwsw:Leiding ;  
+                nen2660:consistsOf                                            # impliciet nen2660:Matter (of nen2660:MatterPortion)
+                [
+                  rdf:value           gwsw:Beton ;
+                ] .
+</pre></div>
+
+<span class="mark">NOG EEN VARIANT MET nen2660:Matter</span>
+Handhaaf attribuut <span class="blue">gwsw:materiaalLeiding</span> als <span class="blue">rdfs:subPropertyOf</span> van <span class="blue">nen2660:consistsOf</span>
 
 <div class="box"><strong>Kenmerken in vorige versies</strong>
 <div class="example"><div class="example-title marker">De OUDE GWSW (versie 1.n) kenmerk-domein-definitie:</div><pre>
@@ -1965,7 +2002,10 @@ gwsw:Materiaal            rdf:type                          owl:Class ;
 
 <div class="example-dataset"><div class="example-title marker">Dataset: In de dataset verwijzen naar een niet getypeerd individu</div><pre>
   ex:Put_3                rdf:type                          gwsw:Put ;
-                          gwsw:materiaalPut                 gwsw:Betonnnn .
+                          gwsw:materiaalPut                             
+                          [                                        
+                            rdf:value                       gwsw:Betonnnn ;
+                          ] .
 </pre></div>
 
 Validator rapporteert dat het materiaal van ex:Put_2 ontbreekt en van ex:Put3 onbekend is
@@ -2032,9 +2072,9 @@ Ter illustratie, beschrijf de situaties met de volgende voorwaarden:
 
 Hierna volgt de inhoud van drie proefbestanden:
 
-Bestand <span class="blue">Proef GWSW 2.0 - Bridge.ttl</span> bevat het datamodel en de dataset  
-Bestand <span class="blue">Proef GWSW 2.0 - Bridge.rq</span> bevat de SPARQL query om de inferencing te testen  
-Bestand <span class="blue">Proef GWSW 2.0 - Bridge.sh.ttl</span> bevat de SHACL graphs
+Bestand <span class="blue">Proef GWSW 2.0.ttl</span> bevat het datamodel en de dataset  
+Bestand <span class="blue">Proef GWSW 2.0 domain.rq</span> bevat de SPARQL query om de inferencing te testen  
+Bestand <span class="blue">Proef GWSW 2.0.sh.ttl</span> bevat de SHACL graphs
 
 ## Bestand "Proef GWSW 2.0.ttl"
 
@@ -2087,8 +2127,7 @@ gwsw:begindatum           rdf:type            owl:ObjectProperty ;          # de
 gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                           rdf:type            nen2660:EnumerationType;      # punning: is klasse en wordt hier ook individu
                           owl:oneOf           (gwsw:Beton) .                # individuen
-#gwsw:Beton                rdf:type            gwsw:MateriaalColl .          # wordt individu             
-gwsw:Beton                rdf:type            gwsw:Materiaal .              # wordt individu             
+gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu             
 gwsw:MateriaalLeiding     rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
                           rdfs:subClassOf                                   # restricties op klasse-niveau
                           [ 
@@ -2159,11 +2198,11 @@ WHERE
 {
   gwsw:begindatum   rdfs:label             ?labDat .
   ?begdat           rdf:type               gwsw:Begindatum . # expliciet
-                    gwsw:materiaalLeiding rdfs:label ?labMat .
-  ?sub              gwsw:materiaalLeiding ?mat .
-  ?mat              sesame:directType     ?typMat . # impliciet, wordt afgeleid van range
-                    gwsw:diameterLeiding  skos:definition ?defDia .
-  ?sub              sesame:directType     ?typSub .
+                    gwsw:materiaalLeiding  rdfs:label ?labMat .
+  ?sub              gwsw:materiaalLeiding  ?mat .
+  ?mat              sesame:directType      ?typMat . # impliciet, wordt afgeleid van range
+                    gwsw:diameterLeiding   skos:definition ?defDia .
+  ?sub              sesame:directType      ?typSub .
 }
 </pre>
 
