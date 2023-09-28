@@ -1307,6 +1307,7 @@ In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarna
                               owl:onClass       gwsw:MateriaalLeiding ;
                             ] . 
   gwsw:MateriaalLeiding     rdf:type            owl:Class ;
+                            rdfs:subClassOf     nen2660:RelationReference ;   # relatie-referentie
                             rdfs:subClassOf     nen2660:Matter ;              # range van nen2660:consistsOf
                             rdfs:subClassOf                                   # restricties op klasse-niveau
                             [ 
