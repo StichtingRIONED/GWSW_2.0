@@ -129,7 +129,7 @@ Voorbeelden van de bestandsvormen zijn in dit document als volgt gemarkeerd:
 
 ## Uitgangspunten
 
-Een belangrijk principe is de object-georiënteerde modellering: het datamodel hanteert overerving-principes en maakt zo expliciet mogelijk onderscheid in subtypen van de genoemde supertypen. Dat is een heel andere benadering dan bijvoorbeeld het ontwerp van een relationeel datamodel. Daarbij ligt de nadruk ligt op het interpreteren van informatie met een hoofdrol voor de normalisatie-techniek om opslagruimte te beperken en redundantie te voorkomen. RDF is vanwege zijn binaire relaties van zichzelf optimaal genormaliseerd, wijzigingen beperken zich tot toevoegen of verwijderen van triples.
+Een belangrijk principe is de object-georiënteerde modellering: het datamodel hanteert overerving-principes en maakt zo expliciet mogelijk onderscheid in subtypen. Dat is een heel andere benadering dan bijvoorbeeld het ontwerp van een relationeel datamodel. Daarbij ligt de nadruk op het interpreteren van informatie met een hoofdrol voor de normalisatie-techniek om opslagruimte te beperken en redundantie te voorkomen. RDF is vanwege zijn binaire relaties van zichzelf optimaal genormaliseerd, wijzigingen beperken zich tot toevoegen of verwijderen van triples.
 
 Voor de modellering is uitgegaan van het OWL RL (Rule Language) profiel. Dit profiel gebruikt nagenoeg alle OWL 2 semantiek en is toereikend voor het modelleren van de GWSW-Ontologie.
 
