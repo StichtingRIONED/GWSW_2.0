@@ -150,10 +150,10 @@ De GWSW Ontologie wordt vanaf versie 1.5.2 in GitHub, onderhouden. Daarmee is er
 In de ontologie is <span class="blue">owl:versionInfo</span> opgenomen, daarin staat de aanmaakdatum. Vanaf versie 2.0 wordt daarin ook expliciet het versienummer opgenomen.
 
 In de URL van GWSW-concepten is (al dan niet via een prefix) expliciet het versienummer opgenomen (exclusief patch-nummer, bijvoorbeeld voor versie 1.5.2 blijft het 1.5). 
-Elk GWSW-concept heeft dus een eigen beschrijving per versie op het web, die concepten zijn tot versie 1.3.1 terug te vinden op het web. Vanaf versie 1.4 worden de patch-nummers
+Elk GWSW-concept heeft dus een eigen beschrijving per versie op het web, die concepten zijn daar tot versie 1.3.1 ook terug te vinden. Vanaf versie 1.4 worden de patch-nummers
 niet meer in de URL opgenomen.
 
-Met een alias wordt voor het gemak altijd naar de meest recente versie (in het deelmodel Totaal) verwezen:
+Met een alias wordt voor het browse-gemak altijd naar de meest recente versie (in het deelmodel Totaal) verwezen:
 * Aliasen https://data.gwsw.nl/put en https://data.gwsw.nl/1.6/totaal/put verwijzen beide naar https://data.gwsw.nl/def/1.6/totaal/put (de actuele versie)
 * Alias https://data.gwsw.nl/1.4/totaal/put verwijst naar https://data.gwsw.nl/def/1.4/totaal/put
 
