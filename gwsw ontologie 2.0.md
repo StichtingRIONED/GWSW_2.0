@@ -144,6 +144,22 @@ Uitgangspunten bij de bouw van de GWSW ontologie:
 
 Het laatste hoofdstuk bevat voorbeelden waarbij deze uitgangspunten worden toegepast.
 
+### Versiebeheer
+
+De GWSW Ontologie wordt vanaf versie 1.5.2 in GitHub, onderhouden. Daarmee is er volledige controle over de versie-aanpassingen. Van de versies voorafgaand aan 1.5.2 zijn de ontologiën 
+In de ontologie is <span class="blue">owl:versionInfo</span> opgenomen, daarin staat de aanmaakdatum. Vanaf versie 2.0 wordt daarin ook expliciet het versienummer opgenomen.
+
+In de URL van GWSW-concepten is (al dan niet via een prefix) expliciet het versienummer opgenomen (exclusief patch-nummer, bijvoorbeeld voor versie 1.5.2 blijft het 1.5). 
+Elk GWSW-concept heeft dus een eigen beschrijving per versie op het web, die concepten zijn tot versie 1.3.1 terug te vinden op het web. Vanaf versie 1.4 worden de patch-nummers
+niet meer in de URL opgenomen.
+
+Met een alias wordt voor het gemak altijd naar de meest recente versie (in het deelmodel Totaal) verwezen:
+* Aliasen https://data.gwsw.nl/put en https://data.gwsw.nl/1.6/totaal/put verwijzen beide naar https://data.gwsw.nl/def/1.6/totaal/put (de actuele versie)
+* Alias https://data.gwsw.nl/1.4/totaal/put verwijst naar https://data.gwsw.nl/def/1.4/totaal/put
+
+Een gewijzigd versie-nummer (exclusief patch-nummer) vraagt altijd om aanpassing/evaluatie van de toepassing. 
+In datasets wordt daarom alijd expliciet verwezen (met de URL) naar de bijbehorende ontologie-versie.
+
 ### Taalbinding naar RDF gebaseerde standaarden
 
 De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
@@ -157,7 +173,9 @@ De volgende standaardformaten of -talen hanteren we in de GWSW ontologie:
 | SKOS    | Simple Knowledge Organization System. Gericht op het uitdrukken van kennisorganisatie systemen (KOS) zoals vocabulaires, woordenboeken en thesauri.                                                             |
 | NEN2660 | De door NEN gepubliceerde "Regels voor informatiemodellering van de gebouwde omgeving - Deel 2: Praktische configuratie, extensie en implementatie van NEN 2660-1". Gebaseerd op RDF, RDFS, OWL, SKOS en SHACL. |
 
-### Gebruikte namespaces  
+### Gebruikte namespaces
+
+Overzicht van de relevante namespaces
 
 | Onderwerp      | Prefix        | Url                                                 |
 |----------------|---------------|-----------------------------------------------------|
@@ -181,7 +199,7 @@ Voor de concepten en relaties uit de GWSW-Ontologie hanteren we in de voorbeelde
 | GWSW-Dataset   | ex:    | &lt;https://sparql.gwsw.nl/id/Juinen#&gt; |
 
  (https://data.gwsw.nl/2.0/totaal/ is een alias voor https://data.gwsw.nl/def/2.0/totaal/)
-
+ 
 # Modelleerprincipes - Algemeen
 
 Een groot deel van de gehanteerde modelleerprincipes stammen uit de oorspronkelijke opzet (gestart in 2006) van het datamodel in Gellish-vorm. Deze principes zijn natuurlijk taalonafhankelijk, ook in de RDF-vorm blijven ze van groot belang. Veel dank gaat naar Andries van Renssen, geestelijk vader van Gellish en Matthé van Koetsveld, intensief betrokken bij de modellering in Gellish van het GWSW en zijn voorlopers.
@@ -587,28 +605,32 @@ In IMBOR worden op deelmodel-niveau (vocabulaire-schema) de volgende DCMI elemen
 
 * dcterms:dateAccepted - Datum datamodel-versie <span class="mark">Opnemen in GWSW 2.0 (staat niet in IMBOR)</span>
 
-## Onderscheid met vorige GWSW versies
+## Verschil met vorige GWSW versies
 
-De belangrijkste wijzigingen in GWSW 2.0 ten opzichte van vorige versies (GWSW 1.n):
+Een overzicht van wijzigingen in GWSW 2.0 ten opzichte van eerdere versies (GWSW 1.n):
 
 * Kenmerken uitdrukken als kwalitatieve/kwantitatieve attributen, relatie gwsw:hasAspect vervalt
+* De materiaal- en grondsoort-kenmerken worden uitgedrukt met nen2660:consistsOf
 * Annotatie skos:editorialNote vervangt gwsw:hasDateStart, gwsw:hasDateChange, gwsw:hasAuthorStart, gwsw:hasAuthorChange
 * Annotatie skos:prefLabel vervangt rdfs:label
 * Geometrie-waarde uitdrukken als WKT, was GML in vorige versies
 * Vocabulaire binnen datamodel onderscheiden en apart publiceren/presenteren
+* Materiaal en grondsoort worden een IMBOR-type, waren een type van één of meerdere collecties
+* Relatie rdfs:member vervangt gwsw:hasPart voor informatiedragers
+* In owl:versionInfo het versienummer (inclusief patch-nummer) opnemen 
 
 Samenvatting van gewijzigde klassen:
 
-| Naam                      | Oude naam (1.6)         | Toelichting                                                                 |
-|---------------------------|-------------------------|-----------------------------------------------------------------------------|
-| nen2660:Activity          | gwsw:Activiteit         |                                                                             |
-| nen2660:PhysicalObject    | gwsw:FysiekObject       |                                                                             |
-| nen2660:Matter            | gwsw:Materie            | gwsw:Materiaal is subtype van nen2660:Matter (was subtype van gwsw:Kenmerk) |
-| nen2660:QuantityValue     | gwsw:Kenmerk            |                                                                             |
-| nen2660:QualityValue      | gwsw:Kenmerk            |                                                                             |
-| nen2660:RelationReference | gwsw:Kenmerk            |                                                                             |
-| nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                             |
-| rdfs:Container            | gwsw:VerzamelingSoorten |                                                                             |
+| Naam                      | Oude naam (1.6)         | Toelichting                                                                                    |
+|---------------------------|-------------------------|------------------------------------------------------------------------------------------------|
+| nen2660:Activity          | gwsw:Activiteit         |                                                                                                |
+| nen2660:PhysicalObject    | gwsw:FysiekObject       |                                                                                                |
+| nen2660:Matter            | gwsw:Materie            | gwsw:Materiaal en gwsw:Grondsoort is subtype van nen2660:Matter (was subtype van gwsw:Kenmerk) |
+| nen2660:QuantityValue     | gwsw:Kenmerk            | De waarde is numeriek                                                                          |
+| nen2660:QualityValue      | gwsw:Kenmerk            | De waarde is een string                                                                        |
+| nen2660:RelationReference | gwsw:Kenmerk            | De "waarde" is een individu                                                                    |
+| nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                                                |
+| rdfs:Container            | gwsw:VerzamelingSoorten | Bij informatiedragers (gwsw:hasPart wordt rdfs:member)                                         |
 
 # Details van de GWSW semantiek
 
@@ -757,7 +779,7 @@ De toepassing van properties is in de GWSW-Ontologie vaak aan regels gebonden do
  | rdfs:isDefinedBy                                 | rdfs:isDefinedBy                                                                          | *Subject* <span class="blue">is gedefinieerd door</span> *Literal* (kan meevoudig voorkomen, definitie *met* bron-referentie)                                                                                                                                                                                                                                                                                                           |
  | rdfs:seeAlso                                     | rdfs:seeAlso                                                                              | *Subject* <span class="blue">heeft aanvullende infomatie op</span> *Literal* (URL)                                                                                                                                                                                                                                                                                                                                                      |
  | rdfs:comment                                     | rdfs:comment<br/>skos:hiddenLabel                                                         | *Subject* <span class="blue">heeft als commentaar</span> *Literal*                                                                                                                                                                                                                                                                                                                                                                      |
- | skos:editorialNote                               | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat bij voorkeur *datum*, *auteur* en *soort wijziging*)                                                                                                                                                                                                                                       |
+ | skos:editorialNote                               | gwsw:hasDateStart<br/>gwsw:hasAuthorStart<br/>gwsw:hasDateChange<br/>gwsw:hasAuthorChange | *Subject* <span class="blue">heeft als opmerking door de auteur</span> *Literal* (kan meervoudig voorkomen: bevat bij voorkeur *datum*, *auteur* en *soort wijziging*)                                                                                                                                                                                                                                                                  |
  |                                                  | gwsw:hasDateChange                                                                        | *Subject* <span class="blue">heeft als wijzigingsdatum</span> *Literal* (kan meervoudig voorkomen)                                                                                                                                                                                                                                                                                                                                      |
  |                                                  | gwsw:hasAuthorStart                                                                       | *Subject* <span class="blue">heeft als auteur aanmaak</span> *Literal* (naam modelleur die het concept - op de startdatum - heeft aangemaakt)                                                                                                                                                                                                                                                                                           |
  |                                                  | gwsw:hasAuthorChange                                                                      | *Subject* <span class="blue">heeft als auteur wijziging</span> *Literal* (naam modelleur die het concept - op de wijzigingsdatum - heeft gewijzigd)                                                                                                                                                                                                                                                                                     |
@@ -1265,10 +1287,15 @@ De annotaties bij het kenmerk worden - conform de NEN2660 - aan de property geko
   gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                             rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
                             owl:oneOf           (gwsw:Beton) .                # individuen
-  gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu
+  # gwsw:Beton                rdf:type           gwsw:MateriaalLeidingColl .   # wordt individu
+  gwsw:Beton                rdf:type           imbor:52ab27f2-fb67-4752-8cfc-ac4f3638df4e . # individu is van type IMBOR-Kern owl:Class
 </pre></div>
 
 In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarnaast kan in COMPLEX+ (zoals inwinningsgegevens) nu metadata bij het kenmerk worden opgenomen.
+
+<div class="box">
+  Een complex modelleerpatroon is niet persé gecompliceerd, zeker niet in datasets (bij toepassingen).
+</div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset:</div><pre>
   ex:Leiding_1  rdf:type              gwsw:Leiding ;  
@@ -1317,8 +1344,9 @@ In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarna
                             ] . 
   gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                             rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
-                            owl:oneOf           (gwsw:Beton) .                # individuen
-  gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .              # wordt individu             
+                            owl:oneOf           (gwsw:Beton) .                # individuen (alle mogelijke leidingmaterialen)
+#   gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu        
+  gwsw:Beton                rdf:type            imbor:52ab27f2-fb67-4752-8cfc-ac4f3638df4e . # individu is van type “Beton” (een IMBOR-Kern owl:Class)
 </pre></div>
 
 <div class="example-dataset"><div class="example-title marker">Dataset: <span class="mark">Variant met nen2660:Matter</span></div><pre>
