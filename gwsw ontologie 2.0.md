@@ -146,7 +146,7 @@ Het laatste hoofdstuk bevat voorbeelden waarbij deze uitgangspunten worden toege
 
 ### Versiebeheer
 
-De GWSW Ontologie wordt vanaf versie 1.5.2 in GitHub, onderhouden. Daarmee is er volledige controle over de versie-aanpassingen. Van de versies voorafgaand aan 1.5.2 zijn de ontologie-bestanden uiteraard nog voorhanden, daarnaast zijn alle aanpassingen in een logboek vastgelegd. 
+De GWSW Ontologie wordt vanaf versie 1.5.2 in GitHub, onderhouden. Daarmee is er volledige controle over de versie-aanpassingen. Van de versies voorafgaand aan 1.5.2 zijn de ontologie-bestanden uiteraard nog voorhanden, ze zijn ook op internet gepubliceerd. Alle aanpassingen zijn daarnaast in een logboek vastgelegd. 
 In de ontologie is <span class="blue">owl:versionInfo</span> opgenomen, daarin staat de aanmaakdatum. Vanaf versie 2.0 wordt daarin ook expliciet het versienummer opgenomen.
 
 In de URL van GWSW-concepten is (al dan niet via een prefix) expliciet het versienummer opgenomen (exclusief patch-nummer, bijvoorbeeld voor versie 1.5.2 blijft het 1.5). 
