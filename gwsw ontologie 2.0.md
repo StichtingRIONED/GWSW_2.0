@@ -329,6 +329,7 @@ In deelmodellen met conformiteitsklassen (CFK) worden abstracte klassen gemarkee
 
 <div class="box"><strong>Abstracte klassen in SHACL</strong><br/>
 De DASH Data Shapes Vocabulary definieert een abstracte klasse als "A class is called abstract if it cannot have direct instances - only non-abstract subclasses of an abstract class can be instantiated directly". DASH bevat de property <span class="blue">dash:abstract</span> met domein <span class="blue">rdfs:Class</span> en range <span class="blue">true</span> voor het markeren van abstracte klassen.
+De SHACL validatie hanteert de dash:abstact definitie niet, valideren op (foutief) gebruik van abstracte klassen wordt met SHACL-statements opgelost.
 <a href="#details-specialsatie-en-classificatie">Zie Details specialsatie en classificatie</a>
 </div>
 
@@ -611,11 +612,11 @@ Een overzicht van wijzigingen in GWSW 2.0 ten opzichte van eerdere versies (GWSW
 
 * Kenmerken uitdrukken als kwalitatieve/kwantitatieve attributen, relatie gwsw:hasAspect vervalt
 * De materiaal- en grondsoort-kenmerken worden uitgedrukt met nen2660:consistsOf
+* Materiaal en grondsoort worden een IMBOR-type, waren een type van één of meerdere collecties
 * Annotatie skos:editorialNote vervangt gwsw:hasDateStart, gwsw:hasDateChange, gwsw:hasAuthorStart, gwsw:hasAuthorChange
 * Annotatie skos:prefLabel vervangt rdfs:label
 * Geometrie-waarde uitdrukken als WKT, was GML in vorige versies
 * Vocabulaire binnen datamodel onderscheiden en apart publiceren/presenteren
-* Materiaal en grondsoort worden een IMBOR-type, waren een type van één of meerdere collecties
 * Relatie rdfs:member vervangt gwsw:hasPart voor informatiedragers
 * In owl:versionInfo het versienummer (inclusief patch-nummer) opnemen 
 
@@ -691,8 +692,26 @@ Het individu ex:Put_2 is dus zowel een stuwput (een put met een stuwconstructie)
 Verificatie van het gebruik van abstracte klassen wordt uitgedrukt in SHACL:
 
 <div class="example-shapes"><div class="example-title marker">Shapes: Controleer op abstracte klasse</div><pre>
-  gwsw:Hulpstuk   rdf:type      rdfs:Class,         # om impliciet TargetClass te definiëren
-                  dash:abstract true .
+
+  # De abstracte klasse is focusnode
+
+  cfk:TypeNotAllowed rdf:type       sh:NodeShape ;
+                     sh:targetNode  gwsw:Put ; # type is abstract, niet gebruiken in datasets
+                     sh:targetNode  gwsw:Hulpstuk ; # enzovoort, voor alle abstracte klassen
+                     sh:property
+                     [
+                       sh:path [ sh:inversePath rdf:type ] ; # de focusnode is de abstracte klasse
+                       sh:maxCount 0 ;
+                     ] .
+
+  # Een alternatieve manier, met de individual als focusnode (NIET IN GEBRUIK, levert meer en overbodige rapportage op)
+  cfk:TypeNotAllowed rdf:type            sh:NodeShape ;
+                     sh:targetSubjectsOf rdf:type;
+                     sh:property
+                     [ 
+                       sh:path rdf:type;
+                       sh:not [ sh:or ([ sh:hasValue gwsw:Put ] [ sh:hasValue gwsw:Hulpstuk ]) ] ; # enzovoort, voor alle abstracte klassen
+                     ] .
 </pre></div>
 
 
@@ -846,6 +865,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 | gwsw:hasInput     | gwsw:hasInput     | *Subject* heeft als invoer *Object*                                                          |
 | gwsw:hasOutput    | gwsw:hasOutput    | *Subject* heeft als uitvoer *Object*                                                         |
 | nen2660:hasPart   | nen2660:hasPart   | *Subject* heeft als deel *Object*                                                            |
+| gwsw:isPartOf     | gwsw:isPartOf     | *Subject* is deel van *Object*                                                               |
 
 ## Details annotatie-attributen
 
