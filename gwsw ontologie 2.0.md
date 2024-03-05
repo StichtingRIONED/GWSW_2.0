@@ -613,11 +613,8 @@ Een overzicht van wijzigingen in GWSW 2.0 ten opzichte van eerdere versies (GWSW
 * Kenmerken uitdrukken als kwalitatieve/kwantitatieve attributen, relatie gwsw:hasAspect vervalt
 * De materiaal- en grondsoort-kenmerken worden uitgedrukt met nen2660:consistsOf
 * Materiaal en grondsoort worden een IMBOR-type, waren een type van één of meerdere collecties
-* Annotatie skos:editorialNote vervangt gwsw:hasDateStart, gwsw:hasDateChange, gwsw:hasAuthorStart, gwsw:hasAuthorChange
-* Annotatie skos:prefLabel vervangt rdfs:label
 * Geometrie-waarde uitdrukken als WKT, was GML in vorige versies
 * Vocabulaire binnen datamodel onderscheiden en apart publiceren/presenteren
-* Relatie rdfs:member vervangt gwsw:hasPart voor informatiedragers
 * In owl:versionInfo het versienummer (inclusief patch-nummer) opnemen 
 
 Samenvatting van gewijzigde klassen:
@@ -632,6 +629,18 @@ Samenvatting van gewijzigde klassen:
 | nen2660:RelationReference | gwsw:Kenmerk            | De "waarde" is een individu                                                                    |
 | nen2660:EnumerationType   | gwsw:VerzamelingSoorten |                                                                                                |
 | rdfs:Container            | gwsw:VerzamelingSoorten | Bij informatiedragers (gwsw:hasPart wordt rdfs:member)                                         |
+
+Samenvatting van gewijzigde properties:
+
+| Naam               | Oude naam (1.6)      | Toelichting                                  |
+|--------------------|----------------------|----------------------------------------------|
+| nen2260:executes   | gwsw:functie         | Onderscheidend kenmerk, optioneel doorvoeren |
+| skos:editorialNote | gwsw:hasDateStart    | Annotatie, vermelding auteur en datum        |
+|                    | gwsw:hasDateChange   | Opnemen in skos:editorialNote                |
+|                    | gwsw:hasAuthorStart  | Opnemen in skos:editorialNote                |
+|                    | gwsw:hasAuthorChange | Opnemen in skos:editorialNote                |
+| skos:prefLabel     | rdfs:label           | Impliciete voorkeur expliciet maken          |
+| gwsw:hasPart       | rdfs:member          | Gaat gelden voor informatiedragers           |
 
 # Details van de GWSW semantiek
 
@@ -693,7 +702,7 @@ Verificatie van het gebruik van abstracte klassen wordt uitgedrukt in SHACL:
 
 <div class="example-shapes"><div class="example-title marker">Shapes: Controleer op abstracte klasse</div><pre>
 
-  # De abstracte klasse is focusnode
+  De abstracte klasse is focusnode
 
   cfk:TypeNotAllowed rdf:type       sh:NodeShape ;
                      sh:targetNode  gwsw:Put ; # type is abstract, niet gebruiken in datasets
@@ -704,7 +713,8 @@ Verificatie van het gebruik van abstracte klassen wordt uitgedrukt in SHACL:
                        sh:maxCount 0 ;
                      ] .
 
-  # Een alternatieve manier, met de individual als focusnode (NIET IN GEBRUIK, levert meer en overbodige rapportage op)
+  Een alternatieve manier, met de individual als focusnode (NIET IN GEBRUIK, levert meer en overbodige rapportage op)
+  
   cfk:TypeNotAllowed rdf:type            sh:NodeShape ;
                      sh:targetSubjectsOf rdf:type;
                      sh:property
@@ -734,6 +744,10 @@ Meer specifiek voor activiteiten:
 * Resultaat (wat doet het)
 
 Vooral Functie en Uitvoering worden veel gebruikt om het onderscheid te maken.
+
+<div class="box"><strong>nen2660:executes</strong>
+In IMBOR wordt nen2660:executes gebruikt, dat is een alternatief voor gwsw:functie.
+</div>
 
 Daarnaast kunnen ook relaties tussen GWSW concepten definiërend voor de classificering zijn. Een gwsw:Inspectieput moet bijvoorbeeld een gwsw:Deksel hebben. De compositie (de deel-geheel relatie) is dan bepalend, er geldt een beperking voor de property <span class="blue">nen2660:hasPart</span> .
 
