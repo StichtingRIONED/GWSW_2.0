@@ -662,6 +662,7 @@ In datasets conform het GWSW komen de volgende properties voor:
 | skos:prefLabel    | rdfs:label        | *Subject* heeft als naam *Literal*                                                           |
 | gwsw:"kwantiteit" | gwsw:hasAspect    | *Subject* heeft als "kwantiteit" *Waarde* Het object is een kenmerk-waarde, numerieke waarde |
 | gwsw:"kwaliteit"  | gwsw:haAspect     | *Subject* heeft als "kwaliteit" *Waarde* Het object is een kenmerk-waarde, een tekenreeks    |
+| rdfs:comment      | rdfs:comment      | *Subject* heeft als opmerking *Literal*                                                      |
 | **Relaties**      |                   |                                                                                              |
 | rdf:type          | rdf:type          | *Subject* is van het type *Object* (klasse-naam)                                             |
 | rdf:value         | gwsw:hasValue     | *Subject* heeft als waarde *Literal* (subject is attribuut)                                  |
