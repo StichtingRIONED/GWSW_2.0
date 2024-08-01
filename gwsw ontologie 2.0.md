@@ -814,7 +814,8 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 | PER-HR                                                                                                                | 1/h         | xsd:decimal    |
 | PER-MIN                                                                                                               | 1/min       | xsd:decimal    |
 | BAR                                                                                                                   | bar         | xsd:decimal    |
-| DEG_C                                                                                                                 | degC        | xsd:integer    |
+| DEG_C (graden celsius)                                                                                                | degC        | xsd:integer    |
+| DEG   (hoek in graden, 360 gebaseerd)                                                                                 | DEG         | xsd:integer    |
 | DeciM3                                                                                                                | dm3         | xsd:decimal    |
 | DeciM3-PER-SEC                                                                                                        | dm3/s       | xsd:decimal    |
 | HR                                                                                                                    | h           | xsd:integer    |
