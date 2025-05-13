@@ -8,7 +8,7 @@ let body = document.getElementById("body");
 let timerId = setInterval(chkUpdate, itv);
 
 if (localStorage.getItem('scrollpos')) {
-  body.hidden = true; // Voorkom onrustige opbouw
+  if (body) body.hidden = true; // Voorkom onrustige opbouw
   setTimeout(scrollIt, 500); // Vertraag: laat document volledig laden
 }
 function chkUpdate() {
@@ -27,7 +27,7 @@ function chkUpdate() {
 function scrollIt() {
   const y = 0;  //350; // offset bij scrolling (bij hidden-body offset niet meer nodig)
   var scrollpos = localStorage.getItem('scrollpos');
-  body.hidden = false; // Nu zichtbaar maken, anders werkt scroll niet
+  if (body) body.hidden = false; // Nu zichtbaar maken, anders werkt scroll niet
   window.scrollTo({ top: scrollpos - y, left: 0, behavior: "instant" });
   localStorage.removeItem('scrollpos');
 }

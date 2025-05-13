@@ -826,11 +826,11 @@ Het GWSW definieert nog weinig grootheden, de eenheden zijn wel volledig gemodel
 | MiLiM                                                                                                                 | mm          | xsd:integer    |
 | MiLiM-PER-HR                                                                                                          | mm/h        | xsd:decimal    |
 | MiLiM-PER-MIN                                                                                                         | mm/min      | xsd:decimal    |
-| Geen eenheid: string "yyyy-mm-dd"                                                                                     | yyyymmdd    | xsd:date       |
+| Geen eenheid: string "yyyy-mm-dd"                                                                                     | yyyy-mm-dd  | xsd:date       |
 | YR                                                                                                                    | yyyy        | xsd:gYear      |
 | NUM                                                                                                                   | pcs         | xsd:integer    |
 | PPM                                                                                                                   | ppm         | xsd:integer    |
-| Geen eenheid: string "hh:mm:ss"                                                                                       | hhmmss      | xsd:time       |
+| Geen eenheid: string "hh:mm:ss"                                                                                       | hh:mm:ss    | xsd:time       |
 | <span class="mark">mg/L (nog niet in gebruik, mogelijk straks bij concepten BZV, CZV)</span><br/>                     | -           | xsd:integer    |
 | Geen eenheid: string "wkt..."  (was gmlLiteral in GWSW 1.n)<br/><span class="mark">Datatype "gml" wordt "wkt"</span>  | gml         | geo:wktLiteral |
 | Geen eenheid: getal                                                                                                   | - (factor)  | xsd:decimal    |
@@ -1169,7 +1169,7 @@ In de dataset komt de declaratie in de basis overeen met die van COMPLEX, daarna
   gwsw:MateriaalLeidingColl rdf:type            owl:Class ;
                             rdf:type            nen2660:EnumerationType ;     # punning: is klasse en wordt hier ook individu
                             owl:oneOf           (gwsw:Beton) .                # individuen (alle mogelijke leidingmaterialen)
-#   gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu        
+#   gwsw:Beton                rdf:type            gwsw:MateriaalLeidingColl .   # wordt individu   
   gwsw:Beton                rdf:type            imbor:52ab27f2-fb67-4752-8cfc-ac4f3638df4e . # individu is van type “Beton” (een IMBOR-Kern owl:Class)
 </pre></div>
 
