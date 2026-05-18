@@ -21,9 +21,9 @@ var respecConfig =
   }],
   authors: [{
     name: "Marinus Vonhof",
-    url: "mailto:marinus.vonhof@marivon.nl",
+    url: "mailto:marinus.vonhof@marvoni.nl",
     company: "marIvon",
-    companyURL: "https://www.marivon.nl"
+    companyURL: "https://www.marvoni.nl"
   }],
   otherLinks: [{
     key: "GitHub", href: "https://github.com/stichtingrioned/GWSW_2.0/"
